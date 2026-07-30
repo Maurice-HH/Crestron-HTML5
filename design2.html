@@ -18,6 +18,9 @@
 
 :root {
     --tuerkis-blue: #00d2ff;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-hover: rgba(0, 210, 255, 0.2);
 }
 
 html, body {
@@ -266,20 +269,20 @@ html, body {
     margin-bottom: 35px;
 }
 
-/* ==================== CARD CONTAINERS ==================== */
+/* ==================== CARD CONTAINER ==================== */
 .card-box {
     width: 100%;
     max-width: 720px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid var(--glass-border);
     border-radius: 28px;
     padding: 28px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
     align-items: center;
 }
 
@@ -300,54 +303,84 @@ html, body {
     display: block;
 }
 
-/* ABsOLUT FIXIERTE 3 BUTTONS (LEISTE) */
-.fixed-controls-row {
+/* ==================== UNIFORM GLASSY CONTROLS ==================== */
+.controls-group {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 16px;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 12px 24px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: fit-content;
+    gap: 18px;
+    width: 100%;
 }
 
-.fixed-btn {
-    width: 140px !important;
-    height: 42px !important;
-    flex: 0 0 140px !important;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
+.fixed-controls-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.control-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.glass-btn {
+    width: 140px;
+    height: 42px;
+    flex: 0 0 140px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: #ffffff;
     border-radius: 30px;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     outline: none;
-    line-height: 1;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
 }
 
-.fixed-btn:hover {
-    background: rgba(0, 240, 255, 0.25);
-    border-color: rgba(0, 240, 255, 0.6);
+.glass-btn:hover {
+    background: var(--glass-hover);
+    border-color: rgba(0, 210, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
 }
 
-.fixed-btn.active {
-    background: rgba(0, 210, 255, 0.35);
-    border-color: #00d2ff;
+.glass-btn.active {
+    background: rgba(0, 210, 255, 0.25);
+    border-color: var(--tuerkis-blue);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
 }
 
-.fixed-select {
-    width: 140px !important;
-    height: 42px !important;
-    flex: 0 0 140px !important;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
+.glass-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+.glass-select {
+    width: 140px;
+    height: 42px;
+    flex: 0 0 140px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: #ffffff;
     border-radius: 30px;
     font-weight: 700;
     font-size: 14px;
@@ -355,17 +388,65 @@ html, body {
     cursor: pointer;
     text-align: center;
     text-align-last: center;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease;
 }
 
-.fixed-select:hover {
-    background: rgba(0, 240, 255, 0.25);
-    border-color: rgba(0, 240, 255, 0.6);
+.glass-select:hover {
+    background: var(--glass-hover);
+    border-color: rgba(0, 210, 255, 0.5);
 }
 
-.fixed-select option {
+.glass-select option {
     background: #121824;
-    color: #fff;
+    color: #ffffff;
+}
+
+/* ==================== VOLUME SLIDER ==================== */
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 450px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+}
+
+.volume-icon {
+    width: 18px;
+    height: 18px;
+    fill: rgba(255, 255, 255, 0.7);
+    flex-shrink: 0;
+}
+
+.volume-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--tuerkis-blue);
+    box-shadow: 0 0 10px var(--tuerkis-blue);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
 }
 
 /* ==================== AUDIO PLAYER & VINYL SCRATCH ==================== */
@@ -379,11 +460,11 @@ html, body {
 
 .vinyl-container {
     position: relative;
-    width: 240px;
-    height: 240px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
     background: radial-gradient(circle, #111 30%, #222 50%, #000 70%, #151515 100%);
-    border: 6px solid rgba(255, 255, 255, 0.15);
+    border: 5px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.2);
     cursor: grab;
     touch-action: none;
@@ -408,8 +489,8 @@ html, body {
 }
 
 .vinyl-cover {
-    width: 90px;
-    height: 90px;
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
@@ -442,7 +523,7 @@ html, body {
 
 .progress-container {
     width: 100%;
-    max-width: 480px;
+    max-width: 450px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -504,7 +585,7 @@ html, body {
     <!-- SEITE 1: VIDEO PLAYER -->
     <section id="video-section" class="content-section">
         <h1 class="section-title">Video Stream</h1>
-        <p class="section-subtitle">Gelooptes MP4-Video mit festen Steuerungsknöpfen.</p>
+        <p class="section-subtitle">Gelooptes MP4-Video mit schlichten Glassy-Bedienelementen.</p>
 
         <div class="card-box">
             <div class="video-wrapper">
@@ -514,34 +595,50 @@ html, body {
                 </video>
             </div>
 
-            <!-- 3 MITTIG PLATZIERTE, STARRE BUTTONS -->
-            <div class="fixed-controls-row">
-                <button class="fixed-btn" id="playPauseBtn" onclick="togglePlayPause()">
-                    <span>⏸ Pause</span>
-                </button>
+            <div class="controls-group">
+                <div class="fixed-controls-row">
+                    <div class="control-item">
+                        <button class="glass-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                            <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            <span id="playPauseText">Pause</span>
+                        </button>
+                    </div>
 
-                <button class="fixed-btn active" id="loopBtn" onclick="toggleLoop()">
-                    <span>🔁 Loop: An</span>
-                </button>
+                    <div class="control-item">
+                        <button class="glass-btn active" id="loopBtn" onclick="toggleLoop()">
+                            <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                            <span id="loopText">Loop: An</span>
+                        </button>
+                    </div>
 
-                <select class="fixed-select" id="speedSelect" onchange="changeSpeed(this.value)">
-                    <option value="0.5">0.5x</option>
-                    <option value="1.0" selected>1.0x (Normal)</option>
-                    <option value="1.5">1.5x</option>
-                    <option value="2.0">2.0x</option>
-                </select>
+                    <div class="control-item">
+                        <span class="control-label">Geschwindigkeit</span>
+                        <select class="glass-select" id="speedSelect" onchange="changeSpeed(this.value)">
+                            <option value="0.5">0.5x</option>
+                            <option value="1.0" selected>1.0x (Normal)</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2.0">2.0x</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- LAUTSTÄRKERELER VIDEO -->
+                <div class="volume-container">
+                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                    <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)">
+                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SEITE 2: AUDIO PLAYER MIT SCRATCH & COVER-ART -->
+    <!-- SEITE 2: AUDIO PLAYER -->
     <section id="audio-section" class="content-section">
         <h2 class="section-title">Audio Player & Scratching</h2>
         <p class="section-subtitle">Drehe die Schallplatte, um den Sound der MP3 in Echtzeit zu scratchen.</p>
 
         <div class="card-box">
             <div class="audio-player-wrapper">
-                <!-- VINYL SCHALLPLATTE -->
                 <div class="vinyl-container" id="vinylDisc">
                     <div class="vinyl-grooves"></div>
                     <div class="vinyl-cover" id="albumCover">🎵</div>
@@ -564,22 +661,39 @@ html, body {
                     <source src="musik-weltistgut.mp3" type="audio/mpeg">
                 </audio>
 
-                <!-- STEUERUNG AUDIO -->
-                <div class="fixed-controls-row">
-                    <button class="fixed-btn" id="audioPlayBtn" onclick="toggleAudioPlay()">
-                        <span>▶ Play</span>
-                    </button>
+                <div class="controls-group">
+                    <div class="fixed-controls-row">
+                        <div class="control-item">
+                            <button class="glass-btn" id="audioPlayBtn" onclick="toggleAudioPlay()">
+                                <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <span id="audioPlayText">Play</span>
+                            </button>
+                        </div>
 
-                    <button class="fixed-btn" id="audioLoopBtn" onclick="toggleAudioLoop()">
-                        <span>🔁 Loop: Aus</span>
-                    </button>
+                        <div class="control-item">
+                            <button class="glass-btn" id="audioLoopBtn" onclick="toggleAudioLoop()">
+                                <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                                <span id="audioLoopText">Loop: Aus</span>
+                            </button>
+                        </div>
 
-                    <select class="fixed-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)">
-                        <option value="0.5">0.5x</option>
-                        <option value="1.0" selected>1.0x (Normal)</option>
-                        <option value="1.5">1.5x</option>
-                        <option value="2.0">2.0x</option>
-                    </select>
+                        <div class="control-item">
+                            <span class="control-label">Geschwindigkeit</span>
+                            <select class="glass-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)">
+                                <option value="0.5">0.5x</option>
+                                <option value="1.0" selected>1.0x (Normal)</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2.0">2.0x</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- LAUTSTÄRKERELER AUDIO -->
+                    <div class="volume-container">
+                        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                        <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)">
+                        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </div>
                 </div>
             </div>
         </div>
@@ -588,18 +702,27 @@ html, body {
 </div>
 
 <script>
-/* ==================== VIDEO PLAYER STEUERUNG ==================== */
+/* SVG ICON PATHS */
+const iconPause = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+const iconPlay = '<path d="M8 5v14l11-7z"/>';
+
+/* ==================== VIDEO LOGIK ==================== */
 const video = document.getElementById('myVideo');
 const playPauseBtn = document.getElementById('playPauseBtn');
+const playPauseIcon = document.getElementById('playPauseIcon');
+const playPauseText = document.getElementById('playPauseText');
 const loopBtn = document.getElementById('loopBtn');
+const loopText = document.getElementById('loopText');
 
 function togglePlayPause() {
     if (video.paused) {
         video.play();
-        playPauseBtn.innerHTML = '<span>⏸ Pause</span>';
+        playPauseIcon.innerHTML = iconPause;
+        playPauseText.textContent = 'Pause';
     } else {
         video.pause();
-        playPauseBtn.innerHTML = '<span>▶ Play</span>';
+        playPauseIcon.innerHTML = iconPlay;
+        playPauseText.textContent = 'Play';
     }
 }
 
@@ -607,10 +730,10 @@ function toggleLoop() {
     video.loop = !video.loop;
     if (video.loop) {
         loopBtn.classList.add('active');
-        loopBtn.innerHTML = '<span>🔁 Loop: An</span>';
+        loopText.textContent = 'Loop: An';
     } else {
         loopBtn.classList.remove('active');
-        loopBtn.innerHTML = '<span>➡️ Loop: Aus</span>';
+        loopText.textContent = 'Loop: Aus';
     }
 }
 
@@ -618,10 +741,18 @@ function changeSpeed(val) {
     video.playbackRate = parseFloat(val);
 }
 
-/* ==================== AUDIO PLAYER & SCRATCH LOGIK ==================== */
+function changeVideoVolume(val) {
+    video.volume = parseFloat(val);
+    video.muted = (parseFloat(val) === 0);
+}
+
+/* ==================== AUDIO LOGIK & SCRATCH ==================== */
 const audio = document.getElementById('myAudio');
 const audioPlayBtn = document.getElementById('audioPlayBtn');
+const audioPlayIcon = document.getElementById('audioPlayIcon');
+const audioPlayText = document.getElementById('audioPlayText');
 const audioLoopBtn = document.getElementById('audioLoopBtn');
+const audioLoopText = document.getElementById('audioLoopText');
 const vinylDisc = document.getElementById('vinylDisc');
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
@@ -632,15 +763,16 @@ let isScratching = false;
 let startAngle = 0;
 let currentRotation = 0;
 let lastAngle = 0;
-let animFrame;
 
 function toggleAudioPlay() {
     if (audio.paused) {
         audio.play();
-        audioPlayBtn.innerHTML = '<span>⏸ Pause</span>';
+        audioPlayIcon.innerHTML = iconPause;
+        audioPlayText.textContent = 'Pause';
     } else {
         audio.pause();
-        audioPlayBtn.innerHTML = '<span>▶ Play</span>';
+        audioPlayIcon.innerHTML = iconPlay;
+        audioPlayText.textContent = 'Play';
     }
 }
 
@@ -648,15 +780,19 @@ function toggleAudioLoop() {
     audio.loop = !audio.loop;
     if (audio.loop) {
         audioLoopBtn.classList.add('active');
-        audioLoopBtn.innerHTML = '<span>🔁 Loop: An</span>';
+        audioLoopText.textContent = 'Loop: An';
     } else {
         audioLoopBtn.classList.remove('active');
-        audioLoopBtn.innerHTML = '<span>➡️ Loop: Aus</span>';
+        audioLoopText.textContent = 'Loop: Aus';
     }
 }
 
 function changeAudioSpeed(val) {
     audio.playbackRate = parseFloat(val);
+}
+
+function changeAudioVolume(val) {
+    audio.volume = parseFloat(val);
 }
 
 function formatTime(sec) {
@@ -673,7 +809,6 @@ audio.addEventListener('timeupdate', () => {
         currentTimeEl.textContent = formatTime(audio.currentTime);
         durationEl.textContent = formatTime(audio.duration);
 
-        // Rotation der Platte im Play-Zustand
         currentRotation += audio.playbackRate * 1.5;
         vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
     }
@@ -687,7 +822,7 @@ function seekAudio(e) {
     }
 }
 
-/* SCRATCH LOGIK FÜR SHALLPLATTE */
+/* SCRATCH ENGINE */
 function getCenterAngle(e) {
     const rect = vinylDisc.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -713,7 +848,6 @@ function moveScratch(e) {
     currentRotation += delta;
     vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
 
-    // Zeit im Song entsprechend der Schwenk-Richtung anpassen
     if (audio.duration) {
         audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + (delta * 0.03)));
         progressFill.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
@@ -724,7 +858,7 @@ function moveScratch(e) {
 function stopScratch() {
     if (isScratching) {
         isScratching = false;
-        if (audioPlayBtn.innerHTML.includes('Pause')) {
+        if (audioPlayText.textContent === 'Pause') {
             audio.play();
         }
     }
@@ -738,7 +872,7 @@ vinylDisc.addEventListener('touchstart', startScratch);
 window.addEventListener('touchmove', moveScratch);
 window.addEventListener('touchend', stopScratch);
 
-/* MP3 METADATEN (COVER-ART) LESEN */
+/* INIT */
 document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -746,10 +880,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (video) {
         video.muted = true;
+        video.volume = 0;
         video.play().catch(() => {});
     }
 
-    // Cover aus ID3 Tags extrahieren
+    if (audio) {
+        audio.volume = 0.8;
+    }
+
+    // ID3 Tag Cover Auslesen
     if (window.jsmediatags) {
         jsmediatags.read("musik-weltistgut.mp3", {
             onSuccess: function(tag) {
