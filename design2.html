@@ -282,7 +282,7 @@ html, body {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -303,12 +303,12 @@ html, body {
     display: block;
 }
 
-/* ==================== UNIFORM GLASSY CONTROLS ==================== */
+/* ==================== UNIFORM COMPACT GLASSY CONTROLS ==================== */
 .controls-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 16px;
     width: 100%;
 }
 
@@ -328,7 +328,7 @@ html, body {
 }
 
 .control-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -336,9 +336,9 @@ html, body {
 }
 
 .glass-btn {
-    width: 140px;
+    width: 120px;
     height: 42px;
-    flex: 0 0 140px;
+    flex: 0 0 120px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     color: #ffffff;
@@ -349,7 +349,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     outline: none;
     transition: all 0.2s ease;
     backdrop-filter: blur(10px);
@@ -368,16 +368,16 @@ html, body {
 }
 
 .glass-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     fill: currentColor;
     flex-shrink: 0;
 }
 
 .glass-select {
-    width: 140px;
+    width: 130px;
     height: 42px;
-    flex: 0 0 140px;
+    flex: 0 0 130px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     color: #ffffff;
@@ -408,16 +408,16 @@ html, body {
     align-items: center;
     gap: 12px;
     width: 100%;
-    max-width: 450px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
+    max-width: 420px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 8px 18px;
     border-radius: 30px;
     border: 1px solid var(--glass-border);
 }
 
 .volume-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     fill: rgba(255, 255, 255, 0.7);
     flex-shrink: 0;
 }
@@ -436,8 +436,8 @@ html, body {
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: var(--tuerkis-blue);
     box-shadow: 0 0 10px var(--tuerkis-blue);
@@ -446,54 +446,48 @@ html, body {
 }
 
 .volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
+    transform: scale(1.25);
 }
 
-/* ==================== AUDIO PLAYER & LARGE COVER ART ==================== */
+/* ==================== AUDIO PLAYER & ID3 COVER ==================== */
 .audio-player-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 22px;
+    gap: 18px;
     width: 100%;
 }
 
 /* GROSSES COVER-ARTWORK OBEN */
 .large-cover-box {
-    width: 260px;
-    height: 260px;
-    border-radius: 24px;
+    width: 220px;
+    height: 220px;
+    border-radius: 20px;
     background-size: cover;
     background-position: center;
     background-color: #1e2638;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 48px;
+    font-size: 42px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.large-cover-box:hover {
-    transform: scale(1.02);
-    box-shadow: 0 20px 50px rgba(0, 210, 255, 0.3);
 }
 
 .vinyl-scratch-wrapper {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
     width: 100%;
     justify-content: center;
 }
 
 .vinyl-container {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     background: radial-gradient(circle, #111 30%, #222 50%, #000 70%, #151515 100%);
     border: 3px solid rgba(255, 255, 255, 0.15);
@@ -521,8 +515,8 @@ html, body {
 }
 
 .vinyl-cover {
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
@@ -532,7 +526,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .song-info {
@@ -542,19 +536,19 @@ html, body {
 }
 
 .song-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
     color: #fff;
 }
 
 .song-artist {
-    font-size: 14px;
+    font-size: 13px;
     opacity: 0.7;
 }
 
 .progress-container {
     width: 100%;
-    max-width: 480px;
+    max-width: 420px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -564,7 +558,7 @@ html, body {
 
 .progress-bar-bg {
     flex: 1;
-    height: 8px;
+    height: 7px;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     position: relative;
@@ -629,6 +623,7 @@ html, body {
             <div class="controls-group">
                 <div class="fixed-controls-row">
                     <div class="control-item">
+                        <span class="control-label">Play</span>
                         <button class="glass-btn" id="playPauseBtn" onclick="togglePlayPause()">
                             <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                             <span id="playPauseText">Pause</span>
@@ -636,9 +631,10 @@ html, body {
                     </div>
 
                     <div class="control-item">
+                        <span class="control-label">Loop</span>
                         <button class="glass-btn active" id="loopBtn" onclick="toggleLoop()">
                             <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                            <span id="loopText">Loop: An</span>
+                            <span id="loopText">An</span>
                         </button>
                     </div>
 
@@ -653,7 +649,7 @@ html, body {
                     </div>
                 </div>
 
-                <!-- LAUTSTÄRKERELER VIDEO -->
+                <!-- LAUTSTÄRKERELGER VIDEO -->
                 <div class="volume-container">
                     <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
                     <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)">
@@ -666,12 +662,12 @@ html, body {
     <!-- SEITE 2: AUDIO PLAYER MIT GROSSEM COVER -->
     <section id="audio-section" class="content-section">
         <h2 class="section-title">Audio Player & Scratching</h2>
-        <p class="section-subtitle">Integrierte Cover-Extraktion direkt aus den ID3-Metadaten der MP3.</p>
+        <p class="section-subtitle">Schlichte Glaselemente mit ID3-Cover-Extraktion.</p>
 
         <div class="card-box">
             <div class="audio-player-wrapper">
                 
-                <!-- GROSSES ID3 COVER ARTWORK OVER PLAYER -->
+                <!-- GROSSES COVER OBEN -->
                 <div class="large-cover-box" id="largeCoverBox">🎵</div>
 
                 <div class="song-info">
@@ -702,6 +698,7 @@ html, body {
                 <div class="controls-group">
                     <div class="fixed-controls-row">
                         <div class="control-item">
+                            <span class="control-label">Play</span>
                             <button class="glass-btn" id="audioPlayBtn" onclick="toggleAudioPlay()">
                                 <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 <span id="audioPlayText">Play</span>
@@ -709,9 +706,10 @@ html, body {
                         </div>
 
                         <div class="control-item">
+                            <span class="control-label">Loop</span>
                             <button class="glass-btn" id="audioLoopBtn" onclick="toggleAudioLoop()">
                                 <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                                <span id="audioLoopText">Loop: Aus</span>
+                                <span id="audioLoopText">Aus</span>
                             </button>
                         </div>
 
@@ -726,7 +724,7 @@ html, body {
                         </div>
                     </div>
 
-                    <!-- LAUTSTÄRKERELER AUDIO -->
+                    <!-- LAUTSTÄRKERELGER AUDIO -->
                     <div class="volume-container">
                         <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
                         <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)">
@@ -768,10 +766,10 @@ function toggleLoop() {
     video.loop = !video.loop;
     if (video.loop) {
         loopBtn.classList.add('active');
-        loopText.textContent = 'Loop: An';
+        loopText.textContent = 'An';
     } else {
         loopBtn.classList.remove('active');
-        loopText.textContent = 'Loop: Aus';
+        loopText.textContent = 'Aus';
     }
 }
 
@@ -819,10 +817,10 @@ function toggleAudioLoop() {
     audio.loop = !audio.loop;
     if (audio.loop) {
         audioLoopBtn.classList.add('active');
-        audioLoopText.textContent = 'Loop: An';
+        audioLoopText.textContent = 'An';
     } else {
         audioLoopBtn.classList.remove('active');
-        audioLoopText.textContent = 'Loop: Aus';
+        audioLoopText.textContent = 'Aus';
     }
 }
 
@@ -943,11 +941,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     const base64 = "data:" + picture.format + ";base64," + window.btoa(base64String);
                     
-                    // Großes Cover-Feld befüllen
                     largeCoverBox.style.backgroundImage = `url(${base64})`;
                     largeCoverBox.textContent = "";
 
-                    // Kleines Vinyl-Mittel-Cover befüllen
                     albumCover.style.backgroundImage = `url(${base64})`;
                     albumCover.textContent = "";
                 }
