@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
 <style>
-/* ==================== GLOBAL RESET & BASE ==================== */
+/* ==================== GLOBAL RESET & FULL-HD BASE ==================== */
 * {
     margin: 0;
     padding: 0;
@@ -23,18 +23,18 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0f1524 !important;
+    background: #0b0f19 !important;
     color: #ffffff;
     font-size: 16px;
 }
 
 .neonav-wrapper {
-    background: linear-gradient(135deg, #0d121f 0%, #162032 50%, #0f1524 100%);
     width: 100%;
     height: 100%;
     overflow-y: auto;
     position: relative;
     scroll-behavior: smooth;
+    background: linear-gradient(180deg, #0d1527 0%, #112a38 50%, #28153d 100%);
 }
 
 /* Custom Scrollbar */
@@ -56,22 +56,24 @@ html, body {
 }
 
 .navbar {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 60px;
-    padding: 10px 24px;
+    padding: 8px 22px;
     display: flex;
     align-items: center;
-    gap: 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    gap: 22px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-brand-wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
 }
 
 .navbar-brand {
@@ -87,8 +89,8 @@ html, body {
 }
 
 .logo-icon {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
     border-radius: 50%;
     position: relative;
@@ -113,36 +115,29 @@ html, body {
     50% { transform: scale(1.25); opacity: 1; }
 }
 
-/* BRAND HOVER POPOVER MIT DESIGN-LINKS */
+/* BRAND POPOVER */
 .brand-popover {
     position: absolute;
     top: 100%;
     left: 0;
-    margin-top: 14px;
-    background: rgba(18, 24, 38, 0.95);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 2px solid rgba(0, 240, 255, 0.4);
-    border-radius: 18px;
-    padding: 18px 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    padding-top: 15px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px) scale(0.95);
     transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     pointer-events: none;
-    white-space: nowrap;
     z-index: 2000;
 }
 
-.brand-popover::before {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 24px;
-    border-width: 8px;
-    border-style: solid;
-    border-color: transparent transparent rgba(0, 240, 255, 0.4) transparent;
+.brand-popover-inner {
+    background: rgba(18, 24, 38, 0.85);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    padding: 16px 22px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
 }
 
 .navbar-brand-wrapper:hover .brand-popover,
@@ -154,28 +149,28 @@ html, body {
 }
 
 .brand-popover-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 800;
     color: #00f0ff;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     letter-spacing: 1px;
 }
 
 .brand-popover-links {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .brand-popover-link {
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     padding: 6px 12px;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
@@ -185,36 +180,35 @@ html, body {
 
 .brand-popover-link:hover, .brand-popover-link.active {
     background: rgba(0, 240, 255, 0.2);
-    border-color: rgba(0, 240, 255, 0.5);
+    border-color: rgba(0, 240, 255, 0.4);
     color: #ffffff;
 }
 
 .navbar-nav {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     list-style: none;
 }
 
 .nav-link {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 18px;
+    padding: 7px 18px;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 15px;
     border-radius: 50px;
     transition: all 0.3s ease;
     white-space: nowrap;
     line-height: 1;
+    color: #a2b7e0;
 }
 
 .nav-link:hover, .nav-link.active {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .cta-button {
@@ -224,12 +218,12 @@ html, body {
     background: linear-gradient(135deg, var(--tuerkis-blue), #00a8cc);
     color: #ffffff;
     text-decoration: none;
-    padding: 8px 20px;
+    padding: 7px 18px;
     border-radius: 50px;
     font-weight: 700;
     font-size: 15px;
     line-height: 1;
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
     white-space: nowrap;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -237,7 +231,7 @@ html, body {
 
 .cta-button:hover {
     transform: scale(1.03);
-    box-shadow: 0 8px 25px rgba(0, 210, 255, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
@@ -247,7 +241,7 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 40px 20px;
+    padding: 80px 20px 40px 20px;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -272,147 +266,90 @@ html, body {
     margin-bottom: 35px;
 }
 
-/* ==================== EMBEDDED CODEPEN CARD ==================== */
-.codepen-card-wrapper {
+/* ==================== VIDEO PLAYER CONTAINER ==================== */
+.video-card-box {
     width: 100%;
-    max-width: 850px;
-    display: flex;
-    justify-content: center;
-}
-
-.glow-card {
-    --start: 0;
-    position: relative;
+    max-width: 720px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 28px;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 18px;
+}
+
+.video-wrapper {
+    position: relative;
     width: 100%;
-    min-height: 420px;
-    padding: 40px;
-    border-radius: 28px;
-    background-color: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
     overflow: hidden;
-    text-align: left;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: #000;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.glow-card::before {
-    position: absolute;
-    content: "";
+.video-wrapper video {
     width: 100%;
     height: 100%;
-    left: 0;
-    top: 0;
-    border-radius: 28px;
-    background: radial-gradient(
-        600px circle at var(--x, 50%) var(--y, 50%),
-        rgba(0, 210, 255, 0.25),
-        transparent 40%
-    );
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+    object-fit: cover;
+    display: block;
 }
 
-.glow-card::after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    border-radius: 28px;
-    padding: 2px;
-    background: radial-gradient(
-        400px circle at var(--x, 50%) var(--y, 50%),
-        rgba(0, 240, 255, 0.8),
-        transparent 40%
-    );
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: xor;
-    -webkit-mask-composite: xor;
-    pointer-events: none;
-}
-
-.glow-card-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-}
-
-.glow-card-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(0, 168, 204, 0.4));
-    border: 1px solid rgba(0, 240, 255, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.glow-card-icon svg {
-    width: 24px;
-    height: 24px;
-    stroke: #00f0ff;
-    stroke-width: 2;
-    fill: none;
-}
-
-.glow-card-tag {
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #00f0ff;
-    text-transform: uppercase;
-}
-
-.glow-card-title {
-    font-size: 32px;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 16px;
-    line-height: 1.2;
-}
-
-.glow-card-body {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #cbd5e1;
-    margin-bottom: 32px;
-}
-
-.glow-card-footer {
-    margin-top: auto;
+.video-controls {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glow-card-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 28px;
-    border-radius: 14px;
-    background: rgba(0, 240, 255, 0.15);
-    border: 1px solid rgba(0, 240, 255, 0.4);
-    color: #ffffff;
+.btn-ctrl {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 30px;
     font-weight: 700;
-    font-size: 15px;
-    text-decoration: none;
+    font-size: 14px;
     cursor: pointer;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.glow-card-btn:hover {
+.btn-ctrl:hover {
     background: rgba(0, 240, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    border-color: rgba(0, 240, 255, 0.6);
+}
+
+.btn-ctrl.active {
+    background: rgba(0, 210, 255, 0.4);
+    border-color: #00d2ff;
+}
+
+.speed-select {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.speed-select option {
+    background: #121824;
+    color: #fff;
 }
 </style>
 </head>
@@ -424,99 +361,103 @@ html, body {
     <div class="navbar-container">
         <nav class="navbar">
             <div class="navbar-brand-wrapper">
-                <a href="#seite1" class="navbar-brand">
+                <a href="#video-section" class="navbar-brand">
                     <div class="logo-icon"></div>
                     <span>Design 2</span>
                 </a>
-
-                <!-- DIREKT-NAVIGATION ZU ALLEN 3 DESIGNS -->
+                
                 <div class="brand-popover">
-                    <div class="brand-popover-title">Design wählen</div>
-                    <div class="brand-popover-links">
-                        <a href="index.html" class="brand-popover-link"><span>Design 1</span> <span>➔</span></a>
-                        <a href="design2.html" class="brand-popover-link active"><span>Design 2</span> <span>➔</span></a>
-                        <a href="design3.html" class="brand-popover-link"><span>Design 3</span> <span>➔</span></a>
+                    <div class="brand-popover-inner">
+                        <div class="brand-popover-title">Design wählen</div>
+                        <div class="brand-popover-links">
+                            <a href="index.html" class="brand-popover-link"><span>Design 1</span> <span>➔</span></a>
+                            <a href="design2.html" class="brand-popover-link active"><span>Design 2</span> <span>➔</span></a>
+                            <a href="design3.html" class="brand-popover-link"><span>Design 3</span> <span>➔</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <ul class="navbar-nav">
-                <li>
-                    <a href="#seite1" class="nav-link active" data-section="seite1">
-                        <span>Showcase</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#seite2" class="nav-link" data-section="seite2">
-                        <span>Details</span>
-                    </a>
-                </li>
-                <li class="cta-button-item">
-                    <a href="design3.html" class="cta-button">Nächstes Design</a>
-                </li>
+                <li><a href="#video-section" class="nav-link active" data-section="video-section">Video Player</a></li>
+                <li><a href="#info-section" class="nav-link" data-section="info-section">Info</a></li>
+                <li class="cta-button-item"><a href="design3.html" class="cta-button">Nächstes Design</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- SEITE 1: EINGEBETTETER CODEPEN-KASTEN -->
-    <section id="seite1" class="content-section">
-        <h1 class="section-title">Glowing Card Showcase</h1>
-        <p class="section-subtitle">Interaktives UI-Element mit dynamischem Licht-Cursor, eingebettet in das Crestron Construct Design 2.</p>
+    <!-- SEITE 1: VIDEO PLAYER KASTEN -->
+    <section id="video-section" class="content-section">
+        <h1 class="section-title">Video Stream</h1>
+        <p class="section-subtitle">Gelooptes MP4-Video mit vollständiger Geschwindigkeits- und Wiedergabesteuerung.</p>
 
-        <div class="codepen-card-wrapper">
-            <div class="glow-card" id="glowCard">
-                <div>
-                    <div class="glow-card-header">
-                        <div class="glow-card-icon">
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        </div>
-                        <span class="glow-card-tag">Interactive Component</span>
-                    </div>
-                    <h2 class="glow-card-title">Crestron Glassmorphism Card</h2>
-                    <p class="glow-card-body">Move your cursor or finger over this card to trigger the dynamic radial glow and border trace effects. Fully optimized for WebXPanel rendering.</p>
-                </div>
-                <div class="glow-card-footer">
-                    <a href="#" class="glow-card-btn">Explore Feature</a>
-                    <span style="opacity: 0.6; font-size: 14px;">HTML5 / CSS3</span>
-                </div>
+        <div class="video-card-box">
+            <div class="video-wrapper">
+                <!-- RELATIVER PFAD ZUM MP4-VIDEO -->
+                <video id="myVideo" autoplay loop muted playsinline>
+                    <source src="video.mp4" type="video/mp4">
+                    Ihr Browser unterstützt kein HTML5-Video.
+                </video>
+            </div>
+
+            <div class="video-controls">
+                <button class="btn-ctrl" id="playPauseBtn" onclick="togglePlayPause()">
+                    <span>⏸</span> Pause
+                </button>
+
+                <button class="btn-ctrl active" id="loopBtn" onclick="toggleLoop()">
+                    <span>🔁</span> Loop: An
+                </button>
+
+                <select class="speed-select" id="speedSelect" onchange="changeSpeed(this.value)">
+                    <option value="0.5">0.5x</option>
+                    <option value="1.0" selected>1.0x (Normal)</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="2.0">2.0x</option>
+                </select>
             </div>
         </div>
     </section>
 
-    <!-- SEITE 2: WEITERE INFOS -->
-    <section id="seite2" class="content-section">
-        <h2 class="section-title">Zweite Unterseite</h2>
-        <p class="section-subtitle">Hier befindet sich der erweiterte Bereich der zweiten Designseite.</p>
+    <!-- SEITE 2: INFO -->
+    <section id="info-section" class="content-section">
+        <h2 class="section-title">Weitere Komponenten</h2>
+        <p class="section-subtitle">Integriere Live-Kamerastreams, RTSP-Quellen oder Crestron WebXPanel Komponenten.</p>
     </section>
 
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const card = document.getElementById('glowCard');
+const video = document.getElementById('myVideo');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const loopBtn = document.getElementById('loopBtn');
 
-    if (card) {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            card.style.setProperty('--x', `${x}px`);
-            card.style.setProperty('--y', `${y}px`);
-        });
-
-        card.addEventListener('touchmove', e => {
-            const rect = card.getBoundingClientRect();
-            const touch = e.touches[0];
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-
-            card.style.setProperty('--x', `${x}px`);
-            card.style.setProperty('--y', `${y}px`);
-        });
+function togglePlayPause() {
+    if (video.paused) {
+        video.play();
+        playPauseBtn.innerHTML = '<span>⏸</span> Pause';
+    } else {
+        video.pause();
+        playPauseBtn.innerHTML = '<span>▶</span> Play';
     }
+}
 
-    // ScrollSpy Logic
+function toggleLoop() {
+    video.loop = !video.loop;
+    if (video.loop) {
+        loopBtn.classList.add('active');
+        loopBtn.innerHTML = '<span>🔁</span> Loop: An';
+    } else {
+        loopBtn.classList.remove('active');
+        loopBtn.innerHTML = '<span>➡️</span> Loop: Aus';
+    }
+}
+
+function changeSpeed(val) {
+    video.playbackRate = parseFloat(val);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.content-section');
@@ -538,11 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    const observerOptions = {
-        root: wrapper,
-        threshold: 0.5
-    };
-
+    const observerOptions = { root: wrapper, threshold: 0.5 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
