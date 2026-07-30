@@ -298,12 +298,12 @@ html, body {
     display: block;
 }
 
-/* ==================== KOMPLETT NEUE: FLACHE ACTION-BUTTONS ==================== */
+/* ==================== FLACHE ACTION-BUTTONS (GLEICHE BREITE) ==================== */
 .action-controls-row {
     display: flex;
     gap: 24px;
     justify-content: center;
-    align-items: flex-end; /* Richtet die Buttons auf einer Linie aus, Labels wachsen nach oben */
+    align-items: flex-end; 
     width: 100%;
 }
 
@@ -311,7 +311,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px; /* Abstand zwischen Text und Button */
+    gap: 8px; 
 }
 
 .action-label {
@@ -322,13 +322,16 @@ html, body {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* NEUER, STRIKT FLACHER BUTTON CODE */
 .action-btn, .action-select {
-    all: unset; /* Löscht alle Browser-Vorgaben, die Quadrate verursachen könnten */
+    all: unset;
     box-sizing: border-box;
-    height: 40px; /* Strikte flache Höhe */
-    border-radius: 20px; /* Perfekte Pille */
-    padding: 0 24px; /* Breite ergibt sich organisch aus dem Inhalt */
+    width: 150px !important;     /* BREITER UND EXAKT GLEICH */
+    min-width: 150px !important; 
+    max-width: 150px !important;
+    height: 40px !important;     /* STRIKT FLACH */
+    min-height: 40px !important;
+    max-height: 40px !important;
+    border-radius: 20px !important; /* PERFEKTE PILLE */
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
@@ -357,8 +360,9 @@ html, body {
 }
 
 .action-select {
-    padding-right: 16px; /* Platz für den Pfeil */
+    padding-right: 16px; 
     text-align: center;
+    text-align-last: center;
 }
 
 .action-select option {
@@ -428,29 +432,28 @@ html, body {
     width: 100%;
 }
 
-/* GROSSES COVER-ARTWORK (SCRATCH-FLÄCHE & ZOOM) */
+/* GROSSES COVER-ARTWORK (STATISCH, NUR ZOOM AUF KLICK) */
 .large-cover-box {
     width: 220px;
     height: 220px;
     border-radius: 16px;
     background-size: cover;
     background-position: center;
-    background-image: url('cover-weltistgut.jpg'); /* Statisches Bild */
+    background-image: url('cover-weltistgut.jpg'); 
     background-color: #1e2638;
     border: 2px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-    cursor: pointer; /* Signalisiert Klickbarkeit */
-    touch-action: none;
-    will-change: transform;
+    cursor: pointer; 
+    touch-action: manipulation;
     flex-shrink: 0;
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
     position: relative;
     z-index: 10;
 }
 
-/* ZOOM KLASSE */
+/* ZOOM KLASSE (3.5x Vergrößerung) */
 .large-cover-box.zoomed {
-    transform: scale(1.6);
+    transform: scale(3.5);
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
     z-index: 50;
     border-color: rgba(0, 210, 255, 0.5);
@@ -530,7 +533,7 @@ html, body {
 
             <ul class="navbar-nav">
                 <li><a href="#video-section" class="nav-link active" data-section="video-section">Video Player</a></li>
-                <li><a href="#audio-section" class="nav-link" data-section="audio-section">Audio Scratch</a></li>
+                <li><a href="#audio-section" class="nav-link" data-section="audio-section">Audio Player</a></li>
                 <li class="cta-button-item"><a href="design3.html" class="cta-button">Nächstes Design</a></li>
             </ul>
         </nav>
@@ -549,7 +552,6 @@ html, body {
                 </video>
             </div>
 
-            <!-- KOMPLETT NEUE BUTTON-STRUKTUR (FLACH) -->
             <div class="action-controls-row">
                 <div class="action-item">
                     <span class="action-label">Play</span>
@@ -578,7 +580,6 @@ html, body {
                 </div>
             </div>
 
-            <!-- LAUTSTÄRKERELGER VIDEO -->
             <div class="volume-container">
                 <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
                 <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)">
@@ -589,13 +590,13 @@ html, body {
 
     <!-- SEITE 2: AUDIO PLAYER -->
     <section id="audio-section" class="content-section">
-        <h2 class="section-title">Audio Player & Scratching</h2>
-        <p class="section-subtitle">Klicke das Cover zum Zoomen oder ziehe daran, um zu scratchen.</p>
+        <h2 class="section-title">Audio Player & Cover Zoom</h2>
+        <p class="section-subtitle">Klicke das Cover, um es stark heranzuzoomen.</p>
 
         <div class="card-box">
             <div class="audio-player-wrapper">
                 
-                <!-- GROSSES COVER (ZOOM & SCRATCH) -->
+                <!-- GROSSES COVER (STATISCH, NUR ZOOM AUF KLICK) -->
                 <div class="large-cover-box" id="vinylDisc"></div>
 
                 <div class="song-info">
@@ -643,7 +644,6 @@ html, body {
                     </div>
                 </div>
 
-                <!-- LAUTSTÄRKERELGER AUDIO -->
                 <div class="volume-container">
                     <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
                     <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)">
@@ -656,7 +656,6 @@ html, body {
 </div>
 
 <script>
-/* SVG ICON PATHS */
 const iconPause = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
 const iconPlay = '<path d="M8 5v14l11-7z"/>';
 
@@ -700,7 +699,7 @@ function changeVideoVolume(val) {
     video.muted = (parseFloat(val) === 0);
 }
 
-/* ==================== AUDIO LOGIK, ZOOM & SCRATCH ==================== */
+/* ==================== AUDIO LOGIK & COVER ZOOM ==================== */
 const audio = document.getElementById('myAudio');
 const audioPlayBtn = document.getElementById('audioPlayBtn');
 const audioPlayIcon = document.getElementById('audioPlayIcon');
@@ -711,15 +710,6 @@ const vinylDisc = document.getElementById('vinylDisc');
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
-
-let isScratching = false;
-let startAngle = 0;
-let currentRotation = 0;
-let lastAngle = 0;
-
-// Variablen zur Klick/Zoom-Erkennung
-let clickStartX = 0;
-let clickStartY = 0;
 
 function toggleAudioPlay() {
     if (audio.paused) {
@@ -760,15 +750,11 @@ function formatTime(sec) {
 }
 
 audio.addEventListener('timeupdate', () => {
-    if (!isScratching && audio.duration) {
+    if (audio.duration) {
         const pct = (audio.currentTime / audio.duration) * 100;
         progressFill.style.width = pct + '%';
         currentTimeEl.textContent = formatTime(audio.currentTime);
         durationEl.textContent = formatTime(audio.duration);
-
-        // Rotiere das große Cover während dem Abspielen minimal
-        currentRotation += audio.playbackRate * 0.5;
-        vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
     }
 });
 
@@ -780,84 +766,10 @@ function seekAudio(e) {
     }
 }
 
-/* SCRATCH ENGINE & ZOOM KLICK ERKENNUNG */
-function getCenterAngle(e) {
-    const rect = vinylDisc.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    return Math.atan2(clientY - centerY, clientX - centerX) * (180 / Math.PI);
-}
-
-function startScratch(e) {
-    isScratching = true;
-    
-    // Speichere die Startposition, um später einen Klick von einem Drag zu unterscheiden
-    clickStartX = e.touches ? e.touches[0].clientX : e.clientX;
-    clickStartY = e.touches ? e.touches[0].clientY : e.clientY;
-    
-    startAngle = getCenterAngle(e);
-    lastAngle = startAngle;
-    audio.pause();
-}
-
-function moveScratch(e) {
-    if (!isScratching) return;
-    const angle = getCenterAngle(e);
-    const delta = angle - lastAngle;
-    lastAngle = angle;
-
-    currentRotation += delta;
-    
-    // Behalte den Zoom-Status bei, wenn die Klasse existiert
-    if(vinylDisc.classList.contains('zoomed')) {
-        vinylDisc.style.transform = `scale(1.6) rotate(${currentRotation}deg)`;
-    } else {
-        vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
-    }
-
-    if (audio.duration) {
-        audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + (delta * 0.03)));
-        progressFill.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
-        currentTimeEl.textContent = formatTime(audio.currentTime);
-    }
-}
-
-function stopScratch(e) {
-    if (isScratching) {
-        isScratching = false;
-        
-        // Prüfe, ob es nur ein Klick war (weniger als 10 Pixel Bewegung)
-        let endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-        let endY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-        let dist = Math.sqrt(Math.pow(endX - clickStartX, 2) + Math.pow(endY - clickStartY, 2));
-        
-        if (dist < 10) {
-            // Es war ein Klick! -> Zoom umschalten
-            vinylDisc.classList.toggle('zoomed');
-            
-            // Transform korrigieren (Rotation beibehalten)
-            if(vinylDisc.classList.contains('zoomed')) {
-                vinylDisc.style.transform = `scale(1.6) rotate(${currentRotation}deg)`;
-            } else {
-                vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
-            }
-        }
-        
-        if (audioPlayText.textContent === 'Pause') {
-            audio.play();
-        }
-    }
-}
-
-vinylDisc.addEventListener('mousedown', startScratch);
-window.addEventListener('mousemove', moveScratch);
-window.addEventListener('mouseup', stopScratch);
-
-vinylDisc.addEventListener('touchstart', startScratch);
-window.addEventListener('touchmove', moveScratch);
-window.addEventListener('touchend', stopScratch);
+// Cover Click Zoom Event (Keine Rotation, kein Ruckeln)
+vinylDisc.addEventListener('click', function() {
+    this.classList.toggle('zoomed');
+});
 
 /* INIT */
 document.addEventListener('DOMContentLoaded', function() {
