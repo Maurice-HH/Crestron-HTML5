@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
+<!-- ID3 Tag Reader für Cover-Art aus MP3 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
 <style>
-/* ==================== GLOBAL RESET & FULL-HD BASE ==================== */
+/* ==================== GLOBAL RESET & BASE ==================== */
 * {
     margin: 0;
     padding: 0;
@@ -37,7 +39,6 @@ html, body {
     background: linear-gradient(180deg, #0d1527 0%, #112a38 50%, #28153d 100%);
 }
 
-/* Custom Scrollbar */
 .neonav-wrapper::-webkit-scrollbar {
     width: 10px;
 }
@@ -115,7 +116,6 @@ html, body {
     50% { transform: scale(1.25); opacity: 1; }
 }
 
-/* BRAND POPOVER */
 .brand-popover {
     position: absolute;
     top: 100%;
@@ -266,8 +266,8 @@ html, body {
     margin-bottom: 35px;
 }
 
-/* ==================== VIDEO PLAYER CONTAINER ==================== */
-.video-card-box {
+/* ==================== CARD CONTAINERS ==================== */
+.card-box {
     width: 100%;
     max-width: 720px;
     background: rgba(255, 255, 255, 0.08);
@@ -275,11 +275,12 @@ html, body {
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 28px;
-    padding: 24px;
+    padding: 28px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
+    align-items: center;
 }
 
 .video-wrapper {
@@ -299,22 +300,23 @@ html, body {
     display: block;
 }
 
-.video-controls {
+/* ABsOLUT FIXIERTE 3 BUTTONS (LEISTE) */
+.fixed-controls-row {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
     background: rgba(0, 0, 0, 0.25);
-    padding: 12px 20px;
+    padding: 12px 24px;
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    width: fit-content;
 }
 
-/* ABSOLUT FESTE STRUKTUR FÜR DIE PLAYER-BUTTONS */
-.btn-ctrl {
-    width: 130px;
-    height: 40px;
-    flex-shrink: 0;
+.fixed-btn {
+    width: 140px !important;
+    height: 42px !important;
+    flex: 0 0 140px !important;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
@@ -322,29 +324,27 @@ html, body {
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+    display: grid;
+    place-items: center;
     outline: none;
+    line-height: 1;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.btn-ctrl:hover {
+.fixed-btn:hover {
     background: rgba(0, 240, 255, 0.25);
     border-color: rgba(0, 240, 255, 0.6);
 }
 
-.btn-ctrl.active {
+.fixed-btn.active {
     background: rgba(0, 210, 255, 0.35);
     border-color: #00d2ff;
-    box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
 }
 
-.speed-select {
-    width: 130px;
-    height: 40px;
-    flex-shrink: 0;
+.fixed-select {
+    width: 140px !important;
+    height: 42px !important;
+    flex: 0 0 140px !important;
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
@@ -358,14 +358,113 @@ html, body {
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.speed-select:hover {
+.fixed-select:hover {
     background: rgba(0, 240, 255, 0.25);
     border-color: rgba(0, 240, 255, 0.6);
 }
 
-.speed-select option {
+.fixed-select option {
     background: #121824;
     color: #fff;
+}
+
+/* ==================== AUDIO PLAYER & VINYL SCRATCH ==================== */
+.audio-player-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.vinyl-container {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #111 30%, #222 50%, #000 70%, #151515 100%);
+    border: 6px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.2);
+    cursor: grab;
+    touch-action: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+}
+
+.vinyl-container:active {
+    cursor: grabbing;
+}
+
+.vinyl-grooves {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+.vinyl-cover {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: #2a3447;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.song-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.song-artist {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.progress-container {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #00d2ff, #00f0ff);
+    border-radius: 10px;
 }
 </style>
 </head>
@@ -396,18 +495,18 @@ html, body {
 
             <ul class="navbar-nav">
                 <li><a href="#video-section" class="nav-link active" data-section="video-section">Video Player</a></li>
-                <li><a href="#info-section" class="nav-link" data-section="info-section">Info</a></li>
+                <li><a href="#audio-section" class="nav-link" data-section="audio-section">Audio Scratch</a></li>
                 <li class="cta-button-item"><a href="design3.html" class="cta-button">Nächstes Design</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- SEITE 1: VIDEO PLAYER KASTEN -->
+    <!-- SEITE 1: VIDEO PLAYER -->
     <section id="video-section" class="content-section">
         <h1 class="section-title">Video Stream</h1>
-        <p class="section-subtitle">Gelooptes MP4-Video mit vollständiger Geschwindigkeits- und Wiedergabesteuerung.</p>
+        <p class="section-subtitle">Gelooptes MP4-Video mit festen Steuerungsknöpfen.</p>
 
-        <div class="video-card-box">
+        <div class="card-box">
             <div class="video-wrapper">
                 <video id="myVideo" autoplay loop muted playsinline preload="auto">
                     <source src="video.mp4" type="video/mp4">
@@ -415,16 +514,17 @@ html, body {
                 </video>
             </div>
 
-            <div class="video-controls">
-                <button class="btn-ctrl" id="playPauseBtn" onclick="togglePlayPause()">
-                    <span>⏸</span> Pause
+            <!-- 3 MITTIG PLATZIERTE, STARRE BUTTONS -->
+            <div class="fixed-controls-row">
+                <button class="fixed-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                    <span>⏸ Pause</span>
                 </button>
 
-                <button class="btn-ctrl active" id="loopBtn" onclick="toggleLoop()">
-                    <span>🔁</span> Loop: An
+                <button class="fixed-btn active" id="loopBtn" onclick="toggleLoop()">
+                    <span>🔁 Loop: An</span>
                 </button>
 
-                <select class="speed-select" id="speedSelect" onchange="changeSpeed(this.value)">
+                <select class="fixed-select" id="speedSelect" onchange="changeSpeed(this.value)">
                     <option value="0.5">0.5x</option>
                     <option value="1.0" selected>1.0x (Normal)</option>
                     <option value="1.5">1.5x</option>
@@ -434,15 +534,61 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 2: INFO -->
-    <section id="info-section" class="content-section">
-        <h2 class="section-title">Weitere Komponenten</h2>
-        <p class="section-subtitle">Integriere Live-Kamerastreams, RTSP-Quellen oder Crestron WebXPanel Komponenten.</p>
+    <!-- SEITE 2: AUDIO PLAYER MIT SCRATCH & COVER-ART -->
+    <section id="audio-section" class="content-section">
+        <h2 class="section-title">Audio Player & Scratching</h2>
+        <p class="section-subtitle">Drehe die Schallplatte, um den Sound der MP3 in Echtzeit zu scratchen.</p>
+
+        <div class="card-box">
+            <div class="audio-player-wrapper">
+                <!-- VINYL SCHALLPLATTE -->
+                <div class="vinyl-container" id="vinylDisc">
+                    <div class="vinyl-grooves"></div>
+                    <div class="vinyl-cover" id="albumCover">🎵</div>
+                </div>
+
+                <div class="song-info">
+                    <div class="song-title" id="songTitle">Welt ist gut</div>
+                    <div class="song-artist" id="songArtist">musik-weltistgut.mp3</div>
+                </div>
+
+                <div class="progress-container">
+                    <span id="currentTime">0:00</span>
+                    <div class="progress-bar-bg" onclick="seekAudio(event)">
+                        <div class="progress-bar-fill" id="progressFill"></div>
+                    </div>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <audio id="myAudio" preload="auto">
+                    <source src="musik-weltistgut.mp3" type="audio/mpeg">
+                </audio>
+
+                <!-- STEUERUNG AUDIO -->
+                <div class="fixed-controls-row">
+                    <button class="fixed-btn" id="audioPlayBtn" onclick="toggleAudioPlay()">
+                        <span>▶ Play</span>
+                    </button>
+
+                    <button class="fixed-btn" id="audioLoopBtn" onclick="toggleAudioLoop()">
+                        <span>🔁 Loop: Aus</span>
+                    </button>
+
+                    <select class="fixed-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)">
+                        <option value="0.5">0.5x</option>
+                        <option value="1.0" selected>1.0x (Normal)</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2.0">2.0x</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </section>
 
 </div>
 
 <script>
+/* ==================== VIDEO PLAYER STEUERUNG ==================== */
 const video = document.getElementById('myVideo');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const loopBtn = document.getElementById('loopBtn');
@@ -450,10 +596,10 @@ const loopBtn = document.getElementById('loopBtn');
 function togglePlayPause() {
     if (video.paused) {
         video.play();
-        playPauseBtn.innerHTML = '<span>⏸</span> Pause';
+        playPauseBtn.innerHTML = '<span>⏸ Pause</span>';
     } else {
         video.pause();
-        playPauseBtn.innerHTML = '<span>▶</span> Play';
+        playPauseBtn.innerHTML = '<span>▶ Play</span>';
     }
 }
 
@@ -461,10 +607,10 @@ function toggleLoop() {
     video.loop = !video.loop;
     if (video.loop) {
         loopBtn.classList.add('active');
-        loopBtn.innerHTML = '<span>🔁</span> Loop: An';
+        loopBtn.innerHTML = '<span>🔁 Loop: An</span>';
     } else {
         loopBtn.classList.remove('active');
-        loopBtn.innerHTML = '<span>➡️</span> Loop: Aus';
+        loopBtn.innerHTML = '<span>➡️ Loop: Aus</span>';
     }
 }
 
@@ -472,6 +618,127 @@ function changeSpeed(val) {
     video.playbackRate = parseFloat(val);
 }
 
+/* ==================== AUDIO PLAYER & SCRATCH LOGIK ==================== */
+const audio = document.getElementById('myAudio');
+const audioPlayBtn = document.getElementById('audioPlayBtn');
+const audioLoopBtn = document.getElementById('audioLoopBtn');
+const vinylDisc = document.getElementById('vinylDisc');
+const progressFill = document.getElementById('progressFill');
+const currentTimeEl = document.getElementById('currentTime');
+const durationEl = document.getElementById('duration');
+const albumCover = document.getElementById('albumCover');
+
+let isScratching = false;
+let startAngle = 0;
+let currentRotation = 0;
+let lastAngle = 0;
+let animFrame;
+
+function toggleAudioPlay() {
+    if (audio.paused) {
+        audio.play();
+        audioPlayBtn.innerHTML = '<span>⏸ Pause</span>';
+    } else {
+        audio.pause();
+        audioPlayBtn.innerHTML = '<span>▶ Play</span>';
+    }
+}
+
+function toggleAudioLoop() {
+    audio.loop = !audio.loop;
+    if (audio.loop) {
+        audioLoopBtn.classList.add('active');
+        audioLoopBtn.innerHTML = '<span>🔁 Loop: An</span>';
+    } else {
+        audioLoopBtn.classList.remove('active');
+        audioLoopBtn.innerHTML = '<span>➡️ Loop: Aus</span>';
+    }
+}
+
+function changeAudioSpeed(val) {
+    audio.playbackRate = parseFloat(val);
+}
+
+function formatTime(sec) {
+    if (isNaN(sec)) return "0:00";
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+audio.addEventListener('timeupdate', () => {
+    if (!isScratching && audio.duration) {
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = pct + '%';
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+        durationEl.textContent = formatTime(audio.duration);
+
+        // Rotation der Platte im Play-Zustand
+        currentRotation += audio.playbackRate * 1.5;
+        vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
+    }
+});
+
+function seekAudio(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pos = (e.clientX - rect.left) / rect.width;
+    if (audio.duration) {
+        audio.currentTime = pos * audio.duration;
+    }
+}
+
+/* SCRATCH LOGIK FÜR SHALLPLATTE */
+function getCenterAngle(e) {
+    const rect = vinylDisc.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return Math.atan2(clientY - centerY, clientX - centerX) * (180 / Math.PI);
+}
+
+function startScratch(e) {
+    isScratching = true;
+    startAngle = getCenterAngle(e);
+    lastAngle = startAngle;
+    audio.pause();
+}
+
+function moveScratch(e) {
+    if (!isScratching) return;
+    const angle = getCenterAngle(e);
+    const delta = angle - lastAngle;
+    lastAngle = angle;
+
+    currentRotation += delta;
+    vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
+
+    // Zeit im Song entsprechend der Schwenk-Richtung anpassen
+    if (audio.duration) {
+        audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + (delta * 0.03)));
+        progressFill.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+    }
+}
+
+function stopScratch() {
+    if (isScratching) {
+        isScratching = false;
+        if (audioPlayBtn.innerHTML.includes('Pause')) {
+            audio.play();
+        }
+    }
+}
+
+vinylDisc.addEventListener('mousedown', startScratch);
+window.addEventListener('mousemove', moveScratch);
+window.addEventListener('mouseup', stopScratch);
+
+vinylDisc.addEventListener('touchstart', startScratch);
+window.addEventListener('touchmove', moveScratch);
+window.addEventListener('touchend', stopScratch);
+
+/* MP3 METADATEN (COVER-ART) LESEN */
 document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -479,12 +746,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (video) {
         video.muted = true;
-        const playPromise = video.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                console.warn("Autoplay durch Browser blockiert oder Datei nicht gefunden:", error);
-            });
-        }
+        video.play().catch(() => {});
+    }
+
+    // Cover aus ID3 Tags extrahieren
+    if (window.jsmediatags) {
+        jsmediatags.read("musik-weltistgut.mp3", {
+            onSuccess: function(tag) {
+                const tags = tag.tags;
+                if (tags.title) document.getElementById('songTitle').textContent = tags.title;
+                if (tags.artist) document.getElementById('songArtist').textContent = tags.artist;
+                
+                const picture = tags.picture;
+                if (picture) {
+                    let base64String = "";
+                    for (let i = 0; i < picture.data.length; i++) {
+                        base64String += String.fromCharCode(picture.data[i]);
+                    }
+                    const base64 = "data:" + picture.format + ";base64," + window.btoa(base64String);
+                    albumCover.style.backgroundImage = `url(${base64})`;
+                    albumCover.textContent = "";
+                }
+            },
+            onError: function(error) {
+                console.log("ID3 Tag Lesefehler:", error);
+            }
+        });
     }
 
     navLinks.forEach(anchor => {
