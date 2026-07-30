@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crestron UI - Design 2</title>
+<style>
+/* ==================== GLOBAL RESET & BASE ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+:root {
+    --tuerkis-blue: #00d2ff;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0f1524 !important;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.neonav-wrapper {
+    background: linear-gradient(135deg, #0d121f 0%, #162032 50%, #0f1524 100%);
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+.neonav-wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+.neonav-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* ==================== NAVBAR ==================== */
+.navbar-container {
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+    width: fit-content; 
+    margin: 0 auto;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 60px;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.navbar-brand-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 20px;
+    padding-right: 12px;
+    cursor: pointer;
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logo-icon::before {
+    content: '';
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    animation: logo-pulse 2s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.25); opacity: 1; }
+}
+
+/* BRAND HOVER POPOVER MIT DESIGN-LINKS */
+.brand-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 14px;
+    background: rgba(18, 24, 38, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 2px solid rgba(0, 240, 255, 0.4);
+    border-radius: 18px;
+    padding: 18px 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.95);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 2000;
+}
+
+.brand-popover::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 24px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 240, 255, 0.4) transparent;
+}
+
+.navbar-brand-wrapper:hover .brand-popover,
+.brand-popover:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.brand-popover-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #00f0ff;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.brand-popover-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.brand-popover-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.brand-popover-link:hover, .brand-popover-link.active {
+    background: rgba(0, 240, 255, 0.2);
+    border-color: rgba(0, 240, 255, 0.5);
+    color: #ffffff;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.nav-link:hover, .nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--tuerkis-blue), #00a8cc);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1;
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.3);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 210, 255, 0.5);
+}
+
+/* ==================== CONTENT SECTIONS ==================== */
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.5px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 800px;
+    line-height: 1.5;
+    margin-bottom: 35px;
+}
+
+/* ==================== EMBEDDED CODEPEN CARD ==================== */
+.codepen-card-wrapper {
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    justify-content: center;
+}
+
+.glow-card {
+    --start: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 420px;
+    padding: 40px;
+    border-radius: 28px;
+    background-color: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+    text-align: left;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.glow-card::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 28px;
+    background: radial-gradient(
+        600px circle at var(--x, 50%) var(--y, 50%),
+        rgba(0, 210, 255, 0.25),
+        transparent 40%
+    );
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.glow-card::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 28px;
+    padding: 2px;
+    background: radial-gradient(
+        400px circle at var(--x, 50%) var(--y, 50%),
+        rgba(0, 240, 255, 0.8),
+        transparent 40%
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+}
+
+.glow-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.glow-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.2), rgba(0, 168, 204, 0.4));
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glow-card-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: #00f0ff;
+    stroke-width: 2;
+    fill: none;
+}
+
+.glow-card-tag {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #00f0ff;
+    text-transform: uppercase;
+}
+
+.glow-card-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 16px;
+    line-height: 1.2;
+}
+
+.glow-card-body {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 32px;
+}
+
+.glow-card-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-radius: 14px;
+    background: rgba(0, 240, 255, 0.15);
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.glow-card-btn:hover {
+    background: rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+</style>
+</head>
+<body>
+
+<div class="neonav-wrapper" id="neonavWrapper">
+
+    <!-- NAVIGATION HEADER -->
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="navbar-brand-wrapper">
+                <a href="#seite1" class="navbar-brand">
+                    <div class="logo-icon"></div>
+                    <span>Design 2</span>
+                </a>
+
+                <!-- DIREKT-NAVIGATION ZU ALLEN 3 DESIGNS -->
+                <div class="brand-popover">
+                    <div class="brand-popover-title">Design wählen</div>
+                    <div class="brand-popover-links">
+                        <a href="index.html" class="brand-popover-link"><span>Design 1</span> <span>➔</span></a>
+                        <a href="design2.html" class="brand-popover-link active"><span>Design 2</span> <span>➔</span></a>
+                        <a href="design3.html" class="brand-popover-link"><span>Design 3</span> <span>➔</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="navbar-nav">
+                <li>
+                    <a href="#seite1" class="nav-link active" data-section="seite1">
+                        <span>Showcase</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#seite2" class="nav-link" data-section="seite2">
+                        <span>Details</span>
+                    </a>
+                </li>
+                <li class="cta-button-item">
+                    <a href="design3.html" class="cta-button">Nächstes Design</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- SEITE 1: EINGEBETTETER CODEPEN-KASTEN -->
+    <section id="seite1" class="content-section">
+        <h1 class="section-title">Glowing Card Showcase</h1>
+        <p class="section-subtitle">Interaktives UI-Element mit dynamischem Licht-Cursor, eingebettet in das Crestron Construct Design 2.</p>
+
+        <div class="codepen-card-wrapper">
+            <div class="glow-card" id="glowCard">
+                <div>
+                    <div class="glow-card-header">
+                        <div class="glow-card-icon">
+                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                        <span class="glow-card-tag">Interactive Component</span>
+                    </div>
+                    <h2 class="glow-card-title">Crestron Glassmorphism Card</h2>
+                    <p class="glow-card-body">Move your cursor or finger over this card to trigger the dynamic radial glow and border trace effects. Fully optimized for WebXPanel rendering.</p>
+                </div>
+                <div class="glow-card-footer">
+                    <a href="#" class="glow-card-btn">Explore Feature</a>
+                    <span style="opacity: 0.6; font-size: 14px;">HTML5 / CSS3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEITE 2: WEITERE INFOS -->
+    <section id="seite2" class="content-section">
+        <h2 class="section-title">Zweite Unterseite</h2>
+        <p class="section-subtitle">Hier befindet sich der erweiterte Bereich der zweiten Designseite.</p>
+    </section>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const card = document.getElementById('glowCard');
+
+    if (card) {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+
+        card.addEventListener('touchmove', e => {
+            const rect = card.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+    }
+
+    // ScrollSpy Logic
+    const wrapper = document.getElementById('neonavWrapper');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+
+                if (target && wrapper) {
+                    wrapper.scrollTo({
+                        top: target.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    const observerOptions = {
+        root: wrapper,
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const activeId = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('data-section') === activeId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+});
+</script>
+
+</body>
+</html>

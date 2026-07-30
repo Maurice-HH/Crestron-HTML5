@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crestron UI - Design 1 (Index)</title>
+<style>
+/* ==================== GLOBAL RESET & FULL-HD BASE ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+:root {
+    --electric-border-color: #dd8448;
+    --electric-light-color: #f7a361;
+    --tuerkis-blue: #00d2ff;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d121f !important;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.neonav-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    scroll-behavior: smooth;
+    background: #0d121f;
+}
+
+/* Custom Scrollbar */
+.neonav-wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+.neonav-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* ==================== NAVBAR (BREITER & LUFTIGER) ==================== */
+.navbar-container {
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+    width: fit-content; 
+    margin: 0 auto;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 60px;
+    padding: 10px 36px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 20px;
+    padding-right: 12px;
+    cursor: pointer;
+}
+
+.logo-icon {
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logo-icon::before {
+    content: '';
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    animation: logo-pulse 2s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.25); opacity: 1; }
+}
+
+/* BRAND POPOVER (GLASFELD) */
+.brand-popover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 15px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.95);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    z-index: 2000;
+}
+
+.brand-popover-inner {
+    background: rgba(18, 24, 38, 0.85);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    padding: 16px 22px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+.navbar-brand-wrapper:hover .brand-popover,
+.brand-popover:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.brand-popover-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #00f0ff;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.brand-popover-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.brand-popover-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.brand-popover-link:hover, .brand-popover-link.active {
+    background: rgba(0, 240, 255, 0.2);
+    border-color: rgba(0, 240, 255, 0.4);
+    color: #ffffff;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 22px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.nav-link[data-section="matrix"] { color: #f7a361; }
+.nav-link[data-section="klima"] { color: #4ecdc4; }
+.nav-link[data-section="medien"] { color: #00d2ff; }
+
+.nav-link:hover, .nav-link.active {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--tuerkis-blue), #00a8cc);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 22px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+}
+
+/* ==================== CONTENT SECTIONS ==================== */
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 80px 20px 40px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#matrix {
+    background: linear-gradient(135deg, #1f120c 0%, #3a2215 50%, #1f120c 100%);
+    max-width: 100%;
+}
+#matrix > * { max-width: 1200px; width: 100%; }
+
+#klima {
+    background: linear-gradient(135deg, #0e2219 0%, #153b28 50%, #0e2219 100%);
+    max-width: 100%;
+}
+#klima > * { max-width: 1200px; width: 100%; }
+
+#medien {
+    background: linear-gradient(135deg, #0c1b2a 0%, #133352 50%, #0c1b2a 100%);
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+}
+#medien > * { max-width: 1200px; width: 100%; position: relative; z-index: 2; }
+
+#medienCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.section-title {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    opacity: 0.85;
+    max-width: 800px;
+    line-height: 1.5;
+    margin-bottom: 35px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ==================== ELEMENTS ==================== */
+.side-by-side-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.svg-container {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.card-container {
+    padding: 0;
+    border-radius: 28px;
+    position: relative;
+    background: transparent;
+    box-shadow: none;
+}
+
+.inner-container {
+    position: relative;
+}
+
+.main-card {
+    width: 360px;
+    height: 360px;
+    border-radius: 28px;
+    border: 4px solid var(--electric-border-color);
+    background: #182030;
+    filter: url(#electric-spark);
+}
+
+.glow-layer-1 {
+    border: 3px solid rgba(221, 132, 72, 0.7);
+    border-radius: 28px;
+    width: 100%; height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.card-content-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    z-index: 5;
+}
+
+.card-content-top {
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    padding-bottom: 14px;
+    height: 100%;
+}
+
+.card-content-bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    padding-top: 14px;
+}
+
+.badge-neu {
+    background: rgba(255, 107, 107, 0.3);
+    border: 1px solid rgba(255, 107, 107, 0.6);
+    border-radius: 14px;
+    width: fit-content;
+    padding: 4px 14px;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 13px; 
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-neu:hover {
+    transform: scale(1.08);
+    background: rgba(255, 107, 107, 0.5);
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.6);
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin-top: auto;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.card-description {
+    opacity: 0.85;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #e2e8f0;
+}
+
+.card-divider {
+    margin-top: auto;
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==================== POPOVER ==================== */
+.popover-menu-box {
+    position: relative;
+    width: 360px;
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popover-trigger {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+    z-index: 20;
+    outline: none;
+}
+
+.popover-trigger svg {
+    width: 32px;
+    height: 32px;
+    stroke: #ffffff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    transition: transform 0.3s ease;
+}
+
+.popover-menu-box.open .popover-trigger svg {
+    transform: rotate(135deg);
+}
+
+.popover-menu-box.open .popover-trigger {
+    background: linear-gradient(135deg, #ee5a52, #ff6b6b);
+}
+
+.popover-item {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transform: translate(0,0) scale(0);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.popover-item svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+}
+
+.popover-menu-box.open .popover-item { opacity: 1; }
+.popover-menu-box.open .pop-1 { transform: translate(0px, -120px) scale(1); transition-delay: 0.05s; }
+.popover-menu-box.open .pop-2 { transform: translate(104px, -60px) scale(1); transition-delay: 0.1s; }
+.popover-menu-box.open .pop-3 { transform: translate(104px, 60px) scale(1); transition-delay: 0.15s; }
+.popover-menu-box.open .pop-4 { transform: translate(0px, 120px) scale(1); transition-delay: 0.2s; }
+.popover-menu-box.open .pop-5 { transform: translate(-104px, 60px) scale(1); transition-delay: 0.25s; }
+.popover-menu-box.open .pop-6 { transform: translate(-104px, -60px) scale(1); transition-delay: 0.3s; }
+
+.popover-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* ==================== GEL SLIDER (PERFEKT STABIL) ==================== */
+.gel-slider-box {
+    width: 100%;
+    max-width: 720px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 28px;
+    padding: 28px 36px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.gel-slider-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 22px;
+    color: #ffffff;
+}
+
+.gel-track-container {
+    position: relative;
+    width: 100%;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+.gel-fill-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 67px;
+    border-radius: 50px;
+    background-image: linear-gradient(90deg, #ff9a9e 0%, #fecfef 45%, #ffc3a0 100%);
+    background-repeat: no-repeat;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gel-range-input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+    -webkit-tap-highlight-color: transparent; 
+    outline: none;
+}
+
+.gel-thumb-badge {
+    position: absolute;
+    top: 50%;
+    left: 67px;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #ffe259 0%, #ffa751 50%, #d4af37 100%);
+    color: #1a1500;
+    border: 2px solid #fff5c0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 900;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+    pointer-events: none;
+    z-index: 5;
+    will-change: left;
+}
+
+.gel-scale-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0 24px;
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.gel-presets {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 24px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.gel-preset-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+.gel-preset-label:hover {
+    opacity: 1;
+    color: #00f0ff;
+}
+
+.gel-preset-label.active {
+    opacity: 1;
+    color: #ffffff;
+    border-bottom-color: #ff6b6b;
+}
+
+.gel-radio-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    border: 2px solid #fff;
+    display: inline-block;
+}
+
+.gel-preset-label.active .gel-radio-dot {
+    background: #ff6b6b;
+    box-shadow: 0 0 10px #ff6b6b;
+}
+
+/* ==================== RADIAL MENU ==================== */
+.radial-dial-box {
+    position: relative;
+    width: 440px;
+    height: 440px;
+    margin: 20px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.dial-center-knob {
+    width: 160px;
+    height: 160px;
+    background: linear-gradient(135deg, #1a2232, #242f45);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 50%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border: 3px solid rgba(0, 240, 255, 0.5);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dial-center-knob:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+}
+
+.dial-val {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.dial-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #00f0ff;
+    letter-spacing: 2px;
+    margin-top: 2px;
+}
+
+.dial-item {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(0, 0) scale(0.2);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.dial-item svg {
+    width: 28px;
+    height: 28px;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 2.2;
+    pointer-events: none;
+}
+
+.dial-item[data-color="bt"]  { background: linear-gradient(135deg, #0082fc, #00d2ff); }
+.dial-item[data-color="tv"]  { background: linear-gradient(135deg, #ff4757, #ff6b81); }
+.dial-item[data-color="rad"] { background: linear-gradient(135deg, #ffa502, #ff7f50); }
+.dial-item[data-color="sp"]  { background: linear-gradient(135deg, #1db954, #1ed760); }
+.dial-item[data-color="aux"] { background: linear-gradient(135deg, #eccc68, #ff7f50); }
+.dial-item[data-color="set"] { background: linear-gradient(135deg, #70a1ff, #1e90ff); }
+
+.radial-dial-box.open .dial-item {
+    pointer-events: auto;
+}
+
+.radial-dial-box.open .pos-bt  { transform: translate(0px, -150px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-tv  { transform: translate(130px, -75px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-rad { transform: translate(130px, 75px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-sp  { transform: translate(0px, 150px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-aux { transform: translate(-130px, 75px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-set { transform: translate(-130px, -75px) scale(1); opacity: 1; }
+
+.radial-dial-box.open .pos-bt:hover  { transform: translate(0px, -150px) scale(1.15); box-shadow: 0 0 25px rgba(0, 210, 255, 0.8); }
+.radial-dial-box.open .pos-tv:hover  { transform: translate(130px, -75px) scale(1.15); box-shadow: 0 0 25px rgba(255, 71, 87, 0.8); }
+.radial-dial-box.open .pos-rad:hover { transform: translate(130px, 75px) scale(1.15); box-shadow: 0 0 25px rgba(255, 165, 2, 0.8); }
+.radial-dial-box.open .pos-sp:hover  { transform: translate(0px, 150px) scale(1.15); box-shadow: 0 0 25px rgba(29, 185, 84, 0.8); }
+.radial-dial-box.open .pos-aux:hover { transform: translate(-130px, 75px) scale(1.15); box-shadow: 0 0 25px rgba(236, 204, 104, 0.8); }
+.radial-dial-box.open .pos-set:hover { transform: translate(-130px, -75px) scale(1.15); box-shadow: 0 0 25px rgba(112, 161, 255, 0.8); }
+</style>
+</head>
+<body>
+
+<svg class="svg-container">
+    <defs>
+        <filter id="electric-spark" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
+                <animate attributeName="seed" values="1;5;12;24;8;2;19;3" dur="0.4s" repeatCount="indefinite" calcMode="discrete"/>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </defs>
+</svg>
+
+<div class="neonav-wrapper" id="neonavWrapper">
+
+    <!-- NAVIGATION HEADER -->
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="navbar-brand-wrapper">
+                <a href="#matrix" class="navbar-brand">
+                    <div class="logo-icon"></div>
+                    <span>Crestron UI</span>
+                </a>
+                
+                <div class="brand-popover">
+                    <div class="brand-popover-inner">
+                        <div class="brand-popover-title">Design wählen</div>
+                        <div class="brand-popover-links">
+                            <a href="index.html" class="brand-popover-link active"><span>Design 1</span> <span>➔</span></a>
+                            <a href="design2.html" class="brand-popover-link"><span>Design 2</span> <span>➔</span></a>
+                            <a href="design3.html" class="brand-popover-link"><span>Design 3</span> <span>➔</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="navbar-nav">
+                <li>
+                    <a href="#matrix" class="nav-link active" data-section="matrix">HTML5</a>
+                </li>
+                <li>
+                    <a href="#klima" class="nav-link" data-section="klima">Klima</a>
+                </li>
+                <li>
+                    <a href="#medien" class="nav-link" data-section="medien">Medien</a>
+                </li>
+                <li class="cta-button-item">
+                    <a href="design2.html" class="cta-button">Nächstes Design</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- SEITE 1: HTML5 -->
+    <section id="matrix" class="content-section">
+        <h1 class="section-title">HTML5</h1>
+        <p class="section-subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
+
+        <div class="side-by-side-container">
+            <!-- ELECTRIC CARD -->
+            <div class="card-container">
+                <div class="inner-container">
+                    <div class="main-card"></div>
+                    <div class="glow-layer-1"></div>
+                </div>
+
+                <div class="card-content-container">
+                    <div class="card-content-top">
+                        <a href="#medien" class="badge-neu">NEU</a>
+                        <p class="card-title">Crestron. Construct.</p>
+                    </div>
+
+                    <hr class="card-divider" />
+
+                    <div class="card-content-bottom">
+                        <p class="card-description">Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRIGONOMETRIC RADIAL POPOVER MENU -->
+            <div class="popover-menu-box" id="popoverBox1">
+                <button class="popover-trigger" onclick="togglePopover1()">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                
+                <div class="popover-item pop-1"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                <div class="popover-item pop-2"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
+                <div class="popover-item pop-3"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+                <div class="popover-item pop-4"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                <div class="popover-item pop-5"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                <div class="popover-item pop-6"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEITE 2: RANGE SLIDER -->
+    <section id="klima" class="content-section">
+        <h2 class="section-title">Range Slider</h2>
+        <p class="section-subtitle">Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.</p>
+
+        <div class="gel-slider-box">
+            <h3 class="gel-slider-title">Glass / Gel Slider</h3>
+            
+            <div class="gel-track-container" id="gelTrack">
+                <div class="gel-scale-labels">
+                    <span>0</span>
+                    <span>100</span>
+                </div>
+                <div class="gel-fill-bar" id="gelFill"></div>
+                <div class="gel-thumb-badge" id="gelBadge">67</div>
+                <input type="range" min="0" max="100" value="67" class="gel-range-input" id="gelRange">
+            </div>
+
+            <div class="gel-presets">
+                <div class="gel-preset-label" onclick="setPreset('clear', this)"><span class="gel-radio-dot"></span> Clear</div>
+                <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> Rainbow</div>
+                <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> Sunset</div>
+                <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> Ice</div>
+                <div class="gel-preset-label" onclick="setPreset('slime', this)"><span class="gel-radio-dot"></span> Slime</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEITE 3: HINTERGRUNDEFFEKT & MENÜ-BUTTON -->
+    <section id="medien" class="content-section">
+        <canvas id="medienCanvas"></canvas>
+
+        <h2 class="section-title">Hintergrundeffekt & Menü-Button</h2>
+        <p class="section-subtitle">Tippe auf den Crestron-Button in der Mitte, um die bunten Quellen zu öffnen.</p>
+
+        <div class="radial-dial-box" id="radialDialBox">
+            <div class="dial-center-knob" onclick="toggleRadialDial()">
+                <span class="dial-val">Crestron</span>
+                <span class="dial-label">Klick</span>
+            </div>
+
+            <div class="dial-item pos-bt" data-color="bt" onclick="selectDial(this, 'Bluetooth', 'Maurice S24')"><svg viewBox="0 0 24 24"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polyline></svg></div>
+            <div class="dial-item pos-tv" data-color="tv" onclick="selectDial(this, 'TV / HDMI', 'ZONE 2')"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
+            <div class="dial-item pos-rad" data-color="rad" onclick="selectDial(this, 'Radio', 'FM 104.2')"><svg viewBox="0 0 24 24"><path d="M4.93 4.93a10 10 0 0 1 14.14 0"></path><path d="M7.76 7.76a6 6 0 0 1 8.49 0"></path><circle cx="12" cy="12" r="2"></circle><path d="M12 14v8"></path></svg></div>
+            <div class="dial-item pos-sp" data-color="sp" onclick="selectDial(this, 'Spotify', 'ZONE 1')"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
+            <div class="dial-item pos-aux" data-color="aux" onclick="selectDial(this, 'AUX In', 'Line 1')"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+            <div class="dial-item pos-set" data-color="set" onclick="selectDial(this, 'Settings', 'DSP Out')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const wrapper = document.getElementById('neonavWrapper');
+    const navLinks = document.querySelectorAll('.nav-link, .badge-neu');
+    const sections = document.querySelectorAll('.content-section');
+
+    navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+
+                if (target && wrapper) {
+                    wrapper.scrollTo({
+                        top: target.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    const observerOptions = { root: wrapper, threshold: 0.5 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const activeId = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('data-section') === activeId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+    updateGelSlider();
+    initMedienCanvas();
+});
+
+function togglePopover1() {
+    const box = document.getElementById('popoverBox1');
+    if (box) box.classList.toggle('open');
+}
+
+/* 100% EXAKTE PIXEL-BASIERTE SLIDER-SYNCHRONISATION (FEST VERBUNDEN) */
+const gelRange = document.getElementById('gelRange');
+const gelFill = document.getElementById('gelFill');
+const gelBadge = document.getElementById('gelBadge');
+
+function updateGelSlider() {
+    if (!gelRange || !gelFill || !gelBadge) return;
+    const val = Number(gelRange.value);
+    
+    // Füllbalken und Badge exakt prozentual synchronisiert
+    gelFill.style.width = val + '%';
+    gelBadge.style.left = val + '%';
+    gelBadge.textContent = val;
+}
+
+if (gelRange) {
+    gelRange.addEventListener('input', updateGelSlider);
+}
+
+function setPreset(theme, el) {
+    document.querySelectorAll('.gel-preset-label').forEach(lbl => lbl.classList.remove('active'));
+    el.classList.add('active');
+
+    const gradients = {
+        'clear': 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 100%)',
+        'rainbow': 'linear-gradient(90deg, #ff007f 0%, #7f00ff 33%, #00f0ff 66%, #ff007f 100%)',
+        'sunset': 'linear-gradient(90deg, #ff9a9e 0%, #fecfef 45%, #ffc3a0 100%)',
+        'ice': 'linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%)',
+        'slime': 'linear-gradient(90deg, #0ba360 0%, #3cba92 100%)'
+    };
+
+    if (gelFill && gradients[theme]) {
+        gelFill.style.backgroundImage = gradients[theme];
+    }
+}
+
+function toggleRadialDial() {
+    const dialBox = document.getElementById('radialDialBox');
+    if (dialBox) dialBox.classList.toggle('open');
+}
+
+function selectDial(el, label, val) {
+    document.querySelectorAll('#radialDialBox .dial-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+}
+
+/* KANVAS-ANIMATION FÜR DIE MEDIEN-SEITE (DOPPELT SO HELL & FUNKELND) */
+function initMedienCanvas() {
+    const canvas = document.getElementById('medienCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const particles = [];
+    for (let i = 0; i < 40; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2.5 + 1,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            alpha: Math.random() * 0.5 + 0.5,
+            twinkleSpeed: Math.random() * 0.04 + 0.01,
+            twinkleDir: Math.random() > 0.5 ? 1 : -1
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
+
+            p.alpha += p.twinkleSpeed * p.twinkleDir;
+            if (p.alpha > 1.0) { p.alpha = 1.0; p.twinkleDir = -1; }
+            if (p.alpha < 0.3) { p.alpha = 0.3; p.twinkleDir = 1; }
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 210, 255, ${p.alpha})`;
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = 'rgba(0, 210, 255, 0.8)';
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        });
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(0, 210, 255, ${0.25 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+</script>
+
+</body>
+</html>
