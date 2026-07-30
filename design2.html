@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
-<!-- ID3 Tag Reader für Cover-Art aus MP3 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.5/jsmediatags.min.js"></script>
 <style>
 /* ==================== GLOBAL RESET & BASE ==================== */
 * {
@@ -282,7 +280,7 @@ html, body {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
     align-items: center;
 }
 
@@ -324,25 +322,25 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 8px; /* Abstand zwischen Label und Button */
 }
 
 .control-label {
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .glass-btn {
-    width: 120px;
-    height: 42px;
-    flex: 0 0 120px;
+    width: 110px !important;
+    height: 40px !important; /* HARTE GRENZE FÜR PILLE */
+    flex: 0 0 110px !important;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     color: #ffffff;
-    border-radius: 30px;
+    border-radius: 20px !important; /* HARTE GRENZE FÜR RUNDUNG */
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
@@ -353,6 +351,7 @@ html, body {
     outline: none;
     transition: all 0.2s ease;
     backdrop-filter: blur(10px);
+    padding: 0;
 }
 
 .glass-btn:hover {
@@ -375,13 +374,13 @@ html, body {
 }
 
 .glass-select {
-    width: 130px;
-    height: 42px;
-    flex: 0 0 130px;
+    width: 110px !important;
+    height: 40px !important; /* HARTE GRENZE FÜR PILLE */
+    flex: 0 0 110px !important;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     color: #ffffff;
-    border-radius: 30px;
+    border-radius: 20px !important; /* HARTE GRENZE FÜR RUNDUNG */
     font-weight: 700;
     font-size: 14px;
     outline: none;
@@ -390,6 +389,7 @@ html, body {
     text-align-last: center;
     backdrop-filter: blur(10px);
     transition: all 0.2s ease;
+    padding: 0 10px;
 }
 
 .glass-select:hover {
@@ -449,7 +449,7 @@ html, body {
     transform: scale(1.25);
 }
 
-/* ==================== AUDIO PLAYER & ID3 COVER ==================== */
+/* ==================== AUDIO PLAYER & COVER ART ==================== */
 .audio-player-wrapper {
     display: flex;
     flex-direction: column;
@@ -466,14 +466,9 @@ html, body {
     background-size: cover;
     background-position: center;
     background-color: #1e2638;
+    background-image: url('cover-weltistgut.jpg'); /* Statisches Bild */
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 42px;
-    position: relative;
-    overflow: hidden;
 }
 
 .vinyl-scratch-wrapper {
@@ -521,12 +516,9 @@ html, body {
     background-size: cover;
     background-position: center;
     background-color: #2a3447;
+    background-image: url('cover-weltistgut.jpg'); /* Statisches Bild */
     border: 2px solid #fff;
     pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
 }
 
 .song-info {
@@ -642,7 +634,7 @@ html, body {
                         <span class="control-label">Geschwindigkeit</span>
                         <select class="glass-select" id="speedSelect" onchange="changeSpeed(this.value)">
                             <option value="0.5">0.5x</option>
-                            <option value="1.0" selected>1.0x (Normal)</option>
+                            <option value="1.0" selected>1.0x</option>
                             <option value="1.5">1.5x</option>
                             <option value="2.0">2.0x</option>
                         </select>
@@ -659,16 +651,16 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 2: AUDIO PLAYER MIT GROSSEM COVER -->
+    <!-- SEITE 2: AUDIO PLAYER MIT STATISCHEM COVER -->
     <section id="audio-section" class="content-section">
         <h2 class="section-title">Audio Player & Scratching</h2>
-        <p class="section-subtitle">Schlichte Glaselemente mit ID3-Cover-Extraktion.</p>
+        <p class="section-subtitle">Statisches Cover aus JPG geladen. Reiner HTML5 Audio Player.</p>
 
         <div class="card-box">
             <div class="audio-player-wrapper">
                 
                 <!-- GROSSES COVER OBEN -->
-                <div class="large-cover-box" id="largeCoverBox">🎵</div>
+                <div class="large-cover-box" id="largeCoverBox"></div>
 
                 <div class="song-info">
                     <div class="song-title" id="songTitle">Welt ist gut</div>
@@ -679,7 +671,7 @@ html, body {
                 <div class="vinyl-scratch-wrapper">
                     <div class="vinyl-container" id="vinylDisc">
                         <div class="vinyl-grooves"></div>
-                        <div class="vinyl-cover" id="albumCover">🎵</div>
+                        <div class="vinyl-cover" id="albumCover"></div>
                     </div>
                 </div>
 
@@ -717,7 +709,7 @@ html, body {
                             <span class="control-label">Geschwindigkeit</span>
                             <select class="glass-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)">
                                 <option value="0.5">0.5x</option>
-                                <option value="1.0" selected>1.0x (Normal)</option>
+                                <option value="1.0" selected>1.0x</option>
                                 <option value="1.5">1.5x</option>
                                 <option value="2.0">2.0x</option>
                             </select>
@@ -793,8 +785,6 @@ const vinylDisc = document.getElementById('vinylDisc');
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
-const albumCover = document.getElementById('albumCover');
-const largeCoverBox = document.getElementById('largeCoverBox');
 
 let isScratching = false;
 let startAngle = 0;
@@ -923,35 +913,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (audio) {
         audio.volume = 0.8;
-    }
-
-    // ID3 Tag Cover Auslesen & Gross Anzeigen
-    if (window.jsmediatags) {
-        jsmediatags.read("musik-weltistgut.mp3", {
-            onSuccess: function(tag) {
-                const tags = tag.tags;
-                if (tags.title) document.getElementById('songTitle').textContent = tags.title;
-                if (tags.artist) document.getElementById('songArtist').textContent = tags.artist;
-                
-                const picture = tags.picture;
-                if (picture) {
-                    let base64String = "";
-                    for (let i = 0; i < picture.data.length; i++) {
-                        base64String += String.fromCharCode(picture.data[i]);
-                    }
-                    const base64 = "data:" + picture.format + ";base64," + window.btoa(base64String);
-                    
-                    largeCoverBox.style.backgroundImage = `url(${base64})`;
-                    largeCoverBox.textContent = "";
-
-                    albumCover.style.backgroundImage = `url(${base64})`;
-                    albumCover.textContent = "";
-                }
-            },
-            onError: function(error) {
-                console.log("ID3 Tag Lesefehler:", error);
-            }
-        });
     }
 
     navLinks.forEach(anchor => {
