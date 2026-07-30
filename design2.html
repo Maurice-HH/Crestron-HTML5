@@ -393,8 +393,8 @@ html, body {
 
         <div class="video-card-box">
             <div class="video-wrapper">
-                <!-- RELATIVER PFAD ZUM MP4-VIDEO -->
-                <video id="myVideo" autoplay loop muted playsinline>
+                <!-- ERZWUNGENES STUMMSCHALTEN & INLINE-PLAY FÜR GEWÄHRLEISTETES AUTOPLAY -->
+                <video id="myVideo" autoplay loop muted playsinline preload="auto">
                     <source src="video.mp4" type="video/mp4">
                     Ihr Browser unterstützt kein HTML5-Video.
                 </video>
@@ -461,6 +461,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.content-section');
+
+    // Sicherstellen, dass das Video stummgeschaltet startet (Voraussetzung für Autoplay)
+    if (video) {
+        video.muted = true;
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.warn("Autoplay durch Browser blockiert oder Datei nicht gefunden:", error);
+            });
+        }
+    }
 
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
