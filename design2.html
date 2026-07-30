@@ -312,7 +312,7 @@ html, body {
 
 .fixed-controls-row {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end; /* Labels oben, Buttons unten bündig */
     justify-content: center;
     gap: 16px;
     width: 100%;
@@ -333,28 +333,36 @@ html, body {
     color: rgba(255, 255, 255, 0.7);
 }
 
-.glass-btn {
-    width: 110px !important;
-    height: 40px !important; /* HARTE GRENZE FÜR PILLE */
-    flex: 0 0 110px !important;
+/* HARTE GRENZEN FÜR FLACHE PILLEN-BUTTONS */
+.glass-btn, .glass-select {
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    height: 40px;
+    min-height: 40px;
+    max-height: 40px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     color: #ffffff;
-    border-radius: 20px !important; /* HARTE GRENZE FÜR RUNDUNG */
+    border-radius: 20px; /* Flache Pille */
     font-weight: 700;
     font-size: 14px;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
     outline: none;
+    cursor: pointer;
     transition: all 0.2s ease;
     backdrop-filter: blur(10px);
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-.glass-btn:hover {
+.glass-btn:hover, .glass-select:hover {
     background: var(--glass-hover);
     border-color: rgba(0, 210, 255, 0.5);
     box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
@@ -374,27 +382,9 @@ html, body {
 }
 
 .glass-select {
-    width: 110px !important;
-    height: 40px !important; /* HARTE GRENZE FÜR PILLE */
-    flex: 0 0 110px !important;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: #ffffff;
-    border-radius: 20px !important; /* HARTE GRENZE FÜR RUNDUNG */
-    font-weight: 700;
-    font-size: 14px;
-    outline: none;
-    cursor: pointer;
+    padding: 0 10px;
     text-align: center;
     text-align-last: center;
-    backdrop-filter: blur(10px);
-    transition: all 0.2s ease;
-    padding: 0 10px;
-}
-
-.glass-select:hover {
-    background: var(--glass-hover);
-    border-color: rgba(0, 210, 255, 0.5);
 }
 
 .glass-select option {
@@ -454,71 +444,31 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 20px;
     width: 100%;
 }
 
-/* GROSSES COVER-ARTWORK OBEN */
+/* GROSSES COVER-ARTWORK (GLEICHZEITIG SCRATCH-FLÄCHE) */
 .large-cover-box {
     width: 220px;
     height: 220px;
-    border-radius: 20px;
+    border-radius: 16px;
     background-size: cover;
     background-position: center;
-    background-color: #1e2638;
     background-image: url('cover-weltistgut.jpg'); /* Statisches Bild */
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background-color: #1e2638;
+    border: 2px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-}
-
-.vinyl-scratch-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    justify-content: center;
-}
-
-.vinyl-container {
-    position: relative;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #111 30%, #222 50%, #000 70%, #151515 100%);
-    border: 3px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
     cursor: grab;
     touch-action: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     will-change: transform;
     flex-shrink: 0;
+    transition: box-shadow 0.2s ease;
 }
 
-.vinyl-container:active {
+.large-cover-box:active {
     cursor: grabbing;
-}
-
-.vinyl-grooves {
-    position: absolute;
-    width: 90%;
-    height: 90%;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    pointer-events: none;
-}
-
-.vinyl-cover {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background-size: cover;
-    background-position: center;
-    background-color: #2a3447;
-    background-image: url('cover-weltistgut.jpg'); /* Statisches Bild */
-    border: 2px solid #fff;
-    pointer-events: none;
+    box-shadow: 0 15px 45px rgba(0, 210, 255, 0.3);
 }
 
 .song-info {
@@ -602,7 +552,7 @@ html, body {
     <!-- SEITE 1: VIDEO PLAYER -->
     <section id="video-section" class="content-section">
         <h1 class="section-title">Video Stream</h1>
-        <p class="section-subtitle">Gelooptes MP4-Video mit schlichten Glassy-Bedienelementen.</p>
+        <p class="section-subtitle">Gelooptes MP4-Video mit schlichten, flachen Glassy-Buttons.</p>
 
         <div class="card-box">
             <div class="video-wrapper">
@@ -651,28 +601,20 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 2: AUDIO PLAYER MIT STATISCHEM COVER -->
+    <!-- SEITE 2: AUDIO PLAYER -->
     <section id="audio-section" class="content-section">
         <h2 class="section-title">Audio Player & Scratching</h2>
-        <p class="section-subtitle">Statisches Cover aus JPG geladen. Reiner HTML5 Audio Player.</p>
+        <p class="section-subtitle">Greife das Bild und drehe es, um den Sound in Echtzeit zu scratchen.</p>
 
         <div class="card-box">
             <div class="audio-player-wrapper">
                 
-                <!-- GROSSES COVER OBEN -->
-                <div class="large-cover-box" id="largeCoverBox"></div>
+                <!-- GROSSES COVER (ALS SCRATCH-ZIEL) -->
+                <div class="large-cover-box" id="vinylDisc"></div>
 
                 <div class="song-info">
                     <div class="song-title" id="songTitle">Welt ist gut</div>
                     <div class="song-artist" id="songArtist">musik-weltistgut.mp3</div>
-                </div>
-
-                <!-- SCRATCH VINYL RAD -->
-                <div class="vinyl-scratch-wrapper">
-                    <div class="vinyl-container" id="vinylDisc">
-                        <div class="vinyl-grooves"></div>
-                        <div class="vinyl-cover" id="albumCover"></div>
-                    </div>
                 </div>
 
                 <div class="progress-container">
@@ -781,7 +723,7 @@ const audioPlayIcon = document.getElementById('audioPlayIcon');
 const audioPlayText = document.getElementById('audioPlayText');
 const audioLoopBtn = document.getElementById('audioLoopBtn');
 const audioLoopText = document.getElementById('audioLoopText');
-const vinylDisc = document.getElementById('vinylDisc');
+const vinylDisc = document.getElementById('vinylDisc'); // Das ist jetzt das große Cover
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
@@ -836,6 +778,7 @@ audio.addEventListener('timeupdate', () => {
         currentTimeEl.textContent = formatTime(audio.currentTime);
         durationEl.textContent = formatTime(audio.duration);
 
+        // Rotiere das große Cover während dem Abspielen
         currentRotation += audio.playbackRate * 1.5;
         vinylDisc.style.transform = `rotate(${currentRotation}deg)`;
     }
