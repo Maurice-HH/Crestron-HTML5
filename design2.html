@@ -20,7 +20,7 @@
 
 :root {
     --tuerkis-blue: #00d2ff;
-    --dark-bg: #0b0f19;
+    --dark-bar: #0d1322;
     --card-bg: #0f172a;
 }
 
@@ -29,7 +29,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--dark-bg) !important;
+    background: #070a12 !important;
     color: #ffffff;
     font-size: 16px;
 }
@@ -40,7 +40,7 @@ html, body {
     overflow-y: auto;
     position: relative;
     scroll-behavior: smooth;
-    background: linear-gradient(180deg, #0d1527 0%, #112a38 50%, #28153d 100%);
+    background: linear-gradient(180deg, #090f1d 0%, #0d1e2b 50%, #1a0f2e 100%);
 }
 
 .neonav-wrapper::-webkit-scrollbar {
@@ -51,23 +51,23 @@ html, body {
     border-radius: 10px;
 }
 
-/* ==================== NAVBAR (VOLLE BREITE, SCHLICHTES TAB-DESIGN) ==================== */
+/* ==================== DURCHGEHENDE SYMBOLLEISTE (FULL WIDTH TOP) ==================== */
 .navbar-container {
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
-    background: rgba(15, 23, 42, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: var(--dark-bar);
+    border-bottom: 2px solid rgba(0, 210, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .navbar {
-    max-width: 1400px;
+    width: 100%;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 12px 30px;
+    padding: 0 30px;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -91,30 +91,15 @@ html, body {
 }
 
 .logo-icon {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-    border-radius: 50%;
+    border-radius: 6px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-}
-
-.logo-icon::before {
-    content: '';
-    position: absolute;
-    width: 45%;
-    height: 45%;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    animation: logo-pulse 2s ease-in-out infinite;
-}
-
-@keyframes logo-pulse {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.25); opacity: 1; }
 }
 
 .brand-popover {
@@ -135,7 +120,7 @@ html, body {
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 18px;
+    border-radius: 12px;
     padding: 16px 22px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     white-space: nowrap;
@@ -150,7 +135,7 @@ html, body {
 }
 
 .brand-popover-title {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 800;
     color: #00f0ff;
     margin-bottom: 8px;
@@ -169,7 +154,7 @@ html, body {
     font-size: 14px;
     font-weight: 600;
     padding: 6px 12px;
-    border-radius: 8px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.2s ease;
@@ -185,108 +170,116 @@ html, body {
     color: #ffffff;
 }
 
-/* MITTIG PLATZIERTE SEGMENT-TABS */
 .navbar-nav-centered {
     display: flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 6px;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 16px;
     list-style: none;
+    height: 100%;
 }
 
-/* TAB BUTTON STYLE (ZWEI-ZEILIG / UMKLAPPBAR DURCH HOVER) */
-.nav-tab {
+/* ==================== 3D FLIP BUTTON DESIGN (EXAKT WIE CODEPEN) ==================== */
+.flip-btn-wrapper {
+    perspective: 1000px;
+    display: inline-block;
+}
+
+.flip-btn {
     position: relative;
+    width: 150px;
+    height: 42px;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.flip-btn:hover {
+    transform: rotateX(-90deg);
+}
+
+.flip-btn-face {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 140px;
-    height: 40px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    border-radius: 30px;
-    color: #a2b7e0;
-    background: transparent;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-/* TEXT FÜR INHALT & HOVER-UMKLAPPEN */
-.nav-tab .tab-text {
-    position: absolute;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
-}
-
-.nav-tab .text-default {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.nav-tab .text-hover {
-    opacity: 0;
-    transform: translateY(20px);
-    color: #ffffff;
-}
-
-/* HOVER ANIMATION (UMKLAPPEN) */
-.nav-tab:hover .text-default {
-    opacity: 0;
-    transform: translateY(-20px);
-}
-
-.nav-tab:hover .text-hover {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.nav-tab:hover {
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
-}
-
-/* NUR DER AKTIVE BUTTON GLÜHT FARBIG! */
-.nav-tab.active {
-    color: #ffffff !important;
-    background: rgba(0, 210, 255, 0.25) !important;
-    border-color: var(--tuerkis-blue) !important;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.6), inset 0 0 8px rgba(0, 210, 255, 0.3);
-}
-
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px 22px;
-    border-radius: 50px;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 14px;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    gap: 8px;
+}
+
+/* VORDERSEITE (FRONT) */
+.flip-btn-front {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+    transform: translateZ(21px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* RÜCKSEITE (BACK - BEIM HOVER/FLIP) */
+.flip-btn-back {
+    background: linear-gradient(180deg, #00d2ff 0%, #0088cc 100%);
+    border: 1px solid #00f0ff;
+    color: #ffffff;
+    transform: rotateX(90deg) translateZ(21px);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+}
+
+/* AKTIVER ZUSTAND */
+.flip-btn.active .flip-btn-front {
+    background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
+    border-color: #00d2ff;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+}
+
+/* ==================== SELECT BOX IM 3D STYLE ==================== */
+.action-select-3d {
+    appearance: none;
+    -webkit-appearance: none;
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    color: #cbd5e1;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 14px;
+    height: 42px;
+    width: 150px;
+    text-align: center;
+    text-align-last: center;
     cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
 }
 
-.cta-button:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+.action-select-3d:hover {
+    border-color: #00d2ff;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+}
+
+.action-select-3d option {
+    background: #0f172a;
+    color: #ffffff;
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
 .content-section {
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 65px);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 60px 20px 40px 20px;
+    padding: 50px 20px 40px 20px;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -298,28 +291,28 @@ html, body {
 .section-title {
     font-size: 38px;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     letter-spacing: 0.5px;
 }
 
 .section-subtitle {
-    font-size: 16px;
-    opacity: 0.85;
+    font-size: 15px;
+    opacity: 0.75;
     max-width: 800px;
     line-height: 1.5;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
 }
 
-/* ==================== CARD CONTAINER (SCHLICHT OHNE GLOW) ==================== */
+/* ==================== CARD CONTAINER ==================== */
 .card-box {
     width: 100%;
     max-width: 720px;
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 28px;
+    border-radius: 20px;
     padding: 28px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -333,7 +326,7 @@ html, body {
 .video-wrapper {
     position: relative;
     width: 100%;
-    border-radius: 22px;
+    border-radius: 14px;
     overflow: hidden;
     background: #000;
     aspect-ratio: 16 / 9;
@@ -347,10 +340,10 @@ html, body {
     display: block;
 }
 
-/* ==================== SCHLICHTE ACTION BUTTONS ==================== */
+/* ==================== PLAYER ACTION CONTROLS ROW ==================== */
 .action-controls-row {
     display: grid;
-    grid-template-columns: repeat(3, 160px);
+    grid-template-columns: repeat(3, 150px);
     gap: 20px;
     justify-content: center;
     align-items: end;
@@ -370,55 +363,7 @@ html, body {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.action-btn, .action-select {
-    all: unset;
-    box-sizing: border-box;
-    width: 100%;
-    height: 42px;
-    border-radius: 21px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-}
-
-.action-btn:hover, .action-select:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.action-btn.active {
-    background: rgba(0, 210, 255, 0.25);
-    border-color: var(--tuerkis-blue);
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
-}
-
-.action-select {
-    text-align: center;
-    text-align-last: center;
-}
-
-.action-select option {
-    background: #121824;
-    color: #ffffff;
-}
-
-.action-btn svg {
-    width: 16px;
-    height: 16px;
-    fill: currentColor;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 /* ==================== VOLUME SLIDER ==================== */
@@ -427,11 +372,11 @@ html, body {
     align-items: center;
     gap: 12px;
     width: 100%;
-    max-width: 520px;
-    background: rgba(0, 0, 0, 0.3);
+    max-width: 490px;
+    background: rgba(0, 0, 0, 0.4);
     padding: 8px 18px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .volume-icon {
@@ -475,7 +420,7 @@ html, body {
     color: rgba(255, 255, 255, 0.45);
     max-width: 800px;
     line-height: 1.6;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.3);
     padding: 12px 20px;
     border-radius: 12px;
     border: 1px dashed rgba(255, 255, 255, 0.15);
@@ -542,7 +487,7 @@ html, body {
 
 .progress-container {
     width: 100%;
-    max-width: 520px;
+    max-width: 490px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -572,7 +517,7 @@ html, body {
 
 <div class="neonav-wrapper" id="neonavWrapper">
 
-    <!-- NAVIGATION HEADER (VOLLE BREITE, AM OBEREN RAND FIXED) -->
+    <!-- DURCHGEHENDE SYMBOLLEISTE OBEN (FULL WIDTH) -->
     <div class="navbar-container">
         <nav class="navbar">
             <div class="navbar-brand-wrapper">
@@ -595,26 +540,35 @@ html, body {
                 </div>
             </div>
 
-            <!-- MITTIGE TAB-BUTTONS (HOVER HOCHKLAPPEN: "Video" -> "Schau an." / "Audio" -> "Hör an.") -->
+            <!-- MITTIG PLATZIERTE 3D-FLIP BUTTONS ("Video" -> "Schau an." / "Audio" -> "Hör an.") -->
             <ul class="navbar-nav-centered">
                 <li>
-                    <a href="#video-section" class="nav-tab active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">
-                        <span class="tab-text text-default">Video</span>
-                        <span class="tab-text text-hover">Schau an.</span>
-                    </a>
+                    <div class="flip-btn-wrapper">
+                        <a href="#video-section" class="flip-btn active" id="navTabVideo" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">
+                            <div class="flip-btn-face flip-btn-front">Video</div>
+                            <div class="flip-btn-face flip-btn-back">Schau an.</div>
+                        </a>
+                    </div>
                 </li>
                 
                 <li>
-                    <a href="#audio-section" class="nav-tab" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">
-                        <span class="tab-text text-default">Audio</span>
-                        <span class="tab-text text-hover">Hör an.</span>
-                    </a>
+                    <div class="flip-btn-wrapper">
+                        <a href="#audio-section" class="flip-btn" id="navTabAudio" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">
+                            <div class="flip-btn-face flip-btn-front">Audio</div>
+                            <div class="flip-btn-face flip-btn-back">Hör an.</div>
+                        </a>
+                    </div>
                 </li>
             </ul>
 
             <div>
                 <!-- CRESTRON JOINT: Digital Press 12 -->
-                <a href="design3.html" class="cta-button" data-ch5-btn="12" ch5-button-send-press="12">Nächstes Design</a>
+                <div class="flip-btn-wrapper">
+                    <a href="design3.html" class="flip-btn" data-ch5-btn="12" ch5-button-send-press="12">
+                        <div class="flip-btn-face flip-btn-front">Nächstes Design</div>
+                        <div class="flip-btn-face flip-btn-back">Design 3 ➔</div>
+                    </a>
+                </div>
             </div>
         </nav>
     </div>
@@ -636,25 +590,29 @@ html, body {
                 <!-- CRESTRON JOINT: Digital Press 21 -->
                 <div class="action-item">
                     <span class="action-label">Play</span>
-                    <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
-                        <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        <span id="playPauseText">Pause</span>
-                    </button>
+                    <div class="flip-btn-wrapper">
+                        <button class="flip-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
+                            <div class="flip-btn-face flip-btn-front" id="playPauseFront">⏸ Pause</div>
+                            <div class="flip-btn-face flip-btn-back" id="playPauseBack">Umschalten</div>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- CRESTRON JOINT: Digital Press 22 -->
                 <div class="action-item">
                     <span class="action-label">Loop</span>
-                    <button class="action-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
-                        <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                        <span id="loopText">An</span>
-                    </button>
+                    <div class="flip-btn-wrapper">
+                        <button class="flip-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
+                            <div class="flip-btn-face flip-btn-front" id="loopFront">🔁 An</div>
+                            <div class="flip-btn-face flip-btn-back" id="loopBack">Umschalten</div>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- CRESTRON JOINT: Analog Value 1 -->
                 <div class="action-item">
                     <span class="action-label">Geschwindigkeit</span>
-                    <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
+                    <select class="action-select-3d" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
                         <option value="0.5">0.5x</option>
                         <option value="1.0" selected>1.0x</option>
                         <option value="1.5">1.5x</option>
@@ -714,25 +672,29 @@ html, body {
                     <!-- CRESTRON JOINT: Digital Press 31 -->
                     <div class="action-item">
                         <span class="action-label">Play</span>
-                        <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
-                            <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <span id="audioPlayText">Play</span>
-                        </button>
+                        <div class="flip-btn-wrapper">
+                            <button class="flip-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
+                                <div class="flip-btn-face flip-btn-front" id="audioPlayFront">▶ Play</div>
+                                <div class="flip-btn-face flip-btn-back">Umschalten</div>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- CRESTRON JOINT: Digital Press 32 -->
                     <div class="action-item">
                         <span class="action-label">Loop</span>
-                        <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
-                            <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                            <span id="audioLoopText">Aus</span>
-                        </button>
+                        <div class="flip-btn-wrapper">
+                            <button class="flip-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
+                                <div class="flip-btn-face flip-btn-front" id="audioLoopFront">➡️ Aus</div>
+                                <div class="flip-btn-face flip-btn-back">Umschalten</div>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- CRESTRON JOINT: Analog Value 4 -->
                     <div class="action-item">
                         <span class="action-label">Geschwindigkeit</span>
-                        <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
+                        <select class="action-select-3d" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
                             <option value="0.5">0.5x</option>
                             <option value="1.0" selected>1.0x</option>
                             <option value="1.5">1.5x</option>
@@ -754,26 +716,20 @@ html, body {
 </div>
 
 <script>
-const iconPause = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
-const iconPlay = '<path d="M8 5v14l11-7z"/>';
-
 /* ==================== VIDEO LOGIK ==================== */
 const video = document.getElementById('myVideo');
 const playPauseBtn = document.getElementById('playPauseBtn');
-const playPauseIcon = document.getElementById('playPauseIcon');
-const playPauseText = document.getElementById('playPauseText');
+const playPauseFront = document.getElementById('playPauseFront');
 const loopBtn = document.getElementById('loopBtn');
-const loopText = document.getElementById('loopText');
+const loopFront = document.getElementById('loopFront');
 
 function togglePlayPause() {
     if (video.paused) {
         video.play();
-        playPauseIcon.innerHTML = iconPause;
-        playPauseText.textContent = 'Pause';
+        playPauseFront.textContent = '⏸ Pause';
     } else {
         video.pause();
-        playPauseIcon.innerHTML = iconPlay;
-        playPauseText.textContent = 'Play';
+        playPauseFront.textContent = '▶ Play';
     }
 }
 
@@ -781,10 +737,10 @@ function toggleLoop() {
     video.loop = !video.loop;
     if (video.loop) {
         loopBtn.classList.add('active');
-        loopText.textContent = 'An';
+        loopFront.textContent = '🔁 An';
     } else {
         loopBtn.classList.remove('active');
-        loopText.textContent = 'Aus';
+        loopFront.textContent = '➡️ Aus';
     }
 }
 
@@ -800,10 +756,9 @@ function changeVideoVolume(val) {
 /* ==================== AUDIO LOGIK ==================== */
 const audio = document.getElementById('myAudio');
 const audioPlayBtn = document.getElementById('audioPlayBtn');
-const audioPlayIcon = document.getElementById('audioPlayIcon');
-const audioPlayText = document.getElementById('audioPlayText');
+const audioPlayFront = document.getElementById('audioPlayFront');
 const audioLoopBtn = document.getElementById('audioLoopBtn');
-const audioLoopText = document.getElementById('audioLoopText');
+const audioLoopFront = document.getElementById('audioLoopFront');
 const albumCover = document.getElementById('albumCover'); 
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
@@ -812,12 +767,12 @@ const durationEl = document.getElementById('duration');
 function toggleAudioPlay() {
     if (audio.paused) {
         audio.play();
-        audioPlayIcon.innerHTML = iconPause;
-        audioPlayText.textContent = 'Pause';
+        audioPlayFront.textContent = '⏸ Pause';
+        audioPlayBtn.classList.add('active');
     } else {
         audio.pause();
-        audioPlayIcon.innerHTML = iconPlay;
-        audioPlayText.textContent = 'Play';
+        audioPlayFront.textContent = '▶ Play';
+        audioPlayBtn.classList.remove('active');
     }
 }
 
@@ -825,10 +780,10 @@ function toggleAudioLoop() {
     audio.loop = !audio.loop;
     if (audio.loop) {
         audioLoopBtn.classList.add('active');
-        audioLoopText.textContent = 'An';
+        audioLoopFront.textContent = '🔁 An';
     } else {
         audioLoopBtn.classList.remove('active');
-        audioLoopText.textContent = 'Aus';
+        audioLoopFront.textContent = '➡️ Aus';
     }
 }
 
@@ -872,7 +827,8 @@ albumCover.addEventListener('click', function() {
 /* INIT NAV INTERSECTION OBSERVER */
 document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
-    const navTabs = document.querySelectorAll('.nav-tab');
+    const navTabVideo = document.getElementById('navTabVideo');
+    const navTabAudio = document.getElementById('navTabAudio');
     const sections = document.querySelectorAll('.content-section');
 
     if (video) {
@@ -885,35 +841,18 @@ document.addEventListener('DOMContentLoaded', function() {
         audio.volume = 0.8;
     }
 
-    navTabs.forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId && targetId.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(targetId);
-
-                if (target && wrapper) {
-                    wrapper.scrollTo({
-                        top: target.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-
     const observerOptions = { root: wrapper, threshold: 0.5 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const activeId = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-tab').forEach(tab => {
-                    if (tab.getAttribute('data-section') === activeId) {
-                        tab.classList.add('active');
-                    } else {
-                        tab.classList.remove('active');
-                    }
-                });
+                if (activeId === 'video-section') {
+                    navTabVideo.classList.add('active');
+                    navTabAudio.classList.remove('active');
+                } else if (activeId === 'audio-section') {
+                    navTabAudio.classList.add('active');
+                    navTabVideo.classList.remove('active');
+                }
             }
         });
     }, observerOptions);
