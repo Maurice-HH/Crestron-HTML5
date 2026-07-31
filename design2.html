@@ -20,8 +20,7 @@
 
 :root {
     --tuerkis-blue: #00d2ff;
-    --neon-pink: #ff007f;
-    --glass-bg: rgba(18, 24, 38, 0.85);
+    --glass-bg: #111827; /* Solide/Dunkle Basis, damit nichts nach innen strahlt */
 }
 
 html, body {
@@ -61,7 +60,7 @@ html, body {
 }
 
 .navbar {
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(18, 24, 38, 0.85);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -70,7 +69,7 @@ html, body {
     display: flex;
     align-items: center;
     gap: 22px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-brand-wrapper {
@@ -134,7 +133,7 @@ html, body {
 }
 
 .brand-popover-inner {
-    background: rgba(18, 24, 38, 0.85);
+    background: rgba(18, 24, 38, 0.95);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -195,7 +194,7 @@ html, body {
     list-style: none;
 }
 
-/* ==================== BEWEGTE NEON-WELLEN BUTTONS ==================== */
+/* ==================== REGENBOGENEFFEKT (NUR AUSSEN!) ==================== */
 .glow-nav-item {
     position: relative;
     display: flex;
@@ -214,55 +213,59 @@ html, body {
     font-size: 15px;
     line-height: 1;
     color: #ffffff;
-    background: var(--glass-bg);
-    border: 1px solid rgba(0, 210, 255, 0.5);
     
-    /* Organische, leicht unregelmäßige Eckenform */
-    border-radius: 25px 22px 26px 21px / 21px 25px 22px 26px;
+    /* Dunkles Inneres verhindert Farbfüllung */
+    background: #111827 !important; 
+    border: 1px solid rgba(255, 255, 255, 0.2);
     
-    /* Sanfter Grund-Glow */
-    box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
+    /* Wellenförmige Eckenbewegung */
+    border-radius: 25px 21px 26px 22px / 22px 25px 21px 26px;
+    animation: organic-wave 6s ease-in-out infinite alternate;
     
-    transition: all 0.3s ease;
-    backdrop-filter: blur(15px);
+    transition: transform 0.2s ease, border-color 0.2s ease;
     cursor: pointer;
     white-space: nowrap;
-    
-    /* Sanfte Wellen-Verformung des Rahmens (ca. 3-5px Amplitude) */
-    animation: organic-wave 6s ease-in-out infinite alternate;
+    z-index: 2;
 }
 
-/* ROTIERENDER FARBIGER AUSSEN-GLOW */
-.nav-link::before, .action-btn::before, .cta-button::before {
+/* ROTIERENDER REGENBOGEN GLOW HIGHER-LAYER (EXAKT HINTER DEM BUTTON) */
+.glow-nav-item::before, .action-item::before, .cta-button-item::before {
     content: '';
     position: absolute;
     inset: -3px;
-    border-radius: inherit;
-    background: linear-gradient(90deg, #00d2ff, #ff007f, #00f0ff, #00d2ff);
-    background-size: 300% 300%;
-    z-index: -1;
-    opacity: 0.4;
-    filter: blur(8px);
-    animation: color-glow-move 5s ease infinite;
-    transition: opacity 0.3s ease;
+    border-radius: 30px;
+    
+    /* KOMPLETTER REGENBOGEN-FARBVERLAUF */
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
+    background-size: 400% 400%;
+    
+    z-index: 1;
+    opacity: 0.6;
+    filter: blur(8px); /* Erzeugt sanften Außen-Glow */
+    animation: rainbow-glow 8s linear infinite;
+    pointer-events: none;
 }
 
-/* HOVER & ACTIVE ZUSTÄNDE */
+/* HOVER ZUSTAND */
 .nav-link:hover, .action-btn:hover, .action-select:hover, .cta-button:hover,
 .nav-link.active, .action-btn.active {
-    background: rgba(0, 210, 255, 0.2);
-    border-color: #00f0ff;
-    color: #ffffff;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    border-color: #ffffff;
+    transform: scale(1.02);
 }
 
-.nav-link:hover::before, .action-btn:hover::before, .cta-button:hover::before,
-.nav-link.active::before, .action-btn.active::before {
-    opacity: 0.9;
+.glow-nav-item:hover::before, .action-item:hover::before, .cta-button-item:hover::before {
+    opacity: 1;
     filter: blur(12px);
 }
 
-/* ANIMATION: ORGANISCHE WELLENBEWEGUNG DES RAHMENS */
+/* REGENBOGEN ANIMATION */
+@keyframes rainbow-glow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* WELLENBEWEGUNG DES RAHMENS */
 @keyframes organic-wave {
     0% {
         border-radius: 25px 21px 26px 22px / 22px 25px 21px 26px;
@@ -276,13 +279,6 @@ html, body {
     100% {
         border-radius: 22px 25px 25px 21px / 25px 22px 22px 25px;
     }
-}
-
-/* ANIMATION: FLIESSENDER FARBVERLAUF DES GLOWS */
-@keyframes color-glow-move {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
@@ -317,25 +313,47 @@ html, body {
     margin-bottom: 35px;
 }
 
-/* ==================== CARD CONTAINER ==================== */
-.card-box {
+/* ==================== CARD CONTAINER (OHNE FARB-FLUT) ==================== */
+.card-wrapper-outer {
+    position: relative;
     width: 100%;
     max-width: 720px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    display: flex;
+    justify-content: center;
+}
+
+.card-wrapper-outer.large-video-box {
+    max-width: 1100px !important;
+}
+
+/* REGENBOGEN GLOW NUR UM DIE HAUPTKARTE HERUM */
+.card-wrapper-outer::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 32px;
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
+    background-size: 400% 400%;
+    z-index: 1;
+    opacity: 0.5;
+    filter: blur(14px);
+    animation: rainbow-glow 10s linear infinite;
+    pointer-events: none;
+}
+
+.card-box {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background: #0f172a !important; /* Solide dunkle Karte, um Ausbluten zu verhindern */
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 28px;
     padding: 28px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
     gap: 24px;
     align-items: center;
-}
-
-.card-box.large-video-box {
-    max-width: 1100px !important;
 }
 
 .video-wrapper {
@@ -366,6 +384,7 @@ html, body {
 }
 
 .action-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -420,7 +439,7 @@ html, body {
     gap: 12px;
     width: 100%;
     max-width: 520px;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.4);
     padding: 8px 18px;
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -591,50 +610,52 @@ html, body {
         <h1 class="section-title">Video Stream</h1>
         <p class="section-subtitle">Gelooptes MP4-Video im Großformat.</p>
 
-        <div class="card-box large-video-box">
-            <div class="video-wrapper">
-                <video id="myVideo" autoplay loop muted playsinline preload="auto">
-                    <source src="video.mp4" type="video/mp4">
-                    Ihr Browser unterstützt kein HTML5-Video.
-                </video>
-            </div>
-
-            <div class="action-controls-row">
-                <!-- CRESTRON JOINT: Digital Press 21 -->
-                <div class="action-item">
-                    <span class="action-label">Play</span>
-                    <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
-                        <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        <span id="playPauseText">Pause</span>
-                    </button>
+        <div class="card-wrapper-outer large-video-box">
+            <div class="card-box">
+                <div class="video-wrapper">
+                    <video id="myVideo" autoplay loop muted playsinline preload="auto">
+                        <source src="video.mp4" type="video/mp4">
+                        Ihr Browser unterstützt kein HTML5-Video.
+                    </video>
                 </div>
 
-                <!-- CRESTRON JOINT: Digital Press 22 -->
-                <div class="action-item">
-                    <span class="action-label">Loop</span>
-                    <button class="action-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
-                        <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                        <span id="loopText">An</span>
-                    </button>
+                <div class="action-controls-row">
+                    <!-- CRESTRON JOINT: Digital Press 21 -->
+                    <div class="action-item">
+                        <span class="action-label">Play</span>
+                        <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
+                            <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            <span id="playPauseText">Pause</span>
+                        </button>
+                    </div>
+
+                    <!-- CRESTRON JOINT: Digital Press 22 -->
+                    <div class="action-item">
+                        <span class="action-label">Loop</span>
+                        <button class="action-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
+                            <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                            <span id="loopText">An</span>
+                        </button>
+                    </div>
+
+                    <!-- CRESTRON JOINT: Analog Value 1 -->
+                    <div class="action-item">
+                        <span class="action-label">Geschwindigkeit</span>
+                        <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
+                            <option value="0.5">0.5x</option>
+                            <option value="1.0" selected>1.0x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2.0">2.0x</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- CRESTRON JOINT: Analog Value 1 -->
-                <div class="action-item">
-                    <span class="action-label">Geschwindigkeit</span>
-                    <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
-                        <option value="0.5">0.5x</option>
-                        <option value="1.0" selected>1.0x</option>
-                        <option value="1.5">1.5x</option>
-                        <option value="2.0">2.0x</option>
-                    </select>
+                <!-- CRESTRON JOINT: Analog Value 2 -->
+                <div class="volume-container">
+                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                    <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)" data-ch5-slider-send="2" data-ch5-slider-receive="2">
+                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
                 </div>
-            </div>
-
-            <!-- CRESTRON JOINT: Analog Value 2 -->
-            <div class="volume-container">
-                <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
-                <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)" data-ch5-slider-send="2" data-ch5-slider-receive="2">
-                <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
             </div>
         </div>
     </section>
@@ -644,67 +665,69 @@ html, body {
         <h1 class="section-title">Audio Player & Cover Zoom</h1>
         <p class="section-subtitle">Klicke das Cover, um es stark heranzuzoomen.</p>
 
-        <div class="card-box">
-            <div class="audio-player-wrapper">
-                
-                <!-- CRESTRON JOINT: Digital Press 30 -->
-                <div class="large-cover-box" id="albumCover" data-ch5-btn="30" ch5-button-send-press="30"></div>
+        <div class="card-wrapper-outer">
+            <div class="card-box">
+                <div class="audio-player-wrapper">
+                    
+                    <!-- CRESTRON JOINT: Digital Press 30 -->
+                    <div class="large-cover-box" id="albumCover" data-ch5-btn="30" ch5-button-send-press="30"></div>
 
-                <div class="song-info">
-                    <!-- CRESTRON JOINTS: Serial Join 1 & 2 -->
-                    <div class="song-title" id="songTitle" data-ch5-string-receive="1">Die Welt ist gut, Sonne, Sekt und Hut</div>
-                    <div class="song-artist" id="songArtist" data-ch5-string-receive="2">Maurice Camplair</div>
-                </div>
-
-                <!-- CRESTRON JOINT: Analog Value 3 -->
-                <div class="progress-container">
-                    <span id="currentTime">0:00</span>
-                    <div class="progress-bar-bg" onclick="seekAudio(event)" data-ch5-slider-send="3">
-                        <div class="progress-bar-fill" id="progressFill"></div>
-                    </div>
-                    <span id="duration">0:00</span>
-                </div>
-
-                <audio id="myAudio" preload="auto">
-                    <source src="musik-weltistgut.mp3" type="audio/mpeg">
-                </audio>
-
-                <div class="action-controls-row">
-                    <!-- CRESTRON JOINT: Digital Press 31 -->
-                    <div class="action-item">
-                        <span class="action-label">Play</span>
-                        <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
-                            <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <span id="audioPlayText">Play</span>
-                        </button>
+                    <div class="song-info">
+                        <!-- CRESTRON JOINTS: Serial Join 1 & 2 -->
+                        <div class="song-title" id="songTitle" data-ch5-string-receive="1">Die Welt ist gut, Sonne, Sekt und Hut</div>
+                        <div class="song-artist" id="songArtist" data-ch5-string-receive="2">Maurice Camplair</div>
                     </div>
 
-                    <!-- CRESTRON JOINT: Digital Press 32 -->
-                    <div class="action-item">
-                        <span class="action-label">Loop</span>
-                        <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
-                            <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                            <span id="audioLoopText">Aus</span>
-                        </button>
+                    <!-- CRESTRON JOINT: Analog Value 3 -->
+                    <div class="progress-container">
+                        <span id="currentTime">0:00</span>
+                        <div class="progress-bar-bg" onclick="seekAudio(event)" data-ch5-slider-send="3">
+                            <div class="progress-bar-fill" id="progressFill"></div>
+                        </div>
+                        <span id="duration">0:00</span>
                     </div>
 
-                    <!-- CRESTRON JOINT: Analog Value 4 -->
-                    <div class="action-item">
-                        <span class="action-label">Geschwindigkeit</span>
-                        <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
-                            <option value="0.5">0.5x</option>
-                            <option value="1.0" selected>1.0x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2.0">2.0x</option>
-                        </select>
-                    </div>
-                </div>
+                    <audio id="myAudio" preload="auto">
+                        <source src="musik-weltistgut.mp3" type="audio/mpeg">
+                    </audio>
 
-                <!-- CRESTRON JOINT: Analog Value 5 -->
-                <div class="volume-container">
-                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
-                    <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)" data-ch5-slider-send="5" data-ch5-slider-receive="5">
-                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    <div class="action-controls-row">
+                        <!-- CRESTRON JOINT: Digital Press 31 -->
+                        <div class="action-item">
+                            <span class="action-label">Play</span>
+                            <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
+                                <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <span id="audioPlayText">Play</span>
+                            </button>
+                        </div>
+
+                        <!-- CRESTRON JOINT: Digital Press 32 -->
+                        <div class="action-item">
+                            <span class="action-label">Loop</span>
+                            <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
+                                <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                                <span id="audioLoopText">Aus</span>
+                            </button>
+                        </div>
+
+                        <!-- CRESTRON JOINT: Analog Value 4 -->
+                        <div class="action-item">
+                            <span class="action-label">Geschwindigkeit</span>
+                            <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
+                                <option value="0.5">0.5x</option>
+                                <option value="1.0" selected>1.0x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2.0">2.0x</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- CRESTRON JOINT: Analog Value 5 -->
+                    <div class="volume-container">
+                        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                        <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)" data-ch5-slider-send="5" data-ch5-slider-receive="5">
+                        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    </div>
                 </div>
             </div>
         </div>
