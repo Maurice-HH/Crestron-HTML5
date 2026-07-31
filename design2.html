@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
 
-<!-- Crestron CH5 Library Integration -->
+<!-- Crestron CH5 Library Integration (in echten Projekten einbinden) -->
 <!-- <script src="js/cr-com-lib.js"></script> -->
 
 <style>
@@ -19,11 +19,13 @@
 }
 
 :root {
-    --dark-bg: #05080c;
-    --card-bg: #0a0f18;
-    --dark-green: #0a291d;
-    --dark-green-hover: #123d29;
-    --accent-green: #10b981;
+    --dark-bg: #070a12;
+    --card-bg: #0d131f;
+    --bar-bg: #030508;
+    --btn-bg: #1f2937;
+    --btn-hover: #374151;
+    --active-green: #059669;
+    --border-color: #374151;
 }
 
 html, body {
@@ -50,159 +52,55 @@ html, body {
 }
 .neonav-wrapper::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
 }
 
-/* ==================== DURCHGEHENDE TOP-BAR MIT ZENTRIERTER MENÜBANK ==================== */
+/* ==================== DURCHGEHENDE TOP-BAR MIT 5 DURCHGEHENDEN BUTTONS ==================== */
 .navbar-container {
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
-    background: #030508;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-}
-
-.navbar {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 30px;
     height: 60px;
+    background: var(--bar-bg);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.navbar-brand-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.logo-icon {
-    width: 24px;
-    height: 24px;
-    background: linear-gradient(135deg, #10b981, #047857);
-    border-radius: 6px;
-    position: relative;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    flex-shrink: 0;
-}
-
-.brand-popover {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    padding-top: 15px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px) scale(0.95);
-    transition: all 0.25s ease;
-    pointer-events: none;
-    z-index: 2000;
-}
-
-.brand-popover-inner {
-    background: #0d131f;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 14px 18px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    white-space: nowrap;
-}
-
-.navbar-brand-wrapper:hover .brand-popover,
-.brand-popover:hover {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-}
-
-.brand-popover-title {
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--accent-green);
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.brand-popover-links {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.brand-popover-link {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: all 0.2s ease;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
 }
 
-.brand-popover-link:hover, .brand-popover-link.active {
-    background: var(--dark-green);
-    border-color: var(--accent-green);
-    color: #ffffff;
-}
-
-/* MENÜBANK IN DER MITTE */
-.navbar-nav-centered {
+/* MENÜBLOCK IN DER MITTE (5 GLEICHWERIGE BUTTONS) */
+.navbar-menu {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    list-style: none;
-    height: 100%;
+    height: 60px;
+    align-items: stretch;
+    background: var(--bar-bg);
+    border-left: 1px solid var(--border-color);
 }
 
-/* ==================== CLEAN 3D FLIP BUTTONS (DUNKEL / MATT) ==================== */
-.flip-btn-wrapper {
+/* ==================== ECKIGES 3D FLIP BUTTON DESIGN (0px BORDER-RADIUS) ==================== */
+.flip-btn-wrapper-top {
     perspective: 1000px;
-    position: relative;
-    display: inline-block;
+    height: 60px;
+    width: 140px;
+    display: block;
 }
 
-.flip-btn {
+.flip-btn-top {
     position: relative;
-    width: 140px;
-    height: 42px;
+    width: 100%;
+    height: 100%;
     transform-style: preserve-3d;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     text-decoration: none;
     display: block;
-    border-radius: 8px;
 }
 
-.flip-btn:hover {
+.flip-btn-top:hover {
     transform: rotateX(-90deg);
 }
 
-.flip-btn-face {
+.flip-face-top {
     position: absolute;
     inset: 0;
     display: flex;
@@ -211,83 +109,35 @@ html, body {
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 0.5px;
-    border-radius: 8px;
     box-sizing: border-box;
     backface-visibility: hidden;
-    gap: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-right: 1px solid var(--border-color);
+    border-radius: 0 !important; /* STRIKT ECKIG */
 }
 
-/* VORDERSEITE (DUNKELGRAU / SCHWARZ / GRÜN) */
-.flip-btn-front {
-    background: #111823;
-    color: #94a3b8;
-    transform: translateZ(21px);
+/* VORDERSEITE NAV */
+.flip-front-top {
+    background: var(--btn-bg);
+    color: #cbd5e1;
+    transform: translateZ(30px);
 }
 
-/* RÜCKSEITE (HOVER FLIP - DUNKELGRÜN) */
-.flip-btn-back {
-    background: var(--dark-green-hover);
-    border-color: var(--accent-green);
+/* RÜCKSEITE NAV */
+.flip-back-top {
+    background: var(--btn-hover);
     color: #ffffff;
-    transform: rotateX(90deg) translateZ(21px);
+    transform: rotateX(90deg) translateZ(30px);
 }
 
-/* REGENBOGEN-GLOW AUSSCHLIESSLICH FÜR DEN AKTIVEN BUTTON */
-.flip-btn-wrapper.active-glow::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 11px;
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
-    background-size: 400% 400%;
-    z-index: -1;
-    opacity: 0.85;
-    filter: blur(8px);
-    animation: rainbow-glow 8s linear infinite;
-    pointer-events: none;
-}
-
-.flip-btn.active .flip-btn-front {
-    background: #0d281e;
-    border-color: var(--accent-green);
+/* AKTIVER TAB (DUNKELGRÜN HINWEIS) */
+.flip-btn-top.active .flip-front-top {
+    background: var(--active-green);
     color: #ffffff;
+    box-shadow: inset 0 -4px 0 #10b981;
 }
 
-@keyframes rainbow-glow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* ==================== SELECT BOX IM DUNKELEN 3D STYLE ==================== */
-.action-select-3d {
-    appearance: none;
-    -webkit-appearance: none;
-    background: #111823;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 8px;
-    color: #94a3b8;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 14px;
-    height: 42px;
-    width: 140px;
-    text-align: center;
-    text-align-last: center;
-    cursor: pointer;
-    outline: none;
-    transition: all 0.2s ease;
-}
-
-.action-select-3d:hover {
-    border-color: var(--accent-green);
-    color: #ffffff;
-    background: var(--dark-green);
-}
-
-.action-select-3d option {
-    background: #0f172a;
+.flip-btn-top.active .flip-back-top {
+    background: #10b981;
     color: #ffffff;
 }
 
@@ -326,10 +176,10 @@ html, body {
     width: 100%;
     max-width: 720px;
     background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 0;
     padding: 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -343,7 +193,7 @@ html, body {
 .video-wrapper {
     position: relative;
     width: 100%;
-    border-radius: 12px;
+    border-radius: 0;
     overflow: hidden;
     background: #000;
     aspect-ratio: 16 / 9;
@@ -357,7 +207,7 @@ html, body {
     display: block;
 }
 
-/* ==================== PLAYER CONTROLS ==================== */
+/* ==================== PLAYER ACTION CONTROLS (KONTROLLEN UNTEN) ==================== */
 .action-controls-row {
     display: grid;
     grid-template-columns: repeat(3, 140px);
@@ -380,7 +230,94 @@ html, body {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ECKIGE PLAYER BUTTONS (3D FLIP, 42px HÖHE) */
+.flip-btn-wrapper-ctrl {
+    perspective: 1000px;
+    height: 42px;
+    width: 140px;
+    display: block;
+}
+
+.flip-btn-ctrl {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    display: block;
+}
+
+.flip-btn-ctrl:hover {
+    transform: rotateX(-90deg);
+}
+
+.flip-face-ctrl {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 0 !important;
+}
+
+.flip-front-ctrl {
+    background: var(--btn-bg);
+    color: #cbd5e1;
+    transform: translateZ(21px);
+}
+
+.flip-back-ctrl {
+    background: var(--btn-hover);
+    color: #ffffff;
+    transform: rotateX(90deg) translateZ(21px);
+}
+
+.flip-btn-ctrl.active .flip-front-ctrl {
+    background: var(--active-green);
+    color: #ffffff;
+    border-color: #10b981;
+}
+
+/* ECKIGE SELECT BOX */
+.action-select-3d {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--btn-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 0 !important;
+    color: #cbd5e1;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    height: 42px;
+    width: 140px;
+    text-align: center;
+    text-align-last: center;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.action-select-3d:hover {
+    border-color: #10b981;
+    color: #ffffff;
+    background: var(--btn-hover);
+}
+
+.action-select-3d option {
+    background: #0f172a;
+    color: #ffffff;
 }
 
 /* ==================== VOLUME SLIDER ==================== */
@@ -392,8 +329,8 @@ html, body {
     max-width: 452px;
     background: rgba(0, 0, 0, 0.5);
     padding: 8px 16px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+    border: 1px solid var(--border-color);
 }
 
 .volume-icon {
@@ -408,7 +345,7 @@ html, body {
     -webkit-appearance: none;
     appearance: none;
     height: 5px;
-    border-radius: 10px;
+    border-radius: 0;
     background: rgba(255, 255, 255, 0.15);
     outline: none;
     cursor: pointer;
@@ -419,14 +356,9 @@ html, body {
     appearance: none;
     width: 15px;
     height: 15px;
-    border-radius: 50%;
-    background: var(--accent-green);
+    border-radius: 0;
+    background: var(--active-green);
     cursor: pointer;
-    transition: transform 0.1s ease;
-}
-
-.volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
 }
 
 /* ==================== PROGRAMMER DEV NOTE ==================== */
@@ -438,13 +370,13 @@ html, body {
     line-height: 1.5;
     background: rgba(0, 0, 0, 0.4);
     padding: 12px 18px;
-    border-radius: 8px;
+    border-radius: 0;
     border: 1px dashed rgba(255, 255, 255, 0.12);
     text-align: left;
 }
 
 .programmer-note code {
-    color: var(--accent-green);
+    color: #10b981;
     font-family: Consolas, monospace;
 }
 
@@ -460,12 +392,12 @@ html, body {
 .large-cover-box {
     width: 200px;
     height: 200px;
-    border-radius: 12px;
+    border-radius: 0;
     background-size: cover;
     background-position: center;
     background-image: url('cover-weltistgut.jpg'); 
     background-color: #111823;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--border-color);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
     cursor: pointer; 
     touch-action: manipulation;
@@ -479,7 +411,7 @@ html, body {
     transform: scale(3.2) !important;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95);
     z-index: 50;
-    border-color: var(--accent-green);
+    border-color: var(--active-green);
 }
 
 .song-info {
@@ -515,7 +447,7 @@ html, body {
     flex: 1;
     height: 6px;
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
+    border-radius: 0;
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -524,8 +456,8 @@ html, body {
 .progress-bar-fill {
     width: 0%;
     height: 100%;
-    background: var(--accent-green);
-    border-radius: 10px;
+    background: var(--active-green);
+    border-radius: 0;
 }
 </style>
 </head>
@@ -533,60 +465,51 @@ html, body {
 
 <div class="neonav-wrapper" id="neonavWrapper">
 
-    <!-- DURCHGEHENDE SYMBOLLEISTE OBEN (FULL WIDTH) -->
+    <!-- DURCHGEHENDE LEISTE OBEN MIT 5 EQUAL 3D-BLOCK BUTTONS IN DER MITTE -->
     <div class="navbar-container">
-        <nav class="navbar">
-            <div class="navbar-brand-wrapper">
-                <!-- CRESTRON JOINT: Digital Press 1 -->
-                <a href="#video-section" class="navbar-brand" data-ch5-btn="1" ch5-button-send-press="1">
-                    <div class="logo-icon"></div>
-                    <span>Design 2</span>
+        <div class="navbar-menu">
+            
+            <!-- BUTTON 1: DESIGN 1 -->
+            <div class="flip-btn-wrapper-top">
+                <a href="index.html" class="flip-btn-top" data-ch5-btn="2" ch5-button-send-press="2">
+                    <div class="flip-face-top flip-front-top">Design 1</div>
+                    <div class="flip-face-top flip-back-top">Zu Design 1 ➔</div>
                 </a>
-                
-                <div class="brand-popover">
-                    <div class="brand-popover-inner">
-                        <div class="brand-popover-title">Design wählen</div>
-                        <div class="brand-popover-links">
-                            <!-- CRESTRON JOINTS: Digital Press 2, 3, 4 -->
-                            <a href="index.html" class="brand-popover-link" data-ch5-btn="2" ch5-button-send-press="2"><span>Design 1</span> <span>➔</span></a>
-                            <a href="design2.html" class="brand-popover-link active" data-ch5-btn="3" ch5-button-send-press="3"><span>Design 2</span> <span>➔</span></a>
-                            <a href="design3.html" class="brand-popover-link" data-ch5-btn="4" ch5-button-send-press="4"><span>Design 3</span> <span>➔</span></a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!-- MITTIG PLATZIERTE MENÜBANK (GLOW NUR WENN AKTIV) -->
-            <ul class="navbar-nav-centered">
-                <li>
-                    <div class="flip-btn-wrapper active-glow" id="wrapTabVideo">
-                        <a href="#video-section" class="flip-btn active" id="navTabVideo" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">
-                            <div class="flip-btn-face flip-btn-front">Video</div>
-                            <div class="flip-btn-face flip-btn-back">Schau an.</div>
-                        </a>
-                    </div>
-                </li>
-                
-                <li>
-                    <div class="flip-btn-wrapper" id="wrapTabAudio">
-                        <a href="#audio-section" class="flip-btn" id="navTabAudio" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">
-                            <div class="flip-btn-face flip-btn-front">Audio</div>
-                            <div class="flip-btn-face flip-btn-back">Hör an.</div>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-
-            <div>
-                <!-- CRESTRON JOINT: Digital Press 12 -->
-                <div class="flip-btn-wrapper">
-                    <a href="design3.html" class="flip-btn" data-ch5-btn="12" ch5-button-send-press="12">
-                        <div class="flip-btn-face flip-btn-front">Nächstes Design</div>
-                        <div class="flip-btn-face flip-btn-back">Design 3 ➔</div>
-                    </a>
-                </div>
+            <!-- BUTTON 2: DESIGN 2 (AKTUELL) -->
+            <div class="flip-btn-wrapper-top">
+                <a href="design2.html" class="flip-btn-top active" data-ch5-btn="3" ch5-button-send-press="3">
+                    <div class="flip-face-top flip-front-top">Design 2</div>
+                    <div class="flip-face-top flip-back-top">Aktuell</div>
+                </a>
             </div>
-        </nav>
+
+            <!-- BUTTON 3: VIDEO STREAM -->
+            <div class="flip-btn-wrapper-top">
+                <a href="#video-section" class="flip-btn-top active" id="navTabVideo" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">
+                    <div class="flip-face-top flip-front-top">Video</div>
+                    <div class="flip-face-top flip-back-top">Schau an.</div>
+                </a>
+            </div>
+
+            <!-- BUTTON 4: AUDIO PLAYER -->
+            <div class="flip-btn-wrapper-top">
+                <a href="#audio-section" class="flip-btn-top" id="navTabAudio" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">
+                    <div class="flip-face-top flip-front-top">Audio</div>
+                    <div class="flip-face-top flip-back-top">Hör an.</div>
+                </a>
+            </div>
+
+            <!-- BUTTON 5: DESIGN 3 -->
+            <div class="flip-btn-wrapper-top">
+                <a href="design3.html" class="flip-btn-top" data-ch5-btn="12" ch5-button-send-press="12">
+                    <div class="flip-face-top flip-front-top">Design 3</div>
+                    <div class="flip-face-top flip-back-top">Zu Design 3 ➔</div>
+                </a>
+            </div>
+
+        </div>
     </div>
 
     <!-- SEITE 1: VIDEO PLAYER -->
@@ -606,10 +529,10 @@ html, body {
                 <!-- CRESTRON JOINT: Digital Press 21 -->
                 <div class="action-item">
                     <span class="action-label">Play</span>
-                    <div class="flip-btn-wrapper">
-                        <button class="flip-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
-                            <div class="flip-btn-face flip-btn-front" id="playPauseFront"> Pause</div>
-                            <div class="flip-btn-face flip-btn-back">Umschalten</div>
+                    <div class="flip-btn-wrapper-ctrl">
+                        <button class="flip-btn-ctrl" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
+                            <div class="flip-face-ctrl flip-front-ctrl" id="playPauseFront">Pause</div>
+                            <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
                         </button>
                     </div>
                 </div>
@@ -617,10 +540,10 @@ html, body {
                 <!-- CRESTRON JOINT: Digital Press 22 -->
                 <div class="action-item">
                     <span class="action-label">Loop</span>
-                    <div class="flip-btn-wrapper">
-                        <button class="flip-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
-                            <div class="flip-btn-face flip-btn-front" id="loopFront"> An</div>
-                            <div class="flip-btn-face flip-btn-back">Umschalten</div>
+                    <div class="flip-btn-wrapper-ctrl">
+                        <button class="flip-btn-ctrl active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
+                            <div class="flip-face-ctrl flip-front-ctrl" id="loopFront">An</div>
+                            <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
                         </button>
                     </div>
                 </div>
@@ -688,10 +611,10 @@ html, body {
                     <!-- CRESTRON JOINT: Digital Press 31 -->
                     <div class="action-item">
                         <span class="action-label">Play</span>
-                        <div class="flip-btn-wrapper">
-                            <button class="flip-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
-                                <div class="flip-btn-face flip-btn-front" id="audioPlayFront"> Play</div>
-                                <div class="flip-btn-face flip-btn-back">Umschalten</div>
+                        <div class="flip-btn-wrapper-ctrl">
+                            <button class="flip-btn-ctrl" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
+                                <div class="flip-face-ctrl flip-front-ctrl" id="audioPlayFront">Play</div>
+                                <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
                             </button>
                         </div>
                     </div>
@@ -699,10 +622,10 @@ html, body {
                     <!-- CRESTRON JOINT: Digital Press 32 -->
                     <div class="action-item">
                         <span class="action-label">Loop</span>
-                        <div class="flip-btn-wrapper">
-                            <button class="flip-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
-                                <div class="flip-btn-face flip-btn-front" id="audioLoopFront"> Aus</div>
-                                <div class="flip-btn-face flip-btn-back">Umschalten</div>
+                        <div class="flip-btn-wrapper-ctrl">
+                            <button class="flip-btn-ctrl" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
+                                <div class="flip-face-ctrl flip-front-ctrl" id="audioLoopFront">Aus</div>
+                                <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
                             </button>
                         </div>
                     </div>
@@ -742,10 +665,10 @@ const loopFront = document.getElementById('loopFront');
 function togglePlayPause() {
     if (video.paused) {
         video.play();
-        playPauseFront.textContent = ' Pause';
+        playPauseFront.textContent = 'Pause';
     } else {
         video.pause();
-        playPauseFront.textContent = ' Play';
+        playPauseFront.textContent = 'Play';
     }
 }
 
@@ -753,10 +676,10 @@ function toggleLoop() {
     video.loop = !video.loop;
     if (video.loop) {
         loopBtn.classList.add('active');
-        loopFront.textContent = ' An';
+        loopFront.textContent = 'An';
     } else {
         loopBtn.classList.remove('active');
-        loopFront.textContent = ' Aus';
+        loopFront.textContent = 'Aus';
     }
 }
 
@@ -783,11 +706,11 @@ const durationEl = document.getElementById('duration');
 function toggleAudioPlay() {
     if (audio.paused) {
         audio.play();
-        audioPlayFront.textContent = ' Pause';
+        audioPlayFront.textContent = 'Pause';
         audioPlayBtn.classList.add('active');
     } else {
         audio.pause();
-        audioPlayFront.textContent = ' Play';
+        audioPlayFront.textContent = 'Play';
         audioPlayBtn.classList.remove('active');
     }
 }
@@ -796,10 +719,10 @@ function toggleAudioLoop() {
     audio.loop = !audio.loop;
     if (audio.loop) {
         audioLoopBtn.classList.add('active');
-        audioLoopFront.textContent = ' An';
+        audioLoopFront.textContent = 'An';
     } else {
         audioLoopBtn.classList.remove('active');
-        audioLoopFront.textContent = ' Aus';
+        audioLoopFront.textContent = 'Aus';
     }
 }
 
@@ -845,8 +768,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navTabVideo = document.getElementById('navTabVideo');
     const navTabAudio = document.getElementById('navTabAudio');
-    const wrapTabVideo = document.getElementById('wrapTabVideo');
-    const wrapTabAudio = document.getElementById('wrapTabAudio');
     const sections = document.querySelectorAll('.content-section');
 
     if (video) {
@@ -867,13 +788,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (activeId === 'video-section') {
                     navTabVideo.classList.add('active');
                     navTabAudio.classList.remove('active');
-                    wrapTabVideo.classList.add('active-glow');
-                    wrapTabAudio.classList.remove('active-glow');
                 } else if (activeId === 'audio-section') {
                     navTabAudio.classList.add('active');
                     navTabVideo.classList.remove('active');
-                    wrapTabAudio.classList.add('active-glow');
-                    wrapTabVideo.classList.remove('active-glow');
                 }
             }
         });
