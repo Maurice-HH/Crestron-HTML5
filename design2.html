@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
+
+<!-- Crestron CH5 Library Integration (in echten Projekten einbinden) -->
+<!-- <script src="js/cr-com-lib.js"></script> -->
+
 <style>
 /* ==================== GLOBAL RESET & BASE ==================== */
 * {
@@ -45,7 +49,7 @@ html, body {
     border-radius: 10px;
 }
 
-/* ==================== NAVBAR ==================== */
+/* ==================== NAVBAR (FIXED TOP) ==================== */
 .navbar-container {
     position: sticky;
     top: 20px;
@@ -244,7 +248,7 @@ html, body {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -281,14 +285,18 @@ html, body {
     align-items: center;
 }
 
+.card-box.large-video-box {
+    max-width: 1100px !important;
+}
+
 .video-wrapper {
     position: relative;
     width: 100%;
-    border-radius: 18px;
+    border-radius: 22px;
     overflow: hidden;
     background: #000;
     aspect-ratio: 16 / 9;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
 }
 
 .video-wrapper video {
@@ -298,12 +306,13 @@ html, body {
     display: block;
 }
 
-/* ==================== FLACHE ACTION-BUTTONS (GLEICHE BREITE) ==================== */
+/* ==================== UNIFORM GRID BUTTONS (EXAKT 160PX) ==================== */
 .action-controls-row {
-    display: flex;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 160px);
+    gap: 20px;
     justify-content: center;
-    align-items: flex-end; 
+    align-items: end;
     width: 100%;
 }
 
@@ -311,7 +320,8 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px; 
+    gap: 8px;
+    width: 100%;
 }
 
 .action-label {
@@ -325,20 +335,16 @@ html, body {
 .action-btn, .action-select {
     all: unset;
     box-sizing: border-box;
-    width: 150px !important;     /* BREITER UND EXAKT GLEICH */
-    min-width: 150px !important; 
-    max-width: 150px !important;
-    height: 40px !important;     /* STRIKT FLACH */
-    min-height: 40px !important;
-    max-height: 40px !important;
-    border-radius: 20px !important; /* PERFEKTE PILLE */
+    width: 100%;
+    height: 42px;
+    border-radius: 21px;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #ffffff;
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
@@ -360,7 +366,6 @@ html, body {
 }
 
 .action-select {
-    padding-right: 16px; 
     text-align: center;
     text-align-last: center;
 }
@@ -382,7 +387,7 @@ html, body {
     align-items: center;
     gap: 12px;
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
     background: rgba(0, 0, 0, 0.25);
     padding: 8px 18px;
     border-radius: 30px;
@@ -432,7 +437,6 @@ html, body {
     width: 100%;
 }
 
-/* GROSSES COVER-ARTWORK (STATISCH, NUR ZOOM AUF KLICK) */
 .large-cover-box {
     width: 220px;
     height: 220px;
@@ -451,10 +455,9 @@ html, body {
     z-index: 10;
 }
 
-/* ZOOM KLASSE (3.5x Vergrößerung) */
 .large-cover-box.zoomed {
-    transform: scale(3.5);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    transform: scale(3.5) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
     z-index: 50;
     border-color: rgba(0, 210, 255, 0.5);
 }
@@ -480,7 +483,7 @@ html, body {
 
 .progress-container {
     width: 100%;
-    max-width: 420px;
+    max-width: 520px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -510,11 +513,12 @@ html, body {
 
 <div class="neonav-wrapper" id="neonavWrapper">
 
-    <!-- NAVIGATION HEADER -->
+    <!-- NAVIGATION HEADER (STAYS FIXED AT TOP) -->
     <div class="navbar-container">
         <nav class="navbar">
             <div class="navbar-brand-wrapper">
-                <a href="#video-section" class="navbar-brand">
+                <!-- CRESTRON JOINT: Digital Press 1 (Home/Brand) -->
+                <a href="#video-section" class="navbar-brand" data-ch5-btn="1" ch5-button-send-press="1">
                     <div class="logo-icon"></div>
                     <span>Design 2</span>
                 </a>
@@ -523,18 +527,21 @@ html, body {
                     <div class="brand-popover-inner">
                         <div class="brand-popover-title">Design wählen</div>
                         <div class="brand-popover-links">
-                            <a href="index.html" class="brand-popover-link"><span>Design 1</span> <span>➔</span></a>
-                            <a href="design2.html" class="brand-popover-link active"><span>Design 2</span> <span>➔</span></a>
-                            <a href="design3.html" class="brand-popover-link"><span>Design 3</span> <span>➔</span></a>
+                            <!-- CRESTRON JOINTS: Digital Press 2, 3, 4 (Page Switch) -->
+                            <a href="index.html" class="brand-popover-link" data-ch5-btn="2" ch5-button-send-press="2"><span>Design 1</span> <span>➔</span></a>
+                            <a href="design2.html" class="brand-popover-link active" data-ch5-btn="3" ch5-button-send-press="3"><span>Design 2</span> <span>➔</span></a>
+                            <a href="design3.html" class="brand-popover-link" data-ch5-btn="4" ch5-button-send-press="4"><span>Design 3</span> <span>➔</span></a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <ul class="navbar-nav">
-                <li><a href="#video-section" class="nav-link active" data-section="video-section">Video Player</a></li>
-                <li><a href="#audio-section" class="nav-link" data-section="audio-section">Audio Player</a></li>
-                <li class="cta-button-item"><a href="design3.html" class="cta-button">Nächstes Design</a></li>
+                <!-- CRESTRON JOINTS: Digital Press 10 & 11 + Feedback State 10 & 11 -->
+                <li><a href="#video-section" class="nav-link active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">Video Player</a></li>
+                <li><a href="#audio-section" class="nav-link" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">Audio Player</a></li>
+                <!-- CRESTRON JOINT: Digital Press 12 -->
+                <li class="cta-button-item"><a href="design3.html" class="cta-button" data-ch5-btn="12" ch5-button-send-press="12">Nächstes Design</a></li>
             </ul>
         </nav>
     </div>
@@ -542,9 +549,9 @@ html, body {
     <!-- SEITE 1: VIDEO PLAYER -->
     <section id="video-section" class="content-section">
         <h1 class="section-title">Video Stream</h1>
-        <p class="section-subtitle">Gelooptes MP4-Video mit schlichten, flachen Glassy-Buttons.</p>
+        <p class="section-subtitle">Gelooptes MP4-Video im Großformat.</p>
 
-        <div class="card-box">
+        <div class="card-box large-video-box">
             <div class="video-wrapper">
                 <video id="myVideo" autoplay loop muted playsinline preload="auto">
                     <source src="video.mp4" type="video/mp4">
@@ -553,25 +560,28 @@ html, body {
             </div>
 
             <div class="action-controls-row">
+                <!-- CRESTRON JOINT: Digital Press 21 (Video Play/Pause) + Feedback State 21 -->
                 <div class="action-item">
                     <span class="action-label">Play</span>
-                    <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                    <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
                         <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                         <span id="playPauseText">Pause</span>
                     </button>
                 </div>
 
+                <!-- CRESTRON JOINT: Digital Press 22 (Video Loop) + Feedback State 22 -->
                 <div class="action-item">
                     <span class="action-label">Loop</span>
-                    <button class="action-btn active" id="loopBtn" onclick="toggleLoop()">
+                    <button class="action-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
                         <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
                         <span id="loopText">An</span>
                     </button>
                 </div>
 
+                <!-- CRESTRON JOINT: Analog Value 1 (Speed Index / Selection) -->
                 <div class="action-item">
                     <span class="action-label">Geschwindigkeit</span>
-                    <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)">
+                    <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
                         <option value="0.5">0.5x</option>
                         <option value="1.0" selected>1.0x</option>
                         <option value="1.5">1.5x</option>
@@ -580,9 +590,10 @@ html, body {
                 </div>
             </div>
 
+            <!-- CRESTRON JOINT: Analog Value 2 (Video Volume Level 0-65535) -->
             <div class="volume-container">
                 <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
-                <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)">
+                <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)" data-ch5-slider-send="2" data-ch5-slider-receive="2">
                 <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
             </div>
         </div>
@@ -590,23 +601,25 @@ html, body {
 
     <!-- SEITE 2: AUDIO PLAYER -->
     <section id="audio-section" class="content-section">
-        <h2 class="section-title">Audio Player & Cover Zoom</h2>
+        <h1 class="section-title">Audio Player & Cover Zoom</h1>
         <p class="section-subtitle">Klicke das Cover, um es stark heranzuzoomen.</p>
 
         <div class="card-box">
             <div class="audio-player-wrapper">
                 
-                <!-- GROSSES COVER (STATISCH, NUR ZOOM AUF KLICK) -->
-                <div class="large-cover-box" id="vinylDisc"></div>
+                <!-- CRESTRON JOINT: Digital Press 30 (Cover Zoom Toggle) -->
+                <div class="large-cover-box" id="albumCover" data-ch5-btn="30" ch5-button-send-press="30"></div>
 
                 <div class="song-info">
-                    <div class="song-title" id="songTitle">Die Welt ist gut, Sonne, Sekt und Hut</div>
-                    <div class="song-artist" id="songArtist">Maurice Camplair</div>
+                    <!-- CRESTRON JOINTS: Serial Join 1 & 2 (Song Title & Artist Text) -->
+                    <div class="song-title" id="songTitle" data-ch5-string-receive="1">Die Welt ist gut, Sonne, Sekt und Hut</div>
+                    <div class="song-artist" id="songArtist" data-ch5-string-receive="2">Maurice Camplair</div>
                 </div>
 
+                <!-- CRESTRON JOINT: Analog Value 3 (Audio Track Position 0-65535) -->
                 <div class="progress-container">
                     <span id="currentTime">0:00</span>
-                    <div class="progress-bar-bg" onclick="seekAudio(event)">
+                    <div class="progress-bar-bg" onclick="seekAudio(event)" data-ch5-slider-send="3">
                         <div class="progress-bar-fill" id="progressFill"></div>
                     </div>
                     <span id="duration">0:00</span>
@@ -617,25 +630,28 @@ html, body {
                 </audio>
 
                 <div class="action-controls-row">
+                    <!-- CRESTRON JOINT: Digital Press 31 (Audio Play/Pause) + Feedback State 31 -->
                     <div class="action-item">
                         <span class="action-label">Play</span>
-                        <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()">
+                        <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
                             <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             <span id="audioPlayText">Play</span>
                         </button>
                     </div>
 
+                    <!-- CRESTRON JOINT: Digital Press 32 (Audio Loop) + Feedback State 32 -->
                     <div class="action-item">
                         <span class="action-label">Loop</span>
-                        <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()">
+                        <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
                             <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
                             <span id="audioLoopText">Aus</span>
                         </button>
                     </div>
 
+                    <!-- CRESTRON JOINT: Analog Value 4 (Audio Speed Selection) -->
                     <div class="action-item">
                         <span class="action-label">Geschwindigkeit</span>
-                        <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)">
+                        <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
                             <option value="0.5">0.5x</option>
                             <option value="1.0" selected>1.0x</option>
                             <option value="1.5">1.5x</option>
@@ -644,9 +660,10 @@ html, body {
                     </div>
                 </div>
 
+                <!-- CRESTRON JOINT: Analog Value 5 (Audio Master Volume Level 0-65535) -->
                 <div class="volume-container">
                     <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
-                    <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)">
+                    <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)" data-ch5-slider-send="5" data-ch5-slider-receive="5">
                     <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
                 </div>
             </div>
@@ -699,14 +716,14 @@ function changeVideoVolume(val) {
     video.muted = (parseFloat(val) === 0);
 }
 
-/* ==================== AUDIO LOGIK & COVER ZOOM ==================== */
+/* ==================== AUDIO LOGIK ==================== */
 const audio = document.getElementById('myAudio');
 const audioPlayBtn = document.getElementById('audioPlayBtn');
 const audioPlayIcon = document.getElementById('audioPlayIcon');
 const audioPlayText = document.getElementById('audioPlayText');
 const audioLoopBtn = document.getElementById('audioLoopBtn');
 const audioLoopText = document.getElementById('audioLoopText');
-const vinylDisc = document.getElementById('vinylDisc'); 
+const albumCover = document.getElementById('albumCover'); 
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
@@ -766,12 +783,16 @@ function seekAudio(e) {
     }
 }
 
-// Cover Click Zoom Event (Keine Rotation, kein Ruckeln)
-vinylDisc.addEventListener('click', function() {
+// Cover Click Zoom Event (Keine Rotation)
+albumCover.addEventListener('click', function() {
     this.classList.toggle('zoomed');
 });
 
-/* INIT */
+/* ==================== CRESTRON CH5 BRIDGE INTEGRATION ==================== */
+/* 
+  Falls Crestron CrComLib vorhanden ist, können hier direkte Subscriptions 
+  und Feedback-Handler eingerichtet werden.
+*/
 document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -786,6 +807,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (audio) {
         audio.volume = 0.8;
     }
+
+    // Beispiel für ErComLib Event Listener:
+    // if (typeof CrComLib !== 'undefined') {
+    //     CrComLib.subscribeState('b', '21', (value) => {
+    //         if(value) { video.play(); } else { video.pause(); }
+    //     });
+    //     CrComLib.subscribeState('n', '2', (value) => {
+    //         video.volume = value / 65535;
+    //     });
+    // }
 
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
