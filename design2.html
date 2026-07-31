@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
 
-<!-- Crestron CH5 Library Integration (in echten Projekten einbinden) -->
+<!-- Crestron CH5 Library Integration -->
 <!-- <script src="js/cr-com-lib.js"></script> -->
 
 <style>
@@ -19,9 +19,11 @@
 }
 
 :root {
-    --tuerkis-blue: #00d2ff;
-    --dark-bar: #0d1322;
-    --card-bg: #0f172a;
+    --dark-bg: #05080c;
+    --card-bg: #0a0f18;
+    --dark-green: #0a291d;
+    --dark-green-hover: #123d29;
+    --accent-green: #10b981;
 }
 
 html, body {
@@ -29,7 +31,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #070a12 !important;
+    background: var(--dark-bg) !important;
     color: #ffffff;
     font-size: 16px;
 }
@@ -40,26 +42,26 @@ html, body {
     overflow-y: auto;
     position: relative;
     scroll-behavior: smooth;
-    background: linear-gradient(180deg, #090f1d 0%, #0d1e2b 50%, #1a0f2e 100%);
+    background: radial-gradient(circle at top, #0f1a15 0%, #05080c 70%);
 }
 
 .neonav-wrapper::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 .neonav-wrapper::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
 }
 
-/* ==================== DURCHGEHENDE SYMBOLLEISTE (FULL WIDTH TOP) ==================== */
+/* ==================== DURCHGEHENDE TOP-BAR MIT ZENTRIERTER MENÜBANK ==================== */
 .navbar-container {
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
-    background: var(--dark-bar);
-    border-bottom: 2px solid rgba(0, 210, 255, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    background: #030508;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .navbar {
@@ -67,7 +69,7 @@ html, body {
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 30px;
-    height: 65px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -86,14 +88,14 @@ html, body {
     text-decoration: none;
     color: #ffffff;
     font-weight: 800;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
 }
 
 .logo-icon {
-    width: 28px;
-    height: 28px;
-    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #10b981, #047857);
     border-radius: 6px;
     position: relative;
     display: flex;
@@ -110,19 +112,17 @@ html, body {
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px) scale(0.95);
-    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.25s ease;
     pointer-events: none;
     z-index: 2000;
 }
 
 .brand-popover-inner {
-    background: rgba(18, 24, 38, 0.95);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #0d131f;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
-    padding: 16px 22px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    padding: 14px 18px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
     white-space: nowrap;
 }
 
@@ -135,9 +135,9 @@ html, body {
 }
 
 .brand-popover-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
-    color: #00f0ff;
+    color: var(--accent-green);
     margin-bottom: 8px;
     letter-spacing: 1px;
 }
@@ -149,14 +149,14 @@ html, body {
 }
 
 .brand-popover-link {
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     padding: 6px 12px;
     border-radius: 6px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
@@ -165,34 +165,37 @@ html, body {
 }
 
 .brand-popover-link:hover, .brand-popover-link.active {
-    background: rgba(0, 240, 255, 0.2);
-    border-color: rgba(0, 240, 255, 0.4);
+    background: var(--dark-green);
+    border-color: var(--accent-green);
     color: #ffffff;
 }
 
+/* MENÜBANK IN DER MITTE */
 .navbar-nav-centered {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
     list-style: none;
     height: 100%;
 }
 
-/* ==================== 3D FLIP BUTTON DESIGN (EXAKT WIE CODEPEN) ==================== */
+/* ==================== CLEAN 3D FLIP BUTTONS (DUNKEL / MATT) ==================== */
 .flip-btn-wrapper {
     perspective: 1000px;
+    position: relative;
     display: inline-block;
 }
 
 .flip-btn {
     position: relative;
-    width: 150px;
+    width: 140px;
     height: 42px;
     transform-style: preserve-3d;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     text-decoration: none;
     display: block;
+    border-radius: 8px;
 }
 
 .flip-btn:hover {
@@ -205,66 +208,82 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 14px;
     letter-spacing: 0.5px;
     border-radius: 8px;
     box-sizing: border-box;
     backface-visibility: hidden;
     gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-/* VORDERSEITE (FRONT) */
+/* VORDERSEITE (DUNKELGRAU / SCHWARZ / GRÜN) */
 .flip-btn-front {
-    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #cbd5e1;
+    background: #111823;
+    color: #94a3b8;
     transform: translateZ(21px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* RÜCKSEITE (BACK - BEIM HOVER/FLIP) */
+/* RÜCKSEITE (HOVER FLIP - DUNKELGRÜN) */
 .flip-btn-back {
-    background: linear-gradient(180deg, #00d2ff 0%, #0088cc 100%);
-    border: 1px solid #00f0ff;
+    background: var(--dark-green-hover);
+    border-color: var(--accent-green);
     color: #ffffff;
     transform: rotateX(90deg) translateZ(21px);
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
 }
 
-/* AKTIVER ZUSTAND */
+/* REGENBOGEN-GLOW AUSSCHLIESSLICH FÜR DEN AKTIVEN BUTTON */
+.flip-btn-wrapper.active-glow::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 11px;
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
+    background-size: 400% 400%;
+    z-index: -1;
+    opacity: 0.85;
+    filter: blur(8px);
+    animation: rainbow-glow 8s linear infinite;
+    pointer-events: none;
+}
+
 .flip-btn.active .flip-btn-front {
-    background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%);
-    border-color: #00d2ff;
+    background: #0d281e;
+    border-color: var(--accent-green);
     color: #ffffff;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
 }
 
-/* ==================== SELECT BOX IM 3D STYLE ==================== */
+@keyframes rainbow-glow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==================== SELECT BOX IM DUNKELEN 3D STYLE ==================== */
 .action-select-3d {
     appearance: none;
     -webkit-appearance: none;
-    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: #111823;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
-    color: #cbd5e1;
+    color: #94a3b8;
     font-family: inherit;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 14px;
     height: 42px;
-    width: 150px;
+    width: 140px;
     text-align: center;
     text-align-last: center;
     cursor: pointer;
     outline: none;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
 }
 
 .action-select-3d:hover {
-    border-color: #00d2ff;
+    border-color: var(--accent-green);
     color: #ffffff;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    background: var(--dark-green);
 }
 
 .action-select-3d option {
@@ -274,12 +293,12 @@ html, body {
 
 /* ==================== CONTENT SECTIONS ==================== */
 .content-section {
-    min-height: calc(100vh - 65px);
+    min-height: calc(100vh - 60px);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 50px 20px 40px 20px;
+    padding: 40px 20px;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -289,19 +308,17 @@ html, body {
 }
 
 .section-title {
-    font-size: 38px;
+    font-size: 34px;
     font-weight: 800;
-    margin-bottom: 8px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    margin-bottom: 6px;
     letter-spacing: 0.5px;
 }
 
 .section-subtitle {
-    font-size: 15px;
-    opacity: 0.75;
+    font-size: 14px;
+    opacity: 0.6;
     max-width: 800px;
-    line-height: 1.5;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 /* ==================== CARD CONTAINER ==================== */
@@ -309,28 +326,28 @@ html, body {
     width: 100%;
     max-width: 720px;
     background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    padding: 28px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
     align-items: center;
 }
 
 .card-box.large-video-box {
-    max-width: 1100px !important;
+    max-width: 1050px !important;
 }
 
 .video-wrapper {
     position: relative;
     width: 100%;
-    border-radius: 14px;
+    border-radius: 12px;
     overflow: hidden;
     background: #000;
     aspect-ratio: 16 / 9;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .video-wrapper video {
@@ -340,11 +357,11 @@ html, body {
     display: block;
 }
 
-/* ==================== PLAYER ACTION CONTROLS ROW ==================== */
+/* ==================== PLAYER CONTROLS ==================== */
 .action-controls-row {
     display: grid;
-    grid-template-columns: repeat(3, 150px);
-    gap: 20px;
+    grid-template-columns: repeat(3, 140px);
+    gap: 16px;
     justify-content: center;
     align-items: end;
     width: 100%;
@@ -354,7 +371,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
 }
 
@@ -363,7 +380,7 @@ html, body {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.4);
 }
 
 /* ==================== VOLUME SLIDER ==================== */
@@ -372,17 +389,17 @@ html, body {
     align-items: center;
     gap: 12px;
     width: 100%;
-    max-width: 490px;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 8px 18px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 452px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .volume-icon {
     width: 16px;
     height: 16px;
-    fill: rgba(255, 255, 255, 0.7);
+    fill: rgba(255, 255, 255, 0.5);
     flex-shrink: 0;
 }
 
@@ -390,9 +407,9 @@ html, body {
     flex: 1;
     -webkit-appearance: none;
     appearance: none;
-    height: 6px;
+    height: 5px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     outline: none;
     cursor: pointer;
 }
@@ -400,35 +417,34 @@ html, body {
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    background: var(--tuerkis-blue);
-    box-shadow: 0 0 10px var(--tuerkis-blue);
+    background: var(--accent-green);
     cursor: pointer;
     transition: transform 0.1s ease;
 }
 
 .volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.25);
+    transform: scale(1.2);
 }
 
 /* ==================== PROGRAMMER DEV NOTE ==================== */
 .programmer-note {
-    margin-top: 25px;
+    margin-top: 20px;
     font-size: 12px;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.4);
     max-width: 800px;
-    line-height: 1.6;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 12px 20px;
-    border-radius: 12px;
-    border: 1px dashed rgba(255, 255, 255, 0.15);
+    line-height: 1.5;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: 1px dashed rgba(255, 255, 255, 0.12);
     text-align: left;
 }
 
 .programmer-note code {
-    color: #00f0ff;
+    color: var(--accent-green);
     font-family: Consolas, monospace;
 }
 
@@ -437,20 +453,20 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
     width: 100%;
 }
 
 .large-cover-box {
-    width: 220px;
-    height: 220px;
-    border-radius: 16px;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
     background-size: cover;
     background-position: center;
     background-image: url('cover-weltistgut.jpg'); 
-    background-color: #1e2638;
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    background-color: #111823;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
     cursor: pointer; 
     touch-action: manipulation;
     flex-shrink: 0;
@@ -460,10 +476,10 @@ html, body {
 }
 
 .large-cover-box.zoomed {
-    transform: scale(3.5) !important;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
+    transform: scale(3.2) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95);
     z-index: 50;
-    border-color: rgba(0, 210, 255, 0.5);
+    border-color: var(--accent-green);
 }
 
 .song-info {
@@ -475,29 +491,29 @@ html, body {
 }
 
 .song-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 800;
     color: #fff;
 }
 
 .song-artist {
-    font-size: 15px;
-    opacity: 0.7;
+    font-size: 14px;
+    opacity: 0.6;
 }
 
 .progress-container {
     width: 100%;
-    max-width: 490px;
+    max-width: 452px;
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
 }
 
 .progress-bar-bg {
     flex: 1;
-    height: 7px;
+    height: 6px;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     position: relative;
@@ -508,7 +524,7 @@ html, body {
 .progress-bar-fill {
     width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #00d2ff, #00f0ff);
+    background: var(--accent-green);
     border-radius: 10px;
 }
 </style>
@@ -540,10 +556,10 @@ html, body {
                 </div>
             </div>
 
-            <!-- MITTIG PLATZIERTE 3D-FLIP BUTTONS ("Video" -> "Schau an." / "Audio" -> "Hör an.") -->
+            <!-- MITTIG PLATZIERTE MENÜBANK (GLOW NUR WENN AKTIV) -->
             <ul class="navbar-nav-centered">
                 <li>
-                    <div class="flip-btn-wrapper">
+                    <div class="flip-btn-wrapper active-glow" id="wrapTabVideo">
                         <a href="#video-section" class="flip-btn active" id="navTabVideo" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">
                             <div class="flip-btn-face flip-btn-front">Video</div>
                             <div class="flip-btn-face flip-btn-back">Schau an.</div>
@@ -552,7 +568,7 @@ html, body {
                 </li>
                 
                 <li>
-                    <div class="flip-btn-wrapper">
+                    <div class="flip-btn-wrapper" id="wrapTabAudio">
                         <a href="#audio-section" class="flip-btn" id="navTabAudio" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">
                             <div class="flip-btn-face flip-btn-front">Audio</div>
                             <div class="flip-btn-face flip-btn-back">Hör an.</div>
@@ -592,8 +608,8 @@ html, body {
                     <span class="action-label">Play</span>
                     <div class="flip-btn-wrapper">
                         <button class="flip-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
-                            <div class="flip-btn-face flip-btn-front" id="playPauseFront">⏸ Pause</div>
-                            <div class="flip-btn-face flip-btn-back" id="playPauseBack">Umschalten</div>
+                            <div class="flip-btn-face flip-btn-front" id="playPauseFront"> Pause</div>
+                            <div class="flip-btn-face flip-btn-back">Umschalten</div>
                         </button>
                     </div>
                 </div>
@@ -603,8 +619,8 @@ html, body {
                     <span class="action-label">Loop</span>
                     <div class="flip-btn-wrapper">
                         <button class="flip-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
-                            <div class="flip-btn-face flip-btn-front" id="loopFront">🔁 An</div>
-                            <div class="flip-btn-face flip-btn-back" id="loopBack">Umschalten</div>
+                            <div class="flip-btn-face flip-btn-front" id="loopFront"> An</div>
+                            <div class="flip-btn-face flip-btn-back">Umschalten</div>
                         </button>
                     </div>
                 </div>
@@ -674,7 +690,7 @@ html, body {
                         <span class="action-label">Play</span>
                         <div class="flip-btn-wrapper">
                             <button class="flip-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
-                                <div class="flip-btn-face flip-btn-front" id="audioPlayFront">▶ Play</div>
+                                <div class="flip-btn-face flip-btn-front" id="audioPlayFront"> Play</div>
                                 <div class="flip-btn-face flip-btn-back">Umschalten</div>
                             </button>
                         </div>
@@ -685,7 +701,7 @@ html, body {
                         <span class="action-label">Loop</span>
                         <div class="flip-btn-wrapper">
                             <button class="flip-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
-                                <div class="flip-btn-face flip-btn-front" id="audioLoopFront">➡️ Aus</div>
+                                <div class="flip-btn-face flip-btn-front" id="audioLoopFront"> Aus</div>
                                 <div class="flip-btn-face flip-btn-back">Umschalten</div>
                             </button>
                         </div>
@@ -726,10 +742,10 @@ const loopFront = document.getElementById('loopFront');
 function togglePlayPause() {
     if (video.paused) {
         video.play();
-        playPauseFront.textContent = '⏸ Pause';
+        playPauseFront.textContent = ' Pause';
     } else {
         video.pause();
-        playPauseFront.textContent = '▶ Play';
+        playPauseFront.textContent = ' Play';
     }
 }
 
@@ -737,10 +753,10 @@ function toggleLoop() {
     video.loop = !video.loop;
     if (video.loop) {
         loopBtn.classList.add('active');
-        loopFront.textContent = '🔁 An';
+        loopFront.textContent = ' An';
     } else {
         loopBtn.classList.remove('active');
-        loopFront.textContent = '➡️ Aus';
+        loopFront.textContent = ' Aus';
     }
 }
 
@@ -767,11 +783,11 @@ const durationEl = document.getElementById('duration');
 function toggleAudioPlay() {
     if (audio.paused) {
         audio.play();
-        audioPlayFront.textContent = '⏸ Pause';
+        audioPlayFront.textContent = ' Pause';
         audioPlayBtn.classList.add('active');
     } else {
         audio.pause();
-        audioPlayFront.textContent = '▶ Play';
+        audioPlayFront.textContent = ' Play';
         audioPlayBtn.classList.remove('active');
     }
 }
@@ -780,10 +796,10 @@ function toggleAudioLoop() {
     audio.loop = !audio.loop;
     if (audio.loop) {
         audioLoopBtn.classList.add('active');
-        audioLoopFront.textContent = '🔁 An';
+        audioLoopFront.textContent = ' An';
     } else {
         audioLoopBtn.classList.remove('active');
-        audioLoopFront.textContent = '➡️ Aus';
+        audioLoopFront.textContent = ' Aus';
     }
 }
 
@@ -829,6 +845,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navTabVideo = document.getElementById('navTabVideo');
     const navTabAudio = document.getElementById('navTabAudio');
+    const wrapTabVideo = document.getElementById('wrapTabVideo');
+    const wrapTabAudio = document.getElementById('wrapTabAudio');
     const sections = document.querySelectorAll('.content-section');
 
     if (video) {
@@ -849,9 +867,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (activeId === 'video-section') {
                     navTabVideo.classList.add('active');
                     navTabAudio.classList.remove('active');
+                    wrapTabVideo.classList.add('active-glow');
+                    wrapTabAudio.classList.remove('active-glow');
                 } else if (activeId === 'audio-section') {
                     navTabAudio.classList.add('active');
                     navTabVideo.classList.remove('active');
+                    wrapTabAudio.classList.add('active-glow');
+                    wrapTabVideo.classList.remove('active-glow');
                 }
             }
         });
