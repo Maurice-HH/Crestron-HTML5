@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
 
-<!-- Crestron CH5 Library Integration (in echten Projekten einbinden) -->
+<!-- Crestron CH5 Library Integration -->
 <!-- <script src="js/cr-com-lib.js"></script> -->
 
 <style>
@@ -189,28 +189,101 @@ html, body {
 .navbar-nav {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
     list-style: none;
 }
 
+/* ==================== GLOWING MENU BUTTONS ==================== */
+.glow-nav-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .nav-link {
+    position: relative;
     display: flex;
     align-items: center;
-    padding: 7px 18px;
+    justify-content: center;
+    padding: 8px 22px;
     text-decoration: none;
     font-weight: 700;
     font-size: 15px;
     border-radius: 50px;
-    transition: all 0.3s ease;
-    white-space: nowrap;
     line-height: 1;
-    color: #a2b7e0;
+    color: #ffffff;
+    background: rgba(18, 24, 38, 0.8);
+    border: 1px solid transparent;
+    z-index: 1;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.nav-link:hover, .nav-link.active {
-    background: rgba(255, 255, 255, 0.15) !important;
-    color: #ffffff !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+/* NEON GLOW BORDER ANIMATION (PEN INSPIRATION) */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent 0%, #00d2ff 25%, #00f0ff 50%, #ff007f 75%, transparent 100%);
+    animation: rotate-glow 4s linear infinite;
+    z-index: -2;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 50px;
+    z-index: -1;
+    transition: background 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    background: rgba(0, 210, 255, 0.25);
+}
+
+@keyframes rotate-glow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==================== ANIMIERTE WELLEN-LINIE UNTER AKTIVEM BUTTON ==================== */
+.wave-indicator {
+    position: absolute;
+    bottom: -12px;
+    width: 80%;
+    height: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.nav-link.active + .wave-indicator {
+    opacity: 1;
+}
+
+.wave-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wave-path {
+    fill: none;
+    stroke: #00d2ff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    animation: wave-move 2s linear infinite;
+}
+
+@keyframes wave-move {
+    0% { stroke-dashoffset: 0; d: path("M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"); }
+    50% { d: path("M0 4 Q 10 8, 20 4 T 40 4 T 60 4 T 80 4"); }
+    100% { stroke-dashoffset: -20; d: path("M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"); }
 }
 
 .cta-button {
@@ -220,12 +293,12 @@ html, body {
     background: linear-gradient(135deg, var(--tuerkis-blue), #00a8cc);
     color: #ffffff;
     text-decoration: none;
-    padding: 7px 18px;
+    padding: 8px 20px;
     border-radius: 50px;
     font-weight: 700;
     font-size: 15px;
     line-height: 1;
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
     white-space: nowrap;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -233,7 +306,7 @@ html, body {
 
 .cta-button:hover {
     transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
@@ -517,7 +590,7 @@ html, body {
     <div class="navbar-container">
         <nav class="navbar">
             <div class="navbar-brand-wrapper">
-                <!-- CRESTRON JOINT: Digital Press 1 (Home/Brand) -->
+                <!-- CRESTRON JOINT: Digital Press 1 -->
                 <a href="#video-section" class="navbar-brand" data-ch5-btn="1" ch5-button-send-press="1">
                     <div class="logo-icon"></div>
                     <span>Design 2</span>
@@ -527,7 +600,7 @@ html, body {
                     <div class="brand-popover-inner">
                         <div class="brand-popover-title">Design wählen</div>
                         <div class="brand-popover-links">
-                            <!-- CRESTRON JOINTS: Digital Press 2, 3, 4 (Page Switch) -->
+                            <!-- CRESTRON JOINTS: Digital Press 2, 3, 4 -->
                             <a href="index.html" class="brand-popover-link" data-ch5-btn="2" ch5-button-send-press="2"><span>Design 1</span> <span>➔</span></a>
                             <a href="design2.html" class="brand-popover-link active" data-ch5-btn="3" ch5-button-send-press="3"><span>Design 2</span> <span>➔</span></a>
                             <a href="design3.html" class="brand-popover-link" data-ch5-btn="4" ch5-button-send-press="4"><span>Design 3</span> <span>➔</span></a>
@@ -538,10 +611,24 @@ html, body {
 
             <ul class="navbar-nav">
                 <!-- CRESTRON JOINTS: Digital Press 10 & 11 + Feedback State 10 & 11 -->
-                <li><a href="#video-section" class="nav-link active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">Video Player</a></li>
-                <li><a href="#audio-section" class="nav-link" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">Audio Player</a></li>
+                <li class="glow-nav-item">
+                    <a href="#video-section" class="nav-link active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">Video Player</a>
+                    <div class="wave-indicator">
+                        <svg class="wave-svg" viewBox="0 0 80 8"><path class="wave-path" d="M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"/></svg>
+                    </div>
+                </li>
+                
+                <li class="glow-nav-item">
+                    <a href="#audio-section" class="nav-link" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">Audio Player</a>
+                    <div class="wave-indicator">
+                        <svg class="wave-svg" viewBox="0 0 80 8"><path class="wave-path" d="M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"/></svg>
+                    </div>
+                </li>
+
                 <!-- CRESTRON JOINT: Digital Press 12 -->
-                <li class="cta-button-item"><a href="design3.html" class="cta-button" data-ch5-btn="12" ch5-button-send-press="12">Nächstes Design</a></li>
+                <li class="cta-button-item">
+                    <a href="design3.html" class="cta-button" data-ch5-btn="12" ch5-button-send-press="12">Nächstes Design</a>
+                </li>
             </ul>
         </nav>
     </div>
@@ -560,7 +647,7 @@ html, body {
             </div>
 
             <div class="action-controls-row">
-                <!-- CRESTRON JOINT: Digital Press 21 (Video Play/Pause) + Feedback State 21 -->
+                <!-- CRESTRON JOINT: Digital Press 21 -->
                 <div class="action-item">
                     <span class="action-label">Play</span>
                     <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
@@ -569,7 +656,7 @@ html, body {
                     </button>
                 </div>
 
-                <!-- CRESTRON JOINT: Digital Press 22 (Video Loop) + Feedback State 22 -->
+                <!-- CRESTRON JOINT: Digital Press 22 -->
                 <div class="action-item">
                     <span class="action-label">Loop</span>
                     <button class="action-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
@@ -578,7 +665,7 @@ html, body {
                     </button>
                 </div>
 
-                <!-- CRESTRON JOINT: Analog Value 1 (Speed Index / Selection) -->
+                <!-- CRESTRON JOINT: Analog Value 1 -->
                 <div class="action-item">
                     <span class="action-label">Geschwindigkeit</span>
                     <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
@@ -590,7 +677,7 @@ html, body {
                 </div>
             </div>
 
-            <!-- CRESTRON JOINT: Analog Value 2 (Video Volume Level 0-65535) -->
+            <!-- CRESTRON JOINT: Analog Value 2 -->
             <div class="volume-container">
                 <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
                 <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)" data-ch5-slider-send="2" data-ch5-slider-receive="2">
@@ -607,16 +694,16 @@ html, body {
         <div class="card-box">
             <div class="audio-player-wrapper">
                 
-                <!-- CRESTRON JOINT: Digital Press 30 (Cover Zoom Toggle) -->
+                <!-- CRESTRON JOINT: Digital Press 30 -->
                 <div class="large-cover-box" id="albumCover" data-ch5-btn="30" ch5-button-send-press="30"></div>
 
                 <div class="song-info">
-                    <!-- CRESTRON JOINTS: Serial Join 1 & 2 (Song Title & Artist Text) -->
+                    <!-- CRESTRON JOINTS: Serial Join 1 & 2 -->
                     <div class="song-title" id="songTitle" data-ch5-string-receive="1">Die Welt ist gut, Sonne, Sekt und Hut</div>
                     <div class="song-artist" id="songArtist" data-ch5-string-receive="2">Maurice Camplair</div>
                 </div>
 
-                <!-- CRESTRON JOINT: Analog Value 3 (Audio Track Position 0-65535) -->
+                <!-- CRESTRON JOINT: Analog Value 3 -->
                 <div class="progress-container">
                     <span id="currentTime">0:00</span>
                     <div class="progress-bar-bg" onclick="seekAudio(event)" data-ch5-slider-send="3">
@@ -630,7 +717,7 @@ html, body {
                 </audio>
 
                 <div class="action-controls-row">
-                    <!-- CRESTRON JOINT: Digital Press 31 (Audio Play/Pause) + Feedback State 31 -->
+                    <!-- CRESTRON JOINT: Digital Press 31 -->
                     <div class="action-item">
                         <span class="action-label">Play</span>
                         <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
@@ -639,7 +726,7 @@ html, body {
                         </button>
                     </div>
 
-                    <!-- CRESTRON JOINT: Digital Press 32 (Audio Loop) + Feedback State 32 -->
+                    <!-- CRESTRON JOINT: Digital Press 32 -->
                     <div class="action-item">
                         <span class="action-label">Loop</span>
                         <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
@@ -648,7 +735,7 @@ html, body {
                         </button>
                     </div>
 
-                    <!-- CRESTRON JOINT: Analog Value 4 (Audio Speed Selection) -->
+                    <!-- CRESTRON JOINT: Analog Value 4 -->
                     <div class="action-item">
                         <span class="action-label">Geschwindigkeit</span>
                         <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
@@ -660,7 +747,7 @@ html, body {
                     </div>
                 </div>
 
-                <!-- CRESTRON JOINT: Analog Value 5 (Audio Master Volume Level 0-65535) -->
+                <!-- CRESTRON JOINT: Analog Value 5 -->
                 <div class="volume-container">
                     <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
                     <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)" data-ch5-slider-send="5" data-ch5-slider-receive="5">
@@ -783,16 +870,12 @@ function seekAudio(e) {
     }
 }
 
-// Cover Click Zoom Event (Keine Rotation)
+// Cover Click Zoom Event
 albumCover.addEventListener('click', function() {
     this.classList.toggle('zoomed');
 });
 
-/* ==================== CRESTRON CH5 BRIDGE INTEGRATION ==================== */
-/* 
-  Falls Crestron CrComLib vorhanden ist, können hier direkte Subscriptions 
-  und Feedback-Handler eingerichtet werden.
-*/
+/* INIT */
 document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -807,16 +890,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (audio) {
         audio.volume = 0.8;
     }
-
-    // Beispiel für ErComLib Event Listener:
-    // if (typeof CrComLib !== 'undefined') {
-    //     CrComLib.subscribeState('b', '21', (value) => {
-    //         if(value) { video.play(); } else { video.pause(); }
-    //     });
-    //     CrComLib.subscribeState('n', '2', (value) => {
-    //         video.volume = value / 65535;
-    //     });
-    // }
 
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
