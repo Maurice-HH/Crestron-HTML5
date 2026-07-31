@@ -20,6 +20,9 @@
 
 :root {
     --tuerkis-blue: #00d2ff;
+    --neon-pink: #ff007f;
+    --glass-bg: rgba(18, 24, 38, 0.85);
+    --glass-border: rgba(0, 210, 255, 0.4);
 }
 
 html, body {
@@ -189,11 +192,11 @@ html, body {
 .navbar-nav {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     list-style: none;
 }
 
-/* ==================== GLOWING MENU BUTTONS ==================== */
+/* ==================== SAUBERE OUTER-GLOW BUTTONS ==================== */
 .glow-nav-item {
     position: relative;
     display: flex;
@@ -201,112 +204,64 @@ html, body {
     align-items: center;
 }
 
-.nav-link {
+/* KLARE INTERNE STRUKTUR OHNE INNERES RUCKELN */
+.nav-link, .action-btn, .action-select, .cta-button {
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 22px;
+    padding: 8px 24px;
     text-decoration: none;
     font-weight: 700;
     font-size: 15px;
     border-radius: 50px;
     line-height: 1;
     color: #ffffff;
-    background: rgba(18, 24, 38, 0.8);
-    border: 1px solid transparent;
-    z-index: 1;
-    overflow: hidden;
-    transition: all 0.3s ease;
+    background: var(--glass-bg);
+    border: 1px solid rgba(0, 210, 255, 0.4);
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.3), inset 0 0 8px rgba(0, 210, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    backdrop-filter: blur(15px);
+    cursor: pointer;
+    white-space: nowrap;
 }
 
-/* NEON GLOW BORDER ANIMATION (PEN INSPIRATION) */
-.nav-link::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent 0%, #00d2ff 25%, #00f0ff 50%, #ff007f 75%, transparent 100%);
-    animation: rotate-glow 4s linear infinite;
-    z-index: -2;
+/* SAUBERER AUSSEN-GLOW AUF HOVER UND AKTIV */
+.nav-link:hover, .action-btn:hover, .action-select:hover, .cta-button:hover,
+.nav-link.active, .action-btn.active {
+    background: rgba(0, 210, 255, 0.18);
+    border-color: #00f0ff;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.7), 0 0 35px rgba(0, 210, 255, 0.4), inset 0 0 12px rgba(0, 240, 255, 0.3);
+    animation: outer-glow-pulse 2.5s ease-in-out infinite alternate;
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    background: rgba(15, 23, 42, 0.9);
-    border-radius: 50px;
-    z-index: -1;
-    transition: background 0.3s ease;
+@keyframes outer-glow-pulse {
+    0% {
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.6), 0 0 28px rgba(0, 210, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.9), 0 0 45px rgba(255, 0, 127, 0.5);
+        border-color: #00f0ff;
+    }
 }
 
-.nav-link:hover::after, .nav-link.active::after {
-    background: rgba(0, 210, 255, 0.25);
-}
-
-@keyframes rotate-glow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* ==================== ANIMIERTE WELLEN-LINIE UNTER AKTIVEM BUTTON ==================== */
+/* SUBTILE UNTERE LEUCHT-LINIE */
 .wave-indicator {
     position: absolute;
-    bottom: -12px;
-    width: 80%;
-    height: 8px;
+    bottom: -8px;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #00d2ff, transparent);
+    border-radius: 2px;
     opacity: 0;
+    box-shadow: 0 0 8px #00d2ff;
     transition: opacity 0.3s ease;
     pointer-events: none;
 }
 
 .nav-link.active + .wave-indicator {
     opacity: 1;
-}
-
-.wave-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.wave-path {
-    fill: none;
-    stroke: #00d2ff;
-    stroke-width: 2;
-    stroke-linecap: round;
-    animation: wave-move 2s linear infinite;
-}
-
-@keyframes wave-move {
-    0% { stroke-dashoffset: 0; d: path("M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"); }
-    50% { d: path("M0 4 Q 10 8, 20 4 T 40 4 T 60 4 T 80 4"); }
-    100% { stroke-dashoffset: -20; d: path("M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"); }
-}
-
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--tuerkis-blue), #00a8cc);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 8px 20px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 1;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
-    white-space: nowrap;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cta-button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
@@ -379,7 +334,7 @@ html, body {
     display: block;
 }
 
-/* ==================== UNIFORM GRID BUTTONS (EXAKT 160PX) ==================== */
+/* ==================== UNIFORM GRID BUTTONS ==================== */
 .action-controls-row {
     display: grid;
     grid-template-columns: repeat(3, 160px);
@@ -411,9 +366,6 @@ html, body {
     width: 100%;
     height: 42px;
     border-radius: 21px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
@@ -422,20 +374,7 @@ html, body {
     justify-content: center;
     gap: 8px;
     cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: all 0.2s ease;
     white-space: nowrap;
-}
-
-.action-btn:hover, .action-select:hover {
-    background: rgba(0, 210, 255, 0.2);
-    border-color: rgba(0, 210, 255, 0.6);
-}
-
-.action-btn.active {
-    background: rgba(0, 210, 255, 0.3);
-    border-color: var(--tuerkis-blue);
-    box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
 }
 
 .action-select {
@@ -613,16 +552,12 @@ html, body {
                 <!-- CRESTRON JOINTS: Digital Press 10 & 11 + Feedback State 10 & 11 -->
                 <li class="glow-nav-item">
                     <a href="#video-section" class="nav-link active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">Video Player</a>
-                    <div class="wave-indicator">
-                        <svg class="wave-svg" viewBox="0 0 80 8"><path class="wave-path" d="M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"/></svg>
-                    </div>
+                    <div class="wave-indicator"></div>
                 </li>
                 
                 <li class="glow-nav-item">
                     <a href="#audio-section" class="nav-link" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">Audio Player</a>
-                    <div class="wave-indicator">
-                        <svg class="wave-svg" viewBox="0 0 80 8"><path class="wave-path" d="M0 4 Q 10 0, 20 4 T 40 4 T 60 4 T 80 4"/></svg>
-                    </div>
+                    <div class="wave-indicator"></div>
                 </li>
 
                 <!-- CRESTRON JOINT: Digital Press 12 -->
