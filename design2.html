@@ -152,7 +152,7 @@ html, body {
     100% { background-position: 300% 50%; }
 }
 
-/* ==================== PLAYER ACTION CONTROLS (OHNE LÜCKEN & OHNE ÜBERSCHRIFTEN) ==================== */
+/* ==================== PLAYER ACTION CONTROLS ==================== */
 .action-controls-row {
     display: flex;
     justify-content: center;
@@ -319,31 +319,57 @@ html, body {
     display: block;
 }
 
-/* ==================== VOLUME SLIDER ==================== */
+/* ==================== VOLUME SLIDER & MUTE BUTTON ==================== */
 .volume-container {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     width: 100%;
     max-width: 450px;
     background: rgba(0, 0, 0, 0.5);
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 0;
     border: 1px solid var(--border-color);
 }
 
-.volume-icon {
-    width: 16px;
-    height: 16px;
-    fill: rgba(255, 255, 255, 0.5);
+/* GROSSER MUTE BUTTON (LINKES SYMBOL) */
+.mute-btn {
+    all: unset;
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 0;
+    transition: background 0.2s ease;
     flex-shrink: 0;
+}
+
+.mute-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* DOPPELT SO GROSSE LAUTSPRECHER-SYMBOLE (32px statt 16px) */
+.volume-icon {
+    width: 32px;
+    height: 32px;
+    fill: rgba(255, 255, 255, 0.75);
+    flex-shrink: 0;
+    transition: fill 0.2s ease;
+}
+
+.mute-btn.muted .volume-icon {
+    fill: #ff0055;
 }
 
 .volume-slider {
     flex: 1;
     -webkit-appearance: none;
     appearance: none;
-    height: 5px;
+    height: 6px;
     border-radius: 0;
     background: rgba(255, 255, 255, 0.15);
     outline: none;
@@ -353,8 +379,8 @@ html, body {
 .volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     border-radius: 0;
     background: #00d2ff;
     cursor: pointer;
@@ -516,7 +542,7 @@ html, body {
                 </video>
             </div>
 
-            <!-- PLAYER CONTROLS (OHNE MANTEL-ÜBERSCHRIFTEN) -->
+            <!-- PLAYER CONTROLS IN EINEM NAHTLOSEN BLOCK -->
             <div class="action-controls-row">
                 <!-- CRESTRON JOINT: Digital Press 21 -->
                 <div class="flip-btn-wrapper-ctrl">
@@ -545,9 +571,11 @@ html, body {
                 </div>
             </div>
 
-            <!-- CRESTRON JOINT: Analog Value 2 -->
+            <!-- VIDEO LAUTSTÄRKERELER MIT CROSS-MUTE BUTTON -->
             <div class="volume-container">
-                <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                <button class="mute-btn muted" id="videoMuteBtn" onclick="toggleVideoMute()" title="Mute/Unmute" data-ch5-btn="23" ch5-button-send-press="23">
+                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                </button>
                 <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)" data-ch5-slider-send="2" data-ch5-slider-receive="2">
                 <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
             </div>
@@ -620,9 +648,11 @@ html, body {
                     </div>
                 </div>
 
-                <!-- CRESTRON JOINT: Analog Value 5 -->
+                <!-- AUDIO LAUTSTÄRKERELER MIT CROSS-MUTE BUTTON -->
                 <div class="volume-container">
-                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                    <button class="mute-btn" id="audioMuteBtn" onclick="toggleAudioMute()" title="Mute/Unmute" data-ch5-btn="33" ch5-button-send-press="33">
+                        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                    </button>
                     <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)" data-ch5-slider-send="5" data-ch5-slider-receive="5">
                     <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
                 </div>
@@ -641,6 +671,10 @@ const playPauseBack = document.getElementById('playPauseBack');
 const loopBtn = document.getElementById('loopBtn');
 const loopFront = document.getElementById('loopFront');
 const loopBack = document.getElementById('loopBack');
+const videoVolume = document.getElementById('videoVolume');
+const videoMuteBtn = document.getElementById('videoMuteBtn');
+
+let lastVideoVol = 0.5;
 
 function togglePlayPause() {
     if (video.paused) {
@@ -676,6 +710,27 @@ function changeSpeed(val) {
 function changeVideoVolume(val) {
     video.volume = parseFloat(val);
     video.muted = (parseFloat(val) === 0);
+    if (video.muted) {
+        videoMuteBtn.classList.add('muted');
+    } else {
+        videoMuteBtn.classList.remove('muted');
+        lastVideoVol = video.volume;
+    }
+}
+
+function toggleVideoMute() {
+    if (video.muted || video.volume === 0) {
+        video.muted = false;
+        video.volume = lastVideoVol || 0.5;
+        videoVolume.value = video.volume;
+        videoMuteBtn.classList.remove('muted');
+    } else {
+        lastVideoVol = video.volume;
+        video.muted = true;
+        video.volume = 0;
+        videoVolume.value = 0;
+        videoMuteBtn.classList.add('muted');
+    }
 }
 
 /* ==================== AUDIO LOGIK ==================== */
@@ -690,6 +745,10 @@ const albumCover = document.getElementById('albumCover');
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
+const audioVolume = document.getElementById('audioVolume');
+const audioMuteBtn = document.getElementById('audioMuteBtn');
+
+let lastAudioVol = 0.8;
 
 function toggleAudioPlay() {
     if (audio.paused) {
@@ -724,6 +783,28 @@ function changeAudioSpeed(val) {
 
 function changeAudioVolume(val) {
     audio.volume = parseFloat(val);
+    audio.muted = (parseFloat(val) === 0);
+    if (audio.muted) {
+        audioMuteBtn.classList.add('muted');
+    } else {
+        audioMuteBtn.classList.remove('muted');
+        lastAudioVol = audio.volume;
+    }
+}
+
+function toggleAudioMute() {
+    if (audio.muted || audio.volume === 0) {
+        audio.muted = false;
+        audio.volume = lastAudioVol || 0.8;
+        audioVolume.value = audio.volume;
+        audioMuteBtn.classList.remove('muted');
+    } else {
+        lastAudioVol = audio.volume;
+        audio.muted = true;
+        audio.volume = 0;
+        audioVolume.value = 0;
+        audioMuteBtn.classList.add('muted');
+    }
 }
 
 function formatTime(sec) {
