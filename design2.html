@@ -75,7 +75,7 @@ html, body {
     border-left: 1px solid var(--border-color);
 }
 
-/* ==================== ECKIGES 3D FLIP BUTTON DESIGN (0px RADIUS, KEIN GLOW) ==================== */
+/* ==================== ECKIGES 3D FLIP BUTTON DESIGN ==================== */
 .flip-btn-wrapper-top {
     perspective: 1000px;
     height: 60px;
@@ -152,7 +152,7 @@ html, body {
     100% { background-position: 300% 50%; }
 }
 
-/* ==================== PLAYER ACTION CONTROLS ==================== */
+/* ==================== PLAYER ACTION CONTROLS (OHNE LÜCKEN & OHNE ÜBERSCHRIFTEN) ==================== */
 .action-controls-row {
     display: flex;
     justify-content: center;
@@ -163,28 +163,10 @@ html, body {
     border: 1px solid var(--border-color);
 }
 
-.action-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1;
-    position: relative;
-}
-
-.action-label {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.45);
-    margin-bottom: 4px;
-}
-
-/* ECKIGE PLAYER BUTTONS (IDENTISCH ZU OBEN, KEIN GLOW) */
 .flip-btn-wrapper-ctrl {
     perspective: 1000px;
-    height: 42px;
-    width: 100%;
+    height: 46px;
+    flex: 1;
     display: block;
     position: relative;
 }
@@ -212,33 +194,31 @@ html, body {
     align-items: center;
     justify-content: center;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
     box-sizing: border-box;
     backface-visibility: hidden;
     border-right: 1px solid var(--border-color);
     border-radius: 0 !important;
 }
 
-.action-item:last-child .flip-face-ctrl {
-    border-right: none;
-}
-
 .flip-front-ctrl {
     background: var(--btn-bg);
     color: #cbd5e1;
-    transform: translateZ(21px);
+    transform: translateZ(23px);
 }
 
 .flip-back-ctrl {
     background: var(--btn-hover);
     color: #ffffff;
-    transform: rotateX(90deg) translateZ(21px);
+    transform: rotateX(90deg) translateZ(23px);
 }
 
-/* ECKIGE SELECT BOX */
+/* ECKIGE SELECT BOX PARALLEL IM BLOCK */
 .action-select-container {
-    width: 100%;
+    flex: 1;
     position: relative;
+    height: 46px;
 }
 
 .action-select-3d {
@@ -246,13 +226,13 @@ html, body {
     -webkit-appearance: none;
     background: var(--btn-bg);
     border: none;
-    border-right: 1px solid var(--border-color);
     border-radius: 0 !important;
     color: #cbd5e1;
     font-family: inherit;
     font-weight: 700;
-    font-size: 14px;
-    height: 42px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    height: 100%;
     width: 100%;
     text-align: center;
     text-align-last: center;
@@ -536,41 +516,32 @@ html, body {
                 </video>
             </div>
 
-            <!-- PLAYER CONTROLS IN EINEM NAHTLOSEN BLOCK -->
+            <!-- PLAYER CONTROLS (OHNE MANTEL-ÜBERSCHRIFTEN) -->
             <div class="action-controls-row">
                 <!-- CRESTRON JOINT: Digital Press 21 -->
-                <div class="action-item">
-                    <span class="action-label">Play</span>
-                    <div class="flip-btn-wrapper-ctrl">
-                        <button class="flip-btn-ctrl" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
-                            <div class="flip-face-ctrl flip-front-ctrl" id="playPauseFront">Pause</div>
-                            <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
-                        </button>
-                    </div>
+                <div class="flip-btn-wrapper-ctrl">
+                    <button class="flip-btn-ctrl active" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
+                        <div class="flip-face-ctrl flip-front-ctrl" id="playPauseFront">PLAY</div>
+                        <div class="flip-face-ctrl flip-back-ctrl" id="playPauseBack">drück für pause</div>
+                    </button>
                 </div>
 
                 <!-- CRESTRON JOINT: Digital Press 22 -->
-                <div class="action-item">
-                    <span class="action-label">Loop</span>
-                    <div class="flip-btn-wrapper-ctrl">
-                        <button class="flip-btn-ctrl active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
-                            <div class="flip-face-ctrl flip-front-ctrl" id="loopFront">An</div>
-                            <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
-                        </button>
-                    </div>
+                <div class="flip-btn-wrapper-ctrl">
+                    <button class="flip-btn-ctrl active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
+                        <div class="flip-face-ctrl flip-front-ctrl" id="loopFront">LOOP</div>
+                        <div class="flip-face-ctrl flip-back-ctrl" id="loopBack">loop aus</div>
+                    </button>
                 </div>
 
                 <!-- CRESTRON JOINT: Analog Value 1 -->
-                <div class="action-item">
-                    <span class="action-label">Geschwindigkeit</span>
-                    <div class="action-select-container">
-                        <select class="action-select-3d" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
-                            <option value="0.5">0.5x</option>
-                            <option value="1.0" selected>1.0x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2.0">2.0x</option>
-                        </select>
-                    </div>
+                <div class="action-select-container">
+                    <select class="action-select-3d" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
+                        <option value="0.5">GESCHW. 0.5x</option>
+                        <option value="1.0" selected>GESCHW. 1.0x</option>
+                        <option value="1.5">GESCHW. 1.5x</option>
+                        <option value="2.0">GESCHW. 2.0x</option>
+                    </select>
                 </div>
             </div>
 
@@ -623,38 +594,29 @@ html, body {
 
                 <div class="action-controls-row">
                     <!-- CRESTRON JOINT: Digital Press 31 -->
-                    <div class="action-item">
-                        <span class="action-label">Play</span>
-                        <div class="flip-btn-wrapper-ctrl">
-                            <button class="flip-btn-ctrl" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
-                                <div class="flip-face-ctrl flip-front-ctrl" id="audioPlayFront">Play</div>
-                                <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
-                            </button>
-                        </div>
+                    <div class="flip-btn-wrapper-ctrl">
+                        <button class="flip-btn-ctrl" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
+                            <div class="flip-face-ctrl flip-front-ctrl" id="audioPlayFront">PLAY</div>
+                            <div class="flip-face-ctrl flip-back-ctrl" id="audioPlayBack">drück für play</div>
+                        </button>
                     </div>
 
                     <!-- CRESTRON JOINT: Digital Press 32 -->
-                    <div class="action-item">
-                        <span class="action-label">Loop</span>
-                        <div class="flip-btn-wrapper-ctrl">
-                            <button class="flip-btn-ctrl" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
-                                <div class="flip-face-ctrl flip-front-ctrl" id="audioLoopFront">Aus</div>
-                                <div class="flip-face-ctrl flip-back-ctrl">Umschalten</div>
-                            </button>
-                        </div>
+                    <div class="flip-btn-wrapper-ctrl">
+                        <button class="flip-btn-ctrl" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
+                            <div class="flip-face-ctrl flip-front-ctrl" id="audioLoopFront">NO LOOP</div>
+                            <div class="flip-face-ctrl flip-back-ctrl" id="audioLoopBack">drück für loop</div>
+                        </button>
                     </div>
 
                     <!-- CRESTRON JOINT: Analog Value 4 -->
-                    <div class="action-item">
-                        <span class="action-label">Geschwindigkeit</span>
-                        <div class="action-select-container">
-                            <select class="action-select-3d" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
-                                <option value="0.5">0.5x</option>
-                                <option value="1.0" selected>1.0x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="2.0">2.0x</option>
-                            </select>
-                        </div>
+                    <div class="action-select-container">
+                        <select class="action-select-3d" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
+                            <option value="0.5">GESCHW. 0.5x</option>
+                            <option value="1.0" selected>GESCHW. 1.0x</option>
+                            <option value="1.5">GESCHW. 1.5x</option>
+                            <option value="2.0">GESCHW. 2.0x</option>
+                        </select>
                     </div>
                 </div>
 
@@ -675,17 +637,21 @@ html, body {
 const video = document.getElementById('myVideo');
 const playPauseBtn = document.getElementById('playPauseBtn');
 const playPauseFront = document.getElementById('playPauseFront');
+const playPauseBack = document.getElementById('playPauseBack');
 const loopBtn = document.getElementById('loopBtn');
 const loopFront = document.getElementById('loopFront');
+const loopBack = document.getElementById('loopBack');
 
 function togglePlayPause() {
     if (video.paused) {
         video.play();
-        playPauseFront.textContent = 'Pause';
+        playPauseFront.textContent = 'PLAY';
+        playPauseBack.textContent = 'drück für pause';
         playPauseBtn.classList.add('active');
     } else {
         video.pause();
-        playPauseFront.textContent = 'Play';
+        playPauseFront.textContent = 'PLAY';
+        playPauseBack.textContent = 'drück für play';
         playPauseBtn.classList.remove('active');
     }
 }
@@ -694,10 +660,12 @@ function toggleLoop() {
     video.loop = !video.loop;
     if (video.loop) {
         loopBtn.classList.add('active');
-        loopFront.textContent = 'An';
+        loopFront.textContent = 'LOOP';
+        loopBack.textContent = 'loop aus';
     } else {
         loopBtn.classList.remove('active');
-        loopFront.textContent = 'Aus';
+        loopFront.textContent = 'NO LOOP';
+        loopBack.textContent = 'drück für loop';
     }
 }
 
@@ -714,8 +682,10 @@ function changeVideoVolume(val) {
 const audio = document.getElementById('myAudio');
 const audioPlayBtn = document.getElementById('audioPlayBtn');
 const audioPlayFront = document.getElementById('audioPlayFront');
+const audioPlayBack = document.getElementById('audioPlayBack');
 const audioLoopBtn = document.getElementById('audioLoopBtn');
 const audioLoopFront = document.getElementById('audioLoopFront');
+const audioLoopBack = document.getElementById('audioLoopBack');
 const albumCover = document.getElementById('albumCover'); 
 const progressFill = document.getElementById('progressFill');
 const currentTimeEl = document.getElementById('currentTime');
@@ -724,11 +694,13 @@ const durationEl = document.getElementById('duration');
 function toggleAudioPlay() {
     if (audio.paused) {
         audio.play();
-        audioPlayFront.textContent = 'Pause';
+        audioPlayFront.textContent = 'PLAY';
+        audioPlayBack.textContent = 'drück für pause';
         audioPlayBtn.classList.add('active');
     } else {
         audio.pause();
-        audioPlayFront.textContent = 'Play';
+        audioPlayFront.textContent = 'PLAY';
+        audioPlayBack.textContent = 'drück für play';
         audioPlayBtn.classList.remove('active');
     }
 }
@@ -737,10 +709,12 @@ function toggleAudioLoop() {
     audio.loop = !audio.loop;
     if (audio.loop) {
         audioLoopBtn.classList.add('active');
-        audioLoopFront.textContent = 'An';
+        audioLoopFront.textContent = 'LOOP';
+        audioLoopBack.textContent = 'loop aus';
     } else {
         audioLoopBtn.classList.remove('active');
-        audioLoopFront.textContent = 'Aus';
+        audioLoopFront.textContent = 'NO LOOP';
+        audioLoopBack.textContent = 'drück für loop';
     }
 }
 
