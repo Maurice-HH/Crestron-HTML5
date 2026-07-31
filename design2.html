@@ -22,7 +22,6 @@
     --tuerkis-blue: #00d2ff;
     --neon-pink: #ff007f;
     --glass-bg: rgba(18, 24, 38, 0.85);
-    --glass-border: rgba(0, 210, 255, 0.4);
 }
 
 html, body {
@@ -196,15 +195,14 @@ html, body {
     list-style: none;
 }
 
-/* ==================== SAUBERE OUTER-GLOW BUTTONS ==================== */
+/* ==================== BEWEGTE NEON-WELLEN BUTTONS ==================== */
 .glow-nav-item {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-/* KLARE INTERNE STRUKTUR OHNE INNERES RUCKELN */
 .nav-link, .action-btn, .action-select, .cta-button {
     position: relative;
     display: inline-flex;
@@ -214,54 +212,77 @@ html, body {
     text-decoration: none;
     font-weight: 700;
     font-size: 15px;
-    border-radius: 50px;
     line-height: 1;
     color: #ffffff;
     background: var(--glass-bg);
-    border: 1px solid rgba(0, 210, 255, 0.4);
-    box-shadow: 0 0 12px rgba(0, 210, 255, 0.3), inset 0 0 8px rgba(0, 210, 255, 0.15);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid rgba(0, 210, 255, 0.5);
+    
+    /* Organische, leicht unregelmäßige Eckenform */
+    border-radius: 25px 22px 26px 21px / 21px 25px 22px 26px;
+    
+    /* Sanfter Grund-Glow */
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
+    
+    transition: all 0.3s ease;
     backdrop-filter: blur(15px);
     cursor: pointer;
     white-space: nowrap;
+    
+    /* Sanfte Wellen-Verformung des Rahmens (ca. 3-5px Amplitude) */
+    animation: organic-wave 6s ease-in-out infinite alternate;
 }
 
-/* SAUBERER AUSSEN-GLOW AUF HOVER UND AKTIV */
+/* ROTIERENDER FARBIGER AUSSEN-GLOW */
+.nav-link::before, .action-btn::before, .cta-button::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #00d2ff, #ff007f, #00f0ff, #00d2ff);
+    background-size: 300% 300%;
+    z-index: -1;
+    opacity: 0.4;
+    filter: blur(8px);
+    animation: color-glow-move 5s ease infinite;
+    transition: opacity 0.3s ease;
+}
+
+/* HOVER & ACTIVE ZUSTÄNDE */
 .nav-link:hover, .action-btn:hover, .action-select:hover, .cta-button:hover,
 .nav-link.active, .action-btn.active {
-    background: rgba(0, 210, 255, 0.18);
+    background: rgba(0, 210, 255, 0.2);
     border-color: #00f0ff;
     color: #ffffff;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.7), 0 0 35px rgba(0, 210, 255, 0.4), inset 0 0 12px rgba(0, 240, 255, 0.3);
-    animation: outer-glow-pulse 2.5s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
 }
 
-@keyframes outer-glow-pulse {
+.nav-link:hover::before, .action-btn:hover::before, .cta-button:hover::before,
+.nav-link.active::before, .action-btn.active::before {
+    opacity: 0.9;
+    filter: blur(12px);
+}
+
+/* ANIMATION: ORGANISCHE WELLENBEWEGUNG DES RAHMENS */
+@keyframes organic-wave {
     0% {
-        box-shadow: 0 0 15px rgba(0, 240, 255, 0.6), 0 0 28px rgba(0, 210, 255, 0.3);
+        border-radius: 25px 21px 26px 22px / 22px 25px 21px 26px;
+    }
+    33% {
+        border-radius: 21px 26px 22px 25px / 26px 21px 25px 22px;
+    }
+    66% {
+        border-radius: 26px 22px 21px 25px / 21px 25px 26px 21px;
     }
     100% {
-        box-shadow: 0 0 25px rgba(0, 240, 255, 0.9), 0 0 45px rgba(255, 0, 127, 0.5);
-        border-color: #00f0ff;
+        border-radius: 22px 25px 25px 21px / 25px 22px 22px 25px;
     }
 }
 
-/* SUBTILE UNTERE LEUCHT-LINIE */
-.wave-indicator {
-    position: absolute;
-    bottom: -8px;
-    width: 60%;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #00d2ff, transparent);
-    border-radius: 2px;
-    opacity: 0;
-    box-shadow: 0 0 8px #00d2ff;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.nav-link.active + .wave-indicator {
-    opacity: 1;
+/* ANIMATION: FLIESSENDER FARBVERLAUF DES GLOWS */
+@keyframes color-glow-move {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
@@ -365,7 +386,6 @@ html, body {
     box-sizing: border-box;
     width: 100%;
     height: 42px;
-    border-radius: 21px;
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
@@ -552,12 +572,10 @@ html, body {
                 <!-- CRESTRON JOINTS: Digital Press 10 & 11 + Feedback State 10 & 11 -->
                 <li class="glow-nav-item">
                     <a href="#video-section" class="nav-link active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">Video Player</a>
-                    <div class="wave-indicator"></div>
                 </li>
                 
                 <li class="glow-nav-item">
                     <a href="#audio-section" class="nav-link" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">Audio Player</a>
-                    <div class="wave-indicator"></div>
                 </li>
 
                 <!-- CRESTRON JOINT: Digital Press 12 -->
