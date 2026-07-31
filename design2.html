@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 2</title>
 
-<!-- Crestron CH5 Library Integration -->
+<!-- Crestron CH5 Library Integration (in echten Projekten einbinden) -->
 <!-- <script src="js/cr-com-lib.js"></script> -->
 
 <style>
@@ -20,7 +20,8 @@
 
 :root {
     --tuerkis-blue: #00d2ff;
-    --glass-bg: #111827; /* Solide/Dunkle Basis, damit nichts nach innen strahlt */
+    --dark-bg: #0b0f19;
+    --card-bg: #0f172a;
 }
 
 html, body {
@@ -28,7 +29,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0b0f19 !important;
+    background: var(--dark-bg) !important;
     color: #ffffff;
     font-size: 16px;
 }
@@ -50,34 +51,32 @@ html, body {
     border-radius: 10px;
 }
 
-/* ==================== NAVBAR (FIXED TOP) ==================== */
+/* ==================== NAVBAR (VOLLE BREITE, SCHLICHTES TAB-DESIGN) ==================== */
 .navbar-container {
     position: sticky;
-    top: 20px;
+    top: 0;
     z-index: 1000;
-    width: fit-content; 
-    margin: 0 auto;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .navbar {
-    background: rgba(18, 24, 38, 0.85);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 60px;
-    padding: 8px 22px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 12px 30px;
     display: flex;
     align-items: center;
-    gap: 22px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    justify-content: space-between;
 }
 
 .navbar-brand-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: -20px;
 }
 
 .navbar-brand {
@@ -88,7 +87,6 @@ html, body {
     color: #ffffff;
     font-weight: 800;
     font-size: 20px;
-    padding-right: 12px;
     cursor: pointer;
 }
 
@@ -187,108 +185,108 @@ html, body {
     color: #ffffff;
 }
 
-.navbar-nav {
+/* MITTIG PLATZIERTE SEGMENT-TABS */
+.navbar-nav-centered {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     list-style: none;
 }
 
-/* ==================== REGENBOGENEFFEKT (NUR AUSSEN!) ==================== */
-.glow-nav-item {
+/* TAB BUTTON STYLE (ZWEI-ZEILIG / UMKLAPPBAR DURCH HOVER) */
+.nav-tab {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.nav-link, .action-btn, .action-select, .cta-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 24px;
+    width: 140px;
+    height: 40px;
     text-decoration: none;
     font-weight: 700;
     font-size: 15px;
-    line-height: 1;
-    color: #ffffff;
-    
-    /* Dunkles Inneres verhindert Farbfüllung */
-    background: #111827 !important; 
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    /* Wellenförmige Eckenbewegung */
-    border-radius: 25px 21px 26px 22px / 22px 25px 21px 26px;
-    animation: organic-wave 6s ease-in-out infinite alternate;
-    
-    transition: transform 0.2s ease, border-color 0.2s ease;
-    cursor: pointer;
-    white-space: nowrap;
-    z-index: 2;
-}
-
-/* ROTIERENDER REGENBOGEN GLOW HIGHER-LAYER (EXAKT HINTER DEM BUTTON) */
-.glow-nav-item::before, .action-item::before, .cta-button-item::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
     border-radius: 30px;
-    
-    /* KOMPLETTER REGENBOGEN-FARBVERLAUF */
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
-    background-size: 400% 400%;
-    
-    z-index: 1;
-    opacity: 0.6;
-    filter: blur(8px); /* Erzeugt sanften Außen-Glow */
-    animation: rainbow-glow 8s linear infinite;
-    pointer-events: none;
+    color: #a2b7e0;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
 }
 
-/* HOVER ZUSTAND */
-.nav-link:hover, .action-btn:hover, .action-select:hover, .cta-button:hover,
-.nav-link.active, .action-btn.active {
-    border-color: #ffffff;
-    transform: scale(1.02);
+/* TEXT FÜR INHALT & HOVER-UMKLAPPEN */
+.nav-tab .tab-text {
+    position: absolute;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
 }
 
-.glow-nav-item:hover::before, .action-item:hover::before, .cta-button-item:hover::before {
+.nav-tab .text-default {
     opacity: 1;
-    filter: blur(12px);
+    transform: translateY(0);
 }
 
-/* REGENBOGEN ANIMATION */
-@keyframes rainbow-glow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.nav-tab .text-hover {
+    opacity: 0;
+    transform: translateY(20px);
+    color: #ffffff;
 }
 
-/* WELLENBEWEGUNG DES RAHMENS */
-@keyframes organic-wave {
-    0% {
-        border-radius: 25px 21px 26px 22px / 22px 25px 21px 26px;
-    }
-    33% {
-        border-radius: 21px 26px 22px 25px / 26px 21px 25px 22px;
-    }
-    66% {
-        border-radius: 26px 22px 21px 25px / 21px 25px 26px 21px;
-    }
-    100% {
-        border-radius: 22px 25px 25px 21px / 25px 22px 22px 25px;
-    }
+/* HOVER ANIMATION (UMKLAPPEN) */
+.nav-tab:hover .text-default {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.nav-tab:hover .text-hover {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-tab:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* NUR DER AKTIVE BUTTON GLÜHT FARBIG! */
+.nav-tab.active {
+    color: #ffffff !important;
+    background: rgba(0, 210, 255, 0.25) !important;
+    border-color: var(--tuerkis-blue) !important;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.6), inset 0 0 8px rgba(0, 210, 255, 0.3);
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cta-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
 .content-section {
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 80px 20px 40px 20px;
+    padding: 60px 20px 40px 20px;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -313,47 +311,23 @@ html, body {
     margin-bottom: 35px;
 }
 
-/* ==================== CARD CONTAINER (OHNE FARB-FLUT) ==================== */
-.card-wrapper-outer {
-    position: relative;
+/* ==================== CARD CONTAINER (SCHLICHT OHNE GLOW) ==================== */
+.card-box {
     width: 100%;
     max-width: 720px;
-    display: flex;
-    justify-content: center;
-}
-
-.card-wrapper-outer.large-video-box {
-    max-width: 1100px !important;
-}
-
-/* REGENBOGEN GLOW NUR UM DIE HAUPTKARTE HERUM */
-.card-wrapper-outer::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 32px;
-    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bfd, #7a00ff, #ff00c8, #ff0000);
-    background-size: 400% 400%;
-    z-index: 1;
-    opacity: 0.5;
-    filter: blur(14px);
-    animation: rainbow-glow 10s linear infinite;
-    pointer-events: none;
-}
-
-.card-box {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    background: #0f172a !important; /* Solide dunkle Karte, um Ausbluten zu verhindern */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 28px;
     padding: 28px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     gap: 24px;
     align-items: center;
+}
+
+.card-box.large-video-box {
+    max-width: 1100px !important;
 }
 
 .video-wrapper {
@@ -373,7 +347,7 @@ html, body {
     display: block;
 }
 
-/* ==================== UNIFORM GRID BUTTONS ==================== */
+/* ==================== SCHLICHTE ACTION BUTTONS ==================== */
 .action-controls-row {
     display: grid;
     grid-template-columns: repeat(3, 160px);
@@ -384,7 +358,6 @@ html, body {
 }
 
 .action-item {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -405,6 +378,10 @@ html, body {
     box-sizing: border-box;
     width: 100%;
     height: 42px;
+    border-radius: 21px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
     font-family: inherit;
     font-size: 14px;
     font-weight: 700;
@@ -414,6 +391,18 @@ html, body {
     gap: 8px;
     cursor: pointer;
     white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover, .action-select:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.action-btn.active {
+    background: rgba(0, 210, 255, 0.25);
+    border-color: var(--tuerkis-blue);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
 }
 
 .action-select {
@@ -439,10 +428,10 @@ html, body {
     gap: 12px;
     width: 100%;
     max-width: 520px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3);
     padding: 8px 18px;
     border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .volume-icon {
@@ -477,6 +466,25 @@ html, body {
 
 .volume-slider::-webkit-slider-thumb:hover {
     transform: scale(1.25);
+}
+
+/* ==================== PROGRAMMER DEV NOTE ==================== */
+.programmer-note {
+    margin-top: 25px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.45);
+    max-width: 800px;
+    line-height: 1.6;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    text-align: left;
+}
+
+.programmer-note code {
+    color: #00f0ff;
+    font-family: Consolas, monospace;
 }
 
 /* ==================== AUDIO PLAYER ==================== */
@@ -564,7 +572,7 @@ html, body {
 
 <div class="neonav-wrapper" id="neonavWrapper">
 
-    <!-- NAVIGATION HEADER (STAYS FIXED AT TOP) -->
+    <!-- NAVIGATION HEADER (VOLLE BREITE, AM OBEREN RAND FIXED) -->
     <div class="navbar-container">
         <nav class="navbar">
             <div class="navbar-brand-wrapper">
@@ -587,21 +595,27 @@ html, body {
                 </div>
             </div>
 
-            <ul class="navbar-nav">
-                <!-- CRESTRON JOINTS: Digital Press 10 & 11 + Feedback State 10 & 11 -->
-                <li class="glow-nav-item">
-                    <a href="#video-section" class="nav-link active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">Video Player</a>
+            <!-- MITTIGE TAB-BUTTONS (HOVER HOCHKLAPPEN: "Video" -> "Schau an." / "Audio" -> "Hör an.") -->
+            <ul class="navbar-nav-centered">
+                <li>
+                    <a href="#video-section" class="nav-tab active" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">
+                        <span class="tab-text text-default">Video</span>
+                        <span class="tab-text text-hover">Schau an.</span>
+                    </a>
                 </li>
                 
-                <li class="glow-nav-item">
-                    <a href="#audio-section" class="nav-link" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">Audio Player</a>
-                </li>
-
-                <!-- CRESTRON JOINT: Digital Press 12 -->
-                <li class="cta-button-item">
-                    <a href="design3.html" class="cta-button" data-ch5-btn="12" ch5-button-send-press="12">Nächstes Design</a>
+                <li>
+                    <a href="#audio-section" class="nav-tab" data-section="audio-section" data-ch5-btn="11" ch5-button-send-press="11" ch5-button-receive-state="11">
+                        <span class="tab-text text-default">Audio</span>
+                        <span class="tab-text text-hover">Hör an.</span>
+                    </a>
                 </li>
             </ul>
+
+            <div>
+                <!-- CRESTRON JOINT: Digital Press 12 -->
+                <a href="design3.html" class="cta-button" data-ch5-btn="12" ch5-button-send-press="12">Nächstes Design</a>
+            </div>
         </nav>
     </div>
 
@@ -610,53 +624,59 @@ html, body {
         <h1 class="section-title">Video Stream</h1>
         <p class="section-subtitle">Gelooptes MP4-Video im Großformat.</p>
 
-        <div class="card-wrapper-outer large-video-box">
-            <div class="card-box">
-                <div class="video-wrapper">
-                    <video id="myVideo" autoplay loop muted playsinline preload="auto">
-                        <source src="video.mp4" type="video/mp4">
-                        Ihr Browser unterstützt kein HTML5-Video.
-                    </video>
+        <div class="card-box large-video-box">
+            <div class="video-wrapper">
+                <video id="myVideo" autoplay loop muted playsinline preload="auto">
+                    <source src="video.mp4" type="video/mp4">
+                    Ihr Browser unterstützt kein HTML5-Video.
+                </video>
+            </div>
+
+            <div class="action-controls-row">
+                <!-- CRESTRON JOINT: Digital Press 21 -->
+                <div class="action-item">
+                    <span class="action-label">Play</span>
+                    <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
+                        <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        <span id="playPauseText">Pause</span>
+                    </button>
                 </div>
 
-                <div class="action-controls-row">
-                    <!-- CRESTRON JOINT: Digital Press 21 -->
-                    <div class="action-item">
-                        <span class="action-label">Play</span>
-                        <button class="action-btn" id="playPauseBtn" onclick="togglePlayPause()" data-ch5-btn="21" ch5-button-send-press="21" ch5-button-receive-state="21">
-                            <svg id="playPauseIcon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                            <span id="playPauseText">Pause</span>
-                        </button>
-                    </div>
-
-                    <!-- CRESTRON JOINT: Digital Press 22 -->
-                    <div class="action-item">
-                        <span class="action-label">Loop</span>
-                        <button class="action-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
-                            <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                            <span id="loopText">An</span>
-                        </button>
-                    </div>
-
-                    <!-- CRESTRON JOINT: Analog Value 1 -->
-                    <div class="action-item">
-                        <span class="action-label">Geschwindigkeit</span>
-                        <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
-                            <option value="0.5">0.5x</option>
-                            <option value="1.0" selected>1.0x</option>
-                            <option value="1.5">1.5x</option>
-                            <option value="2.0">2.0x</option>
-                        </select>
-                    </div>
+                <!-- CRESTRON JOINT: Digital Press 22 -->
+                <div class="action-item">
+                    <span class="action-label">Loop</span>
+                    <button class="action-btn active" id="loopBtn" onclick="toggleLoop()" data-ch5-btn="22" ch5-button-send-press="22" ch5-button-receive-state="22">
+                        <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                        <span id="loopText">An</span>
+                    </button>
                 </div>
 
-                <!-- CRESTRON JOINT: Analog Value 2 -->
-                <div class="volume-container">
-                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
-                    <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)" data-ch5-slider-send="2" data-ch5-slider-receive="2">
-                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                <!-- CRESTRON JOINT: Analog Value 1 -->
+                <div class="action-item">
+                    <span class="action-label">Geschwindigkeit</span>
+                    <select class="action-select" id="speedSelect" onchange="changeSpeed(this.value)" data-ch5-analog-send="1" data-ch5-analog-receive="1">
+                        <option value="0.5">0.5x</option>
+                        <option value="1.0" selected>1.0x</option>
+                        <option value="1.5">1.5x</option>
+                        <option value="2.0">2.0x</option>
+                    </select>
                 </div>
             </div>
+
+            <!-- CRESTRON JOINT: Analog Value 2 -->
+            <div class="volume-container">
+                <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                <input type="range" class="volume-slider" id="videoVolume" min="0" max="1" step="0.01" value="0" oninput="changeVideoVolume(this.value)" data-ch5-slider-send="2" data-ch5-slider-receive="2">
+                <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+            </div>
+        </div>
+
+        <!-- PROGRAMMIERER ERKLÄRUNG (DEV NOTE) -->
+        <div class="programmer-note">
+            <strong>Hinweis für CH5 / Crestron Programmierung:</strong><br>
+            Alle Interaktionselemente sind direkt mit Crestron HTML5 (CH5) Data-Attributen vorkonfiguriert:
+            <code>ch5-button-send-press="X"</code> sendet Digital Join X, <code>ch5-button-receive-state="X"</code> verarbeitet Digital Feedback X.
+            Regler senden/empfangen Analog-Werte via <code>data-ch5-slider-send="X"</code> (Bereich 0–65535). Texte werden dynamisch über Serial Joins (<code>data-ch5-string-receive="X"</code>) aktualisiert.
         </div>
     </section>
 
@@ -665,69 +685,67 @@ html, body {
         <h1 class="section-title">Audio Player & Cover Zoom</h1>
         <p class="section-subtitle">Klicke das Cover, um es stark heranzuzoomen.</p>
 
-        <div class="card-wrapper-outer">
-            <div class="card-box">
-                <div class="audio-player-wrapper">
-                    
-                    <!-- CRESTRON JOINT: Digital Press 30 -->
-                    <div class="large-cover-box" id="albumCover" data-ch5-btn="30" ch5-button-send-press="30"></div>
+        <div class="card-box">
+            <div class="audio-player-wrapper">
+                
+                <!-- CRESTRON JOINT: Digital Press 30 -->
+                <div class="large-cover-box" id="albumCover" data-ch5-btn="30" ch5-button-send-press="30"></div>
 
-                    <div class="song-info">
-                        <!-- CRESTRON JOINTS: Serial Join 1 & 2 -->
-                        <div class="song-title" id="songTitle" data-ch5-string-receive="1">Die Welt ist gut, Sonne, Sekt und Hut</div>
-                        <div class="song-artist" id="songArtist" data-ch5-string-receive="2">Maurice Camplair</div>
+                <div class="song-info">
+                    <!-- CRESTRON JOINTS: Serial Join 1 & 2 -->
+                    <div class="song-title" id="songTitle" data-ch5-string-receive="1">Die Welt ist gut, Sonne, Sekt und Hut</div>
+                    <div class="song-artist" id="songArtist" data-ch5-string-receive="2">Maurice Camplair</div>
+                </div>
+
+                <!-- CRESTRON JOINT: Analog Value 3 -->
+                <div class="progress-container">
+                    <span id="currentTime">0:00</span>
+                    <div class="progress-bar-bg" onclick="seekAudio(event)" data-ch5-slider-send="3">
+                        <div class="progress-bar-fill" id="progressFill"></div>
+                    </div>
+                    <span id="duration">0:00</span>
+                </div>
+
+                <audio id="myAudio" preload="auto">
+                    <source src="musik-weltistgut.mp3" type="audio/mpeg">
+                </audio>
+
+                <div class="action-controls-row">
+                    <!-- CRESTRON JOINT: Digital Press 31 -->
+                    <div class="action-item">
+                        <span class="action-label">Play</span>
+                        <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
+                            <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <span id="audioPlayText">Play</span>
+                        </button>
                     </div>
 
-                    <!-- CRESTRON JOINT: Analog Value 3 -->
-                    <div class="progress-container">
-                        <span id="currentTime">0:00</span>
-                        <div class="progress-bar-bg" onclick="seekAudio(event)" data-ch5-slider-send="3">
-                            <div class="progress-bar-fill" id="progressFill"></div>
-                        </div>
-                        <span id="duration">0:00</span>
+                    <!-- CRESTRON JOINT: Digital Press 32 -->
+                    <div class="action-item">
+                        <span class="action-label">Loop</span>
+                        <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
+                            <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+                            <span id="audioLoopText">Aus</span>
+                        </button>
                     </div>
 
-                    <audio id="myAudio" preload="auto">
-                        <source src="musik-weltistgut.mp3" type="audio/mpeg">
-                    </audio>
-
-                    <div class="action-controls-row">
-                        <!-- CRESTRON JOINT: Digital Press 31 -->
-                        <div class="action-item">
-                            <span class="action-label">Play</span>
-                            <button class="action-btn" id="audioPlayBtn" onclick="toggleAudioPlay()" data-ch5-btn="31" ch5-button-send-press="31" ch5-button-receive-state="31">
-                                <svg id="audioPlayIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                <span id="audioPlayText">Play</span>
-                            </button>
-                        </div>
-
-                        <!-- CRESTRON JOINT: Digital Press 32 -->
-                        <div class="action-item">
-                            <span class="action-label">Loop</span>
-                            <button class="action-btn" id="audioLoopBtn" onclick="toggleAudioLoop()" data-ch5-btn="32" ch5-button-send-press="32" ch5-button-receive-state="32">
-                                <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
-                                <span id="audioLoopText">Aus</span>
-                            </button>
-                        </div>
-
-                        <!-- CRESTRON JOINT: Analog Value 4 -->
-                        <div class="action-item">
-                            <span class="action-label">Geschwindigkeit</span>
-                            <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
-                                <option value="0.5">0.5x</option>
-                                <option value="1.0" selected>1.0x</option>
-                                <option value="1.5">1.5x</option>
-                                <option value="2.0">2.0x</option>
-                            </select>
-                        </div>
+                    <!-- CRESTRON JOINT: Analog Value 4 -->
+                    <div class="action-item">
+                        <span class="action-label">Geschwindigkeit</span>
+                        <select class="action-select" id="audioSpeedSelect" onchange="changeAudioSpeed(this.value)" data-ch5-analog-send="4" data-ch5-analog-receive="4">
+                            <option value="0.5">0.5x</option>
+                            <option value="1.0" selected>1.0x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2.0">2.0x</option>
+                        </select>
                     </div>
+                </div>
 
-                    <!-- CRESTRON JOINT: Analog Value 5 -->
-                    <div class="volume-container">
-                        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
-                        <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)" data-ch5-slider-send="5" data-ch5-slider-receive="5">
-                        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                    </div>
+                <!-- CRESTRON JOINT: Analog Value 5 -->
+                <div class="volume-container">
+                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M7 9v6h4l5 5V4l-5 5H7z"/></svg>
+                    <input type="range" class="volume-slider" id="audioVolume" min="0" max="1" step="0.01" value="0.8" oninput="changeAudioVolume(this.value)" data-ch5-slider-send="5" data-ch5-slider-receive="5">
+                    <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4l-5 5H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
                 </div>
             </div>
         </div>
@@ -851,10 +869,10 @@ albumCover.addEventListener('click', function() {
     this.classList.toggle('zoomed');
 });
 
-/* INIT */
+/* INIT NAV INTERSECTION OBSERVER */
 document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navTabs = document.querySelectorAll('.nav-tab');
     const sections = document.querySelectorAll('.content-section');
 
     if (video) {
@@ -867,7 +885,7 @@ document.addEventListener('DOMContentLoaded', function() {
         audio.volume = 0.8;
     }
 
-    navLinks.forEach(anchor => {
+    navTabs.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
             if (targetId && targetId.startsWith('#')) {
@@ -889,11 +907,11 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const activeId = entry.target.getAttribute('id');
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    if (link.getAttribute('data-section') === activeId) {
-                        link.classList.add('active');
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    if (tab.getAttribute('data-section') === activeId) {
+                        tab.classList.add('active');
                     } else {
-                        link.classList.remove('active');
+                        tab.classList.remove('active');
                     }
                 });
             }
