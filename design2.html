@@ -43,7 +43,6 @@ html, body {
     overflow-y: auto;
     position: relative;
     scroll-behavior: smooth;
-    /* Wieder leicht farbiger, edler Verlauf */
     background: linear-gradient(180deg, #0e1726 0%, #152238 40%, #1e1333 80%, #0d111a 100%);
 }
 
@@ -54,7 +53,7 @@ html, body {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* ==================== DURCHGEHENDE TOP-BAR (4 BUTTONS IN DER MITTE) ==================== */
+/* ==================== DURCHGEHENDE TOP-BAR ==================== */
 .navbar-container {
     position: sticky;
     top: 0;
@@ -76,7 +75,7 @@ html, body {
     border-left: 1px solid var(--border-color);
 }
 
-/* ==================== ECKIGES 3D FLIP BUTTON DESIGN (0px RADIUS) ==================== */
+/* ==================== ECKIGES 3D FLIP BUTTON DESIGN (0px RADIUS, KEIN GLOW) ==================== */
 .flip-btn-wrapper-top {
     perspective: 1000px;
     height: 60px;
@@ -127,62 +126,40 @@ html, body {
     transform: rotateX(90deg) translateZ(30px);
 }
 
-/* DEZENTER REGENBOGEN-GLOW FÜR DEN AKTIVEN TOP-TAB (KEIN KANALLIGES GRÜN) */
-.flip-btn-wrapper-top.active-glow::before {
+/* ==================== ANIMIERTE FARBLICHE BODENLINIE FÜR AKTIVE BUTTONS ==================== */
+.flip-btn-top.active .flip-front-top::after,
+.flip-btn-ctrl.active .flip-front-ctrl::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, #ff007f, #7928ca, #00d2ff, #00ffaa, #ff007f);
-    background-size: 300% 300%;
-    z-index: 5;
-    opacity: 0.9;
-    filter: blur(3px);
-    animation: rainbow-glow 6s linear infinite;
-    pointer-events: none;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #00d2ff, #ff007f, #00ffaa, #00d2ff);
+    background-size: 300% 100%;
+    animation: line-color-shift 4s linear infinite;
+    z-index: 10;
 }
 
-.flip-btn-top.active .flip-front-top {
-    background: #1b2636;
+.flip-btn-top.active .flip-front-top,
+.flip-btn-ctrl.active .flip-front-ctrl {
+    background: #182232;
     color: #ffffff;
-    border-bottom: 2px solid #00d2ff;
 }
 
-@keyframes rainbow-glow {
+@keyframes line-color-shift {
     0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
 }
 
-/* ==================== SUBTILER 2PX FARB-GLOW FÜR ALLE CLICKABLE BUTTONS ==================== */
-.flip-btn-wrapper-ctrl, .action-select-3d {
-    position: relative;
-}
-
-/* Zarter farbiger 2px Rahmen für alle Bedienelemente */
-.flip-btn-wrapper-ctrl::before, .action-select-container::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, #ff007f, #00d2ff, #00ffaa);
-    opacity: 0.4;
-    filter: blur(2px);
-    z-index: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-}
-
-.flip-btn-wrapper-ctrl:hover::before, .action-select-container:hover::before {
-    opacity: 0.8;
-}
-
-/* ==================== PLAYER ACTION CONTROLS (NAHTLOS NEBENEINANDER) ==================== */
+/* ==================== PLAYER ACTION CONTROLS ==================== */
 .action-controls-row {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 450px;
-    gap: 0; /* Keine Lücken zwischen den Buttons */
+    gap: 0;
     border: 1px solid var(--border-color);
 }
 
@@ -203,12 +180,13 @@ html, body {
     margin-bottom: 4px;
 }
 
-/* ECKIGE PLAYER BUTTONS (NAHTLOS DURCHGEHEND) */
+/* ECKIGE PLAYER BUTTONS (IDENTISCH ZU OBEN, KEIN GLOW) */
 .flip-btn-wrapper-ctrl {
     perspective: 1000px;
     height: 42px;
     width: 100%;
     display: block;
+    position: relative;
 }
 
 .flip-btn-ctrl {
@@ -257,13 +235,7 @@ html, body {
     transform: rotateX(90deg) translateZ(21px);
 }
 
-.flip-btn-ctrl.active .flip-front-ctrl {
-    background: #1e293b;
-    color: #00d2ff;
-    border-bottom: 2px solid #00d2ff;
-}
-
-/* ECKIGE SELECT BOX PASEEND ZUM BLOCK */
+/* ECKIGE SELECT BOX */
 .action-select-container {
     width: 100%;
     position: relative;
@@ -512,7 +484,7 @@ html, body {
 
 <div class="neonav-wrapper" id="neonavWrapper">
 
-    <!-- DURCHGEHENDE LEISTE OBEN MIT 4 NAHTLOSEN 3D-BLOCK BUTTONS IN DER MITTE -->
+    <!-- TOP-BAR WITH 4 FLIP BUTTONS -->
     <div class="navbar-container">
         <div class="navbar-menu">
             
@@ -525,7 +497,7 @@ html, body {
             </div>
 
             <!-- BUTTON 2: VIDEO STREAM -->
-            <div class="flip-btn-wrapper-top active-glow" id="wrapTabVideo">
+            <div class="flip-btn-wrapper-top" id="wrapTabVideo">
                 <a href="#video-section" class="flip-btn-top active" id="navTabVideo" data-section="video-section" data-ch5-btn="10" ch5-button-send-press="10" ch5-button-receive-state="10">
                     <div class="flip-face-top flip-front-top">Video</div>
                     <div class="flip-face-top flip-back-top">Schau an.</div>
@@ -710,9 +682,11 @@ function togglePlayPause() {
     if (video.paused) {
         video.play();
         playPauseFront.textContent = 'Pause';
+        playPauseBtn.classList.add('active');
     } else {
         video.pause();
         playPauseFront.textContent = 'Play';
+        playPauseBtn.classList.remove('active');
     }
 }
 
@@ -812,8 +786,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('neonavWrapper');
     const navTabVideo = document.getElementById('navTabVideo');
     const navTabAudio = document.getElementById('navTabAudio');
-    const wrapTabVideo = document.getElementById('wrapTabVideo');
-    const wrapTabAudio = document.getElementById('wrapTabAudio');
     const sections = document.querySelectorAll('.content-section');
 
     if (video) {
@@ -834,13 +806,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (activeId === 'video-section') {
                     navTabVideo.classList.add('active');
                     navTabAudio.classList.remove('active');
-                    wrapTabVideo.classList.add('active-glow');
-                    wrapTabAudio.classList.remove('active-glow');
                 } else if (activeId === 'audio-section') {
                     navTabAudio.classList.add('active');
                     navTabVideo.classList.remove('active');
-                    wrapTabAudio.classList.add('active-glow');
-                    wrapTabVideo.classList.remove('active-glow');
                 }
             }
         });
