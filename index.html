@@ -38,7 +38,7 @@ html, body {
     pointer-events: none;
     z-index: 0;
     background: #060810;
-    transition: background 0.6s ease; /* SANFTER FARBÜBERGANG BEIM SCROLLEN */
+    transition: background 0.6s ease;
 }
 
 .bg-blob-inner {
@@ -391,7 +391,7 @@ html, body {
     box-shadow: 0 0 20px rgba(217, 107, 39, 0.5);
 }
 
-/* ==================== CONTENT SECTIONS (ALLE TRANSPARENT FÜR VOLLEN BACKGROUND-BLEED) ==================== */
+/* ==================== CONTENT SECTIONS ==================== */
 .content-section {
     min-height: 1080px;
     display: flex;
@@ -507,7 +507,6 @@ html, body {
 
 .popover-item svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
-/* MINI CRESTRON SWIRL */
 .mini-crestron-swirl {
     width: 22px;
     height: 22px;
@@ -530,7 +529,6 @@ html, body {
     animation: logo-pulse 2s ease-in-out infinite;
 }
 
-/* PERSISTENTE AKTIV-FARBEN BEIM KLICKEN */
 .popover-item.pop-1.active { background: linear-gradient(135deg, #00d2ff, #0082fc); border-color: #00f0ff; box-shadow: 0 0 18px rgba(0, 210, 255, 0.8); }
 .popover-item.pop-2.active { background: linear-gradient(135deg, #ff9f43, #ff5252); border-color: #ff9f43; box-shadow: 0 0 18px rgba(255, 159, 67, 0.8); }
 .popover-item.pop-3.active { background: linear-gradient(135deg, #e056fd, #686de0); border-color: #e056fd; box-shadow: 0 0 18px rgba(224, 86, 253, 0.8); }
@@ -577,24 +575,116 @@ html, body {
 .gel-radio-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid #fff; display: inline-block; }
 .gel-preset-label.active .gel-radio-dot { background: var(--electric-border-color); }
 
-/* RADIAL MENU */
-.radial-dial-box { position: relative; width: 400px; height: 400px; margin: 15px auto 0 auto; display: flex; align-items: center; justify-content: center; z-index: 2; }
+/* ==================== SEITE 3: RADIAL DIAL CONTROL MENU (NEU STYLED) ==================== */
+.radial-dial-control-wrapper {
+    position: relative;
+    width: 440px;
+    height: 440px;
+    margin: 15px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.radial-dial-ring {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.dial-ticks-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.dial-outer-circle {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.12);
+    stroke-width: 6;
+    stroke-dasharray: 4 8;
+}
+
+.dial-active-arc {
+    fill: none;
+    stroke: url(#dialArcGrad);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 1256;
+    stroke-dashoffset: 1000;
+    transition: stroke-dashoffset 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.8));
+}
+
+.radial-dial-box {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .dial-center-knob {
-    width: 140px; height: 140px; background: linear-gradient(135deg, #182030, #242f45);
-    border-radius: 50%; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); display: flex; flex-direction: column;
-    align-items: center; justify-content: center; z-index: 10; border: 2px solid var(--electric-border-color); cursor: pointer;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, rgba(24, 32, 48, 0.95), rgba(36, 47, 69, 0.95));
+    backdrop-filter: blur(15px);
+    border-radius: 50%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border: 3px solid var(--electric-border-color);
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    position: relative;
+}
+
+.dial-center-knob:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 30px rgba(217, 107, 39, 0.7);
+}
+
+.knob-indicator {
+    position: absolute;
+    top: 10px;
+    width: 6px;
+    height: 18px;
+    background: #00f0ff;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #00f0ff;
+    transition: transform 0.4s ease;
 }
 
 .dial-val { font-size: 22px; font-weight: 800; color: #ffffff; }
-.dial-label { font-size: 13px; text-transform: uppercase; font-weight: 700; color: var(--electric-border-color); letter-spacing: 1px; margin-top: 2px; }
+.dial-label { font-size: 12px; text-transform: uppercase; font-weight: 800; color: var(--electric-border-color); letter-spacing: 1.5px; margin-top: 2px; }
 
 .dial-item {
-    position: absolute; width: 64px; height: 64px; border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; z-index: 15; pointer-events: none; opacity: 0; transform: translate(0, 0) scale(0.2); transition: all 0.3s ease;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(0, 0) scale(0.2);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.25s ease, box-shadow 0.25s ease;
 }
 
-.dial-item svg { width: 24px; height: 24px; fill: none; stroke: #ffffff; stroke-width: 2.2; }
+.dial-item svg { width: 26px; height: 26px; fill: none; stroke: #ffffff; stroke-width: 2.2; }
+
 .dial-item[data-color="bt"]  { background: linear-gradient(135deg, #0082fc, #00d2ff); }
 .dial-item[data-color="tv"]  { background: linear-gradient(135deg, #ff4757, #ff6b81); }
 .dial-item[data-color="rad"] { background: linear-gradient(135deg, #ffa502, #ff7f50); }
@@ -603,17 +693,23 @@ html, body {
 .dial-item[data-color="set"] { background: linear-gradient(135deg, #70a1ff, #1e90ff); }
 
 .radial-dial-box.open .dial-item { pointer-events: auto; }
-.radial-dial-box.open .pos-bt  { transform: translate(0px, -135px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-tv  { transform: translate(115px, -65px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-rad { transform: translate(115px, 65px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-sp  { transform: translate(0px, 135px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-aux { transform: translate(-115px, 65px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-set { transform: translate(-115px, -65px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-bt  { transform: translate(0px, -145px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-tv  { transform: translate(125px, -70px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-rad { transform: translate(125px, 70px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-sp  { transform: translate(0px, 145px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-aux { transform: translate(-125px, 70px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-set { transform: translate(-125px, -70px) scale(1); opacity: 1; }
+
+.dial-item.active {
+    box-shadow: 0 0 25px #00f0ff, inset 0 0 10px #ffffff;
+    border-color: #ffffff;
+    transform: scale(1.18) !important;
+}
 </style>
 </head>
 <body>
 
-<!-- SVG FILTER DEFINITIONEN -->
+<!-- SVG FILTER DEFINITIONEN & GRADIENTS -->
 <svg class="svg-container">
     <defs>
         <!-- SPARK FILTER CARD -->
@@ -631,6 +727,13 @@ html, body {
             </feTurbulence>
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
+
+        <!-- RADIAL DIAL ARC GRADIENT -->
+        <linearGradient id="dialArcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00f0ff" />
+            <stop offset="50%" stop-color="#ff007f" />
+            <stop offset="100%" stop-color="#ffe259" />
+        </linearGradient>
     </defs>
 </svg>
 
@@ -756,25 +859,35 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 3: HINTERGRUNDEFFEKT & MENÜ-BUTTON -->
+    <!-- SEITE 3: RADIAL DIAL CONTROL MENU -->
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
-        <h2 class="section-title" data-i18n="medien.title">Hintergrundeffekt & Menü-Button</h2>
+        <h2 class="section-title" data-i18n="medien.title">Hintergrundeffekt & Radial Dial</h2>
         <p class="section-subtitle" data-i18n="medien.subtitle">Tippe auf den Crestron-Button in der Mitte, um die bunten Quellen zu öffnen.</p>
 
-        <div class="radial-dial-box" id="radialDialBox">
-            <div class="dial-center-knob" onclick="toggleRadialDial()">
-                <span class="dial-val" data-i18n="medien.dial_center">Crestron</span>
-                <span class="dial-label" data-i18n="medien.dial_click">Klick</span>
+        <div class="radial-dial-control-wrapper">
+            <div class="radial-dial-ring">
+                <svg class="dial-ticks-svg" viewBox="0 0 440 440">
+                    <circle class="dial-outer-circle" cx="220" cy="220" r="200" />
+                    <circle class="dial-active-arc" id="dialArc" cx="220" cy="220" r="200" />
+                </svg>
             </div>
 
-            <div class="dial-item pos-bt" data-color="bt" onclick="selectDial(this, 'Bluetooth', 'Maurice S24')"><svg viewBox="0 0 24 24"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polyline></svg></div>
-            <div class="dial-item pos-tv" data-color="tv" onclick="selectDial(this, 'TV / HDMI', 'ZONE 2')"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
-            <div class="dial-item pos-rad" data-color="rad" onclick="selectDial(this, 'Radio', 'FM 104.2')"><svg viewBox="0 0 24 24"><path d="M4.93 4.93a10 10 0 0 1 14.14 0"></path><path d="M7.76 7.76a6 6 0 0 1 8.49 0"></path><circle cx="12" cy="12" r="2"></circle><path d="M12 14v8"></path></svg></div>
-            <div class="dial-item pos-sp" data-color="sp" onclick="selectDial(this, 'Spotify', 'ZONE 1')"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
-            <div class="dial-item pos-aux" data-color="aux" onclick="selectDial(this, 'AUX In', 'Line 1')"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
-            <div class="dial-item pos-set" data-color="set" onclick="selectDial(this, 'Settings', 'DSP Out')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+            <div class="radial-dial-box" id="radialDialBox">
+                <div class="dial-center-knob" onclick="toggleRadialDial()">
+                    <div class="knob-indicator" id="knobIndicator"></div>
+                    <span class="dial-val" id="dialValText" data-i18n="medien.dial_center">Crestron</span>
+                    <span class="dial-label" id="dialSubText" data-i18n="medien.dial_click">Klick</span>
+                </div>
+
+                <div class="dial-item pos-bt" data-angle="-90" data-color="bt" onclick="selectDial(this, 'Bluetooth', 'Maurice S24')"><svg viewBox="0 0 24 24"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polyline></svg></div>
+                <div class="dial-item pos-tv" data-angle="-30" data-color="tv" onclick="selectDial(this, 'TV / HDMI', 'ZONE 2')"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
+                <div class="dial-item pos-rad" data-angle="30" data-color="rad" onclick="selectDial(this, 'Radio', 'FM 104.2')"><svg viewBox="0 0 24 24"><path d="M4.93 4.93a10 10 0 0 1 14.14 0"></path><path d="M7.76 7.76a6 6 0 0 1 8.49 0"></path><circle cx="12" cy="12" r="2"></circle><path d="M12 14v8"></path></svg></div>
+                <div class="dial-item pos-sp" data-angle="90" data-color="sp" onclick="selectDial(this, 'Spotify', 'ZONE 1')"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
+                <div class="dial-item pos-aux" data-angle="150" data-color="aux" onclick="selectDial(this, 'AUX In', 'Line 1')"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                <div class="dial-item pos-set" data-angle="210" data-color="set" onclick="selectDial(this, 'Settings', 'DSP Out')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+            </div>
         </div>
     </section>
 
@@ -865,7 +978,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    /* DYNAMISCHER VOLLBILD-HINTERGRUNDWECHSEL FÜR 100VW BLEED BEIM SCROLLEN */
     const observerOptions = { root: wrapper, threshold: 0.5 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -935,6 +1047,7 @@ function setPreset(theme, el) {
     if (gelFill && gradients[theme]) gelFill.style.backgroundImage = gradients[theme];
 }
 
+/* ==================== RADIAL DIAL CONTROL LOGIK ==================== */
 function toggleRadialDial() {
     const dialBox = document.getElementById('radialDialBox');
     if (dialBox) dialBox.classList.toggle('open');
@@ -943,6 +1056,25 @@ function toggleRadialDial() {
 function selectDial(el, label, val) {
     document.querySelectorAll('#radialDialBox .dial-item').forEach(item => item.classList.remove('active'));
     el.classList.add('active');
+
+    const angle = el.getAttribute('data-angle');
+    const knobInd = document.getElementById('knobIndicator');
+    const dialVal = document.getElementById('dialValText');
+    const dialSub = document.getElementById('dialSubText');
+    const dialArc = document.getElementById('dialArc');
+
+    if (knobInd && angle !== null) {
+        knobInd.style.transform = `rotate(${angle}deg) translateY(-50px)`;
+    }
+
+    if (dialVal && label) dialVal.textContent = label;
+    if (dialSub && val) dialSub.textContent = val;
+
+    if (dialArc && angle !== null) {
+        // Berechnet den aktiven Kreisbogen auf dem Zifferblatt
+        const offset = 1256 - (parseInt(angle) + 180) * 2.8;
+        dialArc.style.strokeDashoffset = offset;
+    }
 }
 
 function initKlimaCanvas() {
