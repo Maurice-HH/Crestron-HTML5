@@ -23,7 +23,7 @@ html, body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #060810 !important;
+    background: #0e1322 !important;
     color: #ffffff;
     font-size: 16px;
 }
@@ -39,7 +39,7 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
-    background: #060810;
+    background: transparent;
 }
 
 #canvas::-webkit-scrollbar { width: 8px; }
@@ -79,18 +79,18 @@ html, body {
     font-size: 32px;
     padding: 14px 26px;
     border-radius: 32px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 2px solid rgba(255, 255, 255, 0.16);
-    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
     transition: all 0.25s ease;
 }
 
 .navbar-brand:hover {
     filter: url(#flame-wave-portrait);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.25) 0%, rgba(255, 140, 50, 0.1) 100%);
-    border-color: rgba(255, 140, 50, 0.6);
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.15) 100%);
+    border-color: rgba(255, 140, 50, 0.7);
 }
 
 .logo-icon {
@@ -117,21 +117,20 @@ html, body {
 
 .mode-switch-btn {
     display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     color: #ffffff; text-decoration: none;
     padding: 14px 24px; border-radius: 32px; font-weight: 800; font-size: 24px; line-height: 1;
-    white-space: nowrap; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.18);
+    white-space: nowrap; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.2);
     transition: all 0.25s ease;
 }
 
 .mode-switch-btn:hover {
     filter: url(#flame-wave-portrait);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.25) 0%, rgba(255, 140, 50, 0.1) 100%);
-    border-color: rgba(255, 140, 50, 0.6);
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.15) 100%);
+    border-color: rgba(255, 140, 50, 0.7);
 }
 
-/* REINER FLAGGENSCHALTER HOCHKANT OHNE BUTTON-GEHÄUSE */
 .lang-flag-btn {
     position: relative;
     background: transparent !important;
@@ -160,7 +159,7 @@ html, body {
     position: absolute;
 }
 
-.flag-icon { font-size: 32px; line-height: 1; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.6)); }
+.flag-svg { width: 32px; height: 22px; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.6); flex-shrink: 0; display: block; }
 
 .lang-flag-btn .flag-curr { transform: translateY(0); opacity: 1; }
 .lang-flag-btn .flag-next { transform: translateY(45px); opacity: 0; }
@@ -170,17 +169,17 @@ html, body {
 
 .design2-btn {
     display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     color: #ffffff; text-decoration: none; padding: 14px 24px; border-radius: 32px;
     font-weight: 800; font-size: 24px; line-height: 1;
-    border: 2px solid rgba(255, 255, 255, 0.18); cursor: pointer; transition: all 0.25s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.25s ease;
 }
 
 .design2-btn:hover {
     filter: url(#flame-wave-portrait);
-    border-color: rgba(255, 140, 50, 0.6);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.25) 0%, rgba(255, 140, 50, 0.1) 100%);
+    border-color: rgba(255, 140, 50, 0.7);
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.15) 100%);
 }
 
 /* SEGMENTED CONTROL LEISTE HOCHKANT HIGH-RES */
@@ -195,11 +194,11 @@ html, body {
 .segmented-control-nav li { flex: 1; }
 
 @keyframes rainbowTextSlow {
-    0%   { color: #ff6b6b; }
-    25%  { color: #ffa033; }
-    50%  { color: #4ecdc4; }
-    75%  { color: #00d2ff; }
-    100% { color: #ff6b6b; }
+    0%   { color: #ff7777; }
+    25%  { color: #ffbb44; }
+    50%  { color: #4eedd4; }
+    75%  { color: #33c2ff; }
+    100% { color: #ff7777; }
 }
 
 .nav-link {
@@ -212,9 +211,9 @@ html, body {
     font-weight: 900;
     font-size: 26px;
     border-radius: 32px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-    border: 2px solid rgba(255, 255, 255, 0.16);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     transition: all 0.25s ease;
     white-space: nowrap;
     animation: rainbowTextSlow 8s linear infinite;
@@ -226,8 +225,8 @@ html, body {
 
 .nav-link.active, .nav-link:hover {
     filter: url(#flame-wave-portrait);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.25) 0%, rgba(255, 140, 50, 0.1) 100%) !important;
-    border-color: rgba(255, 140, 50, 0.65) !important;
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.15) 100%) !important;
+    border-color: rgba(255, 140, 50, 0.75) !important;
 }
 
 /* ==================== CONTENT SECTIONS HOCHKANT ==================== */
@@ -236,25 +235,32 @@ html, body {
     padding: 200px 40px 80px 40px; text-align: center; position: relative; z-index: 2; width: 100%;
 }
 
-#matrix { background: #060810; position: relative; overflow: hidden; }
+#matrix { background: transparent; position: relative; }
 
 .bg-blur-layer {
-    position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .bg-blur-inner {
     position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: 
-        radial-gradient(circle at 25% 25%, #6e2a0c 0%, transparent 45%),
-        radial-gradient(circle at 75% 30%, #0d2847 0%, transparent 50%),
-        radial-gradient(circle at 50% 75%, #521c08 0%, transparent 45%),
-        radial-gradient(circle at 20% 70%, #18332b 0%, transparent 40%);
-    filter: blur(140px); animation: rainbowShift 12s linear infinite, blobRotate 18s ease-in-out infinite alternate; opacity: 0.85;
+        radial-gradient(circle at 25% 25%, #ff5500 0%, transparent 45%),
+        radial-gradient(circle at 75% 30%, #00d2ff 0%, transparent 50%),
+        radial-gradient(circle at 50% 75%, #ff007f 0%, transparent 45%),
+        radial-gradient(circle at 15% 80%, #10b981 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, #7f00ff 0%, transparent 45%);
+    filter: blur(140px); animation: rainbowShift 12s linear infinite, blobRotate 18s ease-in-out infinite alternate; opacity: 0.9;
 }
 
 @keyframes blobRotate {
     0%   { transform: rotate(0deg) scale(1); }
-    50%  { transform: rotate(180deg) scale(1.12); }
+    50%  { transform: rotate(180deg) scale(1.15); }
     100% { transform: rotate(360deg) scale(1); }
 }
 
@@ -291,7 +297,7 @@ html, body {
 .card-description { opacity: 0.85; font-size: 28px; line-height: 1.4; color: #e2e8f0; white-space: pre-line; }
 .card-divider { margin-top: auto; border: none; height: 2px; background: rgba(255, 255, 255, 0.18); }
 
-/* POPOVER HOCHKANT HIGH-RES (CRESTRON MINI SWIRL IN ITEM 1 & PERSISTENTE AKTIV-FARBEN) */
+/* POPOVER HOCHKANT HIGH-RES */
 .popover-menu-box { position: relative; width: 600px; height: 600px; display: flex; align-items: center; justify-content: center; }
 .popover-trigger { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(180deg, #d86927, #a84714); border: none; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; box-shadow: 0 10px 30px rgba(168, 71, 20, 0.4); }
 .popover-trigger svg { width: 56px; height: 56px; stroke: #ffffff; stroke-width: 3; }
@@ -321,7 +327,7 @@ html, body {
     animation: logo-pulse 2s ease-in-out infinite;
 }
 
-/* INDIVIDUELLE UND PERSISTENTE AKTIV-FARBEN BEIM KLICKEN HOCHKANT */
+/* PERSISTENTE AKTIV-FARBEN */
 .popover-item.pop-1.active { background: linear-gradient(135deg, #00d2ff, #0082fc); border-color: #00f0ff; box-shadow: 0 0 25px rgba(0, 210, 255, 0.85); }
 .popover-item.pop-2.active { background: linear-gradient(135deg, #ff9f43, #ff5252); border-color: #ff9f43; box-shadow: 0 0 25px rgba(255, 159, 67, 0.85); }
 .popover-item.pop-3.active { background: linear-gradient(135deg, #e056fd, #686de0); border-color: #e056fd; box-shadow: 0 0 25px rgba(224, 86, 253, 0.85); }
@@ -410,8 +416,8 @@ html, body {
                     </a>
 
                     <button id="langToggle" class="lang-flag-btn" onclick="toggleLanguage()">
-                        <span class="flag-wrapper flag-curr" id="langCurr"><span class="flag-icon">🇩🇪</span> <span>DEU</span></span>
-                        <span class="flag-wrapper flag-next" id="langNext"><span class="flag-icon">🇬🇧</span> <span>ENG</span></span>
+                        <span class="flag-wrapper flag-curr" id="langCurr"></span>
+                        <span class="flag-wrapper flag-next" id="langNext"></span>
                     </button>
 
                     <a href="design2.html" class="design2-btn">D2</a>
@@ -486,10 +492,11 @@ html, body {
             </div>
 
             <div class="gel-presets">
-                <div class="gel-preset-label" onclick="setPreset('clear', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_clear">Klar</span></div>
+                <div class="gel-preset-label" onclick="setPreset('beige', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_beige">Beige</span></div>
                 <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_rainbow">Regenbogen</span></div>
                 <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_sunset">Sonnenuntergang</span></div>
                 <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_ice">Eis</span></div>
+                <div class="gel-preset-label" onclick="setPreset('green', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_green">Grün</span></div>
             </div>
         </div>
     </section>
@@ -539,6 +546,9 @@ document.addEventListener('DOMContentLoaded', fitCanvas);
 let currentLang = localStorage.getItem('selectedLang') || 'de';
 let translations = {};
 
+const deFlagSvg = `<svg class="flag-svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#FFCE00"/><rect width="3" height="1.333" fill="#DD0000"/><rect width="3" height="0.667" fill="#000000"/></svg>`;
+const enFlagSvg = `<svg class="flag-svg" viewBox="0 0 60 30"><clipPath id="s_uk"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk"><path d="M30,15 L60,0 v30 z M30,15 L0,30 v-30 z M30,15 L0,0 h60 z M30,15 L60,30 h-60 z"/></clipPath><g clip-path="url(#s_uk)"><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cc0000" stroke-width="4" clip-path="url(#t_uk)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#cc0000" stroke-width="6"/></g></svg>`;
+
 async function loadTranslations(lang) {
     try {
         const response = await fetch(`${lang}.json`);
@@ -555,11 +565,11 @@ function updateLangButtonUI(lang) {
     const curr = document.getElementById('langCurr');
     const next = document.getElementById('langNext');
     if (lang === 'de') {
-        curr.innerHTML = '<span class="flag-icon">🇩🇪</span> <span>DEU</span>';
-        next.innerHTML = '<span class="flag-icon">🇬🇧</span> <span>ENG</span>';
+        curr.innerHTML = `${deFlagSvg} <span>DEU</span>`;
+        next.innerHTML = `${enFlagSvg} <span>ENG</span>`;
     } else {
-        curr.innerHTML = '<span class="flag-icon">🇬🇧</span> <span>ENG</span>';
-        next.innerHTML = '<span class="flag-icon">🇩🇪</span> <span>DEU</span>';
+        curr.innerHTML = `${enFlagSvg} <span>ENG</span>`;
+        next.innerHTML = `${deFlagSvg} <span>DEU</span>`;
     }
 }
 
@@ -645,10 +655,11 @@ function setPreset(theme, el) {
     el.classList.add('active');
 
     const gradients = {
-        'clear': 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 100%)',
+        'beige': 'linear-gradient(90deg, #f5f5dc 0%, #d4b896 50%, #f5e6cc 100%)',
         'rainbow': 'linear-gradient(90deg, #ff007f 0%, #7f00ff 33%, #00f0ff 66%, #ff007f 100%)',
         'sunset': 'linear-gradient(90deg, #ff9a9e 0%, #fecfef 45%, #ffc3a0 100%)',
-        'ice': 'linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%)'
+        'ice': 'linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%)',
+        'green': 'linear-gradient(90deg, #10b981 0%, #34d399 50%, #059669 100%)'
     };
     if (gelFill && gradients[theme]) gelFill.style.backgroundImage = gradients[theme];
 }
