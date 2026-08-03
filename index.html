@@ -432,10 +432,10 @@ html, body {
     z-index: 2; white-space: pre-line;
 }
 
-/* ==================== SEITE 1: SIDE BY SIDE LAYOUT ==================== */
+/* ==================== SEITE 1: FLAMMENRECHTECK CARDS & BEAR INTEGRATION ==================== */
 .side-by-side-container {
     display: flex; align-items: center; justify-content: center;
-    gap: 32px; flex-wrap: wrap; width: 100%; position: relative; z-index: 2;
+    gap: 36px; flex-wrap: wrap; width: 100%; position: relative; z-index: 2;
 }
 
 .svg-container { position: absolute; width: 0; height: 0; }
@@ -476,20 +476,22 @@ html, body {
 .card-description { opacity: 0.85; font-size: 15px; line-height: 1.4; color: #e2e8f0; white-space: pre-line; }
 .card-divider { margin-top: auto; border: none; height: 1px; background: rgba(255, 255, 255, 0.18); }
 
-/* ==================== SEITE 1: PEEKABOO BEAR TOGGLE (EXAKT WIE IN CODEPEN LINK) ==================== */
-.bear-toggle-wrapper {
+/* ==================== BÄR SCHALTER IN FLAMMENRECHTECK INTEGRATION (50% HALBE GRÖSSE, SCHWARZ GLOSSY KNOB) ==================== */
+.bear-card-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.bear-toggle-wrapper-mini {
     position: relative;
-    width: 330px;
-    height: 330px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    transform: scale(0.52); /* HALBE GRÖSSE */
 }
 
 .bear-head-container {
@@ -507,7 +509,8 @@ html, body {
     height: 95px;
     background: #653819;
     border-radius: 55px 55px 20px 20px;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateY(0); /* STANDARDMÄSSIG GEZEIGT UND SICHTBAR */
 }
 
 .bear-ear {
@@ -578,6 +581,7 @@ html, body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
+/* SCHALTERKNOPF SCHWARZ MIT HIGH-END GLOSSY / GLANZ LOGIK */
 .bear-slider:before {
     content: "";
     position: absolute;
@@ -585,10 +589,14 @@ html, body {
     width: 81px;
     left: 7px;
     bottom: 7px;
-    background-color: #ffffff;
     border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #4a4a4a 0%, #1a1a1a 55%, #050505 100%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 
+        inset 0 2px 3px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.9),
+        0 6px 15px rgba(0, 0, 0, 0.8);
     transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .bear-toggle-switch input:not(:checked) + .bear-slider {
@@ -600,7 +608,7 @@ html, body {
 }
 
 .bear-toggle-switch input:not(:checked) ~ .bear-head-container .bear-head {
-    transform: translateY(42px);
+    transform: translateY(38px);
 }
 
 /* POPOVER MENU SEITE 1 */
@@ -682,7 +690,7 @@ html, body {
 .gel-radio-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid #fff; display: inline-block; }
 .gel-preset-label.active .gel-radio-dot { background: var(--electric-border-color); }
 
-/* ==================== SEITE 3: RADIAL DIAL MENU (EXAKT AUS DEM USER-PROMPT PARSED) ==================== */
+/* ==================== SEITE 3: RADIAL DIAL MENU ==================== */
 .radial-dial-wrapper-s3 {
     --icon-search: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
     --icon-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='m12 7.13.97 2.29.47 1.11 1.2.1 2.47.21-1.88 1.63-.91.79.27 1.18.56 2.41-2.12-1.28-1.03-.64-1.03.62-2.12 1.28.56-2.41.27-1.18-.91-.79-1.88-1.63 2.47-.21 1.2-.1.47-1.11.97-2.27M12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z'/%3E%3C/svg%3E");
@@ -1101,7 +1109,7 @@ html, body {
         </nav>
     </div>
 
-    <!-- SEITE 1: HTML5 (CRESTRON CARD + PEEKABOO BEAR TOGGLE + RADIAL POPOVER) -->
+    <!-- SEITE 1: HTML5 (CRESTRON CARD + PEEKABOO BEAR IN FLAMMENRECHTECK + RADIAL POPOVER) -->
     <section id="matrix" class="content-section">
         <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
         <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
@@ -1128,21 +1136,30 @@ html, body {
                 </div>
             </div>
 
-            <!-- 2. JHEY PEEKABOO BEAR TOGGLE SWITCH (image_3abb7c.png) -->
-            <div class="bear-toggle-wrapper">
-                <div class="bear-head-container">
-                    <div class="bear-head">
-                        <div class="bear-ear bear-ear-left"><div class="bear-ear-inner"></div></div>
-                        <div class="bear-ear bear-ear-right"><div class="bear-ear-inner"></div></div>
-                        <div class="bear-eye bear-eye-left"></div>
-                        <div class="bear-eye bear-eye-right"></div>
-                        <div class="bear-nose"></div>
+            <!-- 2. PEEKABOO BEAR SCHALTER VOLLSTÄNDIG IN EIN FLAMMENRECHTECK INTEGRIERT (50% SKALIERT, BÄR OBEN, SCHWARZER GLOSSY KNOB) -->
+            <div class="card-container">
+                <div class="inner-container">
+                    <div class="main-card"></div>
+                    <div class="glow-layer-1"></div>
+                </div>
+
+                <div class="card-content-container bear-card-center">
+                    <div class="bear-toggle-wrapper-mini">
+                        <label class="bear-toggle-switch">
+                            <input type="checkbox" id="bearToggleCheckbox" checked>
+                            <div class="bear-head-container">
+                                <div class="bear-head">
+                                    <div class="bear-ear bear-ear-left"><div class="bear-ear-inner"></div></div>
+                                    <div class="bear-ear bear-ear-right"><div class="bear-ear-inner"></div></div>
+                                    <div class="bear-eye bear-eye-left"></div>
+                                    <div class="bear-eye bear-eye-right"></div>
+                                    <div class="bear-nose"></div>
+                                </div>
+                            </div>
+                            <span class="bear-slider"></span>
+                        </label>
                     </div>
                 </div>
-                <label class="bear-toggle-switch">
-                    <input type="checkbox" id="bearToggleCheckbox" checked>
-                    <span class="bear-slider"></span>
-                </label>
             </div>
 
             <!-- 3. TRIGONOMETRIC RADIAL POPOVER MENU SEITE 1 -->
@@ -1190,7 +1207,7 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 3: RADIAL DIAL CONTROL MENU (EINGEBAUT AUS DEINEM PROMPT-CODE) -->
+    <!-- SEITE 3: RADIAL DIAL MENU (EXAKT AUS PROMPT JS/CSS PARSED) -->
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
@@ -1350,7 +1367,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initKlimaCanvas();
     initMedienCanvas();
 
-    /* RADIAL DIAL S3 HANDLER AUS DEINEM PROMPT-JS */
+    /* RADIAL DIAL CONTROL S3 JS LOGIK */
     const selectors = document.querySelectorAll(".selector");
     selectors.forEach((selector) => {
         const knob = selector.querySelector(".knob");
