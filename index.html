@@ -23,7 +23,7 @@ html, body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #04060c !important;
+    background: #060810 !important;
     color: #ffffff;
     font-size: 16px;
 }
@@ -39,7 +39,7 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
-    background: #0b0f19;
+    background: #060810;
 }
 
 #canvas::-webkit-scrollbar {
@@ -50,70 +50,59 @@ html, body {
     border-radius: 5px;
 }
 
-/* ==================== NAVBAR (STABIL & ZENTRIERT) ==================== */
+/* ==================== FREI SCHWEBENDE FREIE NAVBAR (OHNE HINTERGRUNDKASTEN) ==================== */
 .navbar-container {
     position: sticky;
-    top: 24px;
+    top: 18px;
     z-index: 1000;
     width: 100%;
     display: flex;
     justify-content: center;
-    pointer-events: none;
-}
-
-.navbar-wrapper-outer {
-    position: relative;
-    padding: 2px;
-    border-radius: 20px;
-    pointer-events: auto;
-}
-
-.navbar-wave-border {
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    border: 2px solid rgba(225, 120, 50, 0.6);
-    box-shadow: 0 0 15px rgba(217, 107, 39, 0.3);
-    pointer-events: none;
 }
 
 .navbar {
-    position: relative;
-    background: rgba(18, 24, 38, 0.94);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-radius: 18px;
-    padding: 12px 32px;
+    background: transparent;
+    padding: 0;
     display: flex;
     align-items: center;
-    gap: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    z-index: 2;
+    gap: 16px;
+    box-shadow: none;
+    border: none;
 }
 
+/* BRAND / LOGO BUTTON (GLASSY) */
 .navbar-brand-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    padding-bottom: 16px;
-    margin-bottom: -16px;
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 800;
-    font-size: 22px;
-    padding-right: 14px;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
+.navbar-brand:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
 .logo-icon {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     background: linear-gradient(135deg, #d96b27, #8c3b12);
     border-radius: 50%;
     position: relative;
@@ -121,7 +110,7 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 0 12px rgba(217, 107, 39, 0.4);
+    box-shadow: 0 0 10px rgba(217, 107, 39, 0.4);
 }
 
 .logo-icon::before {
@@ -143,7 +132,7 @@ html, body {
     position: absolute;
     top: 100%;
     left: 0;
-    padding-top: 12px;
+    padding-top: 10px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(8px) scale(0.96);
@@ -153,12 +142,12 @@ html, body {
 }
 
 .brand-popover-inner {
-    background: rgba(15, 20, 32, 0.95);
-    backdrop-filter: blur(25px);
+    background: rgba(15, 20, 32, 0.85);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 16px 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     white-space: nowrap;
 }
 
@@ -171,7 +160,7 @@ html, body {
 }
 
 .brand-popover-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 800;
     color: var(--electric-border-color);
     margin-bottom: 8px;
@@ -186,7 +175,7 @@ html, body {
 .brand-popover-link {
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     padding: 8px 12px;
     border-radius: 8px;
@@ -200,8 +189,8 @@ html, body {
 }
 
 .brand-popover-link:hover, .brand-popover-link.active {
-    background: rgba(217, 107, 39, 0.2);
-    border-color: rgba(217, 107, 39, 0.4);
+    background: rgba(217, 107, 39, 0.25);
+    border-color: rgba(217, 107, 39, 0.5);
     color: #ffffff;
 }
 
@@ -212,70 +201,96 @@ html, body {
     list-style: none;
 }
 
+/* ==================== REGENBOGEN-TEXT FÜR DIE 3 MENÜPUNKTE ==================== */
+@keyframes rainbowTextSlow {
+    0%   { color: #ff5555; }
+    20%  { color: #ffaa33; }
+    40%  { color: #33ffaa; }
+    60%  { color: #33aaff; }
+    80%  { color: #cc55ff; }
+    100% { color: #ff5555; }
+}
+
 .nav-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    padding: 10px 16px;
+    min-width: 110px;
+    padding: 10px 20px;
     text-decoration: none;
-    font-weight: 800;
-    font-size: 16px;
-    border-radius: 10px;
-    transition: all 0.2s ease;
+    font-weight: 900;
+    font-size: 17px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.25s ease;
     white-space: nowrap;
     line-height: 1;
-    color: rgba(255, 255, 255, 0.75);
+    animation: rainbowTextSlow 8s linear infinite; /* REGENBOGEN FARBWECHSEL */
 }
 
-.nav-link[data-section="matrix"] { color: #f7a361; }
-.nav-link[data-section="klima"] { color: #4ecdc4; }
-.nav-link[data-section="medien"] { color: #70a1ff; }
+.nav-link[data-section="matrix"] { animation-delay: 0s; }
+.nav-link[data-section="klima"]  { animation-delay: -2.6s; }
+.nav-link[data-section="medien"] { animation-delay: -5.3s; }
 
 .nav-link:hover, .nav-link.active {
-    background: rgba(255, 255, 255, 0.12) !important;
-    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
+/* MODUS-UMSCHALTER (GLASSY) */
 .mode-switch-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 120px;
-    background: linear-gradient(180deg, #d86927 0%, #a84714 100%);
+    min-width: 125px;
+    background: rgba(217, 107, 39, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     color: #ffffff;
     text-decoration: none;
-    padding: 9px 16px;
-    border-radius: 10px;
+    padding: 10px 18px;
+    border-radius: 12px;
     font-weight: 800;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1;
     white-space: nowrap;
     cursor: pointer;
     transition: all 0.2s ease;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(217, 107, 39, 0.45);
 }
 
 .mode-switch-btn:hover {
-    background: linear-gradient(180deg, #e57532 0%, #b85018 100%);
+    background: rgba(217, 107, 39, 0.45);
+    border-color: rgba(217, 107, 39, 0.7);
 }
 
+/* SPRACHENSCHALTER (GLASSY MIT FLAGGEN) */
 .lang-flag-btn {
     position: relative;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
     padding: 8px 14px;
     cursor: pointer;
     outline: none;
     overflow: hidden;
     min-width: 82px;
-    height: 36px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    transition: all 0.2s ease;
+}
+
+.lang-flag-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .flag-wrapper {
@@ -298,27 +313,29 @@ html, body {
 .lang-flag-btn:hover .flag-curr { transform: translateY(-30px); opacity: 0; }
 .lang-flag-btn:hover .flag-next { transform: translateY(0); opacity: 1; }
 
+/* DESIGN 2 BUTTON (GLASSY) */
 .design2-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, #2a364a 0%, #172130 100%);
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     color: #ffffff;
     text-decoration: none;
-    padding: 9px 18px;
-    border-radius: 10px;
+    padding: 10px 20px;
+    border-radius: 12px;
     font-weight: 800;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1;
-    border: 1px solid rgba(217, 107, 39, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .design2-btn:hover {
-    border-color: #d96b27;
-    background: linear-gradient(180deg, #35445c 0%, #1e2a3d 100%);
+    border-color: rgba(217, 107, 39, 0.6);
+    background: rgba(217, 107, 39, 0.2);
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
@@ -328,14 +345,14 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 90px 20px 40px 20px;
+    padding: 70px 20px 40px 20px;
     text-align: center;
     position: relative;
     z-index: 2;
     width: 100%;
 }
 
-/* SEITE 1: REGENTBOGEN-FARBLAUF (ISOLIERTES CONTAINER-DIV) */
+/* SEITE 1: BACKGROUND DEMO REGENTBOGEN-FARBLAUF */
 #matrix {
     background: #060810;
     position: relative;
@@ -575,48 +592,45 @@ html, body {
 
     <!-- NAVIGATION HEADER -->
     <div class="navbar-container">
-        <div class="navbar-wrapper-outer">
-            <div class="navbar-wave-border"></div>
-            <nav class="navbar">
-                <div class="navbar-brand-wrapper">
-                    <a href="#matrix" class="navbar-brand">
-                        <div class="logo-icon"></div>
-                        <span data-i18n="nav.brand_title">Crestron UI</span>
-                    </a>
-                    
-                    <div class="brand-popover">
-                        <div class="brand-popover-inner">
-                            <div class="brand-popover-title" data-i18n="nav.select_design">Design wählen</div>
-                            <div class="brand-popover-links">
-                                <a href="index.html" class="brand-popover-link active"><span data-i18n="nav.design_1">Design 1</span> <span>➔</span></a>
-                                <a href="design2.html" class="brand-popover-link"><span data-i18n="nav.design_2">Design 2</span> <span>➔</span></a>
-                                <a href="design3.html" class="brand-popover-link"><span data-i18n="nav.design_3">Design 3</span> <span>➔</span></a>
-                            </div>
+        <nav class="navbar">
+            <div class="navbar-brand-wrapper">
+                <a href="#matrix" class="navbar-brand">
+                    <div class="logo-icon"></div>
+                    <span data-i18n="nav.brand_title">Crestron UI</span>
+                </a>
+                
+                <div class="brand-popover">
+                    <div class="brand-popover-inner">
+                        <div class="brand-popover-title" data-i18n="nav.select_design">Design wählen</div>
+                        <div class="brand-popover-links">
+                            <a href="index.html" class="brand-popover-link active"><span data-i18n="nav.design_1">Design 1</span> <span>➔</span></a>
+                            <a href="design2.html" class="brand-popover-link"><span data-i18n="nav.design_2">Design 2</span> <span>➔</span></a>
+                            <a href="design3.html" class="brand-popover-link"><span data-i18n="nav.design_3">Design 3</span> <span>➔</span></a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <ul class="navbar-nav">
-                    <li><a href="#matrix" class="nav-link active" data-section="matrix" data-i18n="nav.html5">HTML5</a></li>
-                    <li><a href="#klima" class="nav-link" data-section="klima" data-i18n="nav.klima">Klima</a></li>
-                    <li><a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a></li>
-                    <li class="mode-switch-item">
-                        <a href="index_portrait.html" class="mode-switch-btn">
-                            <span>Hoch / Quer</span>
-                        </a>
-                    </li>
-                    <li>
-                        <button id="langToggle" class="lang-flag-btn" onclick="toggleLanguage()">
-                            <span class="flag-wrapper flag-curr" id="langCurr"><span class="flag-icon">🇩🇪</span> <span>DEU</span></span>
-                            <span class="flag-wrapper flag-next" id="langNext"><span class="flag-icon">🇬🇧</span> <span>ENG</span></span>
-                        </button>
-                    </li>
-                    <li>
-                        <a href="design2.html" class="design2-btn">Design 2</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+            <ul class="navbar-nav">
+                <li><a href="#matrix" class="nav-link active" data-section="matrix" data-i18n="nav.html5">HTML5</a></li>
+                <li><a href="#klima" class="nav-link" data-section="klima" data-i18n="nav.klima">Klima</a></li>
+                <li><a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a></li>
+                <li class="mode-switch-item">
+                    <a href="index_portrait.html" class="mode-switch-btn">
+                        <span>Hoch / Quer</span>
+                    </a>
+                </li>
+                <li>
+                    <button id="langToggle" class="lang-flag-btn" onclick="toggleLanguage()">
+                        <span class="flag-wrapper flag-curr" id="langCurr"><span class="flag-icon">🇩🇪</span> <span>DEU</span></span>
+                        <span class="flag-wrapper flag-next" id="langNext"><span class="flag-icon">🇬🇧</span> <span>ENG</span></span>
+                    </button>
+                </li>
+                <li>
+                    <a href="design2.html" class="design2-btn">Design 2</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <!-- SEITE 1: HTML5 -->
@@ -716,7 +730,6 @@ html, body {
 </div>
 
 <script>
-/* EXAKTE TOP-LEFT CANVAS ZENTRIERUNGS-LOGIK */
 function fitCanvas() {
     const canvas = document.getElementById('canvas');
     if (!canvas) return;
