@@ -23,12 +23,9 @@ html, body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #04060c !important;
+    background: #060810 !important;
     color: #ffffff;
     font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* ==================== HIGH-RES CANVAS HOCHKANT (1080x2340) ==================== */
@@ -42,7 +39,7 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
-    background: #0b0f19;
+    background: #060810;
 }
 
 #canvas::-webkit-scrollbar { width: 8px; }
@@ -51,39 +48,18 @@ html, body {
 /* ==================== TOP HEADER HIGH-RES HOCHKANT ==================== */
 .navbar-container {
     position: sticky;
-    top: 20px;
+    top: 16px;
     z-index: 1000;
     width: 94%; 
     margin: 0 auto;
 }
 
-.navbar-wrapper-outer {
-    position: relative;
-    padding: 3px;
-    border-radius: 28px;
-}
-
-.navbar-wave-border {
-    position: absolute;
-    inset: 0;
-    border-radius: 28px;
-    border: 3px solid rgba(225, 120, 50, 0.75);
-    box-shadow: 0 0 25px rgba(217, 107, 39, 0.25);
-    pointer-events: none;
-}
-
 .navbar {
-    position: relative;
-    background: rgba(18, 24, 38, 0.94);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-radius: 26px;
-    padding: 22px 28px;
+    background: transparent;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
-    z-index: 2;
+    gap: 16px;
 }
 
 .navbar-top-row {
@@ -100,11 +76,17 @@ html, body {
     text-decoration: none;
     color: #ffffff;
     font-weight: 800;
-    font-size: 36px;
+    font-size: 32px;
+    padding: 14px 24px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .logo-icon {
-    width: 56px; height: 56px;
+    width: 50px; height: 50px;
     background: linear-gradient(135deg, #d96b27, #8c3b12);
     border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
@@ -122,32 +104,33 @@ html, body {
 .top-actions-group {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
 }
 
 .mode-switch-btn {
     display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(180deg, #d86927 0%, #a84714 100%); color: #ffffff; text-decoration: none;
-    padding: 14px 24px; border-radius: 16px; font-weight: 800; font-size: 26px; line-height: 1;
-    white-space: nowrap; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25);
+    background: rgba(217, 107, 39, 0.25);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: #ffffff; text-decoration: none;
+    padding: 14px 22px; border-radius: 18px; font-weight: 800; font-size: 24px; line-height: 1;
+    white-space: nowrap; cursor: pointer; border: 2px solid rgba(217, 107, 39, 0.45);
 }
 
 .lang-flag-btn {
     position: relative;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
-    border: 2px solid rgba(255, 255, 255, 0.25);
-    border-radius: 16px;
-    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+    padding: 12px 18px;
     cursor: pointer;
     outline: none;
     overflow: hidden;
-    min-width: 150px;
-    height: 60px;
+    min-width: 140px;
+    height: 58px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25);
 }
 
 .flag-wrapper {
@@ -155,41 +138,48 @@ html, body {
     align-items: center;
     gap: 10px;
     font-weight: 900;
-    font-size: 24px;
+    font-size: 22px;
     color: #ffffff;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
     position: absolute;
 }
 
-.flag-icon { font-size: 30px; line-height: 1; }
+.flag-icon { font-size: 26px; line-height: 1; }
 
 .lang-flag-btn .flag-curr { transform: translateY(0); opacity: 1; }
-.lang-flag-btn .flag-next { transform: translateY(50px); opacity: 0; }
+.lang-flag-btn .flag-next { transform: translateY(45px); opacity: 0; }
 
-.lang-flag-btn:hover .flag-curr { transform: translateY(-50px); opacity: 0; }
+.lang-flag-btn:hover .flag-curr { transform: translateY(-45px); opacity: 0; }
 .lang-flag-btn:hover .flag-next { transform: translateY(0); opacity: 1; }
 
 .design2-btn {
     display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(180deg, #2a364a 0%, #172130 100%);
-    color: #ffffff; text-decoration: none; padding: 14px 26px; border-radius: 16px;
-    font-weight: 800; font-size: 26px; line-height: 1;
-    border: 2px solid rgba(217, 107, 39, 0.5); cursor: pointer;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: #ffffff; text-decoration: none; padding: 14px 24px; border-radius: 18px;
+    font-weight: 800; font-size: 24px; line-height: 1;
+    border: 2px solid rgba(255, 255, 255, 0.18); cursor: pointer;
 }
 
-/* SEGMENTED CONTROL LEISTE HOCHKANT HIGH-RES */
+/* SEGMENTED CONTROL LEISTE HOCHKANT (REGENBOGEN) */
 .segmented-control-nav {
     display: flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 18px;
-    padding: 6px;
+    gap: 12px;
     width: 100%;
     list-style: none;
-    border: 2px solid rgba(255, 255, 255, 0.08);
 }
 
 .segmented-control-nav li { flex: 1; }
+
+@keyframes rainbowTextSlow {
+    0%   { color: #ff5555; }
+    20%  { color: #ffaa33; }
+    40%  { color: #33ffaa; }
+    60%  { color: #33aaff; }
+    80%  { color: #cc55ff; }
+    100% { color: #ff5555; }
+}
 
 .nav-link {
     display: flex;
@@ -198,22 +188,30 @@ html, body {
     width: 100%;
     padding: 16px 0;
     text-decoration: none;
-    font-weight: 800;
-    font-size: 28px;
-    border-radius: 14px;
+    font-weight: 900;
+    font-size: 26px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
     transition: all 0.2s ease;
     white-space: nowrap;
-    color: rgba(255, 255, 255, 0.7);
+    animation: rainbowTextSlow 8s linear infinite;
 }
 
-.nav-link[data-section="matrix"].active { background: rgba(247, 163, 97, 0.2); color: #f7a361 !important; border: 2px solid rgba(247, 163, 97, 0.3); }
-.nav-link[data-section="klima"].active  { background: rgba(78, 205, 196, 0.2); color: #4ecdc4 !important; border: 2px solid rgba(78, 205, 196, 0.3); }
-.nav-link[data-section="medien"].active { background: rgba(112, 161, 255, 0.2); color: #70a1ff !important; border: 2px solid rgba(112, 161, 255, 0.3); }
+.nav-link[data-section="matrix"] { animation-delay: 0s; }
+.nav-link[data-section="klima"]  { animation-delay: -2.6s; }
+.nav-link[data-section="medien"] { animation-delay: -5.3s; }
 
-/* ==================== CONTENT SECTIONS HOCHKANT HIGH-RES ==================== */
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ==================== CONTENT SECTIONS HOCHKANT ==================== */
 .content-section {
     min-height: 2340px; display: flex; align-items: center; justify-content: center; flex-direction: column;
-    padding: 220px 40px 80px 40px; text-align: center; position: relative; z-index: 2; width: 100%;
+    padding: 200px 40px 80px 40px; text-align: center; position: relative; z-index: 2; width: 100%;
 }
 
 #matrix { background: #060810; position: relative; overflow: hidden; }
@@ -253,7 +251,7 @@ html, body {
 .section-title { font-size: 64px; font-weight: 800; margin-bottom: 16px; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
 .section-subtitle { font-size: 30px; opacity: 0.85; max-width: 100%; line-height: 1.4; margin-bottom: 50px; white-space: pre-line; }
 
-/* ELEMENTS HOCHKANT HIGH-RES (CARD 650x650) */
+/* ELEMENTS HOCHKANT HIGH-RES */
 .side-by-side-container { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 60px; width: 100%; position: relative; z-index: 2; }
 .svg-container { position: absolute; width: 0; height: 0; }
 .card-container { padding: 0; border-radius: 28px; position: relative; }
@@ -340,36 +338,33 @@ html, body {
 
     <!-- NAVIGATION HEADER PORTRAIT -->
     <div class="navbar-container">
-        <div class="navbar-wrapper-outer">
-            <div class="navbar-wave-border"></div>
-            <nav class="navbar">
-                <div class="navbar-top-row">
-                    <a href="#matrix" class="navbar-brand">
-                        <div class="logo-icon"></div>
-                        <span data-i18n="nav.brand_title">Crestron UI</span>
+        <nav class="navbar">
+            <div class="navbar-top-row">
+                <a href="#matrix" class="navbar-brand">
+                    <div class="logo-icon"></div>
+                    <span data-i18n="nav.brand_title">Crestron UI</span>
+                </a>
+                
+                <div class="top-actions-group">
+                    <a href="index.html" class="mode-switch-btn">
+                        <span>Hoch / Quer</span>
                     </a>
-                    
-                    <div class="top-actions-group">
-                        <a href="index.html" class="mode-switch-btn">
-                            <span>Hoch / Quer</span>
-                        </a>
 
-                        <button id="langToggle" class="lang-flag-btn" onclick="toggleLanguage()">
-                            <span class="flag-wrapper flag-curr" id="langCurr"><span class="flag-icon">🇩🇪</span> <span>DEU</span></span>
-                            <span class="flag-wrapper flag-next" id="langNext"><span class="flag-icon">🇬🇧</span> <span>ENG</span></span>
-                        </button>
+                    <button id="langToggle" class="lang-flag-btn" onclick="toggleLanguage()">
+                        <span class="flag-wrapper flag-curr" id="langCurr"><span class="flag-icon">🇩🇪</span> <span>DEU</span></span>
+                        <span class="flag-wrapper flag-next" id="langNext"><span class="flag-icon">🇬🇧</span> <span>ENG</span></span>
+                    </button>
 
-                        <a href="design2.html" class="design2-btn">D2</a>
-                    </div>
+                    <a href="design2.html" class="design2-btn">D2</a>
                 </div>
+            </div>
 
-                <ul class="segmented-control-nav">
-                    <li><a href="#matrix" class="nav-link active" data-section="matrix" data-i18n="nav.html5">HTML5</a></li>
-                    <li><a href="#klima" class="nav-link" data-section="klima" data-i18n="nav.klima">Klima</a></li>
-                    <li><a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a></li>
-                </ul>
-            </nav>
-        </div>
+            <ul class="segmented-control-nav">
+                <li><a href="#matrix" class="nav-link active" data-section="matrix" data-i18n="nav.html5">HTML5</a></li>
+                <li><a href="#klima" class="nav-link" data-section="klima" data-i18n="nav.klima">Klima</a></li>
+                <li><a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a></li>
+            </ul>
+        </nav>
     </div>
 
     <!-- SEITE 1: HTML5 -->
