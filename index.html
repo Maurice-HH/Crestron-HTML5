@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crestron UI - Design 1 (Index)</title>
+<title>Crestron UI - Design 1 (Index Querformat)</title>
 <style>
 /* ==================== GLOBAL RESET & FULL-HD BASE ==================== */
 * {
@@ -47,51 +47,51 @@ html, body {
     border-radius: 10px;
 }
 
-/* ==================== NAVBAR (BREITER & LUFTIGER) ==================== */
+/* ==================== NAVBAR (DOPPELT SO GROSS & PROPORTIONAL GEPAST) ==================== */
 .navbar-container {
     position: sticky;
-    top: 20px;
+    top: 24px;
     z-index: 1000;
     width: fit-content; 
     margin: 0 auto;
 }
 
 .navbar {
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 60px;
-    padding: 10px 36px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 80px;
+    padding: 18px 48px;
     display: flex;
     align-items: center;
-    gap: 32px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    gap: 48px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
 }
 
 .navbar-brand-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: -20px;
+    padding-bottom: 24px;
+    margin-bottom: -24px;
 }
 
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 18px;
     text-decoration: none;
     color: #ffffff;
-    font-weight: 800;
-    font-size: 20px;
-    padding-right: 12px;
+    font-weight: 900;
+    font-size: 28px;
+    padding-right: 18px;
     cursor: pointer;
 }
 
 .logo-icon {
-    width: 26px;
-    height: 26px;
+    width: 44px;
+    height: 44px;
     background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
     border-radius: 50%;
     position: relative;
@@ -116,12 +116,12 @@ html, body {
     50% { transform: scale(1.25); opacity: 1; }
 }
 
-/* BRAND POPOVER (GLASFELD) */
+/* BRAND POPOVER (GLASFELD - VERGRÖSSERT) */
 .brand-popover {
     position: absolute;
     top: 100%;
     left: 0;
-    padding-top: 15px;
+    padding-top: 18px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px) scale(0.95);
@@ -131,13 +131,13 @@ html, body {
 }
 
 .brand-popover-inner {
-    background: rgba(18, 24, 38, 0.85);
+    background: rgba(18, 24, 38, 0.92);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 18px;
-    padding: 16px 22px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
+    padding: 22px 30px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
     white-space: nowrap;
 }
 
@@ -150,33 +150,33 @@ html, body {
 }
 
 .brand-popover-title {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 800;
     color: #00f0ff;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     letter-spacing: 1px;
 }
 
 .brand-popover-links {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
 }
 
 .brand-popover-link {
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 16px;
 }
 
 .brand-popover-link:hover, .brand-popover-link.active {
@@ -188,18 +188,18 @@ html, body {
 .navbar-nav {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 18px;
     list-style: none;
 }
 
 .nav-link {
     display: flex;
     align-items: center;
-    padding: 8px 22px;
+    padding: 14px 32px;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 15px;
-    border-radius: 50px;
+    font-weight: 800;
+    font-size: 20px;
+    border-radius: 60px;
     transition: all 0.3s ease;
     white-space: nowrap;
     line-height: 1;
@@ -210,42 +210,58 @@ html, body {
 .nav-link[data-section="medien"] { color: #00d2ff; }
 
 .nav-link:hover, .nav-link.active {
-    background: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.18) !important;
     color: #ffffff !important;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.4);
 }
 
-.cta-button {
+/* ==================== MODUS-UMSCHALTER (HOCHKANT / QUERFORMAT) ==================== */
+.mode-switch-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--tuerkis-blue), #00a8cc);
+    background: linear-gradient(135deg, #7f00ff, #ff007f);
     color: #ffffff;
     text-decoration: none;
-    padding: 8px 22px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 60px;
+    font-weight: 800;
+    font-size: 19px;
     line-height: 1;
-    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+    box-shadow: 0 6px 20px rgba(127, 0, 255, 0.4);
     white-space: nowrap;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid rgba(255, 255, 255, 0.25);
 }
 
-.cta-button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+.mode-switch-btn .mode-target {
+    display: none;
+}
+
+.mode-switch-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #00d2ff, #00a8cc);
+    box-shadow: 0 8px 25px rgba(0, 210, 255, 0.6);
+    border-color: #00f0ff;
+}
+
+.mode-switch-btn:hover .mode-current {
+    display: none;
+}
+
+.mode-switch-btn:hover .mode-target {
+    display: inline;
 }
 
 /* SPRACHWECHSLER BUTTON */
 .lang-btn {
     background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.25);
     color: #ffffff;
-    padding: 6px 14px;
-    border-radius: 50px;
-    font-size: 13px;
+    padding: 12px 22px;
+    border-radius: 60px;
+    font-size: 17px;
     font-weight: 800;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -264,7 +280,7 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 80px 20px 40px 20px;
+    padding: 100px 20px 40px 20px;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -272,7 +288,6 @@ html, body {
     margin: 0 auto;
 }
 
-/* SEITE 1: STARK VERBLURTE SCHEMA-ANIMATION (DUNKELBRAUN, DUNKELORANGE, DUNKELBLAU) */
 #matrix {
     background: #080a12;
     overflow: hidden;
@@ -304,7 +319,6 @@ html, body {
     100% { transform: rotate(240deg) scale(1); }
 }
 
-/* SEITE 2: DUNKLES WALDGRÜN & OCKER CANVAS BACKGROUND */
 #klima {
     background: #06120b;
     overflow: hidden;
@@ -346,9 +360,9 @@ html, body {
 }
 
 .section-title {
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 800;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     letter-spacing: 0.5px;
     position: relative;
@@ -356,14 +370,14 @@ html, body {
 }
 
 .section-subtitle {
-    font-size: 16px;
+    font-size: 18px;
     opacity: 0.85;
     max-width: 800px;
     line-height: 1.5;
     margin-bottom: 35px;
     position: relative;
     z-index: 2;
-    white-space: pre-line; /* ERMÖGLICHT SAUBERE ZEILENUMBRÜCHE VIA \n */
+    white-space: pre-line;
 }
 
 /* ==================== ELEMENTS ==================== */
@@ -476,7 +490,7 @@ html, body {
     font-size: 16px;
     line-height: 1.4;
     color: #e2e8f0;
-    white-space: pre-line; /* ERMÖGLICHT SAUBERE ZEILENUMBRÜCHE VIA \n */
+    white-space: pre-line;
 }
 
 .card-divider {
@@ -828,7 +842,7 @@ html, body {
 
 <div class="neonav-wrapper" id="neonavWrapper">
 
-    <!-- NAVIGATION HEADER -->
+    <!-- NAVIGATION HEADER (DOPPELT SO GROSS) -->
     <div class="navbar-container">
         <nav class="navbar">
             <div class="navbar-brand-wrapper">
@@ -859,8 +873,11 @@ html, body {
                 <li>
                     <a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a>
                 </li>
-                <li class="cta-button-item">
-                    <a href="design2.html" class="cta-button" data-i18n="nav.next_design">Nächstes Design</a>
+                <li class="mode-switch-item">
+                    <a href="index_portrait.html" class="mode-switch-btn">
+                        <span class="mode-current">Querformat 💻</span>
+                        <span class="mode-target">➔ Hochkant 📱</span>
+                    </a>
                 </li>
                 <li>
                     <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">DE / EN</button>
@@ -869,13 +886,12 @@ html, body {
         </nav>
     </div>
 
-    <!-- SEITE 1: HTML5 (SCHEMENHAFTE ANIMATION IN DUNKELBRAUN, ORANGE & DUNKELBLAU) -->
+    <!-- SEITE 1: HTML5 -->
     <section id="matrix" class="content-section">
         <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
         <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
 
         <div class="side-by-side-container">
-            <!-- ELECTRIC CARD -->
             <div class="card-container">
                 <div class="inner-container">
                     <div class="main-card"></div>
@@ -896,7 +912,6 @@ html, body {
                 </div>
             </div>
 
-            <!-- TRIGONOMETRIC RADIAL POPOVER MENU -->
             <div class="popover-menu-box" id="popoverBox1">
                 <button class="popover-trigger" onclick="togglePopover1()">
                     <svg viewBox="0 0 24 24">
@@ -915,7 +930,7 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 2: RANGE SLIDER (MIT DUNKLEM GRÜN & OCKER PARTICLES BACKGROUND) -->
+    <!-- SEITE 2: RANGE SLIDER -->
     <section id="klima" class="content-section">
         <canvas id="klimaCanvas"></canvas>
 
@@ -1057,7 +1072,6 @@ function togglePopover1() {
     if (box) box.classList.toggle('open');
 }
 
-/* SLIDER SYNCHRONISATION */
 const gelRange = document.getElementById('gelRange');
 const gelFill = document.getElementById('gelFill');
 const gelBadge = document.getElementById('gelBadge');
@@ -1102,7 +1116,6 @@ function selectDial(el, label, val) {
     el.classList.add('active');
 }
 
-/* CANVAS-ANIMATION KLIMA (DUNKELGRÜN & OCKER PARTICLES / LINES) */
 function initKlimaCanvas() {
     const canvas = document.getElementById('klimaCanvas');
     if (!canvas) return;
@@ -1170,7 +1183,6 @@ function initKlimaCanvas() {
     animate();
 }
 
-/* KANVAS-ANIMATION MEDIEN */
 function initMedienCanvas() {
     const canvas = document.getElementById('medienCanvas');
     if (!canvas) return;
