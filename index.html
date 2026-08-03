@@ -274,7 +274,7 @@ html, body {
     box-shadow: 0 0 18px rgba(217, 107, 39, 0.45);
 }
 
-/* PURER REINER FLAGGENSCHALTER OHNE BUTTON-CONTAINER/HINTERGRUND */
+/* REINER SPRACHEN-BUTTON OHNE BEHÄLTER KASTEN */
 .lang-flag-btn {
     position: relative;
     background: transparent !important;
@@ -285,7 +285,7 @@ html, body {
     cursor: pointer;
     outline: none;
     overflow: hidden;
-    min-width: 76px;
+    min-width: 82px;
     height: 38px;
     display: flex;
     align-items: center;
@@ -295,7 +295,7 @@ html, body {
 .flag-wrapper {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     font-weight: 900;
     font-size: 15px;
     letter-spacing: 0.5px;
@@ -304,7 +304,15 @@ html, body {
     position: absolute;
 }
 
-.flag-icon { font-size: 20px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+/* SVG FLAGGEN STYLING */
+.flag-svg {
+    width: 22px;
+    height: 15px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    flex-shrink: 0;
+    display: block;
+}
 
 .lang-flag-btn .flag-curr { transform: translateY(0); opacity: 1; }
 .lang-flag-btn .flag-next { transform: translateY(30px); opacity: 0; }
@@ -480,7 +488,7 @@ html, body {
 .card-description { opacity: 0.85; font-size: 15px; line-height: 1.4; color: #e2e8f0; white-space: pre-line; }
 .card-divider { margin-top: auto; border: none; height: 1px; background: rgba(255, 255, 255, 0.18); }
 
-/* POPOVER MIT MINI CRESTRON SWIRL IN ITEM 1 & PERSISTENTEN AKTIV-FARBEN */
+/* POPOVER MENU */
 .popover-menu-box { position: relative; width: 330px; height: 330px; display: flex; align-items: center; justify-content: center; }
 .popover-trigger {
     width: 70px; height: 70px; border-radius: 50%;
@@ -493,16 +501,16 @@ html, body {
 .popover-menu-box.open .popover-trigger svg { transform: rotate(135deg); }
 
 .popover-item {
-    position: absolute; width: 56px; height: 56px; border-radius: 50%;
+    position: absolute; width: 54px; height: 54px; border-radius: 50%;
     background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;
     color: #fff; cursor: pointer; opacity: 0; transform: translate(0,0) scale(0);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .popover-item svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
-/* CRESTRON MINI-SWIRL IM POP 1 BUTTON */
+/* MINI CRESTRON SWIRL */
 .mini-crestron-swirl {
     width: 22px;
     height: 22px;
@@ -525,7 +533,7 @@ html, body {
     animation: logo-pulse 2s ease-in-out infinite;
 }
 
-/* INDIVIDUELLE UND PERSISTENTE AKTIV-FARBEN BEIM KLICKEN */
+/* PERSISTENTE AKTIV-FARBEN BEIM KLICKEN */
 .popover-item.pop-1.active { background: linear-gradient(135deg, #00d2ff, #0082fc); border-color: #00f0ff; box-shadow: 0 0 18px rgba(0, 210, 255, 0.8); }
 .popover-item.pop-2.active { background: linear-gradient(135deg, #ff9f43, #ff5252); border-color: #ff9f43; box-shadow: 0 0 18px rgba(255, 159, 67, 0.8); }
 .popover-item.pop-3.active { background: linear-gradient(135deg, #e056fd, #686de0); border-color: #e056fd; box-shadow: 0 0 18px rgba(224, 86, 253, 0.8); }
@@ -608,8 +616,10 @@ html, body {
 </head>
 <body>
 
+<!-- SVG FILTER DEFINITIONEN -->
 <svg class="svg-container">
     <defs>
+        <!-- SPARK FILTER CARD -->
         <filter id="electric-spark" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;5;12;24;8;2;19;3" dur="0.4s" repeatCount="indefinite" calcMode="discrete"/>
@@ -617,6 +627,7 @@ html, body {
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
 
+        <!-- CODEPEN FLAMMEN-WELLEN FILTER -->
         <filter id="flame-wave" x="-30%" y="-30%" width="160%" height="160%">
             <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;8;15;22;9;3;17" dur="0.5s" repeatCount="indefinite" calcMode="discrete"/>
@@ -626,6 +637,7 @@ html, body {
     </defs>
 </svg>
 
+<!-- FESTES SKALIERBARES CANVAS (1920x1080) -->
 <div id="canvas">
 
     <!-- NAVIGATION HEADER -->
@@ -660,8 +672,8 @@ html, body {
                 </li>
                 <li>
                     <button id="langToggle" class="lang-flag-btn" onclick="toggleLanguage()">
-                        <span class="flag-wrapper flag-curr" id="langCurr"><span class="flag-icon">🇩🇪</span> <span>DEU</span></span>
-                        <span class="flag-wrapper flag-next" id="langNext"><span class="flag-icon">🇬🇧</span> <span>ENG</span></span>
+                        <span class="flag-wrapper flag-curr" id="langCurr"></span>
+                        <span class="flag-wrapper flag-next" id="langNext"></span>
                     </button>
                 </li>
                 <li>
@@ -699,7 +711,7 @@ html, body {
                 </div>
             </div>
 
-            <!-- TRIGONOMETRIC RADIAL POPOVER MENU (CRESTRON SWIRL IN POP-1 & PERSISTENTE AKTIV-FARBEN) -->
+            <!-- TRIGONOMETRIC RADIAL POPOVER MENU -->
             <div class="popover-menu-box" id="popoverBox1">
                 <button class="popover-trigger" onclick="togglePopover1()">
                     <svg viewBox="0 0 24 24">
@@ -789,6 +801,10 @@ document.addEventListener('DOMContentLoaded', fitCanvas);
 let currentLang = localStorage.getItem('selectedLang') || 'de';
 let translations = {};
 
+// INLINE SVG FLAGGEN CONSTANTS FÜR UNIVERSELLE DARSTELLUNG
+const deFlagSvg = `<svg class="flag-svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#FFCE00"/><rect width="3" height="1.333" fill="#DD0000"/><rect width="3" height="0.667" fill="#000000"/></svg>`;
+const enFlagSvg = `<svg class="flag-svg" viewBox="0 0 60 30"><clipPath id="s_uk"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk"><path d="M30,15 L60,0 v30 z M30,15 L0,30 v-30 z M30,15 L0,0 h60 z M30,15 L60,30 h-60 z"/></clipPath><g clip-path="url(#s_uk)"><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cc0000" stroke-width="4" clip-path="url(#t_uk)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#cc0000" stroke-width="6"/></g></svg>`;
+
 async function loadTranslations(lang) {
     try {
         const response = await fetch(`${lang}.json`);
@@ -805,11 +821,11 @@ function updateLangButtonUI(lang) {
     const curr = document.getElementById('langCurr');
     const next = document.getElementById('langNext');
     if (lang === 'de') {
-        curr.innerHTML = '<span class="flag-icon">🇩🇪</span> <span>DEU</span>';
-        next.innerHTML = '<span class="flag-icon">🇬🇧</span> <span>ENG</span>';
+        curr.innerHTML = `${deFlagSvg} <span>DEU</span>`;
+        next.innerHTML = `${enFlagSvg} <span>ENG</span>`;
     } else {
-        curr.innerHTML = '<span class="flag-icon">🇬🇧</span> <span>ENG</span>';
-        next.innerHTML = '<span class="flag-icon">🇩🇪</span> <span>DEU</span>';
+        curr.innerHTML = `${enFlagSvg} <span>ENG</span>`;
+        next.innerHTML = `${deFlagSvg} <span>DEU</span>`;
     }
 }
 
@@ -873,7 +889,6 @@ function togglePopover1() {
     if (box) box.classList.toggle('open');
 }
 
-/* UMSCHALTEN DES PERSISTENTEN AKTIV-ZUSTANDS IM POPOVER */
 function togglePopoverItem(el) {
     el.classList.toggle('active');
 }
