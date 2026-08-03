@@ -1,0 +1,36 @@
+{
+  "nav": {
+    "brand_title": "Crestron UI",
+    "select_design": "Select Design",
+    "design_1": "Design 1",
+    "design_2": "Design 2",
+    "design_3": "Design 3",
+    "html5": "HTML5",
+    "klima": "Climate",
+    "medien": "Media",
+    "next_design": "Next Design"
+  },
+  "matrix": {
+    "title": "HTML5",
+    "subtitle": "Here we demonstrate various capabilities of HTML5/CSS/Javascript. They are embedded as HTML code (incl. CSS and Javascript) inside the DIV container in Construct.",
+    "badge_new": "NEW",
+    "card_title": "Crestron. Construct.",
+    "card_desc": "Next-Gen UI design for HTML5 WebXPanel & Touchpanels."
+  },
+  "klima": {
+    "title": "Range Slider",
+    "subtitle": "Smoothly adjust room temperature or lighting using the gel slider.",
+    "slider_title": "Glass / Gel Slider",
+    "preset_clear": "Clear",
+    "preset_rainbow": "Rainbow",
+    "preset_sunset": "Sunset",
+    "preset_ice": "Ice",
+    "preset_slime": "Slime"
+  },
+  "medien": {
+    "title": "Background Effect & Menu Button",
+    "subtitle": "Tap the Crestron button in the center to open the colorful sources.",
+    "dial_center": "Crestron",
+    "dial_click": "Click"
+  }
+}
