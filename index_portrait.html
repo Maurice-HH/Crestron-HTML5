@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Crestron UI - Design 1 (Index Hochkant)</title>
+<title>Crestron UI - Design 1 (Index Hochkant High-Res)</title>
 <style>
 /* ==================== GLOBAL RESET & VIEWPORT LOCK ==================== */
 * {
@@ -23,66 +23,66 @@ html, body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #060810 !important;
+    background: #04060c !important;
     color: #ffffff;
-    font-size: 15px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* ==================== FIXED CANVAS CONTAINER (440x956) ==================== */
+/* ==================== HIGH-RES CANVAS HOCHKANT (1080x2340) ==================== */
 #canvas {
-    width: 440px;
-    height: 956px;
+    width: 1080px;
+    height: 2340px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: center center;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
     background: #0b0f19;
 }
 
-#canvas::-webkit-scrollbar { width: 4px; }
+#canvas::-webkit-scrollbar { width: 8px; }
 #canvas::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
 
-/* ==================== NAVBAR WITH SMOOTH WAVE BORDER ==================== */
+/* ==================== TOP HEADER HIGH-RES HOCHKANT ==================== */
 .navbar-container {
     position: sticky;
-    top: 8px;
+    top: 20px;
     z-index: 1000;
-    width: 95%; 
+    width: 94%; 
     margin: 0 auto;
 }
 
 .navbar-wrapper-outer {
     position: relative;
-    padding: 2px;
-    border-radius: 16px;
+    padding: 3px;
+    border-radius: 28px;
 }
 
 .navbar-wave-border {
     position: absolute;
-    inset: -2px;
-    border-radius: 18px;
-    border: 1.5px solid rgba(225, 120, 50, 0.75);
-    filter: url(#smooth-wave-portrait);
+    inset: 0;
+    border-radius: 28px;
+    border: 3px solid rgba(225, 120, 50, 0.75);
+    box-shadow: 0 0 25px rgba(217, 107, 39, 0.25);
     pointer-events: none;
-    box-shadow: 0 0 15px rgba(217, 107, 39, 0.2);
 }
 
 .navbar {
     position: relative;
-    background: rgba(18, 24, 38, 0.92);
+    background: rgba(18, 24, 38, 0.94);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    border-radius: 15px;
-    padding: 10px 12px;
+    border-radius: 26px;
+    padding: 22px 28px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    gap: 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
     z-index: 2;
 }
 
@@ -96,15 +96,15 @@ html, body {
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 16px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 800;
-    font-size: 16px;
+    font-size: 36px;
 }
 
 .logo-icon {
-    width: 26px; height: 26px;
+    width: 56px; height: 56px;
     background: linear-gradient(135deg, #d96b27, #8c3b12);
     border-radius: 50%; position: relative; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
@@ -122,72 +122,71 @@ html, body {
 .top-actions-group {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 14px;
 }
 
 .mode-switch-btn {
     display: inline-flex; align-items: center; justify-content: center;
     background: linear-gradient(180deg, #d86927 0%, #a84714 100%); color: #ffffff; text-decoration: none;
-    padding: 6px 10px; border-radius: 8px; font-weight: 800; font-size: 12px; line-height: 1;
-    white-space: nowrap; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    padding: 14px 24px; border-radius: 16px; font-weight: 800; font-size: 26px; line-height: 1;
+    white-space: nowrap; cursor: pointer; border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25);
 }
 
-/* SPRACHENBUTTON HOCHKANT */
 .lang-flag-btn {
     position: relative;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
-    padding: 6px 10px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 16px;
+    padding: 12px 20px;
     cursor: pointer;
     outline: none;
     overflow: hidden;
-    min-width: 72px;
-    height: 30px;
+    min-width: 150px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.25);
 }
 
 .flag-wrapper {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     font-weight: 900;
-    font-size: 11px;
+    font-size: 24px;
     color: #ffffff;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
     position: absolute;
 }
 
-.flag-icon { font-size: 13px; line-height: 1; }
+.flag-icon { font-size: 30px; line-height: 1; }
 
 .lang-flag-btn .flag-curr { transform: translateY(0); opacity: 1; }
-.lang-flag-btn .flag-next { transform: translateY(26px); opacity: 0; }
+.lang-flag-btn .flag-next { transform: translateY(50px); opacity: 0; }
 
-.lang-flag-btn:hover .flag-curr { transform: translateY(-26px); opacity: 0; }
+.lang-flag-btn:hover .flag-curr { transform: translateY(-50px); opacity: 0; }
 .lang-flag-btn:hover .flag-next { transform: translateY(0); opacity: 1; }
 
 .design2-btn {
     display: inline-flex; align-items: center; justify-content: center;
     background: linear-gradient(180deg, #2a364a 0%, #172130 100%);
-    color: #ffffff; text-decoration: none; padding: 6px 10px; border-radius: 8px;
-    font-weight: 800; font-size: 12px; line-height: 1;
-    border: 1px solid rgba(217, 107, 39, 0.5); cursor: pointer;
+    color: #ffffff; text-decoration: none; padding: 14px 26px; border-radius: 16px;
+    font-weight: 800; font-size: 26px; line-height: 1;
+    border: 2px solid rgba(217, 107, 39, 0.5); cursor: pointer;
 }
 
-/* DREITEILIGE SEGMENTED CONTROL LEISTE */
+/* SEGMENTED CONTROL LEISTE HOCHKANT HIGH-RES */
 .segmented-control-nav {
     display: flex;
     align-items: center;
     background: rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-    padding: 3px;
+    border-radius: 18px;
+    padding: 6px;
     width: 100%;
     list-style: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.08);
 }
 
 .segmented-control-nav li { flex: 1; }
@@ -197,35 +196,40 @@ html, body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 7px 0;
+    padding: 16px 0;
     text-decoration: none;
     font-weight: 800;
-    font-size: 13px;
-    border-radius: 7px;
+    font-size: 28px;
+    border-radius: 14px;
     transition: all 0.2s ease;
     white-space: nowrap;
     color: rgba(255, 255, 255, 0.7);
 }
 
-.nav-link[data-section="matrix"].active { background: rgba(247, 163, 97, 0.2); color: #f7a361 !important; border: 1px solid rgba(247, 163, 97, 0.3); }
-.nav-link[data-section="klima"].active  { background: rgba(78, 205, 196, 0.2); color: #4ecdc4 !important; border: 1px solid rgba(78, 205, 196, 0.3); }
-.nav-link[data-section="medien"].active { background: rgba(112, 161, 255, 0.2); color: #70a1ff !important; border: 1px solid rgba(112, 161, 255, 0.3); }
+.nav-link[data-section="matrix"].active { background: rgba(247, 163, 97, 0.2); color: #f7a361 !important; border: 2px solid rgba(247, 163, 97, 0.3); }
+.nav-link[data-section="klima"].active  { background: rgba(78, 205, 196, 0.2); color: #4ecdc4 !important; border: 2px solid rgba(78, 205, 196, 0.3); }
+.nav-link[data-section="medien"].active { background: rgba(112, 161, 255, 0.2); color: #70a1ff !important; border: 2px solid rgba(112, 161, 255, 0.3); }
 
-/* ==================== CONTENT SECTIONS PORTRAIT ==================== */
+/* ==================== CONTENT SECTIONS HOCHKANT HIGH-RES ==================== */
 .content-section {
-    min-height: 956px; display: flex; align-items: center; justify-content: center; flex-direction: column;
-    padding: 85px 16px 30px 16px; text-align: center; position: relative; z-index: 2; width: 100%;
+    min-height: 2340px; display: flex; align-items: center; justify-content: center; flex-direction: column;
+    padding: 220px 40px 80px 40px; text-align: center; position: relative; z-index: 2; width: 100%;
 }
 
-#matrix { background: #060810; overflow: hidden; }
-#matrix::before {
-    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+#matrix { background: #060810; position: relative; overflow: hidden; }
+
+.bg-blur-layer {
+    position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1;
+}
+
+.bg-blur-inner {
+    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: 
         radial-gradient(circle at 25% 25%, #6e2a0c 0%, transparent 45%),
         radial-gradient(circle at 75% 30%, #0d2847 0%, transparent 50%),
         radial-gradient(circle at 50% 75%, #521c08 0%, transparent 45%),
         radial-gradient(circle at 20% 70%, #18332b 0%, transparent 40%);
-    filter: blur(75px); animation: rainbowShift 12s linear infinite, blobRotate 18s ease-in-out infinite alternate; opacity: 0.85; pointer-events: none; z-index: 1;
+    filter: blur(140px); animation: rainbowShift 12s linear infinite, blobRotate 18s ease-in-out infinite alternate; opacity: 0.85;
 }
 
 @keyframes blobRotate {
@@ -235,8 +239,8 @@ html, body {
 }
 
 @keyframes rainbowShift {
-    0%   { filter: blur(75px) hue-rotate(0deg); }
-    100% { filter: blur(75px) hue-rotate(360deg); }
+    0%   { filter: blur(140px) hue-rotate(0deg); }
+    100% { filter: blur(140px) hue-rotate(360deg); }
 }
 
 #klima { background: #06120b; overflow: hidden; position: relative; }
@@ -246,63 +250,63 @@ html, body {
 .content-section > * { max-width: 100%; width: 100%; position: relative; z-index: 2; }
 #medienCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0.9; }
 
-.section-title { font-size: 26px; font-weight: 800; margin-bottom: 6px; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); }
-.section-subtitle { font-size: 13px; opacity: 0.85; max-width: 100%; line-height: 1.35; margin-bottom: 20px; white-space: pre-line; }
+.section-title { font-size: 64px; font-weight: 800; margin-bottom: 16px; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
+.section-subtitle { font-size: 30px; opacity: 0.85; max-width: 100%; line-height: 1.4; margin-bottom: 50px; white-space: pre-line; }
 
-/* ELEMENTS STACK PORTRAIT */
-.side-by-side-container { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; width: 100%; position: relative; z-index: 2; }
+/* ELEMENTS HOCHKANT HIGH-RES (CARD 650x650) */
+.side-by-side-container { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 60px; width: 100%; position: relative; z-index: 2; }
 .svg-container { position: absolute; width: 0; height: 0; }
-.card-container { padding: 0; border-radius: 12px; position: relative; }
+.card-container { padding: 0; border-radius: 28px; position: relative; }
 
 .main-card {
-    width: 260px; height: 260px; border-radius: 12px; border: 3px solid var(--electric-border-color); background: #182030; filter: url(#electric-spark-portrait);
+    width: 650px; height: 650px; border-radius: 28px; border: 8px solid var(--electric-border-color); background: #182030; filter: url(#electric-spark-portrait);
 }
 
-.glow-layer-1 { border: 2px solid rgba(217, 107, 39, 0.7); border-radius: 12px; width: 100%; height: 100%; position: absolute; top: 0; left: 0; filter: blur(4px); pointer-events: none; }
+.glow-layer-1 { border: 6px solid rgba(217, 107, 39, 0.7); border-radius: 28px; width: 100%; height: 100%; position: absolute; top: 0; left: 0; filter: blur(8px); pointer-events: none; }
 .card-content-container { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: flex; flex-direction: column; text-align: left; z-index: 5; }
-.card-content-top { display: flex; flex-direction: column; padding: 18px; padding-bottom: 8px; height: 100%; }
-.card-content-bottom { display: flex; flex-direction: column; padding: 18px; padding-top: 8px; }
-.badge-neu { background: rgba(217, 107, 39, 0.3); border: 1px solid rgba(217, 107, 39, 0.6); border-radius: 6px; width: fit-content; padding: 3px 10px; text-transform: uppercase; font-weight: 800; font-size: 11px; color: #ffffff; }
-.card-title { font-size: 22px; font-weight: 800; margin-top: auto; color: #ffffff; }
-.card-description { opacity: 0.85; font-size: 13px; line-height: 1.3; color: #e2e8f0; white-space: pre-line; }
-.card-divider { margin-top: auto; border: none; height: 1px; background: rgba(255, 255, 255, 0.18); }
+.card-content-top { display: flex; flex-direction: column; padding: 45px; padding-bottom: 20px; height: 100%; }
+.card-content-bottom { display: flex; flex-direction: column; padding: 45px; padding-top: 20px; }
+.badge-neu { background: rgba(217, 107, 39, 0.3); border: 2px solid rgba(217, 107, 39, 0.6); border-radius: 12px; width: fit-content; padding: 8px 24px; text-transform: uppercase; font-weight: 800; font-size: 24px; color: #ffffff; }
+.card-title { font-size: 52px; font-weight: 800; margin-top: auto; color: #ffffff; }
+.card-description { opacity: 0.85; font-size: 28px; line-height: 1.4; color: #e2e8f0; white-space: pre-line; }
+.card-divider { margin-top: auto; border: none; height: 2px; background: rgba(255, 255, 255, 0.18); }
 
-/* POPOVER PORTRAIT */
-.popover-menu-box { position: relative; width: 250px; height: 250px; display: flex; align-items: center; justify-content: center; }
-.popover-trigger { width: 58px; height: 58px; border-radius: 50%; background: linear-gradient(180deg, #d86927, #a84714); border: none; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; box-shadow: 0 4px 15px rgba(168, 71, 20, 0.4); }
-.popover-trigger svg { width: 24px; height: 24px; stroke: #ffffff; stroke-width: 3; }
+/* POPOVER HOCHKANT HIGH-RES */
+.popover-menu-box { position: relative; width: 600px; height: 600px; display: flex; align-items: center; justify-content: center; }
+.popover-trigger { width: 140px; height: 140px; border-radius: 50%; background: linear-gradient(180deg, #d86927, #a84714); border: none; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; box-shadow: 0 10px 30px rgba(168, 71, 20, 0.4); }
+.popover-trigger svg { width: 56px; height: 56px; stroke: #ffffff; stroke-width: 3; }
 
-.popover-item { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transform: translate(0,0) scale(0); transition: all 0.3s ease; }
-.popover-item svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 2; fill: none; }
+.popover-item { position: absolute; width: 110px; height: 110px; border-radius: 50%; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(15px); border: 2px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transform: translate(0,0) scale(0); transition: all 0.3s ease; }
+.popover-item svg { width: 44px; height: 44px; stroke: currentColor; stroke-width: 2; fill: none; }
 .popover-menu-box.open .popover-item { opacity: 1; }
-.popover-menu-box.open .pop-1 { transform: translate(0px, -80px) scale(1); }
-.popover-menu-box.open .pop-2 { transform: translate(70px, -40px) scale(1); }
-.popover-menu-box.open .pop-3 { transform: translate(70px, 40px) scale(1); }
-.popover-menu-box.open .pop-4 { transform: translate(0px, 80px) scale(1); }
-.popover-menu-box.open .pop-5 { transform: translate(-70px, 40px) scale(1); }
-.popover-menu-box.open .pop-6 { transform: translate(-70px, -40px) scale(1); }
+.popover-menu-box.open .pop-1 { transform: translate(0px, -200px) scale(1); }
+.popover-menu-box.open .pop-2 { transform: translate(175px, -100px) scale(1); }
+.popover-menu-box.open .pop-3 { transform: translate(175px, 100px) scale(1); }
+.popover-menu-box.open .pop-4 { transform: translate(0px, 200px) scale(1); }
+.popover-menu-box.open .pop-5 { transform: translate(-175px, 100px) scale(1); }
+.popover-menu-box.open .pop-6 { transform: translate(-175px, -100px) scale(1); }
 
-/* GEL SLIDER PORTRAIT (OHNE ZAHLEN 0 & 100) */
-.gel-slider-box { width: 100%; max-width: 320px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 18px 16px; }
-.gel-slider-title { font-size: 18px; font-weight: 800; margin-bottom: 14px; color: #ffffff; }
-.gel-track-container { position: relative; width: 100%; height: 30px; background: rgba(255, 255, 255, 0.1); border-radius: 18px; display: flex; align-items: center; }
-.gel-fill-bar { position: absolute; left: 0; top: 0; height: 100%; width: 67%; border-radius: 18px; background-image: linear-gradient(90deg, #d86927 0%, #fecfef 100%); }
+/* GEL SLIDER HOCHKANT HIGH-RES */
+.gel-slider-box { width: 100%; max-width: 800px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 2px solid rgba(255, 255, 255, 0.12); border-radius: 28px; padding: 45px 40px; }
+.gel-slider-title { font-size: 42px; font-weight: 800; margin-bottom: 30px; color: #ffffff; }
+.gel-track-container { position: relative; width: 100%; height: 70px; background: rgba(255, 255, 255, 0.1); border-radius: 40px; display: flex; align-items: center; }
+.gel-fill-bar { position: absolute; left: 0; top: 0; height: 100%; width: 67%; border-radius: 40px; background-image: linear-gradient(90deg, #d86927 0%, #fecfef 100%); }
 .gel-range-input { position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 10; }
-.gel-thumb-badge { position: absolute; top: 50%; left: 67%; transform: translate(-50%, -50%); width: 34px; height: 34px; background: linear-gradient(135deg, #ffe259 0%, #ffa751 50%, #d4af37 100%); color: #1a1500; border: 2px solid #fff5c0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; z-index: 5; }
-.gel-presets { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 14px; font-size: 12px; font-weight: 700; }
-.gel-preset-label { display: flex; align-items: center; gap: 5px; cursor: pointer; opacity: 0.75; }
+.gel-thumb-badge { position: absolute; top: 50%; left: 67%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: linear-gradient(135deg, #ffe259 0%, #ffa751 50%, #d4af37 100%); color: #1a1500; border: 4px solid #fff5c0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 900; z-index: 5; }
+.gel-presets { display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-top: 30px; font-size: 26px; font-weight: 700; }
+.gel-preset-label { display: flex; align-items: center; gap: 10px; cursor: pointer; opacity: 0.75; }
 .gel-preset-label.active { opacity: 1; color: #ffffff; }
-.gel-radio-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid #fff; }
+.gel-radio-dot { width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 3px solid #fff; }
 .gel-preset-label.active .gel-radio-dot { background: var(--electric-border-color); }
 
-/* RADIAL MENU PORTRAIT */
-.radial-dial-box { position: relative; width: 280px; height: 280px; margin: 5px auto 0 auto; display: flex; align-items: center; justify-content: center; }
-.dial-center-knob { width: 110px; height: 110px; background: linear-gradient(135deg, #182030, #242f45); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; border: 2px solid var(--electric-border-color); cursor: pointer; }
-.dial-val { font-size: 18px; font-weight: 800; color: #ffffff; }
-.dial-label { font-size: 11px; font-weight: 700; color: var(--electric-border-color); letter-spacing: 1px; }
+/* RADIAL MENU HOCHKANT HIGH-RES */
+.radial-dial-box { position: relative; width: 680px; height: 680px; margin: 20px auto 0 auto; display: flex; align-items: center; justify-content: center; }
+.dial-center-knob { width: 260px; height: 260px; background: linear-gradient(135deg, #182030, #242f45); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; border: 4px solid var(--electric-border-color); cursor: pointer; }
+.dial-val { font-size: 44px; font-weight: 800; color: #ffffff; }
+.dial-label { font-size: 24px; font-weight: 700; color: var(--electric-border-color); letter-spacing: 2px; }
 
-.dial-item { position: absolute; width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 15; opacity: 0; transform: scale(0.2); transition: transform 0.3s ease, opacity 0.2s ease; }
-.dial-item svg { width: 20px; height: 20px; fill: none; stroke: #ffffff; stroke-width: 2.2; }
+.dial-item { position: absolute; width: 120px; height: 120px; border-radius: 50%; border: 4px solid rgba(255, 255, 255, 0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 15; opacity: 0; transform: scale(0.2); transition: transform 0.3s ease, opacity 0.2s ease; }
+.dial-item svg { width: 48px; height: 48px; fill: none; stroke: #ffffff; stroke-width: 2.2; }
 .dial-item[data-color="bt"]  { background: linear-gradient(135deg, #0082fc, #00d2ff); }
 .dial-item[data-color="tv"]  { background: linear-gradient(135deg, #ff4757, #ff6b81); }
 .dial-item[data-color="rad"] { background: linear-gradient(135deg, #ffa502, #ff7f50); }
@@ -310,12 +314,12 @@ html, body {
 .dial-item[data-color="aux"] { background: linear-gradient(135deg, #eccc68, #ff7f50); }
 .dial-item[data-color="set"] { background: linear-gradient(135deg, #70a1ff, #1e90ff); }
 
-.radial-dial-box.open .pos-bt  { transform: translate(0px, -95px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-tv  { transform: translate(82px, -45px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-rad { transform: translate(82px, 45px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-sp  { transform: translate(0px, 95px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-aux { transform: translate(-82px, 45px) scale(1); opacity: 1; }
-.radial-dial-box.open .pos-set { transform: translate(-82px, -45px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-bt  { transform: translate(0px, -230px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-tv  { transform: translate(200px, -115px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-rad { transform: translate(200px, 115px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-sp  { transform: translate(0px, 230px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-aux { transform: translate(-200px, 115px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-set { transform: translate(-200px, -115px) scale(1); opacity: 1; }
 </style>
 </head>
 <body>
@@ -328,17 +332,10 @@ html, body {
             </feTurbulence>
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
-
-        <filter id="smooth-wave-portrait" x="-20%" y="-20%" width="140%" height="140%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.015 0.02" numOctaves="2" result="noise">
-                <animate attributeName="baseFrequency" values="0.012 0.018; 0.02 0.025; 0.012 0.018" dur="8s" repeatCount="indefinite"/>
-            </feTurbulence>
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
     </defs>
 </svg>
 
-<!-- FESTES SKALIERBARES CANVAS HOCHKANT (440x956) -->
+<!-- FESTES HIGH-RES CANVAS HOCHKANT (1080x2340) -->
 <div id="canvas">
 
     <!-- NAVIGATION HEADER PORTRAIT -->
@@ -377,6 +374,8 @@ html, body {
 
     <!-- SEITE 1: HTML5 -->
     <section id="matrix" class="content-section">
+        <div class="bg-blur-layer"><div class="bg-blur-inner"></div></div>
+
         <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
         <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript.</p>
 
@@ -466,13 +465,19 @@ html, body {
 </div>
 
 <script>
+/* EXAKTE TOP-LEFT CANVAS ZENTRIERUNGS-LOGIK HOCHKANT (1080x2340) */
 function fitCanvas() {
     const canvas = document.getElementById('canvas');
     if (!canvas) return;
-    const targetW = 440;
-    const targetH = 956;
+    const targetW = 1080;
+    const targetH = 2340;
     const scale = Math.min(window.innerWidth / targetW, window.innerHeight / targetH);
-    canvas.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    const left = (window.innerWidth - targetW * scale) / 2;
+    const top = (window.innerHeight - targetH * scale) / 2;
+    
+    canvas.style.transform = `scale(${scale})`;
+    canvas.style.left = `${left}px`;
+    canvas.style.top = `${top}px`;
 }
 
 window.addEventListener('resize', fitCanvas);
