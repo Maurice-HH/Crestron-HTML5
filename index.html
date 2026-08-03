@@ -238,7 +238,7 @@ html, body {
     box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
 }
 
-/* ==================== SPRACHWECHSLER BUTTON ==================== */
+/* SPRACHWECHSLER BUTTON */
 .lang-btn {
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.25);
@@ -272,12 +272,54 @@ html, body {
     margin: 0 auto;
 }
 
+/* SEITE 1: STARK VERBLURTE SCHEMA-ANIMATION (DUNKELBRAUN, DUNKELORANGE, DUNKELBLAU) */
 #matrix {
-    background: linear-gradient(135deg, #1f120c 0%, #3a2215 50%, #1f120c 100%);
+    background: #080a12;
+    overflow: hidden;
 }
 
+#matrix::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 25% 25%, #2d1408 0%, transparent 45%),
+        radial-gradient(circle at 75% 30%, #0b1a2e 0%, transparent 50%),
+        radial-gradient(circle at 50% 75%, #572508 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, #152840 0%, transparent 40%),
+        radial-gradient(circle at 20% 70%, #3a1906 0%, transparent 50%);
+    filter: blur(90px);
+    animation: blurredBlobs 22s ease-in-out infinite alternate;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes blurredBlobs {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(120deg) scale(1.15); }
+    100% { transform: rotate(240deg) scale(1); }
+}
+
+/* SEITE 2: DUNKLES WALDGRÜN & OCKER CANVAS BACKGROUND */
 #klima {
-    background: linear-gradient(135deg, #0e2219 0%, #153b28 50%, #0e2219 100%);
+    background: #06120b;
+    overflow: hidden;
+    position: relative;
+}
+
+#klimaCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
 }
 
 #medien {
@@ -321,6 +363,7 @@ html, body {
     margin-bottom: 35px;
     position: relative;
     z-index: 2;
+    white-space: pre-line; /* ERMÖGLICHT SAUBERE ZEILENUMBRÜCHE VIA \n */
 }
 
 /* ==================== ELEMENTS ==================== */
@@ -433,6 +476,7 @@ html, body {
     font-size: 16px;
     line-height: 1.4;
     color: #e2e8f0;
+    white-space: pre-line; /* ERMÖGLICHT SAUBERE ZEILENUMBRÜCHE VIA \n */
 }
 
 .card-divider {
@@ -825,7 +869,7 @@ html, body {
         </nav>
     </div>
 
-    <!-- SEITE 1: HTML5 -->
+    <!-- SEITE 1: HTML5 (SCHEMENHAFTE ANIMATION IN DUNKELBRAUN, ORANGE & DUNKELBLAU) -->
     <section id="matrix" class="content-section">
         <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
         <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
@@ -871,8 +915,10 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 2: RANGE SLIDER -->
+    <!-- SEITE 2: RANGE SLIDER (MIT DUNKLEM GRÜN & OCKER PARTICLES BACKGROUND) -->
     <section id="klima" class="content-section">
+        <canvas id="klimaCanvas"></canvas>
+
         <h2 class="section-title" data-i18n="klima.title">Range Slider</h2>
         <p class="section-subtitle" data-i18n="klima.subtitle">Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.</p>
 
@@ -1002,6 +1048,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     sections.forEach(section => observer.observe(section));
     updateGelSlider();
+    initKlimaCanvas();
     initMedienCanvas();
 });
 
@@ -1055,7 +1102,75 @@ function selectDial(el, label, val) {
     el.classList.add('active');
 }
 
-/* KANVAS-ANIMATION */
+/* CANVAS-ANIMATION KLIMA (DUNKELGRÜN & OCKER PARTICLES / LINES) */
+function initKlimaCanvas() {
+    const canvas = document.getElementById('klimaCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const nodes = [];
+    const colors = ['#206a44', '#a38128', '#154a2e', '#d4aa37'];
+    
+    for (let i = 0; i < 45; i++) {
+        nodes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.6,
+            vy: (Math.random() - 0.5) * 0.6,
+            radius: Math.random() * 3 + 1.5,
+            color: colors[Math.floor(Math.random() * colors.length)]
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.strokeStyle = `rgba(163, 129, 40, ${0.2 * (1 - dist / 150)})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        nodes.forEach(n => {
+            n.x += n.vx;
+            n.y += n.vy;
+
+            if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+            if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+            ctx.fillStyle = n.color;
+            ctx.shadowBlur = 8;
+            ctx.shadowColor = n.color;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        });
+
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+/* KANVAS-ANIMATION MEDIEN */
 function initMedienCanvas() {
     const canvas = document.getElementById('medienCanvas');
     if (!canvas) return;
