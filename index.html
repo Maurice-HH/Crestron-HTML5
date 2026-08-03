@@ -16,7 +16,6 @@
 
 :root {
     --electric-border-color: #dd8448;
-    --electric-light-color: #f7a361;
     --tuerkis-blue: #00d2ff;
 }
 
@@ -239,6 +238,25 @@ html, body {
     box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
 }
 
+/* ==================== SPRACHWECHSLER BUTTON ==================== */
+.lang-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.lang-btn:hover {
+    background: rgba(0, 240, 255, 0.25);
+    border-color: #00f0ff;
+}
+
 /* ==================== CONTENT SECTIONS ==================== */
 .content-section {
     min-height: 100vh;
@@ -251,29 +269,28 @@ html, body {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
 #matrix {
     background: linear-gradient(135deg, #1f120c 0%, #3a2215 50%, #1f120c 100%);
-    max-width: 100%;
 }
-#matrix > * { max-width: 1200px; width: 100%; }
 
 #klima {
     background: linear-gradient(135deg, #0e2219 0%, #153b28 50%, #0e2219 100%);
-    max-width: 100%;
 }
-#klima > * { max-width: 1200px; width: 100%; }
 
 #medien {
     background: linear-gradient(135deg, #0c1b2a 0%, #133352 50%, #0c1b2a 100%);
     overflow: hidden;
-    position: relative;
-    max-width: 100%;
 }
-#medien > * { max-width: 1200px; width: 100%; position: relative; z-index: 2; }
+
+.content-section > * {
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
 
 #medienCanvas {
     position: absolute;
@@ -507,7 +524,7 @@ html, body {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* ==================== GEL SLIDER (PERFEKT STABIL) ==================== */
+/* ==================== GEL SLIDER ==================== */
 .gel-slider-box {
     width: 100%;
     max-width: 720px;
@@ -544,7 +561,7 @@ html, body {
     left: 0;
     top: 0;
     height: 100%;
-    width: 67px;
+    width: 67%;
     border-radius: 50px;
     background-image: linear-gradient(90deg, #ff9a9e 0%, #fecfef 45%, #ffc3a0 100%);
     background-repeat: no-repeat;
@@ -568,7 +585,7 @@ html, body {
 .gel-thumb-badge {
     position: absolute;
     top: 50%;
-    left: 67px;
+    left: 67%;
     transform: translate(-50%, -50%);
     width: 42px;
     height: 42px;
@@ -773,16 +790,16 @@ html, body {
             <div class="navbar-brand-wrapper">
                 <a href="#matrix" class="navbar-brand">
                     <div class="logo-icon"></div>
-                    <span>Crestron UI</span>
+                    <span data-i18n="nav.brand_title">Crestron UI</span>
                 </a>
                 
                 <div class="brand-popover">
                     <div class="brand-popover-inner">
-                        <div class="brand-popover-title">Design wählen</div>
+                        <div class="brand-popover-title" data-i18n="nav.select_design">Design wählen</div>
                         <div class="brand-popover-links">
-                            <a href="index.html" class="brand-popover-link active"><span>Design 1</span> <span>➔</span></a>
-                            <a href="design2.html" class="brand-popover-link"><span>Design 2</span> <span>➔</span></a>
-                            <a href="design3.html" class="brand-popover-link"><span>Design 3</span> <span>➔</span></a>
+                            <a href="index.html" class="brand-popover-link active"><span data-i18n="nav.design_1">Design 1</span> <span>➔</span></a>
+                            <a href="design2.html" class="brand-popover-link"><span data-i18n="nav.design_2">Design 2</span> <span>➔</span></a>
+                            <a href="design3.html" class="brand-popover-link"><span data-i18n="nav.design_3">Design 3</span> <span>➔</span></a>
                         </div>
                     </div>
                 </div>
@@ -790,16 +807,19 @@ html, body {
 
             <ul class="navbar-nav">
                 <li>
-                    <a href="#matrix" class="nav-link active" data-section="matrix">HTML5</a>
+                    <a href="#matrix" class="nav-link active" data-section="matrix" data-i18n="nav.html5">HTML5</a>
                 </li>
                 <li>
-                    <a href="#klima" class="nav-link" data-section="klima">Klima</a>
+                    <a href="#klima" class="nav-link" data-section="klima" data-i18n="nav.klima">Klima</a>
                 </li>
                 <li>
-                    <a href="#medien" class="nav-link" data-section="medien">Medien</a>
+                    <a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a>
                 </li>
                 <li class="cta-button-item">
-                    <a href="design2.html" class="cta-button">Nächstes Design</a>
+                    <a href="design2.html" class="cta-button" data-i18n="nav.next_design">Nächstes Design</a>
+                </li>
+                <li>
+                    <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">DE / EN</button>
                 </li>
             </ul>
         </nav>
@@ -807,8 +827,8 @@ html, body {
 
     <!-- SEITE 1: HTML5 -->
     <section id="matrix" class="content-section">
-        <h1 class="section-title">HTML5</h1>
-        <p class="section-subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
+        <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
+        <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
 
         <div class="side-by-side-container">
             <!-- ELECTRIC CARD -->
@@ -820,14 +840,14 @@ html, body {
 
                 <div class="card-content-container">
                     <div class="card-content-top">
-                        <a href="#medien" class="badge-neu">NEU</a>
-                        <p class="card-title">Crestron. Construct.</p>
+                        <a href="#medien" class="badge-neu" data-i18n="matrix.badge_new">NEU</a>
+                        <p class="card-title" data-i18n="matrix.card_title">Crestron. Construct.</p>
                     </div>
 
                     <hr class="card-divider" />
 
                     <div class="card-content-bottom">
-                        <p class="card-description">Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels.</p>
+                        <p class="card-description" data-i18n="matrix.card_desc">Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels.</p>
                     </div>
                 </div>
             </div>
@@ -853,11 +873,11 @@ html, body {
 
     <!-- SEITE 2: RANGE SLIDER -->
     <section id="klima" class="content-section">
-        <h2 class="section-title">Range Slider</h2>
-        <p class="section-subtitle">Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.</p>
+        <h2 class="section-title" data-i18n="klima.title">Range Slider</h2>
+        <p class="section-subtitle" data-i18n="klima.subtitle">Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.</p>
 
         <div class="gel-slider-box">
-            <h3 class="gel-slider-title">Glass / Gel Slider</h3>
+            <h3 class="gel-slider-title" data-i18n="klima.slider_title">Glass / Gel Slider</h3>
             
             <div class="gel-track-container" id="gelTrack">
                 <div class="gel-scale-labels">
@@ -870,11 +890,11 @@ html, body {
             </div>
 
             <div class="gel-presets">
-                <div class="gel-preset-label" onclick="setPreset('clear', this)"><span class="gel-radio-dot"></span> Clear</div>
-                <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> Rainbow</div>
-                <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> Sunset</div>
-                <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> Ice</div>
-                <div class="gel-preset-label" onclick="setPreset('slime', this)"><span class="gel-radio-dot"></span> Slime</div>
+                <div class="gel-preset-label" onclick="setPreset('clear', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_clear">Klar</span></div>
+                <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_rainbow">Regenbogen</span></div>
+                <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_sunset">Sonnenuntergang</span></div>
+                <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_ice">Eis</span></div>
+                <div class="gel-preset-label" onclick="setPreset('slime', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_slime">Schleim</span></div>
             </div>
         </div>
     </section>
@@ -883,13 +903,13 @@ html, body {
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
-        <h2 class="section-title">Hintergrundeffekt & Menü-Button</h2>
-        <p class="section-subtitle">Tippe auf den Crestron-Button in der Mitte, um die bunten Quellen zu öffnen.</p>
+        <h2 class="section-title" data-i18n="medien.title">Hintergrundeffekt & Menü-Button</h2>
+        <p class="section-subtitle" data-i18n="medien.subtitle">Tippe auf den Crestron-Button in der Mitte, um die bunten Quellen zu öffnen.</p>
 
         <div class="radial-dial-box" id="radialDialBox">
             <div class="dial-center-knob" onclick="toggleRadialDial()">
-                <span class="dial-val">Crestron</span>
-                <span class="dial-label">Klick</span>
+                <span class="dial-val" data-i18n="medien.dial_center">Crestron</span>
+                <span class="dial-label" data-i18n="medien.dial_click">Klick</span>
             </div>
 
             <div class="dial-item pos-bt" data-color="bt" onclick="selectDial(this, 'Bluetooth', 'Maurice S24')"><svg viewBox="0 0 24 24"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polyline></svg></div>
@@ -904,7 +924,45 @@ html, body {
 </div>
 
 <script>
+let currentLang = localStorage.getItem('selectedLang') || 'de';
+let translations = {};
+
+async function loadTranslations(lang) {
+    try {
+        const response = await fetch(`${lang}.json`);
+        translations = await response.json();
+        applyTranslations();
+        document.documentElement.lang = lang;
+        const langBtn = document.getElementById('langToggle');
+        if (langBtn) langBtn.textContent = lang.toUpperCase();
+    } catch (err) {
+        console.error('Fehler beim Laden der Sprachdatei:', err);
+    }
+}
+
+function getNestedTranslation(obj, path) {
+    return path.split('.').reduce((prev, curr) => (prev && prev[curr] !== undefined) ? prev[curr] : null, obj);
+}
+
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const text = getNestedTranslation(translations, key);
+        if (text) {
+            el.textContent = text;
+        }
+    });
+}
+
+function toggleLanguage() {
+    currentLang = (currentLang === 'de') ? 'en' : 'de';
+    localStorage.setItem('selectedLang', currentLang);
+    loadTranslations(currentLang);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    loadTranslations(currentLang);
+
     const wrapper = document.getElementById('neonavWrapper');
     const navLinks = document.querySelectorAll('.nav-link, .badge-neu');
     const sections = document.querySelectorAll('.content-section');
@@ -952,7 +1010,7 @@ function togglePopover1() {
     if (box) box.classList.toggle('open');
 }
 
-/* 100% EXAKTE PIXEL-BASIERTE SLIDER-SYNCHRONISATION (FEST VERBUNDEN) */
+/* SLIDER SYNCHRONISATION */
 const gelRange = document.getElementById('gelRange');
 const gelFill = document.getElementById('gelFill');
 const gelBadge = document.getElementById('gelBadge');
@@ -961,7 +1019,6 @@ function updateGelSlider() {
     if (!gelRange || !gelFill || !gelBadge) return;
     const val = Number(gelRange.value);
     
-    // Füllbalken und Badge exakt prozentual synchronisiert
     gelFill.style.width = val + '%';
     gelBadge.style.left = val + '%';
     gelBadge.textContent = val;
@@ -998,7 +1055,7 @@ function selectDial(el, label, val) {
     el.classList.add('active');
 }
 
-/* KANVAS-ANIMATION FÜR DIE MEDIEN-SEITE (DOPPELT SO HELL & FUNKELND) */
+/* KANVAS-ANIMATION */
 function initMedienCanvas() {
     const canvas = document.getElementById('medienCanvas');
     if (!canvas) return;
