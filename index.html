@@ -70,7 +70,7 @@ html, body {
     border: none;
 }
 
-/* BRAND / LOGO BUTTON (TITAN GLASS & DOPPELTER RADIUS) */
+/* BRAND / LOGO BUTTON */
 .navbar-brand-wrapper {
     position: relative;
     display: flex;
@@ -86,7 +86,7 @@ html, body {
     font-weight: 800;
     font-size: 20px;
     padding: 10px 22px;
-    border-radius: 22px; /* DOPPELTER RADIUS */
+    border-radius: 22px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -204,7 +204,7 @@ html, body {
     list-style: none;
 }
 
-/* ==================== REGENBOGEN-TEXT & FLAMMEN-HOVER NAV-LINKS ==================== */
+/* REGENBOGEN-TEXT FÜR MENÜPUNKTE */
 @keyframes rainbowTextSlow {
     0%   { color: #ff6b6b; }
     25%  { color: #ffa033; }
@@ -222,7 +222,7 @@ html, body {
     text-decoration: none;
     font-weight: 900;
     font-size: 17px;
-    border-radius: 22px; /* DOPPELTER RADIUS */
+    border-radius: 22px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -239,13 +239,12 @@ html, body {
 .nav-link[data-section="medien"] { animation-delay: -5.3s; }
 
 .nav-link:hover, .nav-link.active {
-    filter: url(#flame-wave); /* CODEPEN FLAMMEN WELLEN-EFFEKT */
+    filter: url(#flame-wave);
     background: linear-gradient(135deg, rgba(217, 107, 39, 0.22) 0%, rgba(255, 140, 50, 0.1) 100%) !important;
     border-color: rgba(255, 140, 50, 0.65) !important;
     box-shadow: 0 0 20px rgba(217, 107, 39, 0.5), inset 0 1px 2px rgba(255, 200, 150, 0.3) !important;
 }
 
-/* MODUS-UMSCHALTER (GLASSY & FLAMME) */
 .mode-switch-btn {
     display: inline-flex;
     align-items: center;
@@ -257,7 +256,7 @@ html, body {
     color: #ffffff;
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 22px; /* DOPPELTER RADIUS */
+    border-radius: 22px;
     font-weight: 800;
     font-size: 15px;
     line-height: 1;
@@ -275,32 +274,22 @@ html, body {
     box-shadow: 0 0 18px rgba(217, 107, 39, 0.45);
 }
 
-/* SPRACHENSCHALTER (FLAGGEN & FLAMMEN HOVER) */
+/* PURER REINER FLAGGENSCHALTER OHNE BUTTON-CONTAINER/HINTERGRUND */
 .lang-flag-btn {
     position: relative;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 22px; /* DOPPELTER RADIUS */
-    padding: 8px 16px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0;
     cursor: pointer;
     outline: none;
     overflow: hidden;
-    min-width: 86px;
-    height: 40px;
+    min-width: 76px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.25s ease;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
-}
-
-.lang-flag-btn:hover {
-    filter: url(#flame-wave);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.22) 0%, rgba(255, 140, 50, 0.1) 100%);
-    border-color: rgba(255, 140, 50, 0.6);
-    box-shadow: 0 0 18px rgba(217, 107, 39, 0.45);
 }
 
 .flag-wrapper {
@@ -308,14 +297,14 @@ html, body {
     align-items: center;
     gap: 6px;
     font-weight: 900;
-    font-size: 13px;
+    font-size: 15px;
     letter-spacing: 0.5px;
     color: #ffffff;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease;
     position: absolute;
 }
 
-.flag-icon { font-size: 15px; line-height: 1; }
+.flag-icon { font-size: 20px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
 
 .lang-flag-btn .flag-curr { transform: translateY(0); opacity: 1; }
 .lang-flag-btn .flag-next { transform: translateY(30px); opacity: 0; }
@@ -323,7 +312,6 @@ html, body {
 .lang-flag-btn:hover .flag-curr { transform: translateY(-30px); opacity: 0; }
 .lang-flag-btn:hover .flag-next { transform: translateY(0); opacity: 1; }
 
-/* DESIGN 2 BUTTON (GLASSY & FLAMME) */
 .design2-btn {
     display: inline-flex;
     align-items: center;
@@ -334,7 +322,7 @@ html, body {
     color: #ffffff;
     text-decoration: none;
     padding: 10px 22px;
-    border-radius: 22px; /* DOPPELTER RADIUS */
+    border-radius: 22px;
     font-weight: 800;
     font-size: 15px;
     line-height: 1;
@@ -365,7 +353,6 @@ html, body {
     width: 100%;
 }
 
-/* SEITE 1: BACKGROUND DEMO REGENTBOGEN-FARBLAUF */
 #matrix {
     background: #060810;
     position: relative;
@@ -449,25 +436,25 @@ html, body {
     z-index: 2; white-space: pre-line;
 }
 
-/* ==================== ELEMENTS ==================== */
+/* ==================== ELEMENTS & POPOVER PERSISTENTE AKTIV-FARBEN ==================== */
 .side-by-side-container {
     display: flex; align-items: center; justify-content: center;
     gap: 36px; flex-wrap: wrap; width: 100%; position: relative; z-index: 2;
 }
 
 .svg-container { position: absolute; width: 0; height: 0; }
-.card-container { padding: 0; border-radius: 20px; position: relative; background: transparent; box-shadow: none; }
+.card-container { padding: 0; border-radius: 14px; position: relative; background: transparent; box-shadow: none; }
 .inner-container { position: relative; }
 
 .main-card {
-    width: 330px; height: 330px; border-radius: 20px;
+    width: 330px; height: 330px; border-radius: 14px;
     border: 4px solid var(--electric-border-color);
     background: #182030; filter: url(#electric-spark);
 }
 
 .glow-layer-1 {
     border: 3px solid rgba(217, 107, 39, 0.7);
-    border-radius: 20px; width: 100%; height: 100%;
+    border-radius: 14px; width: 100%; height: 100%;
     position: absolute; top: 0; left: 0; filter: blur(5px); pointer-events: none;
 }
 
@@ -481,7 +468,7 @@ html, body {
 
 .badge-neu {
     background: rgba(217, 107, 39, 0.3); border: 1px solid rgba(217, 107, 39, 0.6);
-    border-radius: 10px; width: fit-content; padding: 4px 12px;
+    border-radius: 6px; width: fit-content; padding: 4px 12px;
     text-transform: uppercase; font-weight: 800; font-size: 12px; color: #ffffff;
     letter-spacing: 1px; text-decoration: none; display: inline-block; cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
@@ -493,7 +480,7 @@ html, body {
 .card-description { opacity: 0.85; font-size: 15px; line-height: 1.4; color: #e2e8f0; white-space: pre-line; }
 .card-divider { margin-top: auto; border: none; height: 1px; background: rgba(255, 255, 255, 0.18); }
 
-/* POPOVER */
+/* POPOVER MIT MINI CRESTRON SWIRL IN ITEM 1 & PERSISTENTEN AKTIV-FARBEN */
 .popover-menu-box { position: relative; width: 330px; height: 330px; display: flex; align-items: center; justify-content: center; }
 .popover-trigger {
     width: 70px; height: 70px; border-radius: 50%;
@@ -506,14 +493,46 @@ html, body {
 .popover-menu-box.open .popover-trigger svg { transform: rotate(135deg); }
 
 .popover-item {
-    position: absolute; width: 54px; height: 54px; border-radius: 50%;
+    position: absolute; width: 56px; height: 56px; border-radius: 50%;
     background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.25); display: flex; align-items: center; justify-content: center;
     color: #fff; cursor: pointer; opacity: 0; transform: translate(0,0) scale(0);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .popover-item svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+
+/* CRESTRON MINI-SWIRL IM POP 1 BUTTON */
+.mini-crestron-swirl {
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(78, 205, 196, 0.6);
+}
+
+.mini-crestron-swirl::before {
+    content: '';
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: logo-pulse 2s ease-in-out infinite;
+}
+
+/* INDIVIDUELLE UND PERSISTENTE AKTIV-FARBEN BEIM KLICKEN */
+.popover-item.pop-1.active { background: linear-gradient(135deg, #00d2ff, #0082fc); border-color: #00f0ff; box-shadow: 0 0 18px rgba(0, 210, 255, 0.8); }
+.popover-item.pop-2.active { background: linear-gradient(135deg, #ff9f43, #ff5252); border-color: #ff9f43; box-shadow: 0 0 18px rgba(255, 159, 67, 0.8); }
+.popover-item.pop-3.active { background: linear-gradient(135deg, #e056fd, #686de0); border-color: #e056fd; box-shadow: 0 0 18px rgba(224, 86, 253, 0.8); }
+.popover-item.pop-4.active { background: linear-gradient(135deg, #2ed573, #1e90ff); border-color: #2ed573; box-shadow: 0 0 18px rgba(46, 213, 115, 0.8); }
+.popover-item.pop-5.active { background: linear-gradient(135deg, #ff5252, #ff793f); border-color: #ff5252; box-shadow: 0 0 18px rgba(255, 82, 82, 0.8); }
+.popover-item.pop-6.active { background: linear-gradient(135deg, #f39c12, #f1c40f); border-color: #f1c40f; box-shadow: 0 0 18px rgba(241, 196, 15, 0.8); }
+
 .popover-menu-box.open .popover-item { opacity: 1; }
 .popover-menu-box.open .pop-1 { transform: translate(0px, -110px) scale(1); }
 .popover-menu-box.open .pop-2 { transform: translate(95px, -55px) scale(1); }
@@ -525,7 +544,7 @@ html, body {
 /* GEL SLIDER */
 .gel-slider-box {
     width: 100%; max-width: 680px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 24px 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 24px 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
 }
 
 .gel-slider-title { font-size: 22px; font-weight: 800; margin-bottom: 20px; color: #ffffff; }
@@ -589,10 +608,8 @@ html, body {
 </head>
 <body>
 
-<!-- SVG FILTER DEFINITIONEN -->
 <svg class="svg-container">
     <defs>
-        <!-- SPARK FILTER CARD -->
         <filter id="electric-spark" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;5;12;24;8;2;19;3" dur="0.4s" repeatCount="indefinite" calcMode="discrete"/>
@@ -600,7 +617,6 @@ html, body {
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
 
-        <!-- CODEPEN FLAMMEN-WELLEN FILTER FÜR BUTTON HOVER/ACTIVE -->
         <filter id="flame-wave" x="-30%" y="-30%" width="160%" height="160%">
             <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;8;15;22;9;3;17" dur="0.5s" repeatCount="indefinite" calcMode="discrete"/>
@@ -610,7 +626,6 @@ html, body {
     </defs>
 </svg>
 
-<!-- FESTES SKALIERBARES CANVAS (1920x1080) -->
 <div id="canvas">
 
     <!-- NAVIGATION HEADER -->
@@ -684,6 +699,7 @@ html, body {
                 </div>
             </div>
 
+            <!-- TRIGONOMETRIC RADIAL POPOVER MENU (CRESTRON SWIRL IN POP-1 & PERSISTENTE AKTIV-FARBEN) -->
             <div class="popover-menu-box" id="popoverBox1">
                 <button class="popover-trigger" onclick="togglePopover1()">
                     <svg viewBox="0 0 24 24">
@@ -692,12 +708,12 @@ html, body {
                     </svg>
                 </button>
                 
-                <div class="popover-item pop-1"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
-                <div class="popover-item pop-2"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
-                <div class="popover-item pop-3"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
-                <div class="popover-item pop-4"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
-                <div class="popover-item pop-5"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
-                <div class="popover-item pop-6"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+                <div class="popover-item pop-1" onclick="togglePopoverItem(this)"><div class="mini-crestron-swirl"></div></div>
+                <div class="popover-item pop-2" onclick="togglePopoverItem(this)"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
+                <div class="popover-item pop-3" onclick="togglePopoverItem(this)"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+                <div class="popover-item pop-4" onclick="togglePopoverItem(this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                <div class="popover-item pop-5" onclick="togglePopoverItem(this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                <div class="popover-item pop-6" onclick="togglePopoverItem(this)"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
             </div>
         </div>
     </section>
@@ -855,6 +871,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function togglePopover1() {
     const box = document.getElementById('popoverBox1');
     if (box) box.classList.toggle('open');
+}
+
+/* UMSCHALTEN DES PERSISTENTEN AKTIV-ZUSTANDS IM POPOVER */
+function togglePopoverItem(el) {
+    el.classList.toggle('active');
 }
 
 const gelRange = document.getElementById('gelRange');
