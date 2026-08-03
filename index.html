@@ -23,7 +23,7 @@ html, body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #060810 !important;
+    background: #0e1322 !important;
     color: #ffffff;
     font-size: 16px;
 }
@@ -39,7 +39,7 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
-    background: #060810;
+    background: transparent; /* TRANSPARENT FÜR VOLLFLÄCHIGEN BACKGROUND-BLEED */
 }
 
 #canvas::-webkit-scrollbar {
@@ -87,20 +87,20 @@ html, body {
     font-size: 20px;
     padding: 10px 22px;
     border-radius: 22px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.25s ease;
     cursor: pointer;
 }
 
 .navbar-brand:hover {
     filter: url(#flame-wave);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.2) 0%, rgba(255, 140, 50, 0.08) 100%);
-    border-color: rgba(255, 140, 50, 0.6);
-    box-shadow: 0 0 18px rgba(217, 107, 39, 0.4);
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.12) 100%);
+    border-color: rgba(255, 140, 50, 0.7);
+    box-shadow: 0 0 18px rgba(217, 107, 39, 0.5);
 }
 
 .logo-icon {
@@ -206,11 +206,11 @@ html, body {
 
 /* REGENBOGEN-TEXT FÜR MENÜPUNKTE */
 @keyframes rainbowTextSlow {
-    0%   { color: #ff6b6b; }
-    25%  { color: #ffa033; }
-    50%  { color: #4ecdc4; }
-    75%  { color: #00d2ff; }
-    100% { color: #ff6b6b; }
+    0%   { color: #ff7777; }
+    25%  { color: #ffbb44; }
+    50%  { color: #4eedd4; }
+    75%  { color: #33c2ff; }
+    100% { color: #ff7777; }
 }
 
 .nav-link {
@@ -223,11 +223,11 @@ html, body {
     font-weight: 900;
     font-size: 17px;
     border-radius: 22px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.25s ease;
     white-space: nowrap;
     line-height: 1;
@@ -240,9 +240,9 @@ html, body {
 
 .nav-link:hover, .nav-link.active {
     filter: url(#flame-wave);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.22) 0%, rgba(255, 140, 50, 0.1) 100%) !important;
-    border-color: rgba(255, 140, 50, 0.65) !important;
-    box-shadow: 0 0 20px rgba(217, 107, 39, 0.5), inset 0 1px 2px rgba(255, 200, 150, 0.3) !important;
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.15) 100%) !important;
+    border-color: rgba(255, 140, 50, 0.75) !important;
+    box-shadow: 0 0 22px rgba(217, 107, 39, 0.6), inset 0 1px 2px rgba(255, 200, 150, 0.4) !important;
 }
 
 .mode-switch-btn {
@@ -250,7 +250,7 @@ html, body {
     align-items: center;
     justify-content: center;
     min-width: 125px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
@@ -263,18 +263,18 @@ html, body {
     white-space: nowrap;
     cursor: pointer;
     transition: all 0.25s ease;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .mode-switch-btn:hover {
     filter: url(#flame-wave);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.25) 0%, rgba(255, 140, 50, 0.1) 100%);
-    border-color: rgba(255, 140, 50, 0.6);
-    box-shadow: 0 0 18px rgba(217, 107, 39, 0.45);
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.15) 100%);
+    border-color: rgba(255, 140, 50, 0.7);
+    box-shadow: 0 0 20px rgba(217, 107, 39, 0.5);
 }
 
-/* REINER SPRACHEN-BUTTON OHNE BEHÄLTER KASTEN */
+/* REINER FLAGGENSCHALTER OHNE HINTERGRUNDKASTEN */
 .lang-flag-btn {
     position: relative;
     background: transparent !important;
@@ -304,7 +304,6 @@ html, body {
     position: absolute;
 }
 
-/* SVG FLAGGEN STYLING */
 .flag-svg {
     width: 22px;
     height: 15px;
@@ -324,7 +323,7 @@ html, body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     color: #ffffff;
@@ -334,17 +333,17 @@ html, body {
     font-weight: 800;
     font-size: 15px;
     line-height: 1;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
     transition: all 0.25s ease;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .design2-btn:hover {
     filter: url(#flame-wave);
-    border-color: rgba(255, 140, 50, 0.6);
-    background: linear-gradient(135deg, rgba(217, 107, 39, 0.25) 0%, rgba(255, 140, 50, 0.1) 100%);
-    box-shadow: 0 0 18px rgba(217, 107, 39, 0.45);
+    border-color: rgba(255, 140, 50, 0.7);
+    background: linear-gradient(135deg, rgba(217, 107, 39, 0.3) 0%, rgba(255, 140, 50, 0.15) 100%);
+    box-shadow: 0 0 20px rgba(217, 107, 39, 0.5);
 }
 
 /* ==================== CONTENT SECTIONS ==================== */
@@ -361,18 +360,20 @@ html, body {
     width: 100%;
 }
 
+/* SEITE 1: LEUCHTENDER, FROHER VIBRANT REGENBOGEN-FARBLAUF */
 #matrix {
-    background: #060810;
+    background: transparent;
     position: relative;
-    overflow: hidden;
 }
 
 .bg-blur-layer {
-    position: absolute;
+    position: fixed; /* STRETCHT VOLLSTÄNDIG ÜBER DEN GESAMTEN MONITORSCHIRM (100VW) */
     inset: 0;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
 }
 
 .bg-blur-inner {
@@ -382,24 +383,25 @@ html, body {
     width: 200%;
     height: 200%;
     background: 
-        radial-gradient(circle at 25% 25%, #6e2a0c 0%, transparent 45%),
-        radial-gradient(circle at 75% 30%, #0d2847 0%, transparent 50%),
-        radial-gradient(circle at 50% 75%, #521c08 0%, transparent 45%),
-        radial-gradient(circle at 20% 70%, #18332b 0%, transparent 40%);
-    filter: blur(80px);
+        radial-gradient(circle at 20% 20%, #ff5500 0%, transparent 45%), /* Strahlendes Orange */
+        radial-gradient(circle at 80% 25%, #00d2ff 0%, transparent 50%), /* Helles Cyan */
+        radial-gradient(circle at 50% 75%, #ff007f 0%, transparent 45%), /* Neon Magenta */
+        radial-gradient(circle at 15% 80%, #10b981 0%, transparent 40%), /* Smaragd Grün */
+        radial-gradient(circle at 85% 80%, #7f00ff 0%, transparent 45%); /* Violett */
+    filter: blur(85px);
     animation: rainbowShift 12s linear infinite, blobRotate 18s ease-in-out infinite alternate;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 @keyframes blobRotate {
     0%   { transform: rotate(0deg) scale(1); }
-    50%  { transform: rotate(180deg) scale(1.12); }
+    50%  { transform: rotate(180deg) scale(1.15); }
     100% { transform: rotate(360deg) scale(1); }
 }
 
 @keyframes rainbowShift {
-    0%   { filter: blur(80px) hue-rotate(0deg); }
-    100% { filter: blur(80px) hue-rotate(360deg); }
+    0%   { filter: blur(85px) hue-rotate(0deg); }
+    100% { filter: blur(85px) hue-rotate(360deg); }
 }
 
 #klima {
@@ -444,7 +446,7 @@ html, body {
     z-index: 2; white-space: pre-line;
 }
 
-/* ==================== ELEMENTS & POPOVER PERSISTENTE AKTIV-FARBEN ==================== */
+/* ==================== ELEMENTS & POPOVER ==================== */
 .side-by-side-container {
     display: flex; align-items: center; justify-content: center;
     gap: 36px; flex-wrap: wrap; width: 100%; position: relative; z-index: 2;
@@ -549,7 +551,7 @@ html, body {
 .popover-menu-box.open .pop-5 { transform: translate(-95px, 55px) scale(1); }
 .popover-menu-box.open .pop-6 { transform: translate(-95px, -55px) scale(1); }
 
-/* GEL SLIDER */
+/* GEL SLIDER (PRESETS: BEIGE VORN, GRÜN HINTEN) */
 .gel-slider-box {
     width: 100%; max-width: 680px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 24px 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
@@ -619,7 +621,6 @@ html, body {
 <!-- SVG FILTER DEFINITIONEN -->
 <svg class="svg-container">
     <defs>
-        <!-- SPARK FILTER CARD -->
         <filter id="electric-spark" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;5;12;24;8;2;19;3" dur="0.4s" repeatCount="indefinite" calcMode="discrete"/>
@@ -627,7 +628,6 @@ html, body {
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
 
-        <!-- CODEPEN FLAMMEN-WELLEN FILTER -->
         <filter id="flame-wave" x="-30%" y="-30%" width="160%" height="160%">
             <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;8;15;22;9;3;17" dur="0.5s" repeatCount="indefinite" calcMode="discrete"/>
@@ -747,11 +747,11 @@ html, body {
             </div>
 
             <div class="gel-presets">
-                <div class="gel-preset-label" onclick="setPreset('clear', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_clear">Klar</span></div>
+                <div class="gel-preset-label" onclick="setPreset('beige', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_beige">Beige</span></div>
                 <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_rainbow">Regenbogen</span></div>
                 <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_sunset">Sonnenuntergang</span></div>
                 <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_ice">Eis</span></div>
-                <div class="gel-preset-label" onclick="setPreset('slime', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_slime">Schleim</span></div>
+                <div class="gel-preset-label" onclick="setPreset('green', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_green">Grün</span></div>
             </div>
         </div>
     </section>
@@ -801,7 +801,6 @@ document.addEventListener('DOMContentLoaded', fitCanvas);
 let currentLang = localStorage.getItem('selectedLang') || 'de';
 let translations = {};
 
-// INLINE SVG FLAGGEN CONSTANTS FÜR UNIVERSELLE DARSTELLUNG
 const deFlagSvg = `<svg class="flag-svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#FFCE00"/><rect width="3" height="1.333" fill="#DD0000"/><rect width="3" height="0.667" fill="#000000"/></svg>`;
 const enFlagSvg = `<svg class="flag-svg" viewBox="0 0 60 30"><clipPath id="s_uk"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk"><path d="M30,15 L60,0 v30 z M30,15 L0,30 v-30 z M30,15 L0,0 h60 z M30,15 L60,30 h-60 z"/></clipPath><g clip-path="url(#s_uk)"><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cc0000" stroke-width="4" clip-path="url(#t_uk)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#cc0000" stroke-width="6"/></g></svg>`;
 
@@ -912,11 +911,11 @@ function setPreset(theme, el) {
     el.classList.add('active');
 
     const gradients = {
-        'clear': 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 100%)',
+        'beige': 'linear-gradient(90deg, #f5f5dc 0%, #d4b896 50%, #f5e6cc 100%)',
         'rainbow': 'linear-gradient(90deg, #ff007f 0%, #7f00ff 33%, #00f0ff 66%, #ff007f 100%)',
         'sunset': 'linear-gradient(90deg, #ff9a9e 0%, #fecfef 45%, #ffc3a0 100%)',
         'ice': 'linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%)',
-        'slime': 'linear-gradient(90deg, #0ba360 0%, #3cba92 100%)'
+        'green': 'linear-gradient(90deg, #10b981 0%, #34d399 50%, #059669 100%)'
     };
     if (gelFill && gradients[theme]) gelFill.style.backgroundImage = gradients[theme];
 }
