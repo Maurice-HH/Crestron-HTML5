@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Crestron UI - Design 1 (Index Hochkant)</title>
+<style>
+/* ==================== GLOBAL RESET & MOBILE PORTRAIT BASE ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+:root {
+    --electric-border-color: #dd8448;
+    --tuerkis-blue: #00d2ff;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d121f !important;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+.neonav-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+    scroll-behavior: smooth;
+    background: #0d121f;
+}
+
+/* Custom Scrollbar */
+.neonav-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+.neonav-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* ==================== MOBILE COMPACT NAVBAR ==================== */
+.navbar-container {
+    position: sticky;
+    top: 12px;
+    z-index: 1000;
+    width: 94%; 
+    margin: 0 auto;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.logo-icon {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.logo-icon::before {
+    content: '';
+    position: absolute;
+    width: 45%;
+    height: 45%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    animation: logo-pulse 2s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.25); opacity: 1; }
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    list-style: none;
+    gap: 4px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.nav-link[data-section="matrix"] { color: #f7a361; }
+.nav-link[data-section="klima"] { color: #4ecdc4; }
+.nav-link[data-section="medien"] { color: #00d2ff; }
+
+.nav-link:hover, .nav-link.active {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+/* MODUS UMSCHALTER HOCHKANT */
+.mode-switch-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00d2ff, #0082fc);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 1;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.mode-switch-btn .mode-target {
+    display: none;
+}
+
+.mode-switch-btn:hover {
+    background: linear-gradient(135deg, #7f00ff, #ff007f);
+    box-shadow: 0 6px 20px rgba(127, 0, 255, 0.6);
+}
+
+.mode-switch-btn:hover .mode-current {
+    display: none;
+}
+
+.mode-switch-btn:hover .mode-target {
+    display: inline;
+}
+
+.lang-btn {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* ==================== CONTENT SECTIONS PORTRAIT ==================== */
+.content-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 110px 16px 40px 16px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+#matrix {
+    background: #080a12;
+    overflow: hidden;
+}
+
+#matrix::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 25% 25%, #2d1408 0%, transparent 45%),
+        radial-gradient(circle at 75% 30%, #0b1a2e 0%, transparent 50%),
+        radial-gradient(circle at 50% 75%, #572508 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, #152840 0%, transparent 40%),
+        radial-gradient(circle at 20% 70%, #3a1906 0%, transparent 50%);
+    filter: blur(80px);
+    animation: blurredBlobs 22s ease-in-out infinite alternate;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes blurredBlobs {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(120deg) scale(1.15); }
+    100% { transform: rotate(240deg) scale(1); }
+}
+
+#klima {
+    background: #06120b;
+    overflow: hidden;
+    position: relative;
+}
+
+#klimaCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+#medien {
+    background: linear-gradient(135deg, #0c1b2a 0%, #133352 50%, #0c1b2a 100%);
+    overflow: hidden;
+}
+
+.content-section > * {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+#medienCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.9;
+}
+
+.section-title {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.section-subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    max-width: 100%;
+    line-height: 1.4;
+    margin-bottom: 28px;
+    white-space: pre-line;
+}
+
+/* ==================== ELEMENTS PORTRAIT STACK ==================== */
+.side-by-side-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.svg-container {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.card-container {
+    padding: 0;
+    border-radius: 28px;
+    position: relative;
+}
+
+.main-card {
+    width: 310px;
+    height: 310px;
+    border-radius: 28px;
+    border: 4px solid var(--electric-border-color);
+    background: #182030;
+    filter: url(#electric-spark-portrait);
+}
+
+.glow-layer-1 {
+    border: 3px solid rgba(221, 132, 72, 0.7);
+    border-radius: 28px;
+    width: 100%; height: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.card-content-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    z-index: 5;
+}
+
+.card-content-top {
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+    padding-bottom: 10px;
+    height: 100%;
+}
+
+.card-content-bottom {
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+    padding-top: 10px;
+}
+
+.badge-neu {
+    background: rgba(255, 107, 107, 0.3);
+    border: 1px solid rgba(255, 107, 107, 0.6);
+    border-radius: 14px;
+    width: fit-content;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 12px; 
+    color: #ffffff;
+}
+
+.card-title {
+    font-size: 26px;
+    font-weight: 800;
+    margin-top: auto;
+    color: #ffffff;
+}
+
+.card-description {
+    opacity: 0.85;
+    font-size: 14px;
+    line-height: 1.3;
+    color: #e2e8f0;
+    white-space: pre-line;
+}
+
+.card-divider {
+    margin-top: auto;
+    border: none;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* POPOVER PORTRAIT OPTIMIERUNG */
+.popover-menu-box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popover-trigger {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.popover-trigger svg {
+    width: 28px;
+    height: 28px;
+    stroke: #ffffff;
+    stroke-width: 3;
+}
+
+.popover-item {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    opacity: 0;
+    transform: translate(0,0) scale(0);
+    transition: all 0.3s ease;
+}
+
+.popover-item svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+.popover-menu-box.open .popover-item { opacity: 1; }
+.popover-menu-box.open .pop-1 { transform: translate(0px, -95px) scale(1); }
+.popover-menu-box.open .pop-2 { transform: translate(82px, -48px) scale(1); }
+.popover-menu-box.open .pop-3 { transform: translate(82px, 48px) scale(1); }
+.popover-menu-box.open .pop-4 { transform: translate(0px, 95px) scale(1); }
+.popover-menu-box.open .pop-5 { transform: translate(-82px, 48px) scale(1); }
+.popover-menu-box.open .pop-6 { transform: translate(-82px, -48px) scale(1); }
+
+/* GEL SLIDER PORTRAIT */
+.gel-slider-box {
+    width: 100%;
+    max-width: 340px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 20px 18px;
+}
+
+.gel-slider-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 18px;
+    color: #ffffff;
+}
+
+.gel-track-container {
+    position: relative;
+    width: 100%;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.gel-fill-bar {
+    position: absolute;
+    left: 0; top: 0; height: 100%; width: 67%;
+    border-radius: 50px;
+    background-image: linear-gradient(90deg, #ff9a9e 0%, #fecfef 45%, #ffc3a0 100%);
+}
+
+.gel-range-input {
+    position: absolute;
+    left: 0; top: 0; width: 100%; height: 100%;
+    opacity: 0; cursor: pointer; z-index: 10;
+}
+
+.gel-thumb-badge {
+    position: absolute;
+    top: 50%; left: 67%;
+    transform: translate(-50%, -50%);
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #ffe259 0%, #ffa751 50%, #d4af37 100%);
+    color: #1a1500;
+    border: 2px solid #fff5c0;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 900;
+    z-index: 5;
+}
+
+.gel-scale-labels {
+    display: flex; justify-content: space-between; width: 100%;
+    position: absolute; left: 0; padding: 0 16px; font-size: 13px; font-weight: 700;
+}
+
+.gel-presets {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 18px; font-size: 13px; font-weight: 700;
+}
+
+.gel-preset-label {
+    display: flex; align-items: center; gap: 6px; cursor: pointer; opacity: 0.75;
+}
+
+.gel-preset-label.active { opacity: 1; color: #ffffff; }
+
+.gel-radio-dot {
+    width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid #fff;
+}
+
+.gel-preset-label.active .gel-radio-dot { background: #ff6b6b; }
+
+/* RADIAL MENU PORTRAIT */
+.radial-dial-box {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 10px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dial-center-knob {
+    width: 130px;
+    height: 130px;
+    background: linear-gradient(135deg, #1a2232, #242f45);
+    border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 10; border: 3px solid rgba(0, 240, 255, 0.5); cursor: pointer;
+}
+
+.dial-val { font-size: 20px; font-weight: 800; color: #ffffff; }
+.dial-label { font-size: 12px; font-weight: 700; color: #00f0ff; letter-spacing: 1px; }
+
+.dial-item {
+    position: absolute;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 15; opacity: 0; transform: scale(0.2);
+    transition: transform 0.3s ease, opacity 0.2s ease;
+}
+
+.dial-item svg { width: 22px; height: 22px; fill: none; stroke: #ffffff; stroke-width: 2.2; }
+
+.dial-item[data-color="bt"]  { background: linear-gradient(135deg, #0082fc, #00d2ff); }
+.dial-item[data-color="tv"]  { background: linear-gradient(135deg, #ff4757, #ff6b81); }
+.dial-item[data-color="rad"] { background: linear-gradient(135deg, #ffa502, #ff7f50); }
+.dial-item[data-color="sp"]  { background: linear-gradient(135deg, #1db954, #1ed760); }
+.dial-item[data-color="aux"] { background: linear-gradient(135deg, #eccc68, #ff7f50); }
+.dial-item[data-color="set"] { background: linear-gradient(135deg, #70a1ff, #1e90ff); }
+
+.radial-dial-box.open .pos-bt  { transform: translate(0px, -115px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-tv  { transform: translate(100px, -55px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-rad { transform: translate(100px, 55px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-sp  { transform: translate(0px, 115px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-aux { transform: translate(-100px, 55px) scale(1); opacity: 1; }
+.radial-dial-box.open .pos-set { transform: translate(-100px, -55px) scale(1); opacity: 1; }
+</style>
+</head>
+<body>
+
+<svg class="svg-container">
+    <defs>
+        <filter id="electric-spark-portrait" x="-20%" y="-20%" width="140%" height="140%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
+                <animate attributeName="seed" values="1;5;12;24;8;2;19;3" dur="0.4s" repeatCount="indefinite" calcMode="discrete"/>
+            </feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </defs>
+</svg>
+
+<div class="neonav-wrapper" id="neonavWrapper">
+
+    <!-- NAVIGATION HEADER PORTRAIT -->
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="navbar-top-row">
+                <a href="#matrix" class="navbar-brand">
+                    <div class="logo-icon"></div>
+                    <span data-i18n="nav.brand_title">Crestron UI</span>
+                </a>
+                
+                <a href="index.html" class="mode-switch-btn">
+                    <span class="mode-current">Hochkant 📱</span>
+                    <span class="mode-target">➔ Querformat 💻</span>
+                </a>
+
+                <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">DE / EN</button>
+            </div>
+
+            <ul class="navbar-nav">
+                <li><a href="#matrix" class="nav-link active" data-section="matrix" data-i18n="nav.html5">HTML5</a></li>
+                <li><a href="#klima" class="nav-link" data-section="klima" data-i18n="nav.klima">Klima</a></li>
+                <li><a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- SEITE 1: HTML5 -->
+    <section id="matrix" class="content-section">
+        <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
+        <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript.</p>
+
+        <div class="side-by-side-container">
+            <div class="card-container">
+                <div class="inner-container">
+                    <div class="main-card"></div>
+                    <div class="glow-layer-1"></div>
+                </div>
+
+                <div class="card-content-container">
+                    <div class="card-content-top">
+                        <a href="#medien" class="badge-neu" data-i18n="matrix.badge_new">NEU</a>
+                        <p class="card-title" data-i18n="matrix.card_title">Crestron. Construct.</p>
+                    </div>
+                    <hr class="card-divider" />
+                    <div class="card-content-bottom">
+                        <p class="card-description" data-i18n="matrix.card_desc">Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popover-menu-box" id="popoverBox1">
+                <button class="popover-trigger" onclick="togglePopover1()">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+                <div class="popover-item pop-1"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                <div class="popover-item pop-2"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
+                <div class="popover-item pop-3"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></div>
+                <div class="popover-item pop-4"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+                <div class="popover-item pop-5"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                <div class="popover-item pop-6"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEITE 2: RANGE SLIDER -->
+    <section id="klima" class="content-section">
+        <canvas id="klimaCanvas"></canvas>
+
+        <h2 class="section-title" data-i18n="klima.title">Range Slider</h2>
+        <p class="section-subtitle" data-i18n="klima.subtitle">Stelle Raumtemperatur oder Beleuchtung sanft ein.</p>
+
+        <div class="gel-slider-box">
+            <h3 class="gel-slider-title" data-i18n="klima.slider_title">Glass / Gel Slider</h3>
+            
+            <div class="gel-track-container" id="gelTrack">
+                <div class="gel-scale-labels"><span>0</span><span>100</span></div>
+                <div class="gel-fill-bar" id="gelFill"></div>
+                <div class="gel-thumb-badge" id="gelBadge">67</div>
+                <input type="range" min="0" max="100" value="67" class="gel-range-input" id="gelRange">
+            </div>
+
+            <div class="gel-presets">
+                <div class="gel-preset-label" onclick="setPreset('clear', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_clear">Klar</span></div>
+                <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_rainbow">Regenbogen</span></div>
+                <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_sunset">Sonnenuntergang</span></div>
+                <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_ice">Eis</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEITE 3: HINTERGRUNDEFFEKT & MENÜ-BUTTON -->
+    <section id="medien" class="content-section">
+        <canvas id="medienCanvas"></canvas>
+
+        <h2 class="section-title" data-i18n="medien.title">Hintergrundeffekt</h2>
+        <p class="section-subtitle" data-i18n="medien.subtitle">Tippe auf den Crestron-Button in der Mitte.</p>
+
+        <div class="radial-dial-box" id="radialDialBox">
+            <div class="dial-center-knob" onclick="toggleRadialDial()">
+                <span class="dial-val" data-i18n="medien.dial_center">Crestron</span>
+                <span class="dial-label" data-i18n="medien.dial_click">Klick</span>
+            </div>
+
+            <div class="dial-item pos-bt" data-color="bt"><svg viewBox="0 0 24 24"><polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"></polyline></svg></div>
+            <div class="dial-item pos-tv" data-color="tv"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
+            <div class="dial-item pos-rad" data-color="rad"><svg viewBox="0 0 24 24"><path d="M4.93 4.93a10 10 0 0 1 14.14 0"></path><path d="M7.76 7.76a6 6 0 0 1 8.49 0"></path><circle cx="12" cy="12" r="2"></circle><path d="M12 14v8"></path></svg></div>
+            <div class="dial-item pos-sp" data-color="sp"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
+            <div class="dial-item pos-aux" data-color="aux"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+            <div class="dial-item pos-set" data-color="set"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+let currentLang = localStorage.getItem('selectedLang') || 'de';
+let translations = {};
+
+async function loadTranslations(lang) {
+    try {
+        const response = await fetch(`${lang}.json`);
+        translations = await response.json();
+        applyTranslations();
+        document.documentElement.lang = lang;
+        const langBtn = document.getElementById('langToggle');
+        if (langBtn) langBtn.textContent = lang.toUpperCase();
+    } catch (err) {
+        console.error('Fehler beim Laden der Sprachdatei:', err);
+    }
+}
+
+function getNestedTranslation(obj, path) {
+    return path.split('.').reduce((prev, curr) => (prev && prev[curr] !== undefined) ? prev[curr] : null, obj);
+}
+
+function applyTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const text = getNestedTranslation(translations, key);
+        if (text) el.textContent = text;
+    });
+}
+
+function toggleLanguage() {
+    currentLang = (currentLang === 'de') ? 'en' : 'de';
+    localStorage.setItem('selectedLang', currentLang);
+    loadTranslations(currentLang);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadTranslations(currentLang);
+    const wrapper = document.getElementById('neonavWrapper');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId.startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target && wrapper) {
+                    wrapper.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const activeId = entry.target.getAttribute('id');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('data-section') === activeId);
+                });
+            }
+        });
+    }, { root: wrapper, threshold: 0.5 });
+
+    sections.forEach(section => observer.observe(section));
+    updateGelSlider();
+    initKlimaCanvas();
+    initMedienCanvas();
+});
+
+function togglePopover1() {
+    const box = document.getElementById('popoverBox1');
+    if (box) box.classList.toggle('open');
+}
+
+const gelRange = document.getElementById('gelRange');
+const gelFill = document.getElementById('gelFill');
+const gelBadge = document.getElementById('gelBadge');
+
+function updateGelSlider() {
+    if (!gelRange || !gelFill || !gelBadge) return;
+    const val = Number(gelRange.value);
+    gelFill.style.width = val + '%';
+    gelBadge.style.left = val + '%';
+    gelBadge.textContent = val;
+}
+
+if (gelRange) gelRange.addEventListener('input', updateGelSlider);
+
+function setPreset(theme, el) {
+    document.querySelectorAll('.gel-preset-label').forEach(lbl => lbl.classList.remove('active'));
+    el.classList.add('active');
+
+    const gradients = {
+        'clear': 'linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.8) 100%)',
+        'rainbow': 'linear-gradient(90deg, #ff007f 0%, #7f00ff 33%, #00f0ff 66%, #ff007f 100%)',
+        'sunset': 'linear-gradient(90deg, #ff9a9e 0%, #fecfef 45%, #ffc3a0 100%)',
+        'ice': 'linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%)'
+    };
+    if (gelFill && gradients[theme]) gelFill.style.backgroundImage = gradients[theme];
+}
+
+function toggleRadialDial() {
+    const dialBox = document.getElementById('radialDialBox');
+    if (dialBox) dialBox.classList.toggle('open');
+}
+
+function initKlimaCanvas() {
+    const canvas = document.getElementById('klimaCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const nodes = [];
+    for (let i = 0; i < 25; i++) {
+        nodes.push({
+            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+            radius: Math.random() * 2 + 1, color: '#a38128'
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        nodes.forEach(n => {
+            n.x += n.vx; n.y += n.vy;
+            if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+            if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+            ctx.fillStyle = n.color; ctx.fill();
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+function initMedienCanvas() {
+    const canvas = document.getElementById('medienCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    function resize() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const particles = [];
+    for (let i = 0; i < 25; i++) {
+        particles.push({
+            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 210, 255, 0.7)'; ctx.fill();
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+</script>
+
+</body>
+</html>
