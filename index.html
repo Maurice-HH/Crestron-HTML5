@@ -28,7 +28,7 @@ html, body {
     font-size: 16px;
 }
 
-/* ==================== VOLLFLÄCHIGER ANIMIERTER REGENBOGEN-HINTERGRUND (SANFT ABGEDUNKELT) ==================== */
+/* ==================== VOLLFLÄCHIGER VOLLBILD-HINTERGRUND (100VW BLEED) ==================== */
 #global-vibrant-bg {
     position: fixed;
     inset: 0;
@@ -37,6 +37,8 @@ html, body {
     overflow: hidden;
     pointer-events: none;
     z-index: 0;
+    background: #060810;
+    transition: background 0.6s ease; /* SANFTER FARBÜBERGANG BEIM SCROLLEN */
 }
 
 .bg-blob-inner {
@@ -55,7 +57,8 @@ html, body {
     animation: bgRotate 14s ease-in-out infinite alternate, bgHue 10s linear infinite;
     will-change: transform, filter;
     transform: translateZ(0);
-    opacity: 0.52; /* ANGENEHM ABGEDUNKELT FÜR OPTIMALEN KONTRAST */
+    opacity: 0.52;
+    transition: opacity 0.6s ease;
 }
 
 @keyframes bgRotate {
@@ -388,7 +391,7 @@ html, body {
     box-shadow: 0 0 20px rgba(217, 107, 39, 0.5);
 }
 
-/* ==================== CONTENT SECTIONS ==================== */
+/* ==================== CONTENT SECTIONS (ALLE TRANSPARENT FÜR VOLLEN BACKGROUND-BLEED) ==================== */
 .content-section {
     min-height: 1080px;
     display: flex;
@@ -400,16 +403,11 @@ html, body {
     position: relative;
     z-index: 2;
     width: 100%;
+    background: transparent !important;
 }
 
-#matrix {
-    background: transparent;
-}
-
-#klima {
-    background: #06120b;
-    overflow: hidden;
-    position: relative;
+#matrix, #klima, #medien {
+    background: transparent !important;
 }
 
 #klimaCanvas {
@@ -418,9 +416,10 @@ html, body {
     pointer-events: none; z-index: 1; opacity: 0.85;
 }
 
-#medien {
-    background: linear-gradient(135deg, #0c1b2a 0%, #133352 50%, #0c1b2a 100%);
-    overflow: hidden;
+#medienCanvas {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1; opacity: 0.9;
 }
 
 .content-section > * {
@@ -428,12 +427,6 @@ html, body {
     width: 100%;
     position: relative;
     z-index: 2;
-}
-
-#medienCanvas {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 1; opacity: 0.9;
 }
 
 .section-title {
@@ -872,6 +865,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    /* DYNAMISCHER VOLLBILD-HINTERGRUNDWECHSEL FÜR 100VW BLEED BEIM SCROLLEN */
     const observerOptions = { root: wrapper, threshold: 0.5 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -880,6 +874,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.toggle('active', link.getAttribute('data-section') === activeId);
                 });
+
+                const bgContainer = document.getElementById('global-vibrant-bg');
+                const bgBlob = document.querySelector('.bg-blob-inner');
+
+                if (activeId === 'matrix') {
+                    if (bgContainer) bgContainer.style.background = '#060810';
+                    if (bgBlob) bgBlob.style.opacity = '0.52';
+                } else if (activeId === 'klima') {
+                    if (bgContainer) bgContainer.style.background = '#06120b';
+                    if (bgBlob) bgBlob.style.opacity = '0';
+                } else if (activeId === 'medien') {
+                    if (bgContainer) bgContainer.style.background = 'linear-gradient(135deg, #0c1b2a 0%, #133352 50%, #0c1b2a 100%)';
+                    if (bgBlob) bgBlob.style.opacity = '0';
+                }
             }
         });
     }, observerOptions);
