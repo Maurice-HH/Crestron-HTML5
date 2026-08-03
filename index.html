@@ -23,9 +23,50 @@ html, body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #060810 !important;
+    background: #0a0d1a !important;
     color: #ffffff;
     font-size: 16px;
+}
+
+/* ==================== VOLLFLÄCHIGER ANIMIERTER REGENBOGEN-HINTERGRUND (0 RAND) ==================== */
+#global-vibrant-bg {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-blob-inner {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 20% 20%, #ff5500 0%, transparent 45%),
+        radial-gradient(circle at 80% 20%, #00d2ff 0%, transparent 50%),
+        radial-gradient(circle at 50% 80%, #ff007f 0%, transparent 45%),
+        radial-gradient(circle at 15% 80%, #10b981 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, #7f00ff 0%, transparent 45%);
+    filter: blur(75px);
+    animation: bgRotate 14s ease-in-out infinite alternate, bgHue 10s linear infinite;
+    will-change: transform, filter;
+    transform: translateZ(0);
+    opacity: 0.95;
+}
+
+@keyframes bgRotate {
+    0%   { transform: rotate(0deg) scale(1); }
+    50%  { transform: rotate(180deg) scale(1.15); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes bgHue {
+    0%   { filter: blur(75px) hue-rotate(0deg); }
+    100% { filter: blur(75px) hue-rotate(360deg); }
 }
 
 /* ==================== FIXED CANVAS CONTAINER (1920x1080) ==================== */
@@ -39,7 +80,8 @@ html, body {
     overflow-x: hidden;
     overflow-y: auto;
     scroll-behavior: smooth;
-    background: #060810;
+    background: transparent;
+    z-index: 1;
 }
 
 #canvas::-webkit-scrollbar {
@@ -360,40 +402,8 @@ html, body {
     width: 100%;
 }
 
-/* SEITE 1: PERFEKT VOLLFLÄCHIGER VIBRANT REGENBOGEN-HINTERGRUND OHNE GPU-FILTER-ARTEFAKTE */
 #matrix {
-    background: #090e1a;
-    position: relative;
-    overflow: hidden;
-}
-
-.bg-blur-layer {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.bg-blur-inner {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 25%, rgba(255, 85, 0, 0.45) 0%, transparent 60%),
-        radial-gradient(circle at 80% 25%, rgba(0, 210, 255, 0.45) 0%, transparent 65%),
-        radial-gradient(circle at 50% 75%, rgba(255, 0, 127, 0.45) 0%, transparent 60%),
-        radial-gradient(circle at 15% 80%, rgba(16, 185, 129, 0.4) 0%, transparent 55%),
-        radial-gradient(circle at 85% 80%, rgba(127, 0, 255, 0.45) 0%, transparent 60%);
-    animation: rainbowShift 12s linear infinite;
-}
-
-@keyframes rainbowShift {
-    0%   { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
+    background: transparent;
 }
 
 #klima {
@@ -543,7 +553,7 @@ html, body {
 .popover-menu-box.open .pop-5 { transform: translate(-95px, 55px) scale(1); }
 .popover-menu-box.open .pop-6 { transform: translate(-95px, -55px) scale(1); }
 
-/* GEL SLIDER (PRESETS: BEIGE VORN, GRÜN HINTEN) */
+/* GEL SLIDER */
 .gel-slider-box {
     width: 100%; max-width: 680px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 24px 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
@@ -613,7 +623,6 @@ html, body {
 <!-- SVG FILTER DEFINITIONEN -->
 <svg class="svg-container">
     <defs>
-        <!-- SPARK FILTER CARD -->
         <filter id="electric-spark" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;5;12;24;8;2;19;3" dur="0.4s" repeatCount="indefinite" calcMode="discrete"/>
@@ -621,7 +630,6 @@ html, body {
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
 
-        <!-- CODEPEN FLAMMEN-WELLEN FILTER -->
         <filter id="flame-wave" x="-30%" y="-30%" width="160%" height="160%">
             <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;8;15;22;9;3;17" dur="0.5s" repeatCount="indefinite" calcMode="discrete"/>
@@ -630,6 +638,11 @@ html, body {
         </filter>
     </defs>
 </svg>
+
+<!-- VOLLFLÄCHIG RENDERNDER REGENBOGEN-BACKGROUND OHNE RAND -->
+<div id="global-vibrant-bg">
+    <div class="bg-blob-inner"></div>
+</div>
 
 <!-- FESTES SKALIERBARES CANVAS (1920x1080) -->
 <div id="canvas">
@@ -679,8 +692,6 @@ html, body {
 
     <!-- SEITE 1: HTML5 -->
     <section id="matrix" class="content-section">
-        <div class="bg-blur-layer"><div class="bg-blur-inner"></div></div>
-
         <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
         <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
 
