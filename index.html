@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 1 (Index Querformat)</title>
 <style>
-/* ==================== GLOBAL RESET & FULL-HD BASE ==================== */
+/* ==================== GLOBAL RESET & VIEWPORT LOCK ==================== */
 * {
     margin: 0;
     padding: 0;
@@ -16,56 +16,61 @@
 
 :root {
     --electric-border-color: #d96b27;
-    --dark-orange: #c85a1e;
-    --dark-orange-hover: #e06826;
 }
 
 html, body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0b0f19 !important;
+    background: #060810 !important;
     color: #ffffff;
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.neonav-wrapper {
-    width: 100%;
-    height: 100%;
+/* ==================== FIXED CANVAS CONTAINER (1920x1080) ==================== */
+#canvas {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
     overflow-y: auto;
-    position: relative;
     scroll-behavior: smooth;
     background: #0b0f19;
 }
 
-.neonav-wrapper::-webkit-scrollbar {
-    width: 8px;
+#canvas::-webkit-scrollbar {
+    width: 10px;
 }
-.neonav-wrapper::-webkit-scrollbar-thumb {
+#canvas::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
-/* ==================== NAVBAR (RUHIG, GLOSSY & SCHLICHT) ==================== */
+/* ==================== NAVBAR (AUFGERÄUMT & RUHIG) ==================== */
 .navbar-container {
     position: sticky;
-    top: 20px;
+    top: 24px;
     z-index: 1000;
     width: fit-content; 
     margin: 0 auto;
 }
 
 .navbar {
-    background: rgba(18, 24, 38, 0.85);
+    background: rgba(18, 24, 38, 0.88);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 20px;
-    padding: 12px 32px;
+    padding: 12px 36px;
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 32px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
@@ -80,18 +85,18 @@ html, body {
 .navbar-brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     text-decoration: none;
     color: #ffffff;
     font-weight: 800;
     font-size: 22px;
-    padding-right: 12px;
+    padding-right: 14px;
     cursor: pointer;
 }
 
 .logo-icon {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     background: linear-gradient(135deg, #d96b27, #8c3b12);
     border-radius: 50%;
     position: relative;
@@ -186,7 +191,7 @@ html, body {
 .navbar-nav {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     list-style: none;
 }
 
@@ -194,12 +199,12 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 105px;
+    min-width: 110px;
     padding: 10px 18px;
     text-decoration: none;
     font-weight: 800;
     font-size: 16px;
-    border-radius: 12px;
+    border-radius: 10px;
     transition: all 0.2s ease;
     white-space: nowrap;
     line-height: 1;
@@ -215,7 +220,7 @@ html, body {
     color: #ffffff !important;
 }
 
-/* MODUS-UMSCHALTER (RUHIGES ORANGE WITH GLOSS) */
+/* MODUS-UMSCHALTER */
 .mode-switch-btn {
     display: inline-flex;
     align-items: center;
@@ -225,7 +230,7 @@ html, body {
     color: #ffffff;
     text-decoration: none;
     padding: 10px 18px;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 800;
     font-size: 15px;
     line-height: 1;
@@ -241,13 +246,13 @@ html, body {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 6px 16px rgba(168, 71, 20, 0.5);
 }
 
-/* SPRACHWECHSLER (EINFACH, MONOCHROM, GLOSSY KAPSEL) */
+/* SPRACHWECHSLER (MONOCHROM GLOSSY KAPSEL) */
 .lang-btn {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
     border: 1px solid rgba(255, 255, 255, 0.25);
     color: #ffffff;
     padding: 10px 16px;
-    border-radius: 12px;
+    border-radius: 10px;
     font-size: 14px;
     font-weight: 800;
     cursor: pointer;
@@ -263,7 +268,7 @@ html, body {
     border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* DESIGN 2 BUTTON (SCHLICHT GLOSSY SCHIEFER/ORANGE AKZENT) */
+/* DESIGN 2 BUTTON */
 .design2-btn {
     display: inline-flex;
     align-items: center;
@@ -272,7 +277,7 @@ html, body {
     color: #ffffff;
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 12px;
+    border-radius: 10px;
     font-weight: 800;
     font-size: 15px;
     line-height: 1;
@@ -290,7 +295,7 @@ html, body {
 
 /* ==================== CONTENT SECTIONS ==================== */
 .content-section {
-    min-height: 100vh;
+    min-height: 1080px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -300,11 +305,11 @@ html, body {
     position: relative;
     z-index: 2;
     width: 100%;
-    margin: 0 auto;
 }
 
+/* SEITE 1: FEINER REGENTBOGEN-FARBLAUF (DUNKEL & DEMO-EFFEKTVOLL) */
 #matrix {
-    background: #080a12;
+    background: #060810;
     overflow: hidden;
 }
 
@@ -316,27 +321,26 @@ html, body {
     width: 200%;
     height: 200%;
     background: 
-        radial-gradient(circle at 20% 20%, #2d1408 0%, transparent 40%),
-        radial-gradient(circle at 80% 25%, #572508 0%, transparent 40%),
-        radial-gradient(circle at 50% 50%, #0b1a2e 0%, transparent 45%),
-        radial-gradient(circle at 85% 75%, #3b0811 0%, transparent 40%),
-        radial-gradient(circle at 15% 80%, #4a1c0d 0%, transparent 40%),
-        radial-gradient(circle at 40% 85%, #240b36 0%, transparent 45%),
-        radial-gradient(circle at 70% 40%, #082e2b 0%, transparent 40%),
-        radial-gradient(circle at 30% 60%, #091326 0%, transparent 45%);
-    filter: blur(85px);
-    animation: blurredBlobs8Color 14.6s ease-in-out infinite alternate;
-    opacity: 0.88;
+        radial-gradient(circle at 25% 25%, #6e2a0c 0%, transparent 45%),
+        radial-gradient(circle at 75% 30%, #0d2847 0%, transparent 50%),
+        radial-gradient(circle at 50% 75%, #521c08 0%, transparent 45%),
+        radial-gradient(circle at 20% 70%, #18332b 0%, transparent 40%);
+    filter: blur(80px);
+    animation: rainbowShift 12s linear infinite, blobRotate 18s ease-in-out infinite alternate;
+    opacity: 0.85;
     pointer-events: none;
     z-index: 1;
 }
 
-@keyframes blurredBlobs8Color {
+@keyframes blobRotate {
     0%   { transform: rotate(0deg) scale(1); }
-    25%  { transform: rotate(90deg) scale(1.1); }
-    50%  { transform: rotate(180deg) scale(1.18); }
-    75%  { transform: rotate(270deg) scale(1.08); }
+    50%  { transform: rotate(180deg) scale(1.12); }
     100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes rainbowShift {
+    0%   { filter: blur(80px) hue-rotate(0deg); }
+    100% { filter: blur(80px) hue-rotate(360deg); }
 }
 
 #klima {
@@ -428,7 +432,7 @@ html, body {
 /* POPOVER */
 .popover-menu-box { position: relative; width: 330px; height: 330px; display: flex; align-items: center; justify-content: center; }
 .popover-trigger {
-    width: 70px; height: 76px; border-radius: 50%;
+    width: 70px; height: 70px; border-radius: 50%;
     background: linear-gradient(180deg, #d86927, #a84714);
     border: none; color: #fff; display: flex; align-items: center; justify-content: center;
     cursor: pointer; box-shadow: 0 6px 20px rgba(168, 71, 20, 0.4); z-index: 20; outline: none;
@@ -533,7 +537,8 @@ html, body {
     </defs>
 </svg>
 
-<div class="neonav-wrapper" id="neonavWrapper">
+<!-- FESTES SKALIERBARES CANVAS (1920x1080) -->
+<div id="canvas">
 
     <!-- NAVIGATION HEADER -->
     <div class="navbar-container">
@@ -671,6 +676,19 @@ html, body {
 </div>
 
 <script>
+/* DYNAMISCHE CANVAS SKALIERUNG (PERFEKTER VIEWPORT FIT) */
+function fitCanvas() {
+    const canvas = document.getElementById('canvas');
+    if (!canvas) return;
+    const targetW = 1920;
+    const targetH = 1080;
+    const scale = Math.min(window.innerWidth / targetW, window.innerHeight / targetH);
+    canvas.style.transform = `translate(-50%, -50%) scale(${scale})`;
+}
+
+window.addEventListener('resize', fitCanvas);
+document.addEventListener('DOMContentLoaded', fitCanvas);
+
 let currentLang = localStorage.getItem('selectedLang') || 'de';
 let translations = {};
 
@@ -707,7 +725,7 @@ function toggleLanguage() {
 
 document.addEventListener('DOMContentLoaded', function() {
     loadTranslations(currentLang);
-    const wrapper = document.getElementById('neonavWrapper');
+    const wrapper = document.getElementById('canvas');
     const navLinks = document.querySelectorAll('.nav-link, .badge-neu');
     const sections = document.querySelectorAll('.content-section');
 
@@ -791,7 +809,6 @@ function initKlimaCanvas() {
     const ctx = canvas.getContext('2d');
     function resize() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; }
     resize();
-    window.addEventListener('resize', resize);
 
     const nodes = [];
     const colors = ['#206a44', '#a38128', '#154a2e', '#d4aa37'];
@@ -831,7 +848,6 @@ function initMedienCanvas() {
     const ctx = canvas.getContext('2d');
     function resize() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; }
     resize();
-    window.addEventListener('resize', resize);
 
     const particles = [];
     for (let i = 0; i < 40; i++) {
