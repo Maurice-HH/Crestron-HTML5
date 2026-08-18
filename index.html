@@ -833,12 +833,13 @@ html, body {
                 </div>
             </div>
 
-            <!-- 2. PEEKABOO BEAR SCHALTER (ORIGINAL JHEY) -->
+            <!-- 2. PEEKABOO BEAR SCHALTER (ORIGINAL JHEY REACT -> VANILLA + GSAP) -->
             <div class="bear-container">
                 <div class="bear-clip-zone">
                     <div class="bear__wrap">
                         <div class="bear__swear" id="bear-swear">#@$%*!</div>
                         
+                        <!-- BEAR HEAD SVG -->
                         <svg class="bear" id="bear-head" viewBox="0 0 284.94574 359.73706" preserveAspectRatio="xMinYMin">
                             <g transform="translate(-7.5271369,-761.38595)">
                                 <g transform="matrix(1.2335313,0,0,1.2335313,-35.029693,-212.83637)">
@@ -857,6 +858,7 @@ html, body {
                                     <ellipse cx="105.83063" cy="900.38916" rx="9.2701159" ry="9.6790915" style="fill: #000000; fill-opacity: 1;" />
                                     <ellipse cx="186.89894" cy="900.38916" rx="9.2701159" ry="9.6790915" style="fill: #000000; fill-opacity: 1;" />
                                     
+                                    <!-- ANGER PATHS -->
                                     <path class="bear-anger-path" style="display: none; stroke: #000000; stroke-width: 4.864; stroke-linecap: round; stroke-linejoin: round;" d="m 92.05833,865.4614 39.42665,22.76299" />
                                     <path class="bear-anger-path" style="display: none; stroke: #000000; stroke-width: 4.864; stroke-linecap: round; stroke-linejoin: round;" d="m 202.82482,865.4614 -39.42664,22.76299" />
                                 </g>
@@ -928,12 +930,12 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 3: MEDIENPLAYER MIT GELOOOPTEN PREVIEWS & MATRIX-ROUTING -->
+    <!-- SEITE 3: MEDIENPLAYER -->
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
-        <h2 class="section-title" data-i18n="medien.title">Medienplayer.</h2>
-        <p class="section-subtitle" data-i18n="medien.subtitle">Bitte wählen Sie oben eine Quelle aus und unten ein oder mehrere Ziele (bzw. Senken wie der Profi sagt).</p>
+        <h2 class="section-title" data-i18n="medien.player_title">Medienplayer.</h2>
+        <p class="section-subtitle" data-i18n="medien.player_subtitle">Bitte wählen Sie oben eine Quelle aus und unten ein oder mehrere Ziele (bzw. Senken wie der Profi sagt).</p>
 
         <div class="media-dashboard-container">
             <!-- GRUPPE 1: SIGNALQUELLEN (MIT PREVIEW VIDEOS) -->
@@ -1084,8 +1086,8 @@ const fallbackTranslations = {
         matrix: { title: "HTML5", subtitle: "Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.", badge_new: "NEU", card_title: "Crestron. Construct.", card_desc: "Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels." },
         klima: { title: "Range Slider", subtitle: "Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Regenbogen", preset_sunset: "Sonnenuntergang", preset_ice: "Eis", preset_green: "Grün" },
         medien: { 
-            title: "Medienplayer.", 
-            subtitle: "Bitte wählen Sie oben eine Quelle aus und unten ein oder mehrere Ziele (bzw. Senken wie der Profi sagt).", 
+            player_title: "Medienplayer.", 
+            player_subtitle: "Bitte wählen Sie oben eine Quelle aus und unten ein oder mehrere Ziele (bzw. Senken wie der Profi sagt).", 
             sources_label: "Signalquellen (Input)", sources_hint: "1 wählbar",
             sinks_label: "Räume & Displays (Output)", sinks_hint: "Mehrfachauswahl möglich",
             src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Kamera / Aux",
@@ -1097,8 +1099,8 @@ const fallbackTranslations = {
         matrix: { title: "HTML5", subtitle: "Demonstrating modern capabilities of HTML5/CSS/JavaScript within Crestron Construct containers.", badge_new: "NEW", card_title: "Crestron. Construct.", card_desc: "Next-gen UI design for HTML5 WebXPanel & Touchpanels." },
         klima: { title: "Range Slider", subtitle: "Adjust room temperature or lighting smoothly using the gel slider.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Rainbow", preset_sunset: "Sunset", preset_ice: "Ice", preset_green: "Green" },
         medien: { 
-            title: "Media Player.", 
-            subtitle: "Please select a source above and one or more destinations (sinks, as pros say) below.", 
+            player_title: "Media Player.", 
+            player_subtitle: "Please select a source above and one or more destinations (sinks, as pros say) below.", 
             sources_label: "Signal Sources (Input)", sources_hint: "1 selectable",
             sinks_label: "Rooms & Displays (Output)", sinks_hint: "Multi-selection allowed",
             src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Camera / Aux",
@@ -1156,7 +1158,6 @@ function toggleLanguage() {
 }
 
 /* ==================== MEDIEN DASHBOARD: QUELLEN & FESTE SENKEN-PRESETS ==================== */
-// Jede Quelle schaltet reproduzierbar ein festes Muster an Senken ein
 const SINK_PRESETS = {
     0: [0, 2, 3],       // Apple TV ➔ Küche, Projektor, Kino
     1: [0, 1, 4, 5],    // Spotify  ➔ Küche, Bad, Foyer, Tanzraum
