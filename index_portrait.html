@@ -293,7 +293,7 @@ html, body {
 .card-description { opacity: 0.85; font-size: 16px; line-height: 1.4; color: #e2e8f0; }
 .card-divider { margin-top: auto; border: none; height: 1px; background: rgba(255, 255, 255, 0.18); }
 
-/* ==================== BÄR SCHALTER (KOPF NICHT MEHR ABGESCHNITTEN) ==================== */
+/* ==================== BÄR SCHALTER (JHEY GSAP ORIGINAL) ==================== */
 .bear-container {
     position: relative;
     width: 440px;
@@ -303,7 +303,6 @@ html, body {
     justify-content: center;
 }
 
-/* CLIPPING ZONE: NACH OBEN GROSSZÜGIG GEÖFFNET, NUR AB SCHALTER-MITTE NACH UNTEN VERSTECKT */
 .bear-clip-zone {
     position: absolute;
     inset: 0;
@@ -360,7 +359,7 @@ html, body {
     position: absolute;
     height: 34px;
     width: 100px;
-    z-index: 4; /* HINTER DEM SCHALTER */
+    z-index: 4;
     top: 50%;
     left: 50%;
     transform: translate(0, -50%) rotate(0deg);
@@ -385,7 +384,7 @@ html, body {
     position: absolute;
     height: 34px;
     width: 34px;
-    z-index: 4; /* HINTER DEM SCHALTER */
+    z-index: 4;
     top: 50%;
     left: 50%;
     transform-origin: right;
@@ -733,28 +732,28 @@ html, body {
             <div class="navbar-brand-wrapper">
                 <a href="#matrix" class="navbar-brand">
                     <div class="logo-icon"></div>
-                    <span data-i18n="nav.brand_title">Crestron UI</span>
+                    <span data-de="Crestron UI" data-en="Crestron UI"></span>
                 </a>
                 
                 <div class="brand-popover">
                     <div class="brand-popover-inner">
-                        <div class="brand-popover-title" data-i18n="nav.select_design">Design wählen</div>
+                        <div class="brand-popover-title" data-de="Design wählen" data-en="Select Design"></div>
                         <div class="brand-popover-links">
-                            <a href="index_portrait.html" class="brand-popover-link active"><span data-i18n="nav.design_1">Design 1</span> <span>➔</span></a>
-                            <a href="design2.html" class="brand-popover-link"><span data-i18n="nav.design_2">Design 2</span> <span>➔</span></a>
-                            <a href="design3.html" class="brand-popover-link"><span data-i18n="nav.design_3">Design 3</span> <span>➔</span></a>
+                            <a href="index_portrait.html" class="brand-popover-link active"><span data-de="Design 1" data-en="Design 1"></span> <span>➔</span></a>
+                            <a href="design2.html" class="brand-popover-link"><span data-de="Design 2" data-en="Design 2"></span> <span>➔</span></a>
+                            <a href="design3.html" class="brand-popover-link"><span data-de="Design 3" data-en="Design 3"></span> <span>➔</span></a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <ul class="navbar-nav">
-                <li><a href="#matrix" class="nav-link active" data-section="matrix" data-i18n="nav.html5">HTML5</a></li>
-                <li><a href="#klima" class="nav-link" data-section="klima" data-i18n="nav.klima">Klima</a></li>
-                <li><a href="#medien" class="nav-link" data-section="medien" data-i18n="nav.medien">Medien</a></li>
+                <li><a href="#matrix" class="nav-link active" data-section="matrix" data-de="HTML5" data-en="HTML5"></a></li>
+                <li><a href="#klima" class="nav-link" data-section="klima" data-de="Klima" data-en="Climate"></a></li>
+                <li><a href="#medien" class="nav-link" data-section="medien" data-de="Medien" data-en="Media"></a></li>
                 <li class="mode-switch-item">
                     <a href="index.html" class="mode-switch-btn">
-                        <span>Querformat</span>
+                        <span data-de="Querformat" data-en="Landscape"></span>
                     </a>
                 </li>
                 <li>
@@ -772,8 +771,8 @@ html, body {
 
     <!-- SEITE 1: HTML5 (HOCHFORMAT STACK) -->
     <section id="matrix" class="content-section">
-        <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
-        <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
+        <h1 class="section-title" data-de="HTML5" data-en="HTML5"></h1>
+        <p class="section-subtitle" data-de="Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct." data-en="Demonstrating modern capabilities of HTML5/CSS/JavaScript within Crestron Construct containers."></p>
 
         <div class="side-by-side-container">
             <!-- 1. CRESTRON CONSTRUCT CARD -->
@@ -785,19 +784,19 @@ html, body {
 
                 <div class="card-content-container">
                     <div class="card-content-top">
-                        <a href="#medien" class="badge-neu" data-i18n="matrix.badge_new">NEU</a>
-                        <p class="card-title" data-i18n="matrix.card_title">Crestron. Construct.</p>
+                        <a href="#medien" class="badge-neu" data-de="NEU" data-en="NEW"></a>
+                        <p class="card-title" data-de="Crestron. Construct." data-en="Crestron. Construct."></p>
                     </div>
 
                     <hr class="card-divider" />
 
                     <div class="card-content-bottom">
-                        <p class="card-description" data-i18n="matrix.card_desc">Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels.</p>
+                        <p class="card-description" data-de="Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels." data-en="Next-gen UI design for HTML5 WebXPanel & Touchpanels."></p>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. PEEKABOO BEAR SCHALTER (ORIGINAL GSAP MIT VOLLSTÄNDIGER KOPF-HÖHE) -->
+            <!-- 2. PEEKABOO BEAR SCHALTER -->
             <div class="bear-container">
                 <div class="bear-clip-zone">
                     <div class="bear__wrap">
@@ -870,11 +869,11 @@ html, body {
     <section id="klima" class="content-section">
         <canvas id="klimaCanvas"></canvas>
 
-        <h2 class="section-title" data-i18n="klima.title">Range Slider</h2>
-        <p class="section-subtitle" data-i18n="klima.subtitle">Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.</p>
+        <h2 class="section-title" data-de="Range Slider" data-en="Range Slider"></h2>
+        <p class="section-subtitle" data-de="Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein." data-en="Adjust room temperature or lighting smoothly using the gel slider."></p>
 
         <div class="gel-slider-box">
-            <h3 class="gel-slider-title" data-i18n="klima.slider_title">Glass / Gel Slider</h3>
+            <h3 class="gel-slider-title" data-de="Glass / Gel Slider" data-en="Glass / Gel Slider"></h3>
             
             <div class="gel-track-container" id="gelTrack">
                 <div class="gel-fill-bar" id="gelFill"></div>
@@ -883,11 +882,11 @@ html, body {
             </div>
 
             <div class="gel-presets">
-                <div class="gel-preset-label" onclick="setPreset('beige', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_beige">Beige</span></div>
-                <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_rainbow">Regenbogen</span></div>
-                <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_sunset">Sonnenuntergang</span></div>
-                <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_ice">Eis</span></div>
-                <div class="gel-preset-label" onclick="setPreset('green', this)"><span class="gel-radio-dot"></span> <span data-i18n="klima.preset_green">Grün</span></div>
+                <div class="gel-preset-label" onclick="setPreset('beige', this)"><span class="gel-radio-dot"></span> <span data-de="Beige" data-en="Beige"></span></div>
+                <div class="gel-preset-label" onclick="setPreset('rainbow', this)"><span class="gel-radio-dot"></span> <span data-de="Regenbogen" data-en="Rainbow"></span></div>
+                <div class="gel-preset-label active" onclick="setPreset('sunset', this)"><span class="gel-radio-dot"></span> <span data-de="Sonnenuntergang" data-en="Sunset"></span></div>
+                <div class="gel-preset-label" onclick="setPreset('ice', this)"><span class="gel-radio-dot"></span> <span data-de="Eis" data-en="Ice"></span></div>
+                <div class="gel-preset-label" onclick="setPreset('green', this)"><span class="gel-radio-dot"></span> <span data-de="Grün" data-en="Green"></span></div>
             </div>
         </div>
     </section>
@@ -896,15 +895,15 @@ html, body {
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
-        <h2 class="section-title" data-i18n="medien.player_title">Medienplayer.</h2>
-        <p class="section-subtitle" data-i18n="medien.player_subtitle">Bitte wählen Sie oben eine Quelle aus und unten ein oder mehrere Ziele (bzw. Senken wie der Profi sagt).</p>
+        <h2 class="section-title" data-de="Medienplayer." data-en="Media Player."></h2>
+        <p class="section-subtitle" data-de="Bitte wählen Sie oben eine Quelle aus und unten ein oder mehrere Ziele (bzw. Senken wie der Profi sagt)." data-en="Please select a source above and one or more destinations (sinks, as pros say) below."></p>
 
         <div class="media-dashboard-container">
             <!-- GRUPPE 1: SIGNALQUELLEN -->
             <div>
                 <div class="matrix-group-header">
-                    <span class="matrix-group-title" data-i18n="medien.sources_label">Signalquellen (Input)</span>
-                    <span class="matrix-group-hint" data-i18n="medien.sources_hint">1 wählbar</span>
+                    <span class="matrix-group-title" data-de="Signalquellen (Input)" data-en="Signal Sources (Input)"></span>
+                    <span class="matrix-group-hint" data-de="1 wählbar" data-en="1 selectable"></span>
                 </div>
                 
                 <div class="source-grid">
@@ -914,7 +913,7 @@ html, body {
                             <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
-                            <span class="source-label" data-i18n="medien.src_appletv">Apple TV</span>
+                            <span class="source-label" data-de="Apple TV" data-en="Apple TV"></span>
                         </div>
                     </div>
 
@@ -924,7 +923,7 @@ html, body {
                             <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
-                            <span class="source-label" data-i18n="medien.src_spotify">Spotify</span>
+                            <span class="source-label" data-de="Spotify" data-en="Spotify"></span>
                         </div>
                     </div>
 
@@ -934,7 +933,7 @@ html, body {
                             <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
-                            <span class="source-label" data-i18n="medien.src_tv">HDMI / TV</span>
+                            <span class="source-label" data-de="HDMI / TV" data-en="HDMI / TV"></span>
                         </div>
                     </div>
 
@@ -944,7 +943,7 @@ html, body {
                             <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
-                            <span class="source-label" data-i18n="medien.src_gaming">Gaming</span>
+                            <span class="source-label" data-de="Gaming" data-en="Gaming"></span>
                         </div>
                     </div>
 
@@ -954,7 +953,7 @@ html, body {
                             <span class="no-signal-badge">kein Signal :(</span>
                         </div>
                         <div class="source-content-overlay">
-                            <span class="source-label" data-i18n="medien.src_airplay">AirPlay</span>
+                            <span class="source-label" data-de="AirPlay" data-en="AirPlay"></span>
                         </div>
                     </div>
 
@@ -964,7 +963,7 @@ html, body {
                             <span class="no-signal-badge">kein Signal :(</span>
                         </div>
                         <div class="source-content-overlay">
-                            <span class="source-label" data-i18n="medien.src_bluray">Kamera / Aux</span>
+                            <span class="source-label" data-de="Kamera / Aux" data-en="Camera / Aux"></span>
                         </div>
                     </div>
                 </div>
@@ -973,39 +972,39 @@ html, body {
             <!-- GRUPPE 2: SENKEN -->
             <div>
                 <div class="matrix-group-header">
-                    <span class="matrix-group-title" data-i18n="medien.sinks_label">Räume & Displays (Output)</span>
-                    <span class="matrix-group-hint" data-i18n="medien.sinks_hint">Mehrfachauswahl möglich</span>
+                    <span class="matrix-group-title" data-de="Räume & Displays (Output)" data-en="Rooms & Displays (Output)"></span>
+                    <span class="matrix-group-hint" data-de="Mehrfachauswahl möglich" data-en="Multi-selection allowed"></span>
                 </div>
 
                 <div class="sink-grid">
                     <div class="sink-card active" data-sink="0" onclick="toggleSink(this)">
                         <div class="sink-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg></div>
-                        <span class="sink-label" data-i18n="medien.sink_kueche">Küche</span>
+                        <span class="sink-label" data-de="Küche" data-en="Kitchen"></span>
                     </div>
 
                     <div class="sink-card" data-sink="1" onclick="toggleSink(this)">
                         <div class="sink-icon"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg></div>
-                        <span class="sink-label" data-i18n="medien.sink_bad">Bad</span>
+                        <span class="sink-label" data-de="Bad" data-en="Bath"></span>
                     </div>
 
                     <div class="sink-card active" data-sink="2" onclick="toggleSink(this)">
                         <div class="sink-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="16" cy="12" r="3"></circle><path d="M6 12h.01"></path><path d="M9 12h.01"></path></svg></div>
-                        <span class="sink-label" data-i18n="medien.sink_projektor">Projektor</span>
+                        <span class="sink-label" data-de="Projektor" data-en="Projector"></span>
                     </div>
 
                     <div class="sink-card active" data-sink="3" onclick="toggleSink(this)">
                         <div class="sink-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div>
-                        <span class="sink-label" data-i18n="medien.sink_kino">Kino</span>
+                        <span class="sink-label" data-de="Kino" data-en="Cinema"></span>
                     </div>
 
                     <div class="sink-card" data-sink="4" onclick="toggleSink(this)">
                         <div class="sink-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
-                        <span class="sink-label" data-i18n="medien.sink_foyer">Foyer</span>
+                        <span class="sink-label" data-de="Foyer" data-en="Foyer"></span>
                     </div>
 
                     <div class="sink-card" data-sink="5" onclick="toggleSink(this)">
                         <div class="sink-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
-                        <span class="sink-label" data-i18n="medien.sink_tanzraum">Tanzraum</span>
+                        <span class="sink-label" data-de="Tanzraum" data-en="Dance Hall"></span>
                     </div>
                 </div>
             </div>
@@ -1032,51 +1031,19 @@ function fitCanvas() {
 window.addEventListener('resize', fitCanvas);
 document.addEventListener('DOMContentLoaded', fitCanvas);
 
-/* ==================== SPRACHEN (I18N) ==================== */
+/* ==================== SPRACH-UMSCHALTUNG (DATA-ATTRIBUTE) ==================== */
 let currentLang = localStorage.getItem('selectedLang') || 'de';
-let translations = {};
-
-const fallbackTranslations = {
-    de: {
-        nav: { brand_title: "Crestron UI", select_design: "Design wählen", design_1: "Design 1", design_2: "Design 2", design_3: "Design 3", html5: "HTML5", klima: "Klima", medien: "Medien" },
-        matrix: { title: "HTML5", subtitle: "Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.", badge_new: "NEU", card_title: "Crestron. Construct.", card_desc: "Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels." },
-        klima: { title: "Range Slider", subtitle: "Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Regenbogen", preset_sunset: "Sonnenuntergang", preset_ice: "Eis", preset_green: "Grün" },
-        medien: { 
-            player_title: "Medienplayer.", 
-            player_subtitle: "Bitte wählen Sie oben eine Quelle aus und unten ein oder mehrere Ziele (bzw. Senken wie der Profi sagt).", 
-            sources_label: "Signalquellen (Input)", sources_hint: "1 wählbar",
-            sinks_label: "Räume & Displays (Output)", sinks_hint: "Mehrfachauswahl möglich",
-            src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Kamera / Aux",
-            sink_kueche: "Küche", sink_bad: "Bad", sink_projektor: "Projektor", sink_kino: "Kino", sink_foyer: "Foyer", sink_tanzraum: "Tanzraum"
-        }
-    },
-    en: {
-        nav: { brand_title: "Crestron UI", select_design: "Select Design", design_1: "Design 1", design_2: "Design 2", design_3: "Design 3", html5: "HTML5", klima: "Climate", medien: "Media" },
-        matrix: { title: "HTML5", subtitle: "Demonstrating modern capabilities of HTML5/CSS/JavaScript within Crestron Construct containers.", badge_new: "NEW", card_title: "Crestron. Construct.", card_desc: "Next-gen UI design for HTML5 WebXPanel & Touchpanels." },
-        klima: { title: "Range Slider", subtitle: "Adjust room temperature or lighting smoothly using the gel slider.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Rainbow", preset_sunset: "Sunset", preset_ice: "Ice", preset_green: "Green" },
-        medien: { 
-            player_title: "Media Player.", 
-            player_subtitle: "Please select a source above and one or more destinations (sinks, as pros say) below.", 
-            sources_label: "Signal Sources (Input)", sources_hint: "1 selectable",
-            sinks_label: "Rooms & Displays (Output)", sinks_hint: "Multi-selection allowed",
-            src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Camera / Aux",
-            sink_kueche: "Kitchen", sink_bad: "Bath", sink_projektor: "Projector", sink_kino: "Cinema", sink_foyer: "Foyer", sink_tanzraum: "Dance Hall"
-        }
-    }
-};
 
 const deFlagSvg = `<svg class="flag-svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#FFCE00"/><rect width="3" height="1.333" fill="#DD0000"/><rect width="3" height="0.667" fill="#000000"/></svg>`;
 const enFlagSvg = `<svg class="flag-svg" viewBox="0 0 60 30"><clipPath id="s_uk"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk"><path d="M30,15 L60,0 v30 z M30,15 L0,30 v-30 z M30,15 L0,0 h60 z M30,15 L60,30 h-60 z"/></clipPath><g clip-path="url(#s_uk)"><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cc0000" stroke-width="4" clip-path="url(#t_uk)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#cc0000" stroke-width="6"/></g></svg>`;
 
-async function loadTranslations(lang) {
-    try {
-        const response = await fetch(`${lang}.json`);
-        translations = await response.json();
-    } catch (err) {
-        translations = fallbackTranslations[lang] || fallbackTranslations['de'];
-    }
-    applyTranslations();
+function setLanguage(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+    });
     document.documentElement.lang = lang;
+    localStorage.setItem('selectedLang', lang);
     updateLangButtonUI(lang);
 }
 
@@ -1092,25 +1059,9 @@ function updateLangButtonUI(lang) {
     }
 }
 
-function getNestedTranslation(obj, path) {
-    return path.split('.').reduce((prev, curr) => (prev && prev[curr] !== undefined) ? prev[curr] : null, obj);
-}
-
-function applyTranslations() {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        let text = getNestedTranslation(translations, key);
-        if (!text) {
-            text = getNestedTranslation(fallbackTranslations[currentLang], key);
-        }
-        if (text) el.textContent = text;
-    });
-}
-
 function toggleLanguage() {
-    currentLang = (currentLang === 'de') ? 'en' : 'de';
-    localStorage.setItem('selectedLang', currentLang);
-    loadTranslations(currentLang);
+    const nextLang = (currentLang === 'de') ? 'en' : 'de';
+    setLanguage(nextLang);
 }
 
 /* ==================== MEDIEN DASHBOARD: QUELLEN & FESTE SENKEN-PRESETS ==================== */
@@ -1143,7 +1094,7 @@ function toggleSink(el) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadTranslations(currentLang);
+    setLanguage(currentLang);
     const wrapper = document.getElementById('canvas');
     const navLinks = document.querySelectorAll('.nav-link, .badge-neu');
     const sections = document.querySelectorAll('.content-section');
