@@ -242,6 +242,10 @@ html, body {
     padding: 70px 20px 40px 20px; text-align: center; position: relative; z-index: 2; width: 100%; background: transparent !important;
 }
 
+#matrix {
+    padding-top: 25px; /* Deutlich dichter an das Menü gerückt */
+}
+
 #matrix, #klima, #medien { background: transparent !important; }
 #klimaCanvas, #medienCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; opacity: 0.85; }
 
@@ -259,12 +263,20 @@ html, body {
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     padding: 16px 24px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     display: flex;
     flex-direction: column;
     gap: 8px;
     text-align: left;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.guide-info-header {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--electric-border-color);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
 }
 
 .guide-info-item {
@@ -857,6 +869,7 @@ html, body {
         
         <!-- INFO-BANNER IM ROT UMKREISTEN BEREICH -->
         <div class="guide-info-banner">
+            <div class="guide-info-header" data-de="Infos zur Nutzung dieser Beispieloberfläche:" data-en="Information on using this sample interface:"></div>
             <div class="guide-info-item">
                 <span class="guide-info-dot"></span>
                 <span data-de="Sprachauswahl: Oben rechts kann die Sprache umgestellt werden. Alle Sprachdateien sind direkt im HTML-Code inkludiert." data-en="Language Switch: You can switch the language at the top right. All translations are embedded directly within the HTML code."></span>
@@ -864,6 +877,10 @@ html, body {
             <div class="guide-info-item">
                 <span class="guide-info-dot"></span>
                 <span data-de="Dynamische Effekte: Die Hintergründe sind automatisch bewegt. Bitte beachte die Farbverläufe und sich bewegenden Hintergrundelemente auf den anderen Seiten." data-en="Dynamic Effects: Backgrounds are automatically animated. Please observe the smooth color gradients and moving canvas elements across all pages."></span>
+            </div>
+            <div class="guide-info-item">
+                <span class="guide-info-dot"></span>
+                <span data-de="Bitte benutze den Schalter mindestens einmal. ;)" data-en="Please use the switch at least once. ;)"></span>
             </div>
         </div>
 
