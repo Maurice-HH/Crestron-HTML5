@@ -351,6 +351,7 @@ html, body {
     left: 50%;
     transform: translate(0, -50%) rotate(0deg);
     pointer-events: none;
+    opacity: 0; /* Versteckt die Pfote standardmäßig */
 }
 
 .bear__arm {
@@ -376,6 +377,7 @@ html, body {
     transform-origin: right;
     transform: translate(80px, -15px) scaleX(0);
     pointer-events: none;
+    opacity: 0; /* Versteckt die Pfote standardmäßig */
 }
 
 .bear__checkbox {
@@ -475,7 +477,7 @@ html, body {
 .popover-menu-box.open .pop-5 { transform: translate(-95px, 55px) scale(1); }
 .popover-menu-box.open .pop-6 { transform: translate(-95px, -55px) scale(1); }
 
-/* ==================== GEL SLIDER SEITE 2 ==================== */
+/* GEL SLIDER SEITE 2 */
 .gel-slider-box {
     width: 100%; max-width: 680px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 24px 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
@@ -856,8 +858,8 @@ html, body {
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
-        <h2 class="section-title" data-i18n="medien.title">Media Auswahl</h2>
-        <p class="section-subtitle" data-i18n="medien.subtitle">Wähle die Quelle durch Antippen aus</p>
+        <h2 class="section-title" data-i18n="medien.title">Mediensteuerung.</h2>
+        <p class="section-subtitle" data-i18n="medien.subtitle">Wählen Sie oben die Quelle und unten ein oder mehrere Ziele bzw. Senken, wie der Profi sagt.</p>
 
         <div class="media-dashboard-container">
             <!-- GRUPPE 1: SIGNALQUELLEN -->
@@ -972,7 +974,7 @@ const fallbackTranslations = {
         matrix: { title: "HTML5", subtitle: "Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.", badge_new: "NEU", card_title: "Crestron. Construct.", card_desc: "Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels." },
         klima: { title: "Range Slider", subtitle: "Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Regenbogen", preset_sunset: "Sonnenuntergang", preset_ice: "Eis", preset_green: "Grün" },
         medien: { 
-            title: "Media Auswahl", subtitle: "Wähle die Quelle durch Antippen aus", 
+            title: "Mediensteuerung.", subtitle: "Wählen Sie oben die Quelle und unten ein oder mehrere Ziele bzw. Senken, wie der Profi sagt.", 
             sources_label: "Signalquellen (Input)", sources_hint: "1 wählbar",
             sinks_label: "Räume & Displays (Output)", sinks_hint: "Mehrfachauswahl möglich",
             src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Kamera / Aux",
@@ -984,7 +986,7 @@ const fallbackTranslations = {
         matrix: { title: "HTML5", subtitle: "Demonstrating modern capabilities of HTML5/CSS/JavaScript within Crestron Construct containers.", badge_new: "NEW", card_title: "Crestron. Construct.", card_desc: "Next-gen UI design for HTML5 WebXPanel & Touchpanels." },
         klima: { title: "Range Slider", subtitle: "Adjust room temperature or lighting smoothly using the gel slider.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Rainbow", preset_sunset: "Sunset", preset_ice: "Ice", preset_green: "Green" },
         medien: { 
-            title: "Media Selection", subtitle: "Select source by tapping", 
+            title: "Media Control.", subtitle: "Select the source above and one or more destinations (sinks) below, as the pros say.", 
             sources_label: "Signal Sources (Input)", sources_hint: "1 selectable",
             sinks_label: "Rooms & Displays (Output)", sinks_hint: "Multi-selection allowed",
             src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Camera / Aux",
@@ -1104,13 +1106,15 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ==================== JHEY PEEKABOO BEAR LOGIK (VANILLA + GSAP) ==================== */
     let bearChecked = false;
     let bearCount = 1;
-    const armLimit = gsap.utils.random(0, 3);
-    const headLimit = gsap.utils.random(armLimit + 1, armLimit + 3);
-    const angerLimit = gsap.utils.random(headLimit + 1, headLimit + 3);
     const armDuration = 0.2;
     const bearDuration = 0.25;
     const checkboxDuration = 0.25;
     const pawDuration = 0.1;
+
+    // Feste, niedrige Schwellenwerte für schnelles Wütendwerden!
+    const armLimit = 1;      // Ab dem 2. Klick kommt der Arm
+    const headLimit = 3;     // Ab dem 4. Klick kommt der Kopf halb hoch
+    const angerLimit = 5;    // Ab dem 6. Klick MUSS er fluchen!
 
     const SOUNDS = {
         ON: new Audio('https://assets.codepen.io/605876/switch-on.mp3'),
@@ -1131,7 +1135,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const bearAngerPaths = document.querySelectorAll('.bear-anger-path');
 
     bearCheckboxWrap.addEventListener('mouseover', () => {
-        if (Math.random() > 0.5 && bearCount > armLimit) {
+        // Höhere Chance (80%), dass er beim Hovern vorschaut
+        if (Math.random() > 0.2 && bearCount > armLimit) {
             gsap.to(bearRef, { duration: bearDuration / 2, y: '40%' });
         }
     });
@@ -1171,7 +1176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         let onBearComplete = () => {};
-        if (Math.random() > 0.5 && bearCount > angerLimit) {
+        if (bearCount > angerLimit) {
             onBearComplete = () => {
                 SOUNDS.GROAN.play();
                 gsap.set(swearRef, { display: 'block' });
@@ -1188,7 +1193,9 @@ document.addEventListener('DOMContentLoaded', function() {
             bearTL.to(bearRef, { duration: bearDuration, onComplete: onBearComplete, y: bearTranslation });
         }
 
-        bearTL.to(armWrapRef, { x: 50, duration: armDuration }, bearCount > armLimit ? preDelay : 0)
+        // Arm/Pfote sichtbar machen, dann animieren, dann wieder verstecken
+        bearTL.set([armWrapRef, pawRef], { opacity: 1 }, bearCount > armLimit ? preDelay : 0)
+              .to(armWrapRef, { x: 50, duration: armDuration }, bearCount > armLimit ? preDelay : 0)
               .to(armRef, { scaleX: 0.7, duration: armDuration })
               .to(pawRef, { duration: pawDuration, scaleX: 0.8, onComplete: () => {
                   gsap.set(swearRef, { display: 'none' });
@@ -1199,7 +1206,8 @@ document.addEventListener('DOMContentLoaded', function() {
               .to(pawRef, { duration: pawDuration, scaleX: 0 }, delay)
               .to(armRef, { duration: pawDuration, scaleX: 1 }, delay + pawDuration)
               .to(armWrapRef, { duration: armDuration, x: 0 }, delay + pawDuration)
-              .to(bearRef, { duration: bearDuration, y: '100%' }, delay + pawDuration);
+              .to(bearRef, { duration: bearDuration, y: '100%' }, delay + pawDuration)
+              .set([armWrapRef, pawRef], { opacity: 0 }, delay + pawDuration + armDuration); // Wieder verstecken!
 
         return bearTL;
     }
