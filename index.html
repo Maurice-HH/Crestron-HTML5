@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crestron UI - Design 1 (Index Querformat)</title>
+
+<!-- GSAP Animations-Bibliothek für den Bären -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 <style>
 /* ==================== GLOBAL RESET & VIEWPORT LOCK ==================== */
 * {
@@ -276,129 +280,163 @@ html, body {
 .card-description { opacity: 0.85; font-size: 15px; line-height: 1.4; color: #e2e8f0; white-space: pre-line; }
 .card-divider { margin-top: auto; border: none; height: 1px; background: rgba(255, 255, 255, 0.18); }
 
-/* ==================== ORIGINAL JHEY BEAR TOGGLE (PERFEKTER NACHBAU) ==================== */
-.bear-toggle-wrapper-mini {
+/* ==================== JHEY PEEKABOO BEAR EXACT IMPLEMENTATION ==================== */
+.bear-container {
+    position: relative;
+    width: 330px;
+    height: 330px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 330px;
-    height: 330px;
 }
 
-.toggle {
-    height: 100px;
-    width: 220px;
-    position: relative;
-    cursor: pointer;
+.bear-clip-zone {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%); /* Hides the bear when it goes down */
+    pointer-events: none;
+}
+
+.bear__wrap {
+    width: 100px;
+    left: 50%;
+    position: absolute;
+    bottom: 50%; /* Aligns with the checkbox middle */
+    transform: translate(-15%, 50%) rotate(5deg) translate(0, -75%);
+    background: transparent;
+    z-index: 4;
+}
+
+.bear {
+    width: 100%;
+    background: transparent;
+    transform: translate(0, 100%);
     display: block;
 }
 
-.toggle__input {
+.bear__swear {
     display: none;
+    position: absolute;
+    left: 105%;
+    top: 0;
+    background: #fff;
+    color: #000;
+    font-weight: bolder;
+    padding: 10px;
+    border-radius: 8px;
+    z-index: 10;
+    font-size: 18px;
+    white-space: nowrap;
 }
 
-.toggle__track {
-    background: #314256;
-    border: 4px solid #1f2b38;
+.bear__swear:before {
+    content: '';
+    background: #fff;
+    position: absolute;
+    top: 90%;
+    right: 70%;
+    height: 15px;
+    width: 15px;
+    clip-path: polygon(0 100%, 100% 0, 50% 0);
+}
+
+.bear__arm-wrap {
+    background: transparent;
+    position: absolute;
+    height: 30px;
+    width: 90px;
+    z-index: 6;
+    top: 50%;
+    left: 50%;
+    transform: translate(0, -50%) rotate(0deg);
+    pointer-events: none;
+}
+
+.bear__arm {
+    background: transparent;
+    transform-origin: left;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%) scaleX(1);
+}
+
+.bear__paw {
+    background: #784421;
+    border-radius: 100%;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform-origin: right;
+    transform: translate(80px, -15px) scaleX(0);
+    pointer-events: none;
+}
+
+.bear__checkbox {
+    border-radius: 50px;
+    height: 100px;
+    width: 200px;
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bear__checkbox input {
+    cursor: pointer;
+    border-radius: 50px;
+    position: absolute;
+    outline: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.bear__checkbox__bg {
+    background: #aaa;
     border-radius: 50px;
     height: 100%;
     width: 100%;
+    z-index: 10;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.bear__checkbox__indicator {
+    background: transparent;
+    height: 100%;
+    width: 50%;
+    border-radius: 100%;
     position: absolute;
-    z-index: 2;
-    box-shadow: inset 0 4px 8px rgba(0,0,0,0.3);
-    transition: background 0.25s ease;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    pointer-events: none;
 }
 
-.toggle__knob {
-    background: radial-gradient(circle at 35% 35%, #777, #333, #000);
-    border-radius: 50%;
-    height: 80px;
-    width: 80px;
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 3;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.2);
-}
-
-.toggle__input:checked ~ .toggle__track .toggle__knob {
-    transform: translateX(120px);
-}
-
-.toggle__input:checked ~ .toggle__track {
-    background: #10b981; 
-}
-
-/* THE BEAR PEERING OVER THE BOTTOM LEFT */
-.bear {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    left: 16px;
-    bottom: 0px; 
-    background: #764523;
-    border-radius: 40px 40px 10px 10px;
-    z-index: 1;
-    /* Im ausgeschalteten Zustand guckt er heraus! */
-    transform: translateY(50px);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.toggle__input:checked ~ .bear {
-    /* Eingeschaltet (Grün): Bär versteckt sich komplett hinter dem Track */
-    transform: translateY(0);
-}
-
-.bear__ears { position: absolute; inset: 0; }
-
-.bear__ear {
-    background: #764523;
-    border-radius: 50%;
-    height: 32px;
-    width: 32px;
-    position: absolute;
-    top: -12px;
-}
-
-.bear__ear::after {
+.bear__checkbox__indicator:after {
     content: '';
+    border-radius: 100%;
+    height: 85%;
+    width: 85%;
+    background: #fff;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 16px;
-    width: 16px;
-    background: #d4a373;
-    border-radius: 50%;
-}
-
-.bear__ear--left { left: -12px; }
-.bear__ear--right { right: -12px; }
-
-.bear__face { position: absolute; inset: 0; }
-
-.bear__eye {
-    background: #000;
-    border-radius: 50%;
-    height: 10px;
-    width: 10px;
-    position: absolute;
-    top: 24px;
-}
-
-.bear__eye--left { left: 20px; }
-.bear__eye--right { right: 20px; }
-
-.bear__nose {
-    background: #000;
-    border-radius: 50%;
-    height: 12px;
-    width: 16px;
-    position: absolute;
-    top: 38px;
-    left: 50%;
-    transform: translateX(-50%);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
 
 /* POPOVER MENU SEITE 1 */
@@ -437,7 +475,7 @@ html, body {
 .popover-menu-box.open .pop-5 { transform: translate(-95px, 55px) scale(1); }
 .popover-menu-box.open .pop-6 { transform: translate(-95px, -55px) scale(1); }
 
-/* GEL SLIDER SEITE 2 */
+/* ==================== GEL SLIDER SEITE 2 ==================== */
 .gel-slider-box {
     width: 100%; max-width: 680px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 24px 32px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
@@ -507,7 +545,6 @@ html, body {
     opacity: 0.6;
 }
 
-/* 6 QUELLEN OBEN */
 .source-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -624,7 +661,6 @@ html, body {
 <!-- SVG FILTER & GRADIENTS -->
 <svg class="svg-container">
     <defs>
-        <!-- SPARK FILTER CARD -->
         <filter id="electric-spark" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;5;12;24;8;2;19;3" dur="0.4s" repeatCount="indefinite" calcMode="discrete"/>
@@ -632,7 +668,6 @@ html, body {
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G"/>
         </filter>
 
-        <!-- FLAMMEN WELLEN FILTER -->
         <filter id="flame-wave" x="-30%" y="-30%" width="160%" height="160%">
             <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise">
                 <animate attributeName="seed" values="1;8;15;22;9;3;17" dur="0.5s" repeatCount="indefinite" calcMode="discrete"/>
@@ -642,12 +677,10 @@ html, body {
     </defs>
 </svg>
 
-<!-- VOLLFLÄCHIG RENDERNDER REGENBOGEN-BACKGROUND OHNE RAND -->
 <div id="global-vibrant-bg">
     <div class="bg-blob-inner"></div>
 </div>
 
-<!-- FESTES CANVAS CONTAINER (1920x1080) -->
 <div id="canvas">
 
     <!-- NAVIGATION HEADER -->
@@ -693,7 +726,7 @@ html, body {
         </nav>
     </div>
 
-    <!-- SEITE 1: HTML5 (CRESTRON CARD + VARIABLER BÄR SCHALTER + RADIAL POPOVER) -->
+    <!-- SEITE 1: HTML5 -->
     <section id="matrix" class="content-section">
         <h1 class="section-title" data-i18n="matrix.title">HTML5</h1>
         <p class="section-subtitle" data-i18n="matrix.subtitle">Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.</p>
@@ -720,30 +753,61 @@ html, body {
                 </div>
             </div>
 
-            <!-- 2. PEEKABOO BEAR SCHALTER (ORIGINAL JHEY LOGIK) -->
-            <div class="bear-toggle-wrapper-mini">
-                <label class="toggle">
-                    <input type="checkbox" class="toggle__input" id="bearToggleCheckbox">
-                    
-                    <div class="bear">
-                        <div class="bear__ears">
-                            <div class="bear__ear bear__ear--left"></div>
-                            <div class="bear__ear bear__ear--right"></div>
-                        </div>
-                        <div class="bear__face">
-                            <div class="bear__eye bear__eye--left"></div>
-                            <div class="bear__eye bear__eye--right"></div>
-                            <div class="bear__nose"></div>
-                        </div>
+            <!-- 2. PEEKABOO BEAR SCHALTER (ORIGINAL JHEY REACT -> VANILLA + GSAP) -->
+            <div class="bear-container">
+                
+                <div class="bear-clip-zone">
+                    <div class="bear__wrap">
+                        <div class="bear__swear" id="bear-swear">#@$%*!</div>
+                        
+                        <!-- BEAR HEAD SVG -->
+                        <svg class="bear" id="bear-head" viewBox="0 0 284.94574 359.73706" preserveAspectRatio="xMinYMin">
+                            <g transform="translate(-7.5271369,-761.38595)">
+                                <g transform="matrix(1.2335313,0,0,1.2335313,-35.029693,-212.83637)">
+                                    <path d="M 263.90933,1081.4151 A 113.96792,96.862576 0 0 0 149.99132,985.71456 113.96792,96.862576 0 0 0 36.090664,1081.4151 l 227.818666,0 z" style="fill: #784421; fill-opacity: 1;" />
+                                    <path d="m 250.42825,903.36218 c 2e-5,66.27108 -44.75411,114.99442 -102.42825,114.99442 -57.674143,0 -98.428271,-48.72334 -98.428251,-114.99442 4e-6,-66.27106 40.754125,-92.99437 98.428251,-92.99437 57.67413,0 102.42825,26.72331 102.42825,92.99437 z" style="fill: #784421; fill-opacity: 1;" />
+                                    <path d="m 217,972.86218 c 2e-5,21.53911 -30.44462,42.00002 -68,42.00002 -37.55538,0 -66.000019,-20.46091 -66,-42.00002 0,-21.53911 28.44464,-36 66,-36 37.55536,0 68,14.46089 68,36 z" style="fill: #e9c6af; fill-opacity: 1;" />
+                                    <path d="m 181.5,944.36218 c 0,8.28427 -20.59974,26.5 -32.75,26.5 -12.15026,0 -34.75,-18.21573 -34.75,-26.5 0,-8.28427 22.59974,-13.5 34.75,-13.5 12.15026,0 32.75,5.21573 32.75,13.5 z" style="fill: #000000; fill-opacity: 1;" />
+                                    <g>
+                                        <ellipse cx="69" cy="823.07269" rx="34.5" ry="33.289474" style="fill: #784421; fill-opacity: 1;" />
+                                        <path d="M 69,47.310547 A 24.25,23.399124 0 0 0 44.75,70.710938 24.25,23.399124 0 0 0 64.720703,93.720703 c 0.276316,-0.40734 0.503874,-0.867778 0.787109,-1.267578 1.70087,-2.400855 3.527087,-4.666237 5.470704,-6.798828 1.943616,-2.132591 4.004963,-4.133318 6.179687,-6.003906 2.174725,-1.870589 4.461274,-3.611714 6.855469,-5.226563 2.394195,-1.614848 4.896019,-3.10338 7.498047,-4.46875 0.539935,-0.283322 1.133058,-0.500695 1.68164,-0.773437 A 24.25,23.399124 0 0 0 69,47.310547 Z" transform="translate(0,752.36216)" style="fill: #e9c6af; fill-opacity: 1;" />
+                                    </g>
+                                    <g transform="matrix(-1,0,0,1,300,0)">
+                                        <ellipse cx="69" cy="823.07269" rx="34.5" ry="33.289474" style="fill: #784421; fill-opacity: 1;" />
+                                        <path d="M 69,47.310547 A 24.25,23.399124 0 0 0 44.75,70.710938 24.25,23.399124 0 0 0 64.720703,93.720703 c 0.276316,-0.40734 0.503874,-0.867778 0.787109,-1.267578 1.70087,-2.400855 3.527087,-4.666237 5.470704,-6.798828 1.943616,-2.132591 4.004963,-4.133318 6.179687,-6.003906 2.174725,-1.870589 4.461274,-3.611714 6.855469,-5.226563 2.394195,-1.614848 4.896019,-3.10338 7.498047,-4.46875 0.539935,-0.283322 1.133058,-0.500695 1.68164,-0.773437 A 24.25,23.399124 0 0 0 69,47.310547 Z" transform="translate(0,752.36216)" style="fill: #e9c6af; fill-opacity: 1;" />
+                                    </g>
+                                    <ellipse cx="105.83063" cy="900.38916" rx="9.2701159" ry="9.6790915" style="fill: #000000; fill-opacity: 1;" />
+                                    <ellipse cx="186.89894" cy="900.38916" rx="9.2701159" ry="9.6790915" style="fill: #000000; fill-opacity: 1;" />
+                                    
+                                    <!-- ANGER PATHS -->
+                                    <path class="bear-anger-path" style="display: none; stroke: #000000; stroke-width: 4.864; stroke-linecap: round; stroke-linejoin: round;" d="m 92.05833,865.4614 39.42665,22.76299" />
+                                    <path class="bear-anger-path" style="display: none; stroke: #000000; stroke-width: 4.864; stroke-linecap: round; stroke-linejoin: round;" d="m 202.82482,865.4614 -39.42664,22.76299" />
+                                </g>
+                            </g>
+                        </svg>
                     </div>
+                </div>
 
-                    <div class="toggle__track">
-                        <div class="toggle__knob"></div>
-                    </div>
-                </label>
+                <div class="bear__arm-wrap" id="bear-arm-wrap">
+                    <svg class="bear__arm" id="bear-arm" viewBox="0 0 250.00001 99.999997" preserveAspectRatio="xMinYMin">
+                        <g transform="translate(868.57141,-900.93359)">
+                            <path style="fill: #784421; fill-opacity: 1;" d="m -619.43416,945.05124 c 4.18776,73.01076 -78.25474,53.24342 -150.21568,52.94118 -82.38711,-0.34602 -98.92158,-19.44459 -98.92157,-47.05883 0,-27.61424 4.78794,-42.54902 73.82353,-42.54902 69.03559,0 171.43607,-30.93764 175.31372,36.66667 z" />
+                            <ellipse style="fill: #e9c6af; fill-opacity: 1;" cx="-683.02264" cy="950.98572" rx="29.910826" ry="29.414362" />
+                        </g>
+                    </svg>
+                </div>
+                
+                <div class="bear__paw" id="bear-paw"></div>
+
+                <div class="bear__checkbox" id="bear-checkbox-wrap">
+                    <input type="checkbox" id="bear-checkbox" />
+                    <div class="bear__checkbox__bg" id="bear-bg"></div>
+                    <div class="bear__checkbox__indicator" id="bear-indicator"></div>
+                </div>
+                
             </div>
 
-            <!-- 3. TRIGONOMETRIC RADIAL POPOVER MENU SEITE 1 -->
+            <!-- 3. POPOVER MENU -->
             <div class="popover-menu-box" id="popoverBox1">
                 <button class="popover-trigger" onclick="togglePopover1()">
                     <svg viewBox="0 0 24 24">
@@ -788,7 +852,7 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 3: MEDIA AUSWAHL (6 QUELLEN OBEN + 6 SENKEN UNTEN) -->
+    <!-- SEITE 3: MEDIA AUSWAHL -->
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
@@ -796,7 +860,7 @@ html, body {
         <p class="section-subtitle" data-i18n="medien.subtitle">Wähle die Quelle durch Antippen aus</p>
 
         <div class="media-dashboard-container">
-            <!-- GRUPPE 1: SIGNALQUELLEN (SINGLE SELECT) -->
+            <!-- GRUPPE 1: SIGNALQUELLEN -->
             <div>
                 <div class="matrix-group-header">
                     <span class="matrix-group-title" data-i18n="medien.sources_label">Signalquellen (Input)</span>
@@ -804,57 +868,39 @@ html, body {
                 </div>
                 
                 <div class="source-grid">
-                    <!-- SOURCE 1: APPLE TV -->
                     <div class="source-card active" onclick="selectSource(this)">
-                        <div class="source-icon">
-                            <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                        </div>
+                        <div class="source-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></div>
                         <span class="source-label" data-i18n="medien.src_appletv">Apple TV</span>
                     </div>
 
-                    <!-- SOURCE 2: SPOTIFY -->
                     <div class="source-card" onclick="selectSource(this)">
-                        <div class="source-icon">
-                            <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-                        </div>
+                        <div class="source-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div>
                         <span class="source-label" data-i18n="medien.src_spotify">Spotify</span>
                     </div>
 
-                    <!-- SOURCE 3: HDMI / TV -->
                     <div class="source-card" onclick="selectSource(this)">
-                        <div class="source-icon">
-                            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-                        </div>
+                        <div class="source-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div>
                         <span class="source-label" data-i18n="medien.src_tv">HDMI / TV</span>
                     </div>
 
-                    <!-- SOURCE 4: GAMING -->
                     <div class="source-card" onclick="selectSource(this)">
-                        <div class="source-icon">
-                            <svg viewBox="0 0 24 24"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="6"></rect></svg>
-                        </div>
+                        <div class="source-icon"><svg viewBox="0 0 24 24"><line x1="6" y1="12" x2="10" y2="12"></line><line x1="8" y1="10" x2="8" y2="14"></line><line x1="15" y1="13" x2="15.01" y2="13"></line><line x1="18" y1="11" x2="18.01" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="6"></rect></svg></div>
                         <span class="source-label" data-i18n="medien.src_gaming">Gaming</span>
                     </div>
 
-                    <!-- SOURCE 5: AIRPLAY -->
                     <div class="source-card" onclick="selectSource(this)">
-                        <div class="source-icon">
-                            <svg viewBox="0 0 24 24"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
-                        </div>
+                        <div class="source-icon"><svg viewBox="0 0 24 24"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
                         <span class="source-label" data-i18n="medien.src_airplay">AirPlay</span>
                     </div>
 
-                    <!-- SOURCE 6: KAMERA / AUX -->
                     <div class="source-card" onclick="selectSource(this)">
-                        <div class="source-icon">
-                            <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                        </div>
+                        <div class="source-icon"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg></div>
                         <span class="source-label" data-i18n="medien.src_bluray">Kamera / Aux</span>
                     </div>
                 </div>
             </div>
 
-            <!-- GRUPPE 2: RÄUME & DISPLAYS (MULTI SELECT) -->
+            <!-- GRUPPE 2: SENKEN -->
             <div>
                 <div class="matrix-group-header">
                     <span class="matrix-group-title" data-i18n="medien.sinks_label">Räume & Displays (Output)</span>
@@ -862,51 +908,33 @@ html, body {
                 </div>
 
                 <div class="sink-grid">
-                    <!-- SINK 1: KÜCHE -->
                     <div class="sink-card active" onclick="toggleSink(this)">
-                        <div class="sink-icon">
-                            <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-                        </div>
+                        <div class="sink-icon"><svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg></div>
                         <span class="sink-label" data-i18n="medien.sink_kueche">Küche</span>
                     </div>
 
-                    <!-- SINK 2: BAD -->
                     <div class="sink-card" onclick="toggleSink(this)">
-                        <div class="sink-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-                        </div>
+                        <div class="sink-icon"><svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg></div>
                         <span class="sink-label" data-i18n="medien.sink_bad">Bad</span>
                     </div>
 
-                    <!-- SINK 3: PROJEKTOR -->
                     <div class="sink-card active" onclick="toggleSink(this)">
-                        <div class="sink-icon">
-                            <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="16" cy="12" r="3"></circle><path d="M6 12h.01"></path><path d="M9 12h.01"></path></svg>
-                        </div>
+                        <div class="sink-icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="16" cy="12" r="3"></circle><path d="M6 12h.01"></path><path d="M9 12h.01"></path></svg></div>
                         <span class="sink-label" data-i18n="medien.sink_projektor">Projektor</span>
                     </div>
 
-                    <!-- SINK 4: KINO -->
                     <div class="sink-card active" onclick="toggleSink(this)">
-                        <div class="sink-icon">
-                            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
-                        </div>
+                        <div class="sink-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg></div>
                         <span class="sink-label" data-i18n="medien.sink_kino">Kino</span>
                     </div>
 
-                    <!-- SINK 5: FOYER -->
                     <div class="sink-card" onclick="toggleSink(this)">
-                        <div class="sink-icon">
-                            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                        </div>
+                        <div class="sink-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
                         <span class="sink-label" data-i18n="medien.sink_foyer">Foyer</span>
                     </div>
 
-                    <!-- SINK 6: TANZRAUM -->
                     <div class="sink-card" onclick="toggleSink(this)">
-                        <div class="sink-icon">
-                            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        </div>
+                        <div class="sink-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
                         <span class="sink-label" data-i18n="medien.sink_tanzraum">Tanzraum</span>
                     </div>
                 </div>
@@ -934,34 +962,21 @@ function fitCanvas() {
 window.addEventListener('resize', fitCanvas);
 document.addEventListener('DOMContentLoaded', fitCanvas);
 
+/* ==================== SPRACHEN (I18N) ==================== */
 let currentLang = localStorage.getItem('selectedLang') || 'de';
 let translations = {};
 
-/* FALLBACK WÖRTERBUCH (FÜR ALLE SYSTEME, AUCH LOKAL OHNE WEBSERVER) */
 const fallbackTranslations = {
     de: {
         nav: { brand_title: "Crestron UI", select_design: "Design wählen", design_1: "Design 1", design_2: "Design 2", design_3: "Design 3", html5: "HTML5", klima: "Klima", medien: "Medien" },
         matrix: { title: "HTML5", subtitle: "Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.", badge_new: "NEU", card_title: "Crestron. Construct.", card_desc: "Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels." },
         klima: { title: "Range Slider", subtitle: "Stelle die Raumtemperatur oder Beleuchtung sanft über den Gel-Slider ein.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Regenbogen", preset_sunset: "Sonnenuntergang", preset_ice: "Eis", preset_green: "Grün" },
         medien: { 
-            title: "Media Auswahl", 
-            subtitle: "Wähle die Quelle durch Antippen aus", 
-            sources_label: "Signalquellen (Input)", 
-            sources_hint: "1 wählbar",
-            sinks_label: "Räume & Displays (Output)", 
-            sinks_hint: "Mehrfachauswahl möglich",
-            src_appletv: "Apple TV", 
-            src_spotify: "Spotify", 
-            src_tv: "HDMI / TV", 
-            src_gaming: "Gaming", 
-            src_airplay: "AirPlay", 
-            src_bluray: "Kamera / Aux",
-            sink_kueche: "Küche",
-            sink_bad: "Bad",
-            sink_projektor: "Projektor",
-            sink_kino: "Kino",
-            sink_foyer: "Foyer",
-            sink_tanzraum: "Tanzraum"
+            title: "Media Auswahl", subtitle: "Wähle die Quelle durch Antippen aus", 
+            sources_label: "Signalquellen (Input)", sources_hint: "1 wählbar",
+            sinks_label: "Räume & Displays (Output)", sinks_hint: "Mehrfachauswahl möglich",
+            src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Kamera / Aux",
+            sink_kueche: "Küche", sink_bad: "Bad", sink_projektor: "Projektor", sink_kino: "Kino", sink_foyer: "Foyer", sink_tanzraum: "Tanzraum"
         }
     },
     en: {
@@ -969,24 +984,11 @@ const fallbackTranslations = {
         matrix: { title: "HTML5", subtitle: "Demonstrating modern capabilities of HTML5/CSS/JavaScript within Crestron Construct containers.", badge_new: "NEW", card_title: "Crestron. Construct.", card_desc: "Next-gen UI design for HTML5 WebXPanel & Touchpanels." },
         klima: { title: "Range Slider", subtitle: "Adjust room temperature or lighting smoothly using the gel slider.", slider_title: "Glass / Gel Slider", preset_beige: "Beige", preset_rainbow: "Rainbow", preset_sunset: "Sunset", preset_ice: "Ice", preset_green: "Green" },
         medien: { 
-            title: "Media Selection", 
-            subtitle: "Select source by tapping", 
-            sources_label: "Signal Sources (Input)", 
-            sources_hint: "1 selectable",
-            sinks_label: "Rooms & Displays (Output)", 
-            sinks_hint: "Multi-selection allowed",
-            src_appletv: "Apple TV", 
-            src_spotify: "Spotify", 
-            src_tv: "HDMI / TV", 
-            src_gaming: "Gaming", 
-            src_airplay: "AirPlay", 
-            src_bluray: "Camera / Aux",
-            sink_kueche: "Kitchen",
-            sink_bad: "Bath",
-            sink_projektor: "Projector",
-            sink_kino: "Cinema",
-            sink_foyer: "Foyer",
-            sink_tanzraum: "Dance Hall"
+            title: "Media Selection", subtitle: "Select source by tapping", 
+            sources_label: "Signal Sources (Input)", sources_hint: "1 selectable",
+            sinks_label: "Rooms & Displays (Output)", sinks_hint: "Multi-selection allowed",
+            src_appletv: "Apple TV", src_spotify: "Spotify", src_tv: "HDMI / TV", src_gaming: "Gaming", src_airplay: "AirPlay", src_bluray: "Camera / Aux",
+            sink_kueche: "Kitchen", sink_bad: "Bath", sink_projektor: "Projector", sink_kino: "Cinema", sink_foyer: "Foyer", sink_tanzraum: "Dance Hall"
         }
     }
 };
@@ -1039,7 +1041,7 @@ function toggleLanguage() {
     loadTranslations(currentLang);
 }
 
-/* QUELLEN & SENKEN AUSWAHL LOGIK */
+/* ==================== MEDIEN DASHBOARD ==================== */
 function selectSource(el) {
     document.querySelectorAll('.source-card').forEach(card => card.classList.remove('active'));
     el.classList.add('active');
@@ -1099,20 +1101,107 @@ document.addEventListener('DOMContentLoaded', function() {
     initKlimaCanvas();
     initMedienCanvas();
 
-    /* BÄR TOGGLE MIT UNVORHERSEHBARER RÜCKSTELLZEIT */
-    const bearCheckbox = document.getElementById('bearToggleCheckbox');
-    if (bearCheckbox) {
-        bearCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                // Zufällige Zeit: 25% Chance auf sofortiges Zurückflutschen (~100-250ms), sonst bis zu ~3 Sekunden
-                const randomDelay = Math.random() < 0.25 
-                    ? Math.random() * 150 + 100 
-                    : Math.random() * 2500 + 500;
-                setTimeout(() => {
-                    bearCheckbox.checked = false;
-                }, randomDelay);
-            }
-        });
+    /* ==================== JHEY PEEKABOO BEAR LOGIK (VANILLA + GSAP) ==================== */
+    let bearChecked = false;
+    let bearCount = 1;
+    const armLimit = gsap.utils.random(0, 3);
+    const headLimit = gsap.utils.random(armLimit + 1, armLimit + 3);
+    const angerLimit = gsap.utils.random(headLimit + 1, headLimit + 3);
+    const armDuration = 0.2;
+    const bearDuration = 0.25;
+    const checkboxDuration = 0.25;
+    const pawDuration = 0.1;
+
+    const SOUNDS = {
+        ON: new Audio('https://assets.codepen.io/605876/switch-on.mp3'),
+        OFF: new Audio('https://assets.codepen.io/605876/switch-off.mp3'),
+        GROAN: new Audio('https://assets.codepen.io/605876/bear-groan.mp3')
+    };
+    SOUNDS.GROAN.playbackRate = 2;
+
+    const bearRef = document.getElementById('bear-head');
+    const swearRef = document.getElementById('bear-swear');
+    const armWrapRef = document.getElementById('bear-arm-wrap');
+    const pawRef = document.getElementById('bear-paw');
+    const armRef = document.getElementById('bear-arm');
+    const bgRef = document.getElementById('bear-bg');
+    const indicatorRef = document.getElementById('bear-indicator');
+    const bearCheckbox = document.getElementById('bear-checkbox');
+    const bearCheckboxWrap = document.getElementById('bear-checkbox-wrap');
+    const bearAngerPaths = document.querySelectorAll('.bear-anger-path');
+
+    bearCheckboxWrap.addEventListener('mouseover', () => {
+        if (Math.random() > 0.5 && bearCount > armLimit) {
+            gsap.to(bearRef, { duration: bearDuration / 2, y: '40%' });
+        }
+    });
+
+    bearCheckboxWrap.addEventListener('mouseout', () => {
+        if (!bearChecked) {
+            gsap.to(bearRef, { duration: bearDuration / 2, y: '100%' });
+        }
+    });
+
+    bearCheckbox.addEventListener('change', (e) => {
+        if (bearChecked) {
+            e.preventDefault();
+            bearCheckbox.checked = true;
+            return;
+        }
+        bearChecked = true;
+        
+        gsap.timeline({ onStart: () => SOUNDS.ON.play() })
+            .to(bgRef, { duration: checkboxDuration, backgroundColor: '#2eec71' }, 0)
+            .to(indicatorRef, { duration: checkboxDuration, x: '100%' }, 0)
+            .add(grabBearTL(), 0.25);
+    });
+
+    function grabBearTL() {
+        let bearTranslation = '100%';
+        if (bearCount > armLimit && bearCount < headLimit) {
+            bearTranslation = '40%';
+        } else if (bearCount >= headLimit) {
+            bearTranslation = '0%';
+        }
+
+        const onComplete = () => {
+            bearChecked = false;
+            bearCheckbox.checked = false;
+            bearCount++;
+        };
+
+        let onBearComplete = () => {};
+        if (Math.random() > 0.5 && bearCount > angerLimit) {
+            onBearComplete = () => {
+                SOUNDS.GROAN.play();
+                gsap.set(swearRef, { display: 'block' });
+                bearAngerPaths.forEach(p => p.style.display = 'block');
+            };
+        }
+
+        const base = armDuration + armDuration + pawDuration;
+        const preDelay = Math.random();
+        const delay = bearCount > armLimit ? base + bearDuration + preDelay : base;
+        const bearTL = gsap.timeline({ delay: Math.random(), onComplete });
+
+        if (bearCount > armLimit) {
+            bearTL.to(bearRef, { duration: bearDuration, onComplete: onBearComplete, y: bearTranslation });
+        }
+
+        bearTL.to(armWrapRef, { x: 50, duration: armDuration }, bearCount > armLimit ? preDelay : 0)
+              .to(armRef, { scaleX: 0.7, duration: armDuration })
+              .to(pawRef, { duration: pawDuration, scaleX: 0.8, onComplete: () => {
+                  gsap.set(swearRef, { display: 'none' });
+                  bearAngerPaths.forEach(p => p.style.display = 'none');
+              }})
+              .to(bgRef, { onStart: () => SOUNDS.OFF.play(), duration: checkboxDuration, backgroundColor: '#aaa' }, delay)
+              .to(indicatorRef, { duration: checkboxDuration, x: '0%' }, delay)
+              .to(pawRef, { duration: pawDuration, scaleX: 0 }, delay)
+              .to(armRef, { duration: pawDuration, scaleX: 1 }, delay + pawDuration)
+              .to(armWrapRef, { duration: armDuration, x: 0 }, delay + pawDuration)
+              .to(bearRef, { duration: bearDuration, y: '100%' }, delay + pawDuration);
+
+        return bearTL;
     }
 });
 
