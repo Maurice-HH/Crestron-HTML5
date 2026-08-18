@@ -508,7 +508,7 @@ html, body {
 .gel-radio-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); border: 2px solid #fff; display: inline-block; }
 .gel-preset-label.active .gel-radio-dot { background: var(--electric-border-color); }
 
-/* ==================== SEITE 3: MATRIX MIT 4 PREVIEW VIDEOS OHNE ICONS ==================== */
+/* ==================== SEITE 3: MATRIX MIT VIDEO-PREVIEWS & NO-SIGNAL ==================== */
 .media-dashboard-container {
     width: 100%;
     max-width: 1080px;
@@ -547,7 +547,7 @@ html, body {
     opacity: 0.6;
 }
 
-/* 6 QUELLEN OBEN (4 VIDEOS, 2 NO-SIGNAL, KEINE ICONS) */
+/* 6 QUELLEN OBEN (TEXT UNTEN MITTIG, KEINE ICONS) */
 .source-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -566,8 +566,8 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
+    justify-content: flex-end; /* TEXT UNTEN MITTIG */
+    padding: 10px 6px;
     transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
@@ -591,6 +591,7 @@ html, body {
     object-fit: cover;
     opacity: 0.65;
     z-index: 1;
+    background: #09121f;
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -599,7 +600,7 @@ html, body {
     transform: scale(1.05);
 }
 
-/* KEIN SIGNAL EFFEKT */
+/* KEIN SIGNAL EFFEKT (IM OBEREN ZENTRUM ZENTRIERT) */
 .source-no-signal {
     position: absolute;
     inset: 0;
@@ -607,15 +608,16 @@ html, body {
     height: 100%;
     background: repeating-linear-gradient(
         0deg,
-        #111a28,
-        #111a28 2px,
-        #1e2d42 2px,
-        #1e2d42 4px
+        #0b121e,
+        #0b121e 2px,
+        #162338 2px,
+        #162338 4px
     );
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 28px; /* Platzhalter, damit Text unten frei bleibt */
     gap: 4px;
     z-index: 1;
     opacity: 0.85;
@@ -624,11 +626,11 @@ html, body {
 .no-signal-badge {
     font-size: 11px;
     font-weight: 900;
-    color: #ff5252;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 3px 6px;
+    color: #ff4757;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 4px 8px;
     border-radius: 4px;
-    border: 1px solid rgba(255, 82, 82, 0.4);
+    border: 1px solid rgba(255, 71, 87, 0.5);
     letter-spacing: 0.5px;
     animation: blink-soft 2s infinite ease-in-out;
 }
@@ -638,26 +640,27 @@ html, body {
     50% { opacity: 0.4; }
 }
 
-/* SOURCE LABEL OVERLAY (NUR TEXT MIT SCHWARZER KONTUR, OHNE ICON) */
+/* SOURCE LABEL OVERLAY (TEXT UNTEN MITTIG MIT SCHWARZER KONTUR) */
 .source-content-overlay {
     position: relative;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     width: 100%;
-    height: 100%;
+    pointer-events: none;
 }
 
 .source-label {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 900;
     color: #ffffff;
     white-space: nowrap;
     text-shadow: 0 2px 4px #000, 0 0 4px #000, 0 0 10px #000;
-    -webkit-text-stroke: 0.6px #000000;
+    -webkit-text-stroke: 0.5px #000000;
     letter-spacing: 0.5px;
+    margin-bottom: 2px;
 }
 
 /* 6 SENKEN / DISPLAYS UNTEN */
@@ -908,7 +911,7 @@ html, body {
         </div>
     </section>
 
-    <!-- SEITE 3: MEDIENPLAYER MIT 4 PREVIEW VIDEOS -->
+    <!-- SEITE 3: MEDIENPLAYER -->
     <section id="medien" class="content-section">
         <canvas id="medienCanvas"></canvas>
 
@@ -924,40 +927,40 @@ html, body {
                 </div>
                 
                 <div class="source-grid">
-                    <!-- QUELLE 1: APPLE TV (VIDEO 1) -->
+                    <!-- QUELLE 1: APPLE TV -->
                     <div class="source-card active" data-source="0" onclick="selectSourceCard(0, this)">
-                        <video class="source-video-bg" autoplay loop muted playsinline>
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                        <video class="source-video-bg" autoplay loop muted playsinline preload="auto">
+                            <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
                             <span class="source-label" data-i18n="medien.src_appletv">Apple TV</span>
                         </div>
                     </div>
 
-                    <!-- QUELLE 2: SPOTIFY (VIDEO 2) -->
+                    <!-- QUELLE 2: SPOTIFY -->
                     <div class="source-card" data-source="1" onclick="selectSourceCard(1, this)">
-                        <video class="source-video-bg" autoplay loop muted playsinline>
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                        <video class="source-video-bg" autoplay loop muted playsinline preload="auto">
+                            <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
                             <span class="source-label" data-i18n="medien.src_spotify">Spotify</span>
                         </div>
                     </div>
 
-                    <!-- QUELLE 3: HDMI / TV (VIDEO 3) -->
+                    <!-- QUELLE 3: HDMI / TV -->
                     <div class="source-card" data-source="2" onclick="selectSourceCard(2, this)">
-                        <video class="source-video-bg" autoplay loop muted playsinline>
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                        <video class="source-video-bg" autoplay loop muted playsinline preload="auto">
+                            <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
                             <span class="source-label" data-i18n="medien.src_tv">HDMI / TV</span>
                         </div>
                     </div>
 
-                    <!-- QUELLE 4: GAMING (VIDEO 4) -->
+                    <!-- QUELLE 4: GAMING -->
                     <div class="source-card" data-source="3" onclick="selectSourceCard(3, this)">
-                        <video class="source-video-bg" autoplay loop muted playsinline>
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                        <video class="source-video-bg" autoplay loop muted playsinline preload="auto">
+                            <source src="video.mp4" type="video/mp4">
                         </video>
                         <div class="source-content-overlay">
                             <span class="source-label" data-i18n="medien.src_gaming">Gaming</span>
@@ -1143,7 +1146,6 @@ function selectSourceCard(sourceIndex, el) {
     document.querySelectorAll('.source-card').forEach(card => card.classList.remove('active'));
     el.classList.add('active');
 
-    // Feste Zuordnung auf Senken anwenden
     const activeSinks = SINK_PRESETS[sourceIndex] || [];
     document.querySelectorAll('.sink-card').forEach(sinkEl => {
         const sinkIndex = parseInt(sinkEl.getAttribute('data-sink'), 10);
@@ -1164,6 +1166,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const wrapper = document.getElementById('canvas');
     const navLinks = document.querySelectorAll('.nav-link, .badge-neu');
     const sections = document.querySelectorAll('.content-section');
+
+    // Autoplay für alle Quellen-Videos sicherstellen
+    document.querySelectorAll('.source-video-bg').forEach((vid, i) => {
+        vid.muted = true;
+        vid.playbackRate = 0.85 + (i * 0.15); // Leicht versetzte Wiedergabegeschwindigkeit
+        vid.play().catch(() => {});
+    });
 
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
