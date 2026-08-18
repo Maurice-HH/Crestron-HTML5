@@ -566,7 +566,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; /* TEXT UNTEN MITTIG */
+    justify-content: flex-end;
     padding: 10px 6px;
     transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
@@ -600,7 +600,7 @@ html, body {
     transform: scale(1.05);
 }
 
-/* KEIN SIGNAL EFFEKT (IM OBEREN ZENTRUM ZENTRIERT) */
+/* KEIN SIGNAL EFFEKT */
 .source-no-signal {
     position: absolute;
     inset: 0;
@@ -617,7 +617,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-bottom: 28px; /* Platzhalter, damit Text unten frei bleibt */
+    padding-bottom: 28px;
     gap: 4px;
     z-index: 1;
     opacity: 0.85;
@@ -640,7 +640,7 @@ html, body {
     50% { opacity: 0.4; }
 }
 
-/* SOURCE LABEL OVERLAY (TEXT UNTEN MITTIG MIT SCHWARZER KONTUR) */
+/* SOURCE LABEL OVERLAY */
 .source-content-overlay {
     position: relative;
     z-index: 3;
@@ -989,7 +989,7 @@ html, body {
                 </div>
             </div>
 
-            <!-- GRUPPE 2: SENKEN (DURCH QUELLEN-PRESETS GESTEUERT + MANUELL TOGGLEBAR) -->
+            <!-- GRUPPE 2: SENKEN -->
             <div>
                 <div class="matrix-group-header">
                     <span class="matrix-group-title" data-i18n="medien.sinks_label">Räume & Displays (Output)</span>
@@ -1053,9 +1053,8 @@ document.addEventListener('DOMContentLoaded', fitCanvas);
 
 /* ==================== SPRACHEN (I18N) ==================== */
 let currentLang = localStorage.getItem('selectedLang') || 'de';
-let translations = {};
 
-const fallbackTranslations = {
+const translations = {
     de: {
         nav: { brand_title: "Crestron UI", select_design: "Design wählen", design_1: "Design 1", design_2: "Design 2", design_3: "Design 3", html5: "HTML5", klima: "Klima", medien: "Medien" },
         matrix: { title: "HTML5", subtitle: "Hier zeigen wir verschiedene Möglichkeiten von HTML5/CSS/Javascript. Sie liegen als HTML-Code (inkl. CSS und Javascript) im DIV-Container in Construct.", badge_new: "NEU", card_title: "Crestron. Construct.", card_desc: "Next-Gen UI-Design für HTML5-WebXPanel & Touchpanels." },
@@ -1087,18 +1086,6 @@ const fallbackTranslations = {
 const deFlagSvg = `<svg class="flag-svg" viewBox="0 0 3 2"><rect width="3" height="2" fill="#FFCE00"/><rect width="3" height="1.333" fill="#DD0000"/><rect width="3" height="0.667" fill="#000000"/></svg>`;
 const enFlagSvg = `<svg class="flag-svg" viewBox="0 0 60 30"><clipPath id="s_uk"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="t_uk"><path d="M30,15 L60,0 v30 z M30,15 L0,30 v-30 z M30,15 L0,0 h60 z M30,15 L60,30 h-60 z"/></clipPath><g clip-path="url(#s_uk)"><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#cc0000" stroke-width="4" clip-path="url(#t_uk)"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#cc0000" stroke-width="6"/></g></svg>`;
 
-async function loadTranslations(lang) {
-    try {
-        const response = await fetch(`${lang}.json`);
-        translations = await response.json();
-    } catch (err) {
-        translations = fallbackTranslations[lang] || fallbackTranslations['de'];
-    }
-    applyTranslations();
-    document.documentElement.lang = lang;
-    updateLangButtonUI(lang);
-}
-
 function updateLangButtonUI(lang) {
     const curr = document.getElementById('langCurr');
     const next = document.getElementById('langNext');
@@ -1115,21 +1102,20 @@ function getNestedTranslation(obj, path) {
     return path.split('.').reduce((prev, curr) => (prev && prev[curr] !== undefined) ? prev[curr] : null, obj);
 }
 
-function applyTranslations() {
+function applyTranslations(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        let text = getNestedTranslation(translations, key);
-        if (!text) {
-            text = getNestedTranslation(fallbackTranslations[currentLang], key);
-        }
+        const text = getNestedTranslation(translations[lang] || translations['de'], key);
         if (text) el.textContent = text;
     });
+    document.documentElement.lang = lang;
+    updateLangButtonUI(lang);
 }
 
 function toggleLanguage() {
     currentLang = (currentLang === 'de') ? 'en' : 'de';
     localStorage.setItem('selectedLang', currentLang);
-    loadTranslations(currentLang);
+    applyTranslations(currentLang);
 }
 
 /* ==================== MEDIEN DASHBOARD: QUELLEN & FESTE SENKEN-PRESETS ==================== */
@@ -1162,7 +1148,7 @@ function toggleSink(el) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadTranslations(currentLang);
+    applyTranslations(currentLang);
     const wrapper = document.getElementById('canvas');
     const navLinks = document.querySelectorAll('.nav-link, .badge-neu');
     const sections = document.querySelectorAll('.content-section');
@@ -1170,7 +1156,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Autoplay für alle Quellen-Videos sicherstellen
     document.querySelectorAll('.source-video-bg').forEach((vid, i) => {
         vid.muted = true;
-        vid.playbackRate = 0.85 + (i * 0.15); // Leicht versetzte Wiedergabegeschwindigkeit
+        vid.playbackRate = 0.85 + (i * 0.15);
         vid.play().catch(() => {});
     });
 
